@@ -1,4 +1,72 @@
+/* Make app fullscren */
+html, body {
+  margin:0;
+  padding; 0;
+  overflow: none;
+}
+/*Scroll bar adjustments*/
+::-webkit-scrollbar{
+  width: 3mm;
+  height: 3mm;
+}
+::-webkit-scrollbar-thumb{
+  background: #037;
+  border-radius: 10mm;
+}
+::-webkit-scrollbar-corner{
+  display: none;
+}
+::-webkit-scrollbar-track{
+  display: none;
+}
 
-    p {
-        color: red;
-    }
+/*CSS begins here.*/
+#CharacterSheet{
+   background: url("https://www.type-together.com/resources/-2016/editorial/news/2018_05_Typographics/Typographics-cover.apng") center 15%/cover no-repeat;
+  min-height: 98vh;
+  min-width:  98vw;
+  overflow: none;
+  
+}
+.CharSection{
+  display: flex;
+  overflow: auto;
+  background: transparent;
+  padding: 3mm;
+  gap: 5mm;
+  
+}
+
+/*Sections*/
+.container {
+  background: url("https://azaeath.art/pics/moreRecent/AT%20with%20Azzy%20the%20Great_20200413031258.png") center 15%/cover no-repeat;
+  border: 3mm solid;
+  Border-color: #135;
+  min-height:  180mm;
+  min-width: 95mm;
+  border-radius: 20px;
+}
+/*Specific Sections*/
+#Abilities{
+  margin:0;
+  padding:0% 1% 0% 1%; 
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  overflow: none;
+  
+}
+
+.memory{
+  border: 5px solid;
+  background-color: skyblue;
+  width: 45%;
+  height: 95%;
+  min-width: 45%;
+  min-height: 95%;
+  border-radius: 25px;
+}
+
+#ArmorGrids {
+  min-width: 380mm;
+}
