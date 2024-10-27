@@ -5,7 +5,32 @@
     <div class="container" id="Traits"></div>
     
     <div class="container" id="Abilities">
-      <div id="skills" class="memory"></div>
+      
+      <div id="skills" class="memory">
+        <!--Slots begin here-->
+        <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <!--Occupied Skill-->
+          <div class="skl" draggable="true" ondragstart="dragStart(event)" id="skl1">
+            <input type="text" class="expCur">
+            <input type="button" class="expGoal" value="/25">
+            | Shootist |
+            <input type="button" class="rank" value="4|4"> 
+            
+          </div>
+        </div>
+        <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <div class="skl" draggable="true" ondragstart="dragStart(event)" id="skl2">
+            Item 2
+          </div>
+        </div>
+        <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        
+        
+      </div>
+      
+      
       <div id="insights" class="memory"></div>
     </div>
     
