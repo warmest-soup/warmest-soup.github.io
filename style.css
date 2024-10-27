@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+*{font-family: 'Libre Caslon Text', sans-serif;
+    font-size: 15px;
+  font-weight: bold;
+}
+
 /* Make app fullscren */
 html, body {
   margin:0;
@@ -23,8 +29,8 @@ html, body {
 /*CSS begins here.*/
 #CharacterSheet{
    background: url("https://www.type-together.com/resources/-2016/editorial/news/2018_05_Typographics/Typographics-cover.apng") center 15%/cover no-repeat;
-  min-height: 98vh;
-  min-width:  98vw;
+  min-height: 100vh;
+  min-width:  100vw;
   overflow: none;
   
 }
@@ -49,24 +55,140 @@ html, body {
 /*Specific Sections*/
 #Abilities{
   margin:0;
-  padding:0% 1% 0% 1%; 
+  padding:0; 
   display: flex;
   align-items: center;
   justify-content: space-around;
   overflow: none;
+  min-width: 120mm;
   
 }
 
 .memory{
+  padding-top:15px;
+  padding-bottom:15px;
   border: 5px solid;
   background-color: skyblue;
-  width: 45%;
-  height: 95%;
-  min-width: 45%;
-  min-height: 95%;
+  max-width: 14em;
+  max-height: 40em;
+  min-width: 14em;
+  min-height: 41em;
   border-radius: 25px;
+  text-align:center;
+  display: flex;
+  flex-flow:column;
+  align-items: center;
+  gap:.5em;
+}
+
+.sklSlot{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:.7em;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-color:#589;
+  background-color: skyblue;
+  max-width: 9em;
+  max-height: 1em;
+  min-width: 9em;
+  min-height: 1em;
+  text-align:center;
+  text-wrap: nowrap;
+}
+
+.sklSlot:hover{
+  padding:.75em;
+  background-color: #bff;
+  box-shadow: inset 0em 0em 7px skyblue, 
+    inset 0em 0em 10px skyblue, 
+    inset 0em 0em 20px skyblue, 
+    inset 0em 0em 25px skyblue;
+  animation-name: abilSelect;
+  animation-duration: .15s;
+  animation-timing-function: ease-out;
+}
+@keyframes abilSelect{
+  0%{
+    padding:.5em;
+    background-color: #aff;
+    box-shadow: 
+    0 0 15em #dff,
+    0 0 10em #dff,
+    0 0 5em #dff,
+    0 0 5em #dff,
+    0 0 2em #dff,
+    0 0 2em #dff,
+    inset 0em 0em 0px skyblue, 
+    inset 0em 0em 0px skyblue, 
+    inset 0em 0em 0px skyblue, 
+    inset 0em 0em 0px skyblue;
+  }
+  25%{
+    background-color: #white;
+    box-shadow: 
+    0 0 0em skyblue,
+    0 0 7.5em skyblue,
+    0 0 5em skyblue,
+    0 0 2.5em #6ff,
+    inset 0em 0em 0px skyblue, 
+    inset 0em 0em 0px skyblue, 
+    inset 0em 0em 0px skyblue, 
+    inset 0em 0em 0px skyblue;
+  }
+  100%{
+    padding:.75em;
+    background-color: #bff;
+    box-shadow: 
+    0 0 0em skyblue,
+    0 0 0em skyblue,
+    0 0 0em skyblue,
+    0 0 0px skyblue,
+    inset 0em 0em 7px skyblue, 
+    inset 0em 0em 10px skyblue, 
+    inset 0em 0em 20px skyblue, 
+    inset 0em 0em 25px skyblue;
+  }
 }
 
 #ArmorGrids {
   min-width: 380mm;
+}
+
+
+
+/*Text box formatting*/
+.expCur{
+  Max-width: 1.1em;
+  max-height: 1.1em;
+  Min-width: 1.1em;
+  min-height: 1.1em;
+  border-width: .15em .1em .15em .3em;
+  border-color: #8dd;
+  border-radius: .5em;
+  background-color: #bff;
+  text-align:center;
+}
+.expGoal{
+  Max-width: 2.5em;
+  max-height: 1.5em;
+  Min-width: 2.5em;
+  min-height: 1.5em;
+  border-width: .15em;
+  border-color: #6aa;
+  border-radius: .5em;
+  background-color: #7ac;
+  text-align:left;
+}
+.rank{
+  Max-width: 3em;
+  Min-width: 3m;
+  min-height: 2em;
+  max-height: 2em;
+  border-width: .15em;
+  border-color: rgba(50,100,150,.0);
+  border-radius: .75em;
+  background-color: hsla(195,50%,90%, .0);
+  text-align:left;
 }
