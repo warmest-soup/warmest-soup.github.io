@@ -3,7 +3,6 @@
     font-size: 15px;
   font-weight: bold;
 }
-
 /* Make app fullscren */
 html, body {
   margin:0;
@@ -25,14 +24,12 @@ html, body {
 ::-webkit-scrollbar-track{
   display: none;
 }
-
 /*CSS begins here.*/
 #CharacterSheet{
    background: url("https://www.type-together.com/resources/-2016/editorial/news/2018_05_Typographics/Typographics-cover.apng") center 15%/cover no-repeat;
   min-height: 100vh;
   min-width:  100vw;
   overflow: none;
-  
 }
 .CharSection{
   display: flex;
@@ -40,9 +37,7 @@ html, body {
   background: transparent;
   padding: 3mm;
   gap: 5mm;
-  
 }
-
 /*Sections*/
 .container {
   background: url("https://azaeath.art/pics/moreRecent/AT%20with%20Azzy%20the%20Great_20200413031258.png") center 15%/cover no-repeat;
@@ -63,7 +58,6 @@ html, body {
   min-width: 120mm;
   
 }
-
 .memory{
   padding-top:15px;
   padding-bottom:15px;
@@ -80,7 +74,6 @@ html, body {
   align-items: center;
   gap:.5em;
 }
-
 .sklSlot{
   display:flex;
   justify-content:center;
@@ -97,7 +90,6 @@ html, body {
   text-align:center;
   text-wrap: nowrap;
 }
-
 .sklSlot:hover{
   padding:.75em;
   background-color: #bff;
@@ -151,13 +143,9 @@ html, body {
     inset 0em 0em 25px skyblue;
   }
 }
-
 #ArmorGrids {
   min-width: 380mm;
 }
-
-
-
 /*Text box formatting*/
 .expCur{
   Max-width: 1.1em;
