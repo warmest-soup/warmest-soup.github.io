@@ -7,8 +7,9 @@
 /* Make app fullscren */
 html, body {
   margin:0;
-  padding; 0;
+  padding: 0;
   overflow: none;
+  overscroll-behavior: none;
 }
 /*Scroll bar adjustments*/
 ::-webkit-scrollbar{
