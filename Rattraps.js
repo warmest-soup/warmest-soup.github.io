@@ -8,7 +8,7 @@ $(document).ready(function(){
       if(hovercount%2==0){
       var select = new Audio('https://github.com/warmest-soup/warmest-soup.github.io/raw/refs/heads/main/Assets/Audio/AbilitySelect.mp3');
       select.play();     
-    };
+    }; 
   });
 });
 
