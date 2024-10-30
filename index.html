@@ -1,52 +1,81 @@
 <div id="CharacterSheet">
-<!--First row of the character sheet. -->
-  <div class="CharSection" id="Primary">
-    <div class="container" id="Character Card"></div>
-    <div class="container" id="Traits"></div>
+  <!--First row of the character sheet. -->
+    <div class="CharSection" id="Primary">
+      <div class="container" id="Character Card"></div>
+      <div class="container" id="Traits"></div>
+      
+      <div class="container" id="Abilities">
+        
+        <div id="skills" class="memory">
+          
+          <!--Slots begin here-->
+          <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+          
+          <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+          <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+          <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <!--Occupied Skill-->
+            <div class="skl" draggable="true" ondragstart="dragStart(event)" id="skl2">
+              
+              <input type="button" class="abilButton" onclick="openExp(this)">
+               | Fletch | 
+              <input type="button" class="rank" value=S:1> 
+              <div class="break"> </div>
+              <div class="expBar"><div class="expProgress"></div></div>
+              <div class="break"> </div>
+              <div class="sklData ">
+                <div class="techTitle"> ~EXP~ </div> 
+                <div class="abilBody">
+                  Move and attack, in the same action.
+                  </br>~</br> 
+              Costs 1 SKL Card</div>
+                <div class="techTitle">Tech</div>
+              </div>
+              
+            </div>  
+          </div>
+          <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <!--Occupied Skill-->
+            <div class="skl" draggable="true" ondragstart="dragStart(event)" id="skl1">
+              
+              <input type="button" class="abilButton" onclick="openExp(this)">
+               | Shootist | 
+              <input type="button" class="rank" value="4|4"> 
+              
+              <div class="break"> </div>
+              <div class="expBar"><div class="expProgress"></div></div>
+              <div class="break"> </div>
+              
+              <div class="sklData ">
+                <div class="abilTitle"> ~EXP~ </div> 
+                <div class="abilBody">
+                  One's skill at gunfighting. open combat awareness 
+                  and quickness on the draw! 
+                  </br>~</br> 
+              No target penalty when shooting at moving targets</div>
+                <div class="abilTitle">Class</div>
+              </div>
+            </div>  
+          </div>
+        </div>
     
-    <div class="container" id="Abilities">
-      
-      <div id="skills" class="memory">
-        <!--Slots begin here-->
-        <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)">
-          <!--Occupied Skill-->
-          <div class="skl" draggable="true" ondragstart="dragStart(event)" id="skl1">
-            <input type="text" class="expCur">
-            <input type="button" class="expGoal" value="/25">
-            | Shootist |
-            <input type="button" class="rank" value="4|4"> 
-            
-          </div>
-        </div>
-        <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)">
-          <div class="skl" draggable="true" ondragstart="dragStart(event)" id="skl2">
-            Item 2
-          </div>
-        </div>
-        <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        
-        
-      </div>
+    
+        <!--Insights-->
+        <div id="insights" class="memory"></div></div>
       
       
-      <div id="insights" class="memory"></div>
+      <div class="container" id="Satiety"></div>
+      <div class="container" id="Combat"></div>
+      <div class="container" id="Resistances"></div>
+    </div>
+  <!--Second row of the character sheet. -->
+    <div class="CharSection" id="Secondary">
+      <div class="container" id="Notes"></div>
+      <div class="container" id="ArmorGrids"></div>
+      <div class="container" id="Inventory"></div>
     </div>
     
-    
-    <div class="container" id="Satiety"></div>
-    <div class="container" id="Combat"></div>
-    <div class="container" id="Resistances"></div>
   </div>
-<!--Second row of the character sheet. -->
-  <div class="CharSection" id="Secondary">
-    <div class="container" id="Notes"></div>
-    <div class="container" id="ArmorGrids"></div>
-    <div class="container" id="Inventory"></div>
-  </div>
-  
-</div>
 
 
 <!--Links to External assets-->

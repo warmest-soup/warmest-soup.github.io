@@ -7,14 +7,13 @@
 /* Make app fullscren */
 html, body {
   margin:0;
-  padding: 0;
+  padding; 0;
   overflow: none;
-  overscroll-behavior: none;
 }
 /*Scroll bar adjustments*/
 ::-webkit-scrollbar{
-  width: 3mm;
-  height: 3mm;
+  width: .5em;
+  height: .5em;
 }
 ::-webkit-scrollbar-thumb{
   background: #037;
@@ -26,6 +25,8 @@ html, body {
 ::-webkit-scrollbar-track{
   display: none;
 }
+
+.break{flex-basis:100%;}
 
 /*CSS begins here.*/
 #CharacterSheet{
@@ -66,6 +67,7 @@ html, body {
 }
 
 .memory{
+  position:relative;
   padding-top:15px;
   padding-bottom:15px;
   border: 5px solid;
@@ -78,29 +80,31 @@ html, body {
   text-align:center;
   display: flex;
   flex-flow:column;
+  flex-direction:column-reverse;
+  justify-content:flex-end;
   align-items: center;
   gap:.5em;
 }
 
 .sklSlot{
   display:flex;
+  position:relative;
   justify-content:center;
-  align-items:center;
-  padding:.7em;
+  align-items:top;
+  padding:1em;
   border-top: 2px solid;
   border-bottom: 2px solid;
   border-color:#589;
   background-color: skyblue;
-  max-width: 9em;
+  max-width: 8em;
   max-height: 1em;
-  min-width: 9em;
+  min-width: 8em;
   min-height: 1em;
   text-align:center;
   text-wrap: nowrap;
 }
 
 .sklSlot:hover{
-  /*padding:.75em;*/
   background-color: #bff;
   box-shadow: inset 0em 0em 7px skyblue, 
     inset 0em 0em 10px skyblue, 
@@ -110,10 +114,10 @@ html, body {
   animation-duration: .15s;
   animation-timing-function: ease-out;
   animation-fill-mode:forwards;
-}
+  color:hsl(200,100%,40%);
+} 
 @keyframes abilSelect{
   0%{
-    padding:.7em;
     background-color: #aff;
     box-shadow: 
     0 0 15em #dff,
@@ -140,7 +144,7 @@ html, body {
     inset 0em 0em 0px skyblue;
   }
   100%{
-    padding:.75em;
+    padding:1.1em;
     background-color: #bff;
     box-shadow: 
     0 0 0em skyblue,
@@ -151,7 +155,138 @@ html, body {
     inset 0em 0em 10px skyblue, 
     inset 0em 0em 20px skyblue, 
     inset 0em 0em 25px skyblue;
+    font-size:1.1em;
   }
+}
+
+.skl{
+  display:flex;
+  position:absolute;
+  background-color:transparent;
+  translate:0 -1em;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  height:100%;
+  width:100%;
+}
+.skl:hover{
+  animation-name: abilSelect2;
+  animation-duration: .25s;
+  animation-timing-function: ease-out;
+  animation-fill-mode:forwards;
+}
+@keyframes abilSelect2{
+  100%{
+    font-size:1.025em;
+  }
+}
+
+.expBar{
+  position:relative;
+  background-color:gray;
+  translate:.5em -.55em;
+  height:.38em;
+  width:6.5em;
+  border:hsl(220, 50%, 50%) .1em solid;
+  border-radius:.5em;
+  overflow:clip;
+}
+.expProgress{
+  background-color:hsl(100, 50%, 50%);
+  height:.38em;
+  width:50%;
+  border-radius:.5em;
+}
+
+/*Text box formatting*/
+.abilButton{
+  Max-width: 1.1em;
+  max-height: 1.1em;
+  Min-width: 1.1em;
+  min-height: 1.1em;
+  border-width: .15em;
+  border-color: #6aa;
+  border-radius: 1em;
+  background-color: #7ac;
+  text-align:center;
+}
+/*Dropdown ability Menu*/
+.sklData{
+  display:none;
+}
+.sklDataOpen{
+  display:flex;
+  flex-flow:column;
+  justify-content:space-between;
+  position:absolute;
+  translate: 1.5em 8.8em;
+  z-index:10 !important;
+  display:flex;
+  flex-basis:auto;
+  height:12.5em;
+  width:12.5em;
+  background-color:#bdf;
+  border:#558 .6em solid;
+  border-radius: 1em;
+  text-wrap:wrap;
+  font-size: .75em;
+  color:black !important;
+  animation-name: sklDataOpen;
+  animation-duration: .15s;
+  animation-timing-function: ease-out;
+  animation-fill-mode:forwards;
+  color:hsl(200,100%,40%);
+} 
+@keyframes sklDataOpen{
+  0%{ 
+    translate:1.5em 2em;
+    height:0em;
+  }
+  25%{
+  }
+  100%{
+
+  }
+}
+
+.abilTitle{
+  backGround-color:salmon;
+  box-shadow:inset -.5em -.5em .5em red;
+  border-radius:.25em;
+  color:#800;
+}
+.abilBody{
+  padding:.25em;
+  flex-grow:1;
+  font-size:.85em;
+  ;
+}
+.techTitle{
+  backGround-color:cyan;
+  box-shadow:inset -.5em -.5em .5em blue;
+  border-radius:.25em;
+  color:#008;
+}
+
+.expCur{
+
+}
+.expGoal{
+
+}
+.rank{
+  Max-width: 2.5em;
+  Min-width: 2.5em;
+  min-height: 2.5em;
+  max-height: 2.5em;
+  border-width: .2em;
+  border-color: hsla(50,100,150,.0);
+  border-radius: 2em;
+  background-color: hsla(195,50%,90%,.5);
+  text-align:center;
+  font-size:1.1em;
+  translate:0 .15em;
 }
 
 #ArmorGrids {
@@ -160,37 +295,3 @@ html, body {
 
 
 
-/*Text box formatting*/
-.expCur{
-  Max-width: 1.1em;
-  max-height: 1.1em;
-  Min-width: 1.1em;
-  min-height: 1.1em;
-  border-width: .15em .1em .15em .3em;
-  border-color: #8dd;
-  border-radius: .5em;
-  background-color: #bff;
-  text-align:center;
-}
-.expGoal{
-  Max-width: 2.5em;
-  max-height: 1.5em;
-  Min-width: 2.5em;
-  min-height: 1.5em;
-  border-width: .15em;
-  border-color: #6aa;
-  border-radius: .5em;
-  background-color: #7ac;
-  text-align:left;
-}
-.rank{
-  Max-width: 3em;
-  Min-width: 3m;
-  min-height: 2em;
-  max-height: 2em;
-  border-width: .15em;
-  border-color: rgba(50,100,150,.0);
-  border-radius: .75em;
-  background-color: hsla(195,50%,90%, .0);
-  text-align:left;
-}
