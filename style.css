@@ -30,7 +30,7 @@ html, body {
 
 /*CSS begins here.*/
 #CharacterSheet{
-   background: url("https://www.type-together.com/resources/-2016/editorial/news/2018_05_Typographics/Typographics-cover.apng") center 15%/cover no-repeat;
+   background: url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true") center 15%/cover no-repeat;
   min-height: 100vh;
   min-width:  100vw;
   overflow: none;
