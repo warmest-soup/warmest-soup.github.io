@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 *{font-family: 'Libre Caslon Text', sans-serif;
-    font-size: 15px;
+    font-size: 1em;
   font-weight: bold;
 }
 
@@ -9,20 +9,23 @@ html, body {
   margin:0;
   padding; 0;
   overflow: none;
+  background: url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true") center 15%/cover no-repeat;
+  overflow: auto;
 }
 /*Scroll bar adjustments*/
 ::-webkit-scrollbar{
-  width: .5em;
-  height: .5em;
+  width: .65em;
+  height: .65em;
 }
 ::-webkit-scrollbar-thumb{
   background: #037;
-  border-radius: 10mm;
+  border-radius: 1em;
 }
 ::-webkit-scrollbar-corner{
   display: none;
 }
 ::-webkit-scrollbar-track{
+  background: #000;
   display: none;
 }
 
@@ -30,30 +33,32 @@ html, body {
 
 /*CSS begins here.*/
 #CharacterSheet{
-   background: url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true") center 15%/cover no-repeat;
-  min-height: 100vh;
-  min-width:  100vw;
-  overflow: none;
+ min-height: 100vh;
+  max-height: 100vh;
+  overflow: auto;
   
 }
 .CharSection{
   display: flex;
   overflow: auto;
   background: transparent;
-  padding: 3mm;
-  gap: 5mm;
+  padding: 1em;
+  gap: 1em;
   
 }
 
 /*Sections*/
 .container {
   background: url("https://azaeath.art/pics/moreRecent/AT%20with%20Azzy%20the%20Great_20200413031258.png") center 15%/cover no-repeat;
-  border: 3mm solid;
+  border: .5em solid;
   Border-color: #135;
-  min-height:  180mm;
-  min-width: 95mm;
-  border-radius: 20px;
+  min-height:  45em;
+  max-height:  45em;
+  min-width: 20em;
+  max-width: 20em;
+  border-radius: 1em;
 }
+
 /*Specific Sections*/
 #Abilities{
   margin:0;
