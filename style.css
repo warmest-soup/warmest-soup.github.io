@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 *{font-family: 'Libre Caslon Text', sans-serif;
-    font-size: 1em;
+    font-size: 1.8vh;
   font-weight: bold;
 }
 
@@ -14,12 +14,12 @@ html, body {
 }
 /*Scroll bar adjustments*/
 ::-webkit-scrollbar{
-  width: .65em;
-  height: .65em;
+  width: 1.25vh;
+  height: 1.25vh;
 }
 ::-webkit-scrollbar-thumb{
   background: #037;
-  border-radius: 1em;
+  border-radius: 50vh;
 }
 ::-webkit-scrollbar-corner{
   display: none;
@@ -33,7 +33,7 @@ html, body {
 
 /*CSS begins here.*/
 #CharacterSheet{
- min-height: 100vh;
+  min-height: 100vh;
   max-height: 100vh;
   overflow: auto;
   
@@ -42,21 +42,21 @@ html, body {
   display: flex;
   overflow: auto;
   background: transparent;
-  padding: 1em;
-  gap: 1em;
+  padding: 2vh;
+  gap: 2.5vh;
   
 }
 
 /*Sections*/
 .container {
   background: url("https://azaeath.art/pics/moreRecent/AT%20with%20Azzy%20the%20Great_20200413031258.png") center 15%/cover no-repeat;
-  border: .5em solid;
+  border: .7vh solid;
   Border-color: #135;
-  min-height:  45em;
-  max-height:  45em;
-  min-width: 20em;
-  max-width: 20em;
-  border-radius: 1em;
+  min-height:  85vh;
+  max-height:  85vh;
+  min-width: 40vh;
+  max-width: 40vh;
+  border-radius:2vh;
 }
 
 /*Specific Sections*/
@@ -66,8 +66,8 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  overflow: none;
-  min-width: 120mm;
+  overflow: clip;
+  min-width: 50vh;
   
 }
 
