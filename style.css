@@ -111,10 +111,7 @@ html, body {
 
 .sklSlot:hover{
   background-color: #bff;
-  box-shadow: inset 0em 0em 7px skyblue, 
-    inset 0em 0em 10px skyblue, 
-    inset 0em 0em 20px skyblue, 
-    inset 0em 0em 25px skyblue;
+  box-shadow: inset 0vh 0vh 1vh 1vh skyblue;
   animation-name: abilSelect;
   animation-duration: .15s;
   animation-timing-function: ease-out;
@@ -123,44 +120,19 @@ html, body {
 } 
 @keyframes abilSelect{
   0%{
-    background-color: #aff;
-    box-shadow: 
-    0 0 15em #dff,
-    0 0 10em #dff,
-    0 0 5em #dff,
-    0 0 5em #dff,
-    0 0 2em #dff,
-    0 0 2em #dff,
-    inset 0em 0em 0px skyblue, 
-    inset 0em 0em 0px skyblue, 
-    inset 0em 0em 0px skyblue, 
-    inset 0em 0em 0px skyblue;
+    background-color: #cff;
+    box-shadow: 0vh 0vh 10vh 5vh #cff,
+      inset 0vh 0vh 0vh 0vh skyblue;
   }
   25%{
-    background-color: #white;
-    box-shadow: 
-    0 0 0em skyblue,
-    0 0 7.5em skyblue,
-    0 0 5em skyblue,
-    0 0 2.5em #6ff,
-    inset 0em 0em 0px skyblue, 
-    inset 0em 0em 0px skyblue, 
-    inset 0em 0em 0px skyblue, 
-    inset 0em 0em 0px skyblue;
+    background-color: #eff;
+    box-shadow: 0vh 0vh 0vh 0vh #eff,
+      inset 0vh 0vh 0vh 0vh skyblue;
   }
   100%{
-    padding:1.1em;
+    padding:2vh;
     background-color: #bff;
-    box-shadow: 
-    0 0 0em skyblue,
-    0 0 0em skyblue,
-    0 0 0em skyblue,
-    0 0 0px skyblue,
-    inset 0em 0em 7px skyblue, 
-    inset 0em 0em 10px skyblue, 
-    inset 0em 0em 20px skyblue, 
-    inset 0em 0em 25px skyblue;
-    font-size:1.1em;
+    box-shadow: inset 0vh 0vh 1vh 1vh skyblue;
   }
 }
 
@@ -168,7 +140,7 @@ html, body {
   display:flex;
   position:absolute;
   background-color:transparent;
-  translate:0 -1em;
+  translate:0 -2vh;
   flex-wrap:wrap;
   align-items:center;
   justify-content:space-between;
@@ -183,7 +155,7 @@ html, body {
 }
 @keyframes abilSelect2{
   100%{
-    font-size:1.025em;
+    font-size:1.em;
   }
 }
 
