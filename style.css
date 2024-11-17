@@ -62,33 +62,32 @@ html, body {
 /*Specific Sections*/
 #Abilities{
   margin:0;
-  padding:0; 
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-around;
   overflow: clip;
-  min-width: 35vh;
-  
+  min-width: 45vh;
 }
 
 .memory{
+  margin-bottom:1.8vh;
   position:relative;
-  padding-top:15px;
-  padding-bottom:15px;
-  border: 5px solid;
+  padding-top:4vh;
+  padding-bottom:0vh;
+  border: .5vh solid #135;
   background-color: skyblue;
-  max-width: 14em;
-  max-height: 40em;
-  min-width: 14em;
-  min-height: 41em;
-  border-radius: 25px;
+  max-width: 48%;
+  min-width: 47%;
+  max-height: 60vh;
+  min-height: 73vh;
+  border-radius:2vh;
   text-align:center;
   display: flex;
   flex-flow:column;
   flex-direction:column-reverse;
   justify-content:flex-end;
   align-items: center;
-  gap:.5em;
+  gap:.5vh;
 }
 
 .sklSlot{
@@ -96,15 +95,15 @@ html, body {
   position:relative;
   justify-content:center;
   align-items:top;
-  padding:1em;
-  border-top: 2px solid;
-  border-bottom: 2px solid;
+  padding:1.7vh;
+  border-top: .1vh solid;
+  border-bottom: .5vh solid;
   border-color:#589;
   background-color: skyblue;
-  max-width: 8em;
-  max-height: 1em;
-  min-width: 8em;
-  min-height: 1em;
+  max-height: 1vh;
+  min-height: 2vh;
+  max-width: 15vh;
+  min-width: 15vh;
   text-align:center;
   text-wrap: nowrap;
 }
