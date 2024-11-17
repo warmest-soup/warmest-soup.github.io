@@ -7,10 +7,11 @@
 /* Make app fullscren */
 html, body {
   margin:0;
-  padding; 0;
+  padding: 0;
   overflow: none;
   background: url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true") center 15%/cover no-repeat;
   overflow: auto;
+  overscroll-behavior:none;
 }
 /*Scroll bar adjustments*/
 ::-webkit-scrollbar{
