@@ -1,271 +1,670 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-*{font-family: 'Libre Caslon Text', sans-serif;
-    font-size: 1.8vh;
-  font-weight: bold;
+html {
+  width: 98%;
+  overflow-x:clip;
 }
-
-/* Make app fullscren */
-html, body {
-  margin:0;
-  padding: 0;
-  overflow: none;
-  background: url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true") center 15%/cover no-repeat;
-  overflow: auto;
-  overflow-y:hidden;
+* {
+  font-family: "caudex";
+  font-size: 100%;
+}
+button {
+  font-weight: 700;
 }
 /*Scroll bar adjustments*/
-::-webkit-scrollbar{
-  width: 1.25vh;
-  height: 1.25vh;
+::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.5em;
+  display: overlay;
 }
-::-webkit-scrollbar-thumb{
-  background: #037;
-  border-radius: 50vh;
+::-webkit-scrollbar-thumb {
+  background: darkGray;
+  border-radius: 1em;
 }
-::-webkit-scrollbar-corner{
-  display: none;
+::-webkit-scrollbar-corner {
+  display: visible;
+  background: white;
 }
-::-webkit-scrollbar-track{
-  background: #000;
-  display: none;
+::-webkit-scrollbar-track {
+  background: lightGray;
+  border:solid darkgray .1em;
+  /*display: none;*/
+  /*Display might be important for when background images appear*/
+}
+html > * ::-webkit-scrollbar-track {
+  border-radius: 1em;
 }
 
-.break{flex-basis:100%;}
-
-/*CSS begins here.*/
-#CharacterSheet{
-  min-height: 100vh;
-  max-height: 100vh;
-  overflow: auto;
-  
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 70%;
+  height: 0.15em;
+  background: lightgray;
+  border-radius: 0.5em;
+  outline: none;
+  border: solid gray 0.07em;
 }
-.CharSection{
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0.7em;
+  height: 0.7em;
+  background: black;
+  border-radius: 1em;
+  cursor: pointer;
+}
+
+.SingleInputNUM {
+  min-width: 1.3em;
+  max-width: 1.3em;
+  border-radius: 0.4em;
+  border: solid, 0.085em;
+}
+.Section {
+  border: solid, 0.15em;
+  border-radius: 0.5em;
+  padding: 0.5em;
+}
+#CharID {
+  min-width: 16em;
+  max-width: 16em;
   display: flex;
-  overflow: auto;
-  background: transparent;
-  padding: 2vh;
-  gap: 2.5vh;
-  
+  align-items: end;
+  flex-flow: column;
+  padding: 1em;
 }
-
-/*Sections*/
-.container {
-  background: url("https://azaeath.art/pics/moreRecent/AT%20with%20Azzy%20the%20Great_20200413031258.png") center 15%/cover no-repeat;
-  border: .7vh solid;
-  Border-color: #135;
-  min-height:  85vh;
-  max-height:  85vh;
-  min-width: 40vh;
-  max-width: 40vh;
-  border-radius:2vh;
+#Name textarea {
+  resize: none;
+  text-align: center;
+  border-radius: 0.5em;
+  min-width: 13.8em;
+  max-width: 13.8em;
 }
-
-/*Specific Sections*/
-#Abilities{
-  margin:0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-around;
-  overflow: clip;
-  min-width: 45vh;
+#Photo {
+  border: solid grey 0.1em;
+  border-radius: 0.5em;
+  min-height: 24em;
+  max-height: 24em;
+  min-width: 14em;
+  max-width: 14em;
 }
-
-.memory{
-  margin-bottom:1.8vh;
-  position:relative;
-  padding-top:4vh;
-  padding-bottom:0vh;
-  border: .5vh solid #135;
-  background-color: skyblue;
-  max-width: 48%;
-  min-width: 47%;
-  max-height: 60vh;
-  min-height: 73vh;
-  border-radius:2vh;
-  text-align:center;
-  display: flex;
-  flex-flow:column;
-  flex-direction:column-reverse;
-  justify-content:flex-end;
-  align-items: center;
-  gap:.5vh;
+.CharInfo input,
+#HandDropdown {
+  min-width: 9em;
+  max-width: 9em;
 }
-
-.sklSlot{
-  display:flex;
-  position:relative;
-  justify-content:center;
-  align-items:top;
-  padding:1.7vh;
-  border-top: .1vh solid;
-  border-bottom: .5vh solid;
-  border-color:#589;
-  background-color: skyblue;
-  max-height: 1vh;
-  min-height: 2vh;
-  max-width: 15vh;
-  min-width: 15vh;
-  text-align:center;
+#DayCount {
+  font-size: 1em;
+  font-weight: bold;
+}
+td {
+  text-align: center;
+  min-width: 1em;
+  max-width: fit-content;
   text-wrap: nowrap;
 }
-
-.sklSlot:hover{
-  background-color: #bff;
-  box-shadow: inset 0vh 0vh 1vh 1vh skyblue;
-  animation-name: abilSelect;
-  animation-duration: .15s;
-  animation-timing-function: ease-out;
-  animation-fill-mode:forwards;
-  color:hsl(200,100%,40%);
-} 
-@keyframes abilSelect{
-  0%{
-    background-color: #cff;
-    box-shadow: 0vh 0vh 10vh 5vh #cff,
-      inset 0vh 0vh 0vh 0vh skyblue;
-  }
-  25%{
-    background-color: #eff;
-    box-shadow: 0vh 0vh 0vh 0vh #eff,
-      inset 0vh 0vh 0vh 0vh skyblue;
-  }
-  100%{
-    padding:2vh;
-    background-color: #bff;
-    box-shadow: inset 0vh 0vh 1vh 1vh skyblue;
-  }
+input {
+  text-align: center;
 }
-
-.skl{
-  display:flex;
-  position:absolute;
-  background-color:transparent;
-  translate:0 -2vh;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:space-between;
-  height:100%;
-  width:100%;
+#Traits {
+  text-align: center;
+  min-width: 15em;
+  max-width: 15em;
 }
-.skl:hover{
-  animation-name: abilSelect2;
-  animation-duration: .25s;
-  animation-timing-function: ease-out;
-  animation-fill-mode:forwards;
+.WeightEXP input {
+  min-width: 1.7em;
+  min-width: 1.7em;
 }
-@keyframes abilSelect2{
-  100%{
-    font-size:1.9vh;
-  }
+.Row {
+  width: calc(100vw - 1em);
+  height: 100%;
+  display: flex;
+  gap: 0.5em;
+  overflow: auto;
+  padding: 0.5em;
+  transform:translatex(-.5em);
+  
 }
-
-.expBar{
-  position:relative;
-  background-color:gray;
-  translate:.5vh -.55vh;
-  height:.4vh;
-  width:12vh;
-  border:hsl(220, 50%, 50%) .3vh solid;
-  border-radius:.5vh;
-  overflow:clip;
+#Photo {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.expProgress{
-  background-color:hsl(100, 50%, 50%);
-  height:.38em;
-  width:50%;
-  border-radius:.5em;
+#Name {
+  text-align: center;
 }
-
-/*Text box formatting*/
-.abilButton{
-  Max-width: 1.1em;
-  max-height: 1.1em;
-  Min-width: 1.1em;
-  min-height: 1.1em;
-  border-width: .15em;
-  border-color: #6aa;
+.CharInfo {
+  text-align: right;
+}
+#abilityColumns {
+  display: flex;
+  gap: 1em;
+}
+#Satiety {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+#SatTop {
+  display: flex;
+  gap: 1em;
+  text-wrap: nowrap;
+}
+#SatMiddle {
+  display: flex;
+  gap: 1em;
+}
+.satVal {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  min-height: 29em;
+  justify-content: space-between;
+}
+.satBar {
+  border: solid, 0.15em;
+  min-height: 26.5em;
+  max-height: 26.5em;
+  min-width: 1.3em;
+  max-width: 1.3em;
   border-radius: 1em;
-  background-color: #7ac;
-  text-align:center;
+  overflow: hidden;
 }
-/*Dropdown ability Menu*/
-.sklData{
+#Clock {
+  font-weight: bold;
+  font-size: 2.5em;
+  padding-top: 0.2em;
+}
+.satBarFill {
+  background-color: black;
+  height: 6em;
+  border-radius: 0.8em;
+}
+.ToxicButtons {
+  max-width: 2em;
+  min-width: 2em;
+  max-height: 2em;
+  min-height: 2em;
+}
+#SatBottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+.AbilSlot {
+  border: 0.16em solid black;
+  padding: 0.2em;
+  border-radius: 0.7em;
+  min-height: 1.6em;
+  max-height: 1.6em;
+  min-width: 10.7em;
+  max-width: 10.7em;
+  white-space: nowrap;
+}
+
+.Rank {
+  font-size: 70%;
+}
+#AbilContainer button,
+#AbilContainer {
+  font-size: 80%;
+}
+#abilTitle {
+  display: flex;
+  margin-bottom: 0.5em;
+  justify-content: space-between;
+}
+.Rank {
+  font-weight: Bold;
+  min-width: 2em;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: black;
+  border: solid gray 0.1em;
+  border-radius: 0.75em;
+}
+.aexp {
+  border: none;
+  text-align: right;
+  font-weight: bold;
+  font-size: 90%;
+  height: 100%;
+  width: 1em;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.Ability button {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: black;
+  border: solid gray 0.1em;
+  border-radius: 0.75em;
+}
+.aScrollColumns {
+  max-height: 39em;
+  min-height: 45em;
+  max-width: 12.05em;
+  min-width: 12.05em;
+  overflow: auto;
+  border: solid 0.2em;
+  padding: 0.3em;
+  border-radius: 0.5em;
+  background: repeating-linear-gradient(
+    50deg,
+    black,
+    black 0.5px,
+    white 0.5px,
+    white 1%
+  );
+}
+.satVal .SingleInputNUM {
+  min-width: 1.7em;
+  max-width: 1.7em;
+  border-radius: 0.7em;
+}
+.satIcon {
+  text-align: center;
+  font-weight: bold;
+}
+.wgtIn {
+  border: none;
+}
+#wgtExp {
+  text-align: right;
+  width: 1.6em;
+}
+.WeightEXP {
+  text-align: left;
+}
+#RemoveAbil,
+#INVremove {
+  border: solid gray 0.1em;
+  padding: 0em 0.5em;
+  border-radius: 0.25em;
+  color: grey;
+}
+#AddAbility {
+  border-radius: 5em;
+  border-width: 0.01em;
+}
+.openAbil {
+  border: 0.1em solid black;
+  padding: 0.2em;
+  border-radius: 0.7em;
+  min-height: 1em;
+  max-height: 1em;
+  min-width: 10em;
+  max-width: 10em;
+  white-space: nowrap;
+}
+#addAbilWindow {
+  display: none;
+  width: 14em;
+  height: 22em;
+  background-color: white;
+  border: 0.15em solid black;
+  border-radius: 1em;
+  position: relative;
+  transform: translatey(26.6em) translatex(2em);
+  padding: 1em;
+  z-index: +1;
+}
+#addAbilWindow input {
+  max-width: 5em;
+  min-width: 0em;
+  border-radius: 0.5em;
+  border-color: gray;
+  border-width: 0.05em;
+}
+#addAbilWindow textarea {
+  width: 100%;
+}
+.AbilityInfo {
+  display: none;
+  position: relative;
+  width: 7.9em;
+  min-height: 1em;
+  max-height: 8em;
+  overflow: auto;
+  background-color: white;
+  border: solid black;
+  border-width: 0em 0.2em 0.3em 0.2em;
+  border-radius: 0em 0em 1em 1em;
+  top: 1em;
+  transform: translatey(-1.5em) translatex(0.2em);
+  padding: 1em;
+  text-wrap: wrap;
+}
+#Temperature {
+  display: flex;
+  flex-direction: column;
+  min-width: 13em;
+  max-width: 18em;
+}
+#TempTop {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-around;
+}
+#TempEffects {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+#ThermBar {
+  padding: 0.2em;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  background-color: white;
+  min-width: 1em;
+  max-width: 1em;
+  min-height: 35em;
+  max-height: 35em;
+  border: solid black 0.2em;
+  border-radius: 2em;
+  overflow: clip;
+}
+
+#ThermFill {
+  background-color: black;
+  min-width: 1em;
+  max-width: 1em;
+  border: solid black 0em;
+  border-radius: 5em;
+}
+#TempBot {
+  padding: 0em;
+  text-align: center;
+  line-height: 1.3em;
+  font-size: 2em;
+  font-weight: 700;
+}
+#Abilities {
+  max-height: 41em;
+  overflow: show;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.Ability > div {
+  display: flex;
+  justify-content: space-between;
+}
+#Notes {
+  max-width: 20em;
+  min-width: 20em;
+  max-height: 30em;
+  min-height: 30em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#notesPages {
+  display: flex;
+  overflow: auto;
+  gap: 1em;
+  padding: 0.4em;
+}
+#Notes textArea {
+  width: 17em;
+  height: 19.9em;
+  border-radius: 0.5em;
+  padding: 1em;
+}
+#PageButtons {
+  text-align: center;
+}
+#Inventory {
+  padding: 1em;
+  user-select: none;
+  min-width: 26em;
+  max-width: 26em;
+  min-height: 28em;
+  max-height: 28em;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+#InvTop {
+  display: flex;
+  justify-content: start;
+  gap: 1em;
+  padding: 0.5em;
+  align-items: center;
+}
+#invTitle {
+  font-weight: bold;
+}
+#InvStats {
+  font-size: 0.9em;
+}
+#inventoryDisplay {
+  background: repeating-linear-gradient(
+    50deg,
+    black,
+    black 0.5px,
+    white 0.5px,
+    white 2%
+  );
+  min-width: 26em;
+  max-width: 26em;
+  min-height: 25em;
+  max-height: 25em;
+  border: solid 0.1em black;
+  border-radius: 1em;
+}
+#QuickItem {
+  margin: 0.5em;
+  padding: 0.1em 0em 0.6em 0em;
+  border-radius: 0.7em;
+  min-height: 1.3em;
+  max-height: 1.3em;
+  min-width: 7em;
+  max-width: 7em;
+  text-align: center;
+  text-wrap: nowrap;
+}
+#QuickItem::-webkit-scrollbar {
+  display: none;
+}
+#inventoryDisplay {
+  display: flex;
+}
+.INVcols {
+  min-width: 32.9%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em 0em 0.5em 0em;
+  overflow: auto;
+}
+.QuickMadeItem {
+  background: white;
+  border: solid black 0.1em;
+  border-radius: 0.7em;
+  width: fit-content;
+  text-align: center;
+  padding: 0em 0.5em 0.1em 0.5em;
+}
+#NewItemWin {
+  display: block;
+  min-width: 16em;
+  max-width: 16em;
+  min-height: 22.3em;
+  max-height: 22.3em;
+  background-color: white;
+  border: 0.15em solid black;
+  border-radius: 1em;
+  position: relative;
+  transform: translatey(27.5em) translatex(4em);
+  padding: 1em;
+  z-index: +1;
+  overflow: auto;
+}
+#NewItemStats {
+  display: flex;
+}
+#itemName {
+  width: 7em;
+  border-radius: 0.5em;
+  border: solid black 0.1em;
+}
+#NewItemStats > * {
+  padding: 0em 0.2em 0.2em 0.1em;
+}
+#NewArmorCoverage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#NewArmorCoverage > * {
+  text-align: center;
+}
+#BodyDia { 
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  transform: translatey(-1em);
+}
+#LegsDia {
+  display: flex;
+  gap: 0.5em;
+}
+.diaArms {
+  margin: 0em 0em 5em 0em;
+  border: solid gray 0.1em;
+  border-radius: 0.6em;
+  background: lightgray;
+  overflow: clip;
+  transform: translatey(0.7em);
+}
+#HeadDia {
+  border: solid gray 0.1em;
+  border-radius: 4em;
+  background: lightgray;
+  overflow: clip;
+}
+#TorsoDia {
+  border: solid gray 0.1em;
+  border-radius: 0.5em 0.5em 0em 0em;
+  background: lightgray;
+  overflow: clip;
+  padding: 0em 0em 1.5em 0em;
+  transform: translatey(1.5em);
+}
+.diaLegs {
+  border: solid gray 0.1em;
+  border-radius: 0.5em;
+  background: lightgray;
+  overflow: clip;
+  z-index: +1;
+}
+input[type="checkbox"] {
+  background-color: white;
+  -webkit-appearance: none;
+  -moz-appeareance: none;
+  width: 1em;
+  height: 1em;
+  border: solid black 0.1em;
+  border-radius: 0.4em;
+}
+input[type="checkbox"]:checked {
+  background: repeating-linear-gradient(
+    50deg,
+    black,
+    black 44%,
+    white 44%,
+    white 55%,
+    black 55%,
+    black 100%
+  );
+}
+.newArmorStatGroups {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 0.5em;
+  align-items:center;
+}
+#armorSec {
+  display: flex;
+  gap: 1em;
+  align-items: center;
   display:none;
 }
-.sklDataOpen{
-  display:flex;
-  flex-flow:column;
-  justify-content:space-between;
-  position:absolute;
-  translate: 1.5em 8.8em;
-  z-index:10 !important;
-  display:flex;
-  flex-basis:auto;
-  height:12.5em;
-  width:12.5em;
-  background-color:#bdf;
-  border:#558 .6em solid;
-  border-radius: 1em;
-  text-wrap:wrap;
-  font-size: .75em;
-  color:black !important;
-  animation-name: sklDataOpen;
-  animation-duration: .15s;
-  animation-timing-function: ease-out;
-  animation-fill-mode:forwards;
-  color:hsl(200,100%,40%);
-} 
-@keyframes sklDataOpen{
-  0%{ 
-    translate:1.5em 2em;
-    height:0em;
-  }
-  25%{
-  }
-  100%{
-
-  }
+.ItemTraits {
+  border: solid black;
+  border-width: 0em 0em 0.1em 0em;
+  padding: 0.5em 0em 0em 0em;
+  margin: 1em 0em;
 }
-
-.abilTitle{
-  backGround-color:salmon;
-  box-shadow:inset -.5em -.5em .5em red;
-  border-radius:.25em;
-  color:#800;
+#weaponSec {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5em;
+  display:none;
 }
-.abilBody{
-  padding:.25em;
-  flex-grow:1;
-  font-size:.85em;
-  ;
+.NewArmorStat{
+  width:2em;
+  border-radius:.5em;
+  border:solid gray .1em;
 }
-.techTitle{
-  backGround-color:cyan;
-  box-shadow:inset -.5em -.5em .5em blue;
-  border-radius:.25em;
-  color:#008;
+#lowNASG{
+  transform:translatey(-1em);
 }
-
-.expCur{
-
+.longNumIn{
+  min-width:3em;
+  max-width:3em;
+  border-radius:.5em;
+  border:solid gray .1em;
 }
-.expGoal{
-
+.iTech{
+  width:6em;
+  border:solid gray .1em;
+  border-radius:.5em;
 }
-.rank{
-  Max-width: 2.5em;
-  Min-width: 2.5em;
-  min-height: 2.5em;
-  max-height: 2.5em;
-  border-width: .2em;
-  border-color: hsla(50,100,150,.0);
-  border-radius: 2em;
-  background-color: hsla(195,50%,90%,.5);
+#techSec{
+  display:none;
+  flex-direction:column;
+}
+#invSec{
+  display:none;
+  flex-direction:column;
   text-align:center;
-  font-size:1.1em;
-  translate:0 .15em;
+  gap:1em;
+  line-height:2em;
 }
-
-#ArmorGrids {
-  min-width: 380mm;
+#nPocketName{
+  min-width:5em;
+  max-width:5em;
+  border:solid black .1em;
+  border-radius:.5em;
+}
+#SheetManager{
+  border:solid black;
+  border-width:.1em 0em .2em 0em;
+  min-width:150%;
+  overflow:clip;
+  background: repeating-linear-gradient(
+    50deg,
+    black,
+    black 0.5px,
+    white 0.5px,
+    white .5%);
+  position:relative;
+  text-align:center;
+  transform:translatex(-15%);
+  display:flex;
+  align-items:end;
+  justify-content:center;
+  padding:.2em;
 }
