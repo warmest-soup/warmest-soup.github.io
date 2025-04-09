@@ -1,84 +1,721 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+<div id="SheetManager">
+  <Input id="User" class="longNumIn" style="text-transform:uppercase;" placeholder="User"/>
+  <Input id="Key" class="longNumIn" style="text-transform:uppercase;" placeholder="Key"/>
+  <button onclick="Save()">Save</button>
+  <button onclick="Load()">Load</button>
+</div>
 <div id="CharacterSheet">
-<!--First row of the character sheet. -->
-  <div class="CharSection" id="Primary">
-    <div class="container" id="Character Card"></div>
-    <div class="container" id="Traits"></div>
-    
-    <div class="container" id="Abilities">
-      
-      <div id="skills" class="memory">
-        
-        <!--Slots begin here-->
-        <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        
-        <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)">
-          <!--Occupied Skill-->
-          <div class="skl" draggable="true" ondragstart="dragStart(event)" id="skl2">
-            
-            <input type="button" class="abilButton" onclick="openExp(this)">
-             | Fletch | 
-            <input type="button" class="rank" value=S:1> 
-            <div class="break"> </div>
-            <div class="expBar"><div class="expProgress"></div></div>
-            <div class="break"> </div>
-            <div class="sklData ">
-              <div class="techTitle"> ~EXP~ </div> 
-              <div class="abilBody">
-                Move and attack, in the same action.
-                </br>~</br> 
-            Costs 1 SKL Card</div>
-              <div class="techTitle">Tech</div>
+<div class="Row">
+  <div id="CharID" class="Section">
+    <div id="Name"> <textarea rows="2" type="text" autocapitalize="words" placeholder="-Name-&#10-"></textarea></div>
+    <div id="Photo">-Image 16:9-</div>
+    <div id="Occupation" class="CharInfo"> Occupation:
+      <Input type="Text" autocapitalize="words" PlaceHolder="Adventurer"></Input>
+    </div>
+    <div id="Age" class="CharInfo"> Age:
+      <Input type="Text" autocapitalize="words" PlaceHolder="--"></Input>
+    </div>
+    <div id="Sex" class="CharInfo"> Sex:
+      <Input type="Text" autocapitalize="words" PlaceHolder="--"></Input>
+    </div>
+    <div id="Handed" class="CharInfo"> Handed:
+      <Select id="HandDropdown">
+        <option>Preferred Hand</option>
+        <option>Left Dominant</option>
+        <option>Right Dominant</option>
+      </Select>
+    </div>
+    <div id="Money" class="CharInfo"> Money:
+      <Input type="Text" autocapitalize="words" PlaceHolder="$0.00¢"></Input>
+    </div>
+    <div id="Status" class="CharInfo"> Status:
+      <Input type="Text" autocapitalize="words" PlaceHolder="Fine"></Input>
+    </div> <br>
+    <div id="DayCount" style="text-align:center;">Day <Span id="currentDay">0000</Span></div>
+  </div>
+  <div id="Traits" class="Section"> ~Traits~           <button id="RulesShortcut" onclick="openRules()">Rule Book</button>
+    <table id="TraitTable">
+      <tr class="TraitHeader">
+        <td colspan="2">SKL</td>
+        <td colspan="3">Athleticism</td>
+        <td></td>
+        <td><input maxLength="3" id="athBonus" type="text" class="SingleInputNUM" value="+0" /></td>
+        <td></td>
+      </tr>
+      <tr id="Strength">
+        <td colspan="2" class="traitEXP"> <input maxLength="3" id="strExp" class="EXPvalue SingleInputNUM" type="text" value="0" /> <span id="strGoal"></span></td>
+        <td colspan="3"> Strength </td>
+        <td><input maxLength="3" id="strReal" type="text" class="SingleInputNUM realTrait" value="3" /></td>
+        <td><input maxLength="3" id="strBonus" type="text" class="SingleInputNUM" class="PlusMinusInput" value="+0" /></td>
+        <td id="strFunc" /> x </td>
+      </tr>
+      <tr id="Dexterity">
+        <td colspan="2" class="traitEXP"> <input maxLength="3" id="dexExp" class="EXPvalue SingleInputNUM" type="text" value="0" /> <span id="dexGoal"></span></td>
+        <td colspan="3"> Dexterity </td>
+        <td><input maxLength="3" id="dexReal" type="text" class="SingleInputNUM realTrait" value="3" /></td>
+        <td><input maxLength="3" id="dexBonus" type="text" class="SingleInputNUM" class="PlusMinusInput" value="+0" /></td>
+        <td id="dexFunc" /> x </td>
+      </tr>
+      <tr id="Speed">
+        <td colspan="2" class="traitEXP"> <input maxLength="3" id="spdExp" class="EXPvalue SingleInputNUM" type="text" value="0" /> <span id="spdGoal"></span></td>
+        <td colspan="3"> Speed </td>
+        <td><input maxLength="3" id="spdReal" type="text" class="SingleInputNUM realTrait" value="3" /></td>
+        <td><input maxLength="3" id="spdBonus" type="text" class="SingleInputNUM" class="PlusMinusInput" value="+0" /></td>
+        <td id="spdFunc" /> x </td>
+      </tr>
+      <tr class="TraitHeader">
+        <td colspan="2">INS</td>
+        <td colspan="3">Awareness</td>
+        <td></td>
+        <td><input maxLength="3" id="aweBonus" type="text" class="SingleInputNUM" value="+0" /></td>
+        <td></td>
+      </tr>
+      <tr id="Perception">
+        <td colspan="2" class="traitEXP"> <input maxLength="3" id="perExp" class="EXPvalue SingleInputNUM" type="text" value="0" /> <span id="perGoal"></span></td>
+        <td colspan="3"> Perception </td>
+        <td><input maxLength="3" id="perReal" type="text" class="SingleInputNUM realTrait" value="3" /></td>
+        <td><input maxLength="3" id="perBonus" type="text" class="SingleInputNUM" class="PlusMinusInput" value="+0" /></td>
+        <td id="perFunc" /> x </td>
+      </tr>
+      <tr id="Charisma">
+        <td colspan="2" class="traitEXP"> <input maxLength="3" id="chaExp" class="EXPvalue SingleInputNUM" type="text" value="0" /> <span id="chaGoal"></span></td>
+        <td colspan="3"> Charisma </td>
+        <td><input maxLength="3" id="chaReal" type="text" class="SingleInputNUM realTrait" value="3" /></td>
+        <td><input maxLength="3" id="chaBonus" type="text" class="SingleInputNUM" class="PlusMinusInput" value="+0" /></td>
+        <td id="chaFunc" /> x </td>
+      </tr>
+      <tr id="Navigation">
+        <td colspan="2" class="traitEXP"> <input maxLength="3" id="navExp" class="EXPvalue SingleInputNUM" type="text" value="0" /> <span id="navGoal"></span></td>
+        <td colspan="3"> Navigation </td>
+        <td><input maxLength="3" id="navReal" type="text" class="SingleInputNUM realTrait" value="3" /></td>
+        <td><input maxLength="3" id="navBonus" type="text" class="SingleInputNUM" class="PlusMinusInput" value="+0" /></td>
+        <td id="navFunc" /> x </td>
+      </tr>
+      <tr class="TraitHeader">
+        <td colspan="2">SKL</td>
+        <td colspan="3">Body</td>
+        <td></td>
+        <td><input maxLength="3" id="bodBonus" type="text" class="SingleInputNUM" value="+0" /></td>
+        <td></td>
+      </tr>
+      <tr id="Endurance">
+        <td colspan="2" class="traitEXP"> <input maxLength="3" id="endExp" class="EXPvalue SingleInputNUM" type="text" value="0" /> <span id="endGoal"></span></td>
+        <td colspan="3"> Endurance </td>
+        <td><input maxLength="3" id="endReal" type="text" class="SingleInputNUM realTrait" value="3" /></td>
+        <td><input maxLength="3" id="endBonus" type="text" class="SingleInputNUM" class="PlusMinusInput" value="+0" /></td>
+        <td id="endFunc" /> x </td>
+      </tr>
+      <tr id="Constitution">
+        <td colspan="2" class="traitEXP"> <input maxLength="3" id="conExp" class="EXPvalue SingleInputNUM" type="text" value="0" /> <span id="conGoal"></span></td>
+        <td colspan="3"> Constitution </td>
+        <td><input maxLength="3" id="conReal" type="text" class="SingleInputNUM realTrait" value="3" /></td>
+        <td><input maxLength="3" id="conBonus" type="text" class="SingleInputNUM" class="PlusMinusInput" value="+0" /></td>
+        <td id="conFunc" /> x </td>
+      </tr>
+      <tr id="Stamina">
+        <td colspan="2" class="traitEXP"> <input maxLength="3" id="staExp" class="EXPvalue SingleInputNUM" type="text" value="0" /> <span id="staGoal"></span></td>
+        <td colspan="3"> Stamina </td>
+        <td><input maxLength="3" id="staReal" type="text" class="SingleInputNUM realTrait" value="3" /></td>
+        <td><input maxLength="3" id="staBonus" type="text" class="SingleInputNUM" class="PlusMinusInput" value="+0" /></td>
+        <td id="staFunc" /> x </td>
+      </tr>
+      <tr class="TraitHeader">
+        <td colspan="2">INS</td>
+        <td colspan="3">Mind</td>
+        <td></td>
+        <td><input maxLength="3" id="mndBonus" type="text" class="SingleInputNUM" value="+0" /></td>
+        <td></td>
+      </tr>
+      <tr id="Intelligence">
+        <td colspan="2" class="traitEXP"> <input maxLength="3" id="intExp" class="EXPvalue SingleInputNUM" type="text" value="0" /> <span id="intGoal"></span></td>
+        <td colspan="3"> Intelligence </td>
+        <td><input maxLength="3" id="intReal" type="text" class="SingleInputNUM realTrait" value="3" /></td>
+        <td><input maxLength="3" id="intBonus" type="text" class="SingleInputNUM" class="PlusMinusInput" value="+0" /></td>
+        <td id="intFunc" /> x </td>
+      </tr>
+      <tr id="Wisdom">
+        <td colspan="2" class="traitEXP"> <input maxLength="3" id="wisExp" class="EXPvalue SingleInputNUM" type="text" value="0" /> <span id="wisGoal"></span></td>
+        <td colspan="3"> Wisdom </td>
+        <td><input maxLength="3" id="wisReal" type="text" class="SingleInputNUM realTrait" value="3" /></td>
+        <td><input maxLength="3" id="wisBonus" type="text" class="SingleInputNUM" class="PlusMinusInput" value="+0" /></td>
+        <td id="wisFunc" /> x </td>
+      </tr>
+      <tr id="Knowledge">
+        <td colspan="2" class="traitEXP"> <input maxLength="3" id="knoExp" class="EXPvalue SingleInputNUM" type="text" value="0" /> <span id="knoGoal"></span></td>
+        <td colspan="3"> Knowledge </td>
+        <td><input maxLength="3" id="knoReal" type="text" class="SingleInputNUM realTrait" value="3" /></td>
+        <td><input maxLength="3" id="knoBonus" type="text" class="SingleInputNUM" class="PlusMinusInput" value="+0" /></td>
+        <td id="knoFunc" /> x </td>
+      </tr>
+      <tr id="blankTraitSpace">
+        <td> </td>
+      </tr>
+      <tr id="Level">
+        <td colspan="2" class="traitEXP" style="text-align:center;">EXP</td>
+        <td colspan="3"> Level: </td>
+        <td id="CharacterLevel">0</td>
+      </tr>
+      <tr id="WeightClass">
+        <td colspan="2" class="WeightEXP traitEXP"> <input maxLength="3" id="wgtExp" class="EXPvalue SingleInputNUM wgtIn" type="text" value="0" /> <span id="wgtGoal">/0</span></td>
+        <td colspan="3"> Weight </td>
+        <td><input maxLength="3" id="wgtReal" type="text" class="SingleInputNUM wgtIn" value="3" /></td>
+        <td><input maxLength="3" id="wgtBonus" type="text" class="SingleInputNUM wgtIn" value="+0" /></td>
+        <td id="wgtFunc" /> x </td>
+      </tr>
+    </table>
+  </div>
+  <div id="Abilities" class="Section">
+    <div id="addAbilWindow">
+      <div><input id="Atype" type="radio" name="Atype" value="Skill">Skill</input>
+        <input type="radio" name="Atype" value="Insight">Insight</input>
+      </div>
+      <div>Ability Name: <br><input id="Aname" type="Text" maxlength="10" /></div>
+      <div>Description:<br><textarea id="Ades" rows="10" style="resize:none;"></textarea></div>
+      <button id="addAbil" onclick="addAbillity()">Add To Slot</button>
+    </div>
+    <div id="abilTitle"> ~Abilities~
+
+      <button id="AddAbility" onclick="openWinlette(addAbilWindow)">Add</button>
+
+      <div id="RemoveAbil" onDrop="removeAbility(event)" onDragover="allowDrop(event)">Remove</div>
+      <button id="indexShortcut" onclick="openIndex()">Tech Index</button>
+    </div>
+    <div id="AbilContainer">
+      <div id="abilityColumns">
+        <div id="Skills" class="abilityColumns">
+          Skills <div class="aScrollColumns">
+
+            <div class="AbilSlot openAbil" id="S1" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+            <div class="AbilSlot openAbil" id="S2" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+            <div class="AbilSlot openAbil" id="S3" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+            <div class="AbilSlot openAbil" id="S4" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+            <div class="AbilSlot openAbil" id="S5" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+            <div class="AbilSlot openAbil" id="S6" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+            <div class="AbilSlot openAbil" id="S7" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+            <div class="AbilSlot openAbil" id="S8" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+            <div class="AbilSlot openAbil" id="S9" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+            <div class="AbilSlot openAbil" id="S10" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+            <div class="AbilSlot openAbil" id="S11" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+            <div class="AbilSlot openAbil" id="S12" ondrop="abilDrop(event)" ondragover="allowDrop(event)"> </div>
+            <div class="AbilSlot openAbil" id="S13" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
             </div>
-            
-          </div>  
+            <div class="AbilSlot openAbil" id="S14" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S15" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S16" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S17" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S18" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S19" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S20" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S21" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S22" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S23" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S24" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S25" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S26" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S27" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S28" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S29" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S30" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S31" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S32" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S33" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S34" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S35" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S36" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S37" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S38" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S39" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S40" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S41" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S42" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S43" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S44" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S45" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S46" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S47" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S48" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S49" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="S50" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+
+          </div>
         </div>
-        <div class="sklSlot" ondrop="drop(event)" ondragover="allowDrop(event)">
-          <!--Occupied Skill-->
-          <div class="skl" draggable="true" ondragstart="dragStart(event)" id="skl1">
-            
-            <input type="button" class="abilButton" onclick="openExp(this)">
-             | Shootist | 
-            <input type="button" class="rank" value="4|4"> 
-            
-            <div class="break"> </div>
-            <div class="expBar"><div class="expProgress"></div></div>
-            <div class="break"> </div>
-            
-            <div class="sklData ">
-              <div class="abilTitle"> ~EXP~ </div> 
-              <div class="abilBody">
-                One's skill at gunfighting. open combat awareness 
-                and quickness on the draw! 
-                </br>~</br> 
-            No target penalty when shooting at moving targets</div>
-              <div class="abilTitle">Class</div>
+        <div id="Insights" class="abilityColumns">
+          Insights <div class="aScrollColumns">
+
+            <div class="AbilSlot" id="I1" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+              <span id="Insight0" class="Ability" draggable="true" ondragstart="abilDragStart(event)">
+                <div><span><input class="SingleInputNUM EXPvalue aexp" placeholder="0" style="display: none;"><span class="abilGoal">★</span>|</span><button onclick="openWinlette(Insight0Info)">Common</button><span>|<input class="SingleInputNUM Rank" placeholder="0" value="5|5"></span></div>
+                <pre id="Insight0Info" class="AbilityInfo" style="display: none;">Language:
+The form of speech most common among your countrymen &amp; peers.. with no unique characteristics besides perhaps a slight regional accent.</pre>
+              </span>
             </div>
-          </div>  
+            <div class="AbilSlot openAbil" id="I2" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+              </span>
+            </div>
+            <div class="AbilSlot openAbil" id="I3" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+            <div class="AbilSlot openAbil" id="I4" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+            <div class="AbilSlot openAbil" id="I5" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+            </div>
+            <div class="AbilSlot openAbil" id="I6" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+            </div>
+            <div class="AbilSlot openAbil" id="I7" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="i8" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I9" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I10" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I11" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I12" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I13" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I14" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I15" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I16" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I17" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I18" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I19" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I20" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I21" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I22" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I23" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I24" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I25" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I26" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I27" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I28" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I29" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I30" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I31" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I32" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I33" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I34" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I35" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I36" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I37" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I38" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I39" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I40" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I41" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I42" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I43" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I44" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I45" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I46" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I47" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I48" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I49" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+            <div class="AbilSlot openAbil" id="I50" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div> </div>
+  </div>
+  <div id="Satiety" class="Section">
+    <div id="SatTop">
+      <div id="Cards1">
+        <div> Wild Cards <input type="text" class="SingleInputNUM" /> <span id="WildCardTotal">X</Span> </div>
+      </div>
+      <div id="Cards2">
+        <div> <Span id="card2Type"> Cards </span> <input type="text" class="SingleInputNUM" /> <span id="2ndCardTotal">X</Span> </div>
+      </div>
+    </div>
+    <div id="SatMiddle">
+      <div id="Hunger">
+        <div class=satIcon id=shIcon>H</div>
+        <div class=satVal>
+          <input id="HungerVal" value="15" class="SingleInputNUM" />
+          <div class=satBar id=shBar onchange="console.log('I broke!')">
+            <div class="satBarFill" id="shFill"></div>
+          </div>
         </div>
       </div>
-  
-  
-      <!--Insights-->
-      <div id="insights" class="memory"></div></div>
-    
-    
-    <div class="container" id="Satiety"></div>
-    <div class="container" id="Combat"></div>
-    <div class="container" id="Resistances"></div>
+      <div id="Water">
+        <div class=satIcon id=swIcon>W</div>
+        <div class=satVal>
+          <input id="WaterVal" value="15" class="SingleInputNUM" />
+          <div class=satBar id=swBar>
+            <div class="satBarFill" id="swFill"></div>
+          </div>
+        </div>
+      </div>
+      <div id="Sleep">
+        <div class=satIcon id=szIcon>Z</div>
+        <div class=satVal>
+          <input id="SleepVal" value="15" class="SingleInputNUM" />
+          <div class=satBar id=szBar>
+            <div class="satBarFill" id="szFill"></div>
+          </div>
+        </div>
+      </div>
+      <div id="Toxic">
+        <div class=satIcon id=stIcon>T</div>
+        <div class=satVal>
+          <input id="ToxicVal" value="0" class="SingleInputNUM" />
+          <div class=satBar id=stBar>
+            <div class="satBarFill" id="stFill"></div>
+          </div>
+        </div>
+      </div>
+      <div id="dupButton"> <br>
+        <Button class="ToxicButtons" onClick="dupBar()">+</button> <br> <br>
+        <Button class="ToxicButtons" onClick="remBar()">-</button>
+      </div>
+    </div>
+    <div id="SatBottom">
+      <div id="Time"></div>
+      <Button id="PassTime" onClick="passHour()">Pass Time</button>
+      <div id="Sleep">
+        <Button id="Sleep" onClick="sleep()">Sleep</button>
+        <input id="TimeToSleep" class="SingleInputNUM" value="0" />
+      </div>
+      <div id="Clock"><span id="CurrentHour">00</span>:00</div>
+    </div>
   </div>
-<!--Second row of the character sheet. -->
-  <div class="CharSection" id="Secondary">
-    <div class="container" id="Notes"></div>
-    <div class="container" id="ArmorGrids"></div>
-    <div class="container" id="Inventory"></div>
+  <div id="Temperature" class="Section">
+    <div id=TempTop>
+      <div id="TempEffects">
+        <div id="Burning">BURN!<br>-<span class="burnFx">1</span> MND -<span class="burnFx">1</span> AWE</div>
+        <div id="Hot">Hot!<br>Water Sat Loss • <span id="hotMultiplier">1</span><br>-<span id="hotFx">1</span> WIS</div>
+        <div id="Fine">Fine</div>
+        <div id="Cold">Cold!<br>Hunger Sat loss • <span id="coldMultiplier">1</span><br>-<span id="coldFx">1</span> DEX</div>
+        <div id="Freezing">FREEZE!<br>-<span class="freezeFx">1</span> BOD -<span class="freezeFx">1</span> ATH</div>
+      </div>
+      <div id="thermometer">
+        <div id="ThermBar">
+          <div id="ThermFill"></div>
+        </div>
+      </div>
+    </div>
+    <div id="TempBot">
+      <div id="TempContextReadout">0</div>
+      <div id="TempContextAdjust">
+        <input type="range" id="TempAdjust" min="-5" max="5" value="0" oninput="rangeReadout(this,TempContextReadout)">
+      </div>
+    </div>
   </div>
-  
 </div>
-
-<!--Link to external CSS & JS-->
-<link href="https://warmest-soup.github.io/style.css" rel="stylesheet"> </link>
-<script src="https://warmest-soup.github.io/Rattraps.js"></script>
-</html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<div class="Row">
+  <div id="Notes" class="Section">
+    <div id="NotesTitle">Notes:</div>
+    <div id="notesPages">
+      <div id="Page1" class="notesPage">
+        <textArea style="resize:none;" spellcheck="false"></textArea>
+        <div>Page 1</div>
+      </div>
+    </div>
+    <div id="PageButtons">
+      <Button class="NotesButtons" onClick="newPage('add')">+</button>
+      <span id="pageTotal">01</span>
+      <Button class="NotesButtons" onClick="newPage('remove')">-</button>
+    </div>
+  </div>
+  <div id="Weapon" class="Section">
+    <div id="Name">Weapon</div>
+    <div id="Tech">Tech</div>
+    <div id="Range">Range:</div>
+    <div id="Damage">Swing:__ Thrust:__</div>
+    <div id="PowerLevel">Slider<br>----3----</div>
+    <div id="Retention">R. 4</div>
+    <div id="Sharpness">Edge: 4 Point: 5</div>
+    <div id="ShapeModifier">Swing: Thrust:</div>
+    <div id="Length">Length:__</div>
+    <div id="Weight">Weight:<br>2|0</div>
+  </div>
+  <div id="Combat" class="Section"></div>
+  <div id="Health" class="Section"></div>
+  <div id="Items" class="Section">
+    <div id="Arm1"></div>
+    <div id="Arm2"></div>
+    <div id="Head"></div>
+    <div id="Body"></div>
+    <div id="Leg1"></div>
+    <div id="Leg2"></div>
+  </div>
+</div>
+<div class="Row">
+  <div id="Inventory" class="Section">
+    <div id="NewItemWin">
+      <div id="NewItemStats">
+        <input id="itemName" type="text" placeholder="Item" /> 
+        <input id="itemSize" class="SingleInputNUM ItemStat" type="text" placeholder="sz" /> 
+        <input id="itemWeight" class="SingleInputNUM ItemStat" type="text" placeholder="wg" />
+      </div>
+      <div class="ItemTraits"><input id="isWeapon" class="newItemDefinitions" type="checkbox" onclick="togSec(this, weaponSec)" /> Weapon</div>
+      <div id="weaponSec">
+        <div>       Range: <input id="wRange" class="SingleInputNUM newWeaponStat" type="text" placeholder="Rg" /> </div>
+        <div>             DT: <input id="wDT" class="longNumIn newWeaponStat" type="text" placeholder="DT" /></div>
+        <div> Sharpness: <input id="wRetention" class="SingleInputNUM newWeaponStat" type="text" placeholder="R." />
+          <input id="wEdge" class="SingleInputNUM newWeaponStat" type="text" placeholder="E" />
+          <input id="wPoint" class="SingleInputNUM newWeaponStat" type="text" placeholder="P" />
+        </div>
+        <div>          Stats: <input id="wlength" class="SingleInputNUM newWeaponStat" type="text" placeholder="L" />
+          <input id="wWeight" class="SingleInputNUM newWeaponStat" type="text" placeholder="W" />
+          <input id="wBalance" class="SingleInputNUM newWeaponStat" type="text" placeholder="B" />
+        </div>
+        <div> Shape Modifier: <input id="wSwingMod" class="SingleInputNUM newWeaponStat" type="text" placeholder="sw" />
+          <input id="wThrustMod" class="SingleInputNUM newWeaponStat" type="text" placeholder="th" />
+        </div>
+      </div>
+      <div class="ItemTraits"><input id="isArmor" class="newItemDefinitions" type="checkbox" onclick="togSec(this,armorSec)" /> Armor</div>
+      <div id="armorSec">
+        <div class="newArmorStatGroups" id="lowNASG"> L
+          <input id="aDT" class="NewArmorStat" placeholder="DT" />
+          <input id="aPD" class="NewArmorStat" placeholder="PD" />
+          <input id="aD" class="NewArmorStat" placeholder="D" />
+        </div>
+        <div id="NewArmorCoverage">
+          <div id="HeadDia">
+            <div><input type="checkbox" class="naSpotCove1" /></div>
+            <div><input type="checkbox" class="naSpotCove1" /><input type="checkbox" class="naSpotCove1" /><input type="checkbox" class="naSpotCove1" /></div>
+            <div><input type="checkbox" class="naSpotCove1" /></div>
+          </div>
+          <div id="BodyDia">
+            <div id="1ArmDia" class="diaArms">
+              <input type="checkbox" class="naSpotCove2" /> <br>
+              <input type="checkbox" class="naSpotCove2" /> <br>
+              <input type="checkbox" class="naSpotCove2" /> <br>
+              <input type="checkbox" class="naSpotCove2" /> <br>
+              <input type="checkbox" class="naSpotCove2" />
+            </div>
+            <div id=MidDia>
+              <div id="TorsoDia">
+                <div><input type="checkbox" class="naSpotCove3" /><input type="checkbox" class="naSpotCove3" /></div>
+                <div><input type="checkbox" class="naSpotCove3" /></div>
+                <div><input type="checkbox" class="naSpotCove3" /><input type="checkbox" class="naSpotCove3" /></div>
+              </div>
+              <div id="LegsDia">
+                <div id="1LegDia" class="diaLegs">
+                  <input type="checkbox" class="naSpotCove4" /> <br>
+                  <input type="checkbox" class="naSpotCove4" /> <br>
+                  <input type="checkbox" class="naSpotCove4" /> <br>
+                  <input type="checkbox" class="naSpotCove4" /> <br>
+                  <input type="checkbox" class="naSpotCove4" />
+                </div>
+                <div id="2LegDia" class="diaLegs">
+                  <input type="checkbox" class="naSpotCove5" /> <br>
+                  <input type="checkbox" class="naSpotCove5" /> <br>
+                  <input type="checkbox" class="naSpotCove5" /> <br>
+                  <input type="checkbox" class="naSpotCove5" /> <br>
+                  <input type="checkbox" class="naSpotCove5" />
+                </div>
+              </div>
+            </div>
+            <div id="2ArmDia" class="diaArms">
+              <input type="checkbox" class="naSpotCove6" /> <br>
+              <input type="checkbox" class="naSpotCove6" /> <br>
+              <input type="checkbox" class="naSpotCove6" /> <br>
+              <input type="checkbox" class="naSpotCove6" /> <br>
+              <input type="checkbox" class="naSpotCove6" />
+            </div>
+          </div>
+        </div>
+        <div class="newArmorStatGroups"> R
+          <input id="aIns" class="NewArmorStat" placeholder="Ins" />
+          <input id="aAbs" class="NewArmorStat" placeholder="Abs" />
+          <input id="aCnd" class="NewArmorStat" placeholder="Cnd" />
+          <input id="aBri" class="NewArmorStat" placeholder="Bri" />
+        </div>
+      </div>
+      <div class="ItemTraits"><input id="hasTech" class="newItemDefinitions" type="checkbox" onclick="togSec(this,techSec)" /> Tech</div>
+      <div id="techSec">
+        <div><input class="iTech" type="Text" placeHolder="Tech"/>
+        <button onclick="dupSection(this)">+</button><button onclick="NewItemTechRemove(this)">-</button></div>
+      </div>
+      <div class="ItemTraits"><input id="isInventory" class="newItemDefinitions" type="checkbox" onclick="togSec(this,invSec)" /> Inventory</div>
+      <div id="invSec">
+        <div><input id="nPocketName" class="invData" type="Text" placeHolder="Name"/>
+          <input class="invData SingleInputNUM" type="Text" placeHolder="Slt"/>
+          <input class="invData longNumIn" type="Text" placeHolder="Wgt"/>
+        <button onclick="dupSection(this)">+</button> <button onclick="NewItemTechRemove(this)">-</button></div>
+      </div>
+    </div>
+    <div id="InvTop">
+      <div id="invTitle">Inventory</div>
+      <button id="AddINVitem" onClick="openWinlette(NewItemWin)">+ Item</button>
+      <div id="INVremove" onDragover="allowDrop(event)" onDrop="INVremove(event)">Remove</div>
+      <div id="InvStats">Wgt: <span id="LoadWeight">0</span> / <span id="CarryWeight">0</span></div>
+    </div>
+    <div id="inventoryDisplay">
+      <div class="INVcols INVopen" id=INVcolumn1 onDragover="allowDrop(event)" onDrop="INVDrop(event)">
+        <textarea id="QuickItem" style="resize:none;" placeholder="Item, Sz, Wgt" draggable="true" ondragstart="QIDragStart(event)"></textarea>
+      </div>
+      <div class="INVcols INVopen" id=INVcolumn2 onDragover="allowDrop(event)" onDrop="INVDrop(event)"></div>
+      <div class="INVcols INVopen" id=INVcolumn3 onDragover="allowDrop(event)" onDrop="INVDrop(event)"></div>
+    </div>
+  </div>
+  <div id="Tack" class="Section"></div>
+  <div id="Armor Grids" class="Section"></div>
+</div>
+<div class="Row">
+  <div id="Storage1" class="Section"></div>
+  <div id="Storage2" class="Section"></div>
+  <div id="Storage3" class="Section"></div>
+</div>
+</div>
