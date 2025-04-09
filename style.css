@@ -4,7 +4,7 @@ html {
 }
 * {
   font-family: "caudex";
-  font-size: 100%;
+  font-size: min(calc(100vh/45), calc(100vw/45));
 }
 button {
   font-weight: 700;
@@ -37,7 +37,7 @@ input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 70%;
-  height: 0.15em;
+  height: .3em;
   background: lightgray;
   border-radius: 0.5em;
   outline: none;
@@ -47,8 +47,8 @@ input[type="range"] {
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 0.7em;
-  height: 0.7em;
+  width: 1em;
+  height: 1em;
   background: black;
   border-radius: 1em;
   cursor: pointer;
@@ -171,11 +171,12 @@ input {
   border-radius: 1em;
   overflow: hidden;
 }
-#Clock {
+#Clock{
   font-weight: bold;
   font-size: 2.5em;
   padding-top: 0.2em;
 }
+#Clock > *{font-size:1.2em;}
 .satBarFill {
   background-color: black;
   height: 6em;
@@ -240,8 +241,8 @@ input {
   border-radius: 0.75em;
 }
 .aScrollColumns {
-  max-height: 39em;
-  min-height: 45em;
+  max-height: 1em;
+  min-height: 35em;
   max-width: 12.05em;
   min-width: 12.05em;
   overflow: auto;
@@ -378,11 +379,14 @@ input {
   border-radius: 5em;
 }
 #TempBot {
-  padding: 0em;
+  padding: 1em 0em 0em 0em;
   text-align: center;
-  line-height: 1.3em;
+  line-height: .5em;
   font-size: 2em;
   font-weight: 700;
+}
+#TempBot >*{
+  font-size: 1em;
 }
 #Abilities {
   max-height: 41em;
