@@ -1268,14 +1268,14 @@ const observer = new MutationObserver(function(mutations){
   mutations.forEach((mutation)=>{
     console.log(mutation.type);
     console.log(mutation.target);
-    if(mutation.target.id="CharacterSheet"){
-      runSheet();
+    if(mutation.target=CharacterSheet){
+      //runSheet();
     console.log("!!! RAN AFTER CHANGE !!!")
     }
   });
 });
 const observerConfig={
-  attributes:true,
+  attributes:false,
   childList:true,
   subtree:true
 };
