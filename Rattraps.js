@@ -849,8 +849,6 @@
   }
 } //End of declarations
 
-
-function runSheet(){
 /*Function Calls*/ {
   /*Initial exp goal Assignments*/ {
     expGoalCalc(strReal, strExp, strGoal);
@@ -1144,10 +1142,7 @@ function runSheet(){
     thermoBarFunc(worldTemp, TempBar, TempFill);
   }
 }
-}
-runSheet()
-  
-  
+
 /*Drag & Drop Functions*/ {
   function allowDrop(event) {
     event.preventDefault();
