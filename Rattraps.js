@@ -1272,7 +1272,7 @@ const observer = new MutationObserver(function(mutations){
 });
 const observerConfig={
   attributes:true,
-  childlist:true,
+  childList:true,
   subtree:true
 };
 observer.observe(CharacterSheet, observerConfig);
