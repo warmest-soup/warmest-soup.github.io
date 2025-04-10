@@ -1261,7 +1261,23 @@ function runSheet(){
 }
 }
 runSheet();
-  
+//Save Mutation Observer
+const CharacterSheet=document.getElementById("CharacterSheet");
+
+const observer = new MutationObserver(function(mutations){
+  mutations.forEach((mutation)=>{
+    console.log(mutation.type);
+    console.log(mutation.target);
+  });
+});
+const observerConfig={
+  attributes:true,
+  childlist:true,
+  subtree:true
+};
+observer.observe(CharacterSheet, observerConfig);
+
+
 //Notes!!!
 //Dont forget to set up Money Total in ID when the Inventory's done.
 //SaveInput and SaveInputSP need to update their defaults with user inputs for the GAS saves to work fully.
