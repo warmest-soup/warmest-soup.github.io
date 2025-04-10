@@ -1268,8 +1268,9 @@ const observer = new MutationObserver(function(mutations){
   mutations.forEach((mutation)=>{
     console.log(mutation.type);
     console.log(mutation.target);
-    if(mutation.target.id="CharacterSheet"{
+    if(mutation.target.id="CharacterSheet"){
       runSheet();
+    console.log("!!! RAN AFTER CHANGE !!!")
     }
   });
 });
