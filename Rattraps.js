@@ -913,7 +913,7 @@ function runSheet(){
     // and thus are the only way to get the CURRENT TraitFunc
   }
   /*event listener fot the Real Traits*/ {
-    strReal.addEventListener("input", function () {
+    document.getElementById("CharacterSheet").addEventListener("input", function () {
       expGoalCalc(strReal, strExp, strGoal);
       catBonus(strReal, athBonus, strBonus, strFunc);
       levelCalc(TraitRanks, Ranks);
