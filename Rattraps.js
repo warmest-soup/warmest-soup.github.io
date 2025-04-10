@@ -593,12 +593,12 @@
             "<span id='" +
             type +
             aID +
-            "' class='Ability' draggable='true' ondragstart='abilDragStart(event)'><div><span><input class='SingleInputNUM EXPvalue aexp' placeholder='0' /><span class='abilGoal'>/0</span>|</span><Button onClick='openWinlette(" +
+            "' class='Ability' draggable='true' ondragstart='abilDragStart(event)'><div><span><input class='SingleInputNUM EXPvalue SaveInput aexp' placeholder='0' /><span class='abilGoal'>/0</span>|</span><Button onClick='openWinlette(" +
             type +
             aID +
             "Info)'>" +
             name +
-            "</Button><span>|<input class='SingleInputNUM Rank' placeholder='0' /></span></div><pre id='" +
+            "</Button><span>|<input class='SingleInputNUM SaveInput Rank' placeholder='0' /></span></div><pre id='" +
             type +
             aID +
             "Info' class='AbilityInfo'>" +
@@ -807,7 +807,7 @@
       var newPage =
         "<div id=Page" +
         (notes.children.length + 1) +
-        "' class='notesPage'><textArea style='resize:none;' spellcheck='false'></textArea><div>Page " +
+        "' class='notesPage'><textArea class='UserNote SaveInputSP' style='resize:none;' spellcheck='false'></textArea><div>Page " +
         (notes.children.length + 1) +
         "</div></div>";
 
@@ -847,18 +847,10 @@
      target.parentNode.remove() 
     }
   }
-  //Save Sheet
-  function Save(){
-    var data=document.getElementById("CharacterSheet").innerHTML;
-    console.log(data)
-  }
-  //Load Sheet
-  function Load(){
-    console.log("load")
-  }
-  
 } //End of declarations
 
+
+function runSheet(){
 /*Function Calls*/ {
   /*Initial exp goal Assignments*/ {
     expGoalCalc(strReal, strExp, strGoal);
@@ -1152,7 +1144,10 @@
     thermoBarFunc(worldTemp, TempBar, TempFill);
   }
 }
-
+}
+runSheet()
+  
+  
 /*Drag & Drop Functions*/ {
   function allowDrop(event) {
     event.preventDefault();
@@ -1270,3 +1265,6 @@
 }
 
 //Notes!!!
+//Dont forget to set up Money Total in ID when the Inventory's done.
+//SaveInput and SaveInputSP need to update their defaults with user inputs for the GAS saves to work fully.
+//Need to add GAS save functions to here, or otherwise presever them, as well as the css & JS external Links
