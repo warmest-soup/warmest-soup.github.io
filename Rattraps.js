@@ -849,6 +849,7 @@
   }
 } //End of declarations
 
+function runSheet(){
 /*Function Calls*/ {
   /*Initial exp goal Assignments*/ {
     expGoalCalc(strReal, strExp, strGoal);
@@ -1258,7 +1259,9 @@
     itemPickUp.remove();
   }
 }
-
+}
+runSheet();
+  
 //Notes!!!
 //Dont forget to set up Money Total in ID when the Inventory's done.
 //SaveInput and SaveInputSP need to update their defaults with user inputs for the GAS saves to work fully.
