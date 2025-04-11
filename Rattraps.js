@@ -1,3 +1,18 @@
+var content = document.getElementById("subSheet");
+  function jsSave(){
+    google.script.run.Save(content.innerHTML);
+
+  }
+
+  function update(data){
+    console.log("Data in Update:  "+data)
+    content.innerHTML=data;
+  }
+  function jsLoad(){
+    google.script.run.withSuccessHandler(update).Load();
+    console.log("jsLoad Ran")
+  }
+
 //Variable declarationss
 /*Category Bonuses*/ {
   var athBonus = document.getElementById("athBonus");
