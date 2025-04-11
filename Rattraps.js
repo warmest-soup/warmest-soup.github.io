@@ -840,34 +840,363 @@ function updateVariablesOnLoad() {
     //function, as those set the functional trait values
     // and thus are the only way to get the CURRENT TraitFunc
   }
-  document.getElementById("CharacterSheet").addEventListener("change", function(event){
-  if(event.target.id==="Ability"){
-    expGoalCalc(Rank, aExp, aGoal);
-        levelCalc(TraitRanks, Ranks);
+  /*event listener fot the Real Traits*/ {
 
-  } else if(event.target.id==="strReal"){
-    expGoalCalc(strReal, strExp, strGoal);
-      catBonus(strReal, athBonus, strBonus, strFunc);
+
+    //!!! THIS IS NEW !!!
+    document.getElement.ById("subSheet").addEventListener("input", function (event){
+if (event.target.id==="strReal"){
+    expGoalCalc(document.getElementById("strReal"), document.getElementById("strExp"), document.getElementById("strGoal"));
+      catBonus(document.getElementById("strReal"), document.getElementById("athBonus"), document.getElementById("strBonus"), document.getElementById("strFunc"));
       levelCalc(TraitRanks, Ranks);
-      carryWeight();
+    carryWeight();
 
   } else if (event.target.id==="dexReal"){
-    expGoalCalc(dexReal, dexExp, dexGoal);
-      catBonus(dexReal, athBonus, dexBonus, dexFunc);
+    expGoalCalc(document.getElementById("dexReal"), document.getElementById("dexExp"), document.getElementById("dexGoal"));
+      catBonus(document.getElementById("dexReal"), document.getElementById("athBonus"), document.getElementById("dexBonus"), document.getElementById("dexFunc"));
       levelCalc(TraitRanks, Ranks);
-      slotMemoryLimits(Slots, spdFunc, dexFunc, intFunc, wisFunc);
-      secSklMem = Math.min(spdFunc.innerText, dexFunc.innerText);
-
-  } else if (event.target.id==="spdReal"){
-    expGoalCalc(spdReal, spdExp, spdGoal);
-      catBonus(spdReal, athBonus, spdBonus, spdFunc);
-      levelCalc(TraitRanks, Ranks);
-      slotMemoryLimits(Slots, spdFunc, dexFunc, intFunc, wisFunc);
-      secSklMem = Math.min(spdFunc.innerText, dexFunc.innerText);
+      slotMemoryLimits(Slots, document.getElementById("spdFunc"), document.getElementById("dexFunc"), document.getElementById("intFunc"), document.getElementById("wisFunc"));
+      secSklMem = Math.min(document.getElementById("spdFunc").innerText, document.getElementById("dexFunc").innerText);
   }
 
-
 })
+
+//!!! END OF NEW CONTENT !!!
+
+
+    document.getElementById("spdReal").addEventListener("input", function () {
+      expGoalCalc(document.getElementById("spdReal"), document.getElementById("spdExp"),  document.getElementById("spdGoal"));
+      catBonus(document.getElementById("spdReal"), document.getElementById("athBonus"), document.getElementById("spdBonus"), document.getElementById("spdFunc"));
+      levelCalc(TraitRanks, Ranks);
+      slotMemoryLimits(Slots, document.getElementById("spdFunc"), document.getElementById("dexFunc"), document.getElementById("intFunc"), document.getElementById("wisFunc"));
+      secSklMem = Math.min(document.getElementById("spdFunc").innerText, document.getElementById("dexFunc").innerText);
+    });
+    document.getElementById("perReal").addEventListener("input", function () {
+      expGoalCalc(document.getElementById("perReal"), document.getElementById("perExp"), document.getElementById("perGoal"));
+      catBonus(document.getElementById("perReal"), document.getElementById("aweBonus"), document.getElementById("perBonus"), document.getElementById("perFunc"));
+      levelCalc(TraitRanks, Ranks);
+    });
+    document.getElementById("chaReal").addEventListener("input", function () {
+      expGoalCalc(document.getElementById("chaReal"), document.getElementById("chaExp"), document.getElementById("chaGoal"));
+      catBonus(document.getElementById("chaReal"), document.getElementById("aweBonus"), document.getElementById("chaBonus"),  document.getElementById("chaFunc"));
+      levelCalc(TraitRanks, Ranks);
+    });
+    document.getElementById("navReal").addEventListener("input", function () {
+      expGoalCalc(document.getElementById("navReal"), document.getElementById("navExp"), document.getElementById("navGoal"));
+      catBonus(document.getElementById("navReal"), document.getElementById("aweBonus"), document.getElementById("navBonus"), document.getElementById("navFunc"));
+      levelCalc(TraitRanks, Ranks);
+    });
+    document.getElementById("endReal").addEventListener("input", function () {
+      expGoalCalc(document.getElementById("endReal"), document.getElementById("endExp"), document.getElementById("endGoal"));
+      catBonus(document.getElementById("endReal"), document.getElementById("bodBonus"), document.getElementById("endBonus"), document.getElementById("endFunc"));
+      levelCalc(TraitRanks, Ranks);
+    });
+    document.getElementById("conReal").addEventListener("input", function () {
+      expGoalCalc(document.getElementById("conReal"), document.getElementById("conExp"), document.getElementById("conGoal"));
+      catBonus(document.getElementById("conReal"), document.getElementById("bodBonus"), document.getElementById("conBonus"), document.getElementById("conFunc"));
+      levelCalc(TraitRanks, Ranks);
+      thermoBarFunc(worldTemp, document.getElementById("ThermBar"), document.getElementById("ThermFill"));
+
+      satBarFill(document.getElementById("shBar"), document.getElementById("HungerVal"));
+      satBarFill(document.getElementById("swBar"), document.getElementById("WaterVal"));
+      satBarFill(document.getElementById("szBar"), document.getElementById("SleepVal"));
+      satBarFill(document.getElementById("stBar"), Toxic[0]);
+    });
+    document.getElementById("staReal").addEventListener("input", function () {
+      expGoalCalc(document.getElementById("staReal"), document.getElementById("staExp"), document.getElementById("staGoal"));
+      catBonus(document.getElementById("staReal"), document.getElementById("bodBonus"), document.getElementById("staBonus"), document.getElementById("staFunc"));
+      wildCalc(document.getElementById("staFunc"), document.getElementById("intFunc"));
+      levelCalc(TraitRanks, Ranks);
+    });
+    document.getElementById("intReal").addEventListener("input", function () {
+      expGoalCalc(document.getElementById("intReal"), document.getElementById("intExp"), document.getElementById("intGoal"));
+      catBonus(document.getElementById("intReal"), document.getElementById("mndBonus"), document.getElementById("intBonus"), document.getElementById("intFunc"));
+      levelCalc(TraitRanks, Ranks);
+      slotMemoryLimits(Slots, document.getElementById("spdFunc"), document.getElementById("dexFunc"), document.getElementById("intFunc"), document.getElementById("wisFunc"));
+      secInsMem = Math.min(document.getElementById("intFunc").innerText, document.getElementById("wisFunc").innerText);
+    });
+    document.getElementById("wisReal").addEventListener("input", function () {
+      expGoalCalc(document.getElementById("wisReal"), document.getElementById("wisExp"), document.getElementById("wisGoal"));
+      catBonus(document.getElementById("wisReal"), document.getElementById("mndBonus"), document.getElementById("wisBonus"), document.getElementById("wisFunc"));
+      levelCalc(TraitRanks, Ranks);
+      slotMemoryLimits(Slots, document.getElementById("spdFunc"), document.getElementById("dexFunc"), document.getElementById("intFunc"), document.getElementById("wisFunc"));
+      secInsMem = Math.min(document.getElementById("intFunc").innerText, document.getElementById("wisFunc").innerText);
+    });
+    document.getElementById("knoReal").addEventListener("input", function () {
+      expGoalCalc(document.getElementById("knoReal"), document.getElementById("knoExp"), document.getElementById("knoGoal"));
+      catBonus(document.getElementById("knoReal"), document.getElementById("mndBonus"), document.getElementById("knoBonus"), document.getElementById("knoFunc"));
+      levelCalc(TraitRanks, Ranks);
+      thermoBarFunc(document.getElementById("knoReal"), document.getElementById("ThermBar"), document.getElementById("ThermFill"));
+    });
+    wgtReal.addEventListener("input", function () {
+      weightGoalCalc(wgtReal, wgtExp, wgtGoal);
+      weightCatBonus(wgtReal, invBonus, wgtBonus, wgtFunc);
+      levelCalc(TraitRanks, Ranks);
+    });
+  }
+  /*Event Listeners for category bonueses*/ {
+    document.getElementById("athBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("strReal"), document.getElementById("athBonus"), document.getElementById("strBonus"), document.getElementById("strFunc"));
+      catBonus(document.getElementById("dexReal"), document.getElementById("athBonus"), document.getElementById("dexBonus"), document.getElementById("dexFunc"));
+      catBonus(document.getElementById("spdReal"), document.getElementById("athBonus"), document.getElementById("spdBonus"), document.getElementById("spdFunc"));
+      slotMemoryLimits(Slots, document.getElementById("spdFunc"), document.getElementById("dexFunc"), document.getElementById("intFunc"), document.getElementById("wisFunc"));
+      secSklMem = Math.min(document.getElementById("spdFunc").innerText, document.getElementById("dexFunc").innerText);
+      carryWeight();
+    });
+    document.getElementById("aweBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("perReal"), document.getElementById("aweBonus"), document.getElementById("perBonus"), document.getElementById("perFunc"));
+      catBonus(document.getElementById("chaReal"), document.getElementById("aweBonus"), document.getElementById("chaBonus"),  document.getElementById("chaFunc"));
+      catBonus(document.getElementById("navReal"), document.getElementById("aweBonus"), document.getElementById("navBonus"), document.getElementById("navFunc"));
+    });
+    document.getElementById("bodBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("endReal"), document.getElementById("bodBonus"), document.getElementById("endBonus"), document.getElementById("endFunc"));
+      catBonus(document.getElementById("conReal"), document.getElementById("bodBonus"), document.getElementById("conBonus"), document.getElementById("conFunc"));
+      catBonus(document.getElementById("staReal"), document.getElementById("bodBonus"), document.getElementById("staBonus"), document.getElementById("staFunc"));
+      thermoBarFunc(worldTemp, document.getElementById("ThermBar"), document.getElementById("ThermFill"));
+      satBarFill(
+        document.getElementById("shBar"),
+
+      );
+      satBarFill(
+        document.getElementById("swBar"),
+
+      );
+      satBarFill(
+        document.getElementById("szBar"),
+        document.getElementById("SleepVal")
+      );
+      satBarFill(
+        document.getElementById("stBar"),
+        document.getElementById("ToxicVal")
+      );
+    });
+    document.getElementById("mndBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("intReal"), document.getElementById("mndBonus"), document.getElementById("intBonus"), document.getElementById("intFunc"));
+      catBonus(document.getElementById("wisReal"), document.getElementById("mndBonus"), document.getElementById("wisBonus"), document.getElementById("wisFunc"));
+      catBonus(document.getElementById("knoReal"), document.getElementById("mndBonus"), document.getElementById("knoBonus"), document.getElementById("knoFunc"));
+      slotMemoryLimits(Slots, document.getElementById("spdFunc"), document.getElementById("dexFunc"), document.getElementById("intFunc"), document.getElementById("wisFunc"));
+      secInsMem = Math.min(document.getElementById("intFunc").innerText, document.getElementById("wisFunc").innerText);
+    });
+  }
+  /*Event Listener for Trait Bonuses*/ {
+    document.getElementById("strBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("strReal"), document.getElementById("athBonus"), document.getElementById("strBonus"), document.getElementById("strFunc"));
+      carryWeight();
+    });
+    document.getElementById("dexBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("dexReal"), document.getElementById("athBonus"), document.getElementById("dexBonus"), document.getElementById("dexFunc"));
+      slotMemoryLimits(Slots, document.getElementById("spdFunc"), document.getElementById("dexFunc"), document.getElementById("intFunc"), document.getElementById("wisFunc"));
+      secSklMem = Math.min(document.getElementById("spdFunc").innerText, document.getElementById("dexFunc").innerText);
+    });
+    document.getElementById("spdBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("spdReal"), document.getElementById("athBonus"), document.getElementById("spdBonus"), document.getElementById("spdFunc"));
+      slotMemoryLimits(Slots, document.getElementById("spdFunc"), document.getElementById("dexFunc"), document.getElementById("intFunc"), document.getElementById("wisFunc"));
+      secSklMem = Math.min(document.getElementById("spdFunc").innerText, document.getElementById("dexFunc").innerText);
+    });
+    document.getElementById("perBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("perReal"), document.getElementById("aweBonus"), document.getElementById("perBonus"), document.getElementById("perFunc"));
+    });
+    document.getElementById("chaBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("chaReal"), document.getElementById("aweBonus"), document.getElementById("chaBonus"),  document.getElementById("chaFunc"));
+    });
+    document.getElementById("navBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("navReal"), document.getElementById("aweBonus"), document.getElementById("navBonus"), document.getElementById("navFunc"));
+    });
+    document.getElementById("endBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("endReal"), document.getElementById("bodBonus"), document.getElementById("endBonus"), document.getElementById("endFunc"));
+    });
+    document.getElementById("conBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("conReal"), document.getElementById("bodBonus"), document.getElementById("conBonus"), document.getElementById("conFunc"));
+      satBarFill(
+        document.getElementById("swBar"),
+
+      );
+      satBarFill(
+        document.getElementById("shBar"),
+        document.getElementById("HungerVal")
+      );
+      satBarFill(
+        document.getElementById("swBar"),
+        document.getElementById("WaterVal")
+      );
+      satBarFill(
+        document.getElementById("szBar"),
+        document.getElementById("SleepVal")
+      );
+      satBarFill(
+        document.getElementById("stBar"),
+        document.getElementById("ToxicVal")
+      );
+      thermoBarFunc(worldTemp, document.getElementById("ThermBar"), document.getElementById("ThermFill"));
+    });
+    document.getElementById("staBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("staReal"), document.getElementById("bodBonus"), document.getElementById("staBonus"), document.getElementById("staFunc"));
+    });
+    document.getElementById("intBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("intReal"), document.getElementById("mndBonus"), document.getElementById("intBonus"), document.getElementById("intFunc"));
+      slotMemoryLimits(Slots, document.getElementById("spdFunc"), document.getElementById("dexFunc"), document.getElementById("intFunc"), document.getElementById("wisFunc"));
+      secInsMem = Math.min(document.getElementById("intFunc").innerText, document.getElementById("wisFunc").innerText);
+    });
+    document.getElementById("wisBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("wisReal"), document.getElementById("mndBonus"), document.getElementById("wisBonus"), document.getElementById("wisFunc"));
+      slotMemoryLimits(Slots, document.getElementById("spdFunc"), document.getElementById("dexFunc"), document.getElementById("intFunc"), document.getElementById("wisFunc"));
+      secInsMem = Math.min(document.getElementById("intFunc").innerText, document.getElementById("wisFunc").innerText);
+    });
+    document.getElementById("knoBonus").addEventListener("input", function () {
+      catBonus(document.getElementById("knoReal"), document.getElementById("mndBonus"), document.getElementById("knoBonus"), document.getElementById("knoFunc"));
+    });
+    wgtBonus.addEventListener("input", function () {
+      weightGoalCalc(wgtReal, wgtExp, wgtGoal);
+      weightCatBonus(wgtReal, invBonus, wgtBonus, wgtFunc);
+    });
+  }
+  /*Initial Sat Assignments (Must be called AFTER Func is set)*/ {
+    satBarFill(document.getElementById("shBar"), document.getElementById("HungerVal"));
+    satBarFill(document.getElementById("swBar"), document.getElementById("WaterVal"));
+    satBarFill(document.getElementById("szBar"), document.getElementById("SleepVal"));
+    satBarFill(document.getElementById("stBar"), Toxic[0]);
+  }
+  /*Event Listeners for Sat Values.*/ {
+    document.getElementById("HungerVal").addEventListener("change", function () {
+      satBarFill(document.getElementById("shBar"), document.getElementById("HungerVal"));
+      weightExpGain(
+        document.getElementById("wgtReal"),
+        document.getElementById("wgtExp"),
+        document.getElementById("wgtGoal"),
+        document.getElementById("HungerVal"),
+        document.getElementById("conFunc")
+      );
+    });
+    document.getElementById("WaterVal").addEventListener("change", function () {
+      satBarFill(document.getElementById("swBar"), document.getElementById("WaterVal"));
+    });
+    document.getElementById("SleepVal").addEventListener("change", function () {
+      satBarFill(document.getElementById("szBar"), document.getElementById("SleepVal"));
+    });
+    Toxic[0].addEventListener("change", function () {
+      satBarFill(document.getElementById("stBar"), Toxic[0]);
+    });
+  }
+  /*Initial Temperatue Bar assignment*/ {
+    thermoBarFunc(worldTemp, document.getElementById("ThermBar"), document.getElementById("ThermFill"));
+  }
+}
+
+/*Drag & Drop Functions*/ {
+  function allowDrop(event) {
+    event.preventDefault();
+  }
+
+  //variables
+  var leftBehind = "";
+  //Abilities D&D
+  function abilDragStart(event) {
+    leftBehind = event.target.parentNode;
+    event.dataTransfer.setData("Text", event.target.id);
+  }
+
+  function abilDrop(event) {
+    event.preventDefault();
+
+    tClasses = event.target.className;
+    if (tClasses.includes("openAbil")) {
+      var data = event.dataTransfer.getData("Text");
+
+      slotMemoryLimits(
+        Slots,
+        document.getElementById("spdFunc"),
+        document.getElementById("dexFunc"),
+        document.getElementById("intFunc"),
+        document.getElementById("wisFunc"),
+        event.dataTransfer.getData("Text"),
+        event.target
+      );
+
+      event.target.appendChild(document.getElementById(data));
+      event.dataTransfer.clearData("Text");
+      event.target.classList.remove("openAbil");
+      document.getElementById(leftBehind.id).classList.add("openAbil");
+    }
+  }
+  function removeAbility(event) {
+    var target = document.getElementById(event.dataTransfer.getData("text"));
+    target.remove();
+    document.getElementById(leftBehind.id).classList.add("openAbil");
+    var i = 0;
+    while (i < abilities.length) {
+      if (abilities[i].id.includes(target.id)) {
+        abilities.splice(i, 1);
+      }
+      i++;
+    }
+    i = 0;
+    while (i < Ranks.length) {
+      if (Ranks[i].parentNode.parentNode.id.includes(target.id)) {
+        Ranks.splice(i, 1);
+      }
+      i++;
+    }
+    levelCalc(TraitRanks, Ranks);
+  }
+
+  //Inventory
+  var INVdropType = "";
+  //Quick Items
+  function QIDragStart(event) {
+    event.dataTransfer.setData("Text", event.target.value);
+    INVdropType = "QI";
+  }
+
+  var itemPickUp = "";
+  function INVDragStart(event) {
+    INVdropType = "INV";
+    itemPickUp = event.target;
+  }
+
+  function INVDrop(event) {
+    event.preventDefault();
+    //Validate Target
+    if (event.target.classList.contains("INVopen")) {
+      //Quick Item Drop Function
+      if (INVdropType == "QI") {
+        var input = document.getElementById("QuickItem").value;
+        if (input) {
+          var qEntry = input.split(",");
+          if (qEntry.length < 2 && qEntry[1]) {
+            qEntry[1] = 0;
+            qEntry[2] = 0;
+          } else if (qEntry.length < 3 && qEntry[2]) {
+            qEntry[2] = 0;
+          }
+
+          var qItem =
+            "<div class='QuickMadeItem INV' data-size='" +
+            parseInt(qEntry[1]) +
+            "' data-weight='" +
+            parseInt(qEntry[2]) +
+            "' draggable='true' onDragstart='INVDragStart(event)'>" +
+            qEntry[0] +
+            "</div>";
+
+          event.target.insertAdjacentHTML("beforeend", qItem);
+        }
+        document.getElementById("QuickItem").value = "";
+      }
+
+      //Standard Item Dropsv
+      if (INVdropType == "INV") {
+        var itemClone = itemPickUp.outerHTML;
+        event.target.insertAdjacentHTML("beforeend", itemClone);
+        itemPickUp.remove();
+      }
+    } //Valid Target
+  }
+
+  function INVremove(event) {
+    var target = document.getElementById(event.dataTransfer.getData("text"));
+    itemPickUp.remove();
+  }
+}
 
 
 
