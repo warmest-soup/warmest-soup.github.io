@@ -1,267 +1,53 @@
 var content = document.getElementById("subSheet");
-  function jsSave(){
-    google.script.run.Save(content.innerHTML);
-  }
+function jsSave(){
+google.script.run.Save(content.innerHTML);
+}
 
-  function update(data){
-    console.log("Data in Update:  "+data)
-    content.innerHTML=data;
-  }
-  function jsLoad(){
-    google.script.run.withSuccessHandler(update).Load();
-    console.log("jsLoad Ran")
-    redeclareVariables()
-  }
+function update(data){
+console.log("Data in Update:  "+data)
+content.innerHTML=data;
+}
+function jsLoad(){
+google.script.run.withSuccessHandler(update).Load();
+console.log("jsLoad Ran")
+}
 
-//Variable declarationss
-/*Category Bonuses*/ 
-{
-  var athBonus = document.getElementById("athBonus");
-  var aweBonus = document.getElementById("aweBonus");
-  var bodBonus = document.getElementById("bodBonus");
-  var mndBonus = document.getElementById("mndBonus");
-}
-/*Strength*/ {
-  var strReal = document.getElementById("strReal");
-  var strExp = document.getElementById("strExp");
-  var strGoal = document.getElementById("strGoal");
-  var strBonus = document.getElementById("strBonus");
-  var strFunc = document.getElementById("strFunc");
-}
-/*Dexterity*/ {
-  var dexReal = document.getElementById("dexReal");
-  var dexExp = document.getElementById("dexExp");
-  var dexGoal = document.getElementById("dexGoal");
-  var dexBonus = document.getElementById("dexBonus");
-  var dexFunc = document.getElementById("dexFunc");
-}
-/*Speed*/ {
-  var spdReal = document.getElementById("spdReal");
-  var spdExp = document.getElementById("spdExp");
-  var spdGoal = document.getElementById("spdGoal");
-  var spdBonus = document.getElementById("spdBonus");
-  var spdFunc = document.getElementById("spdFunc");
-}
-/*Perception*/ {
-  var perReal = document.getElementById("perReal");
-  var perExp = document.getElementById("perExp");
-  var perGoal = document.getElementById("perGoal");
-  var perBonus = document.getElementById("perBonus");
-  var perFunc = document.getElementById("perFunc");
-}
-/*Charisma*/ {
-  var chaReal = document.getElementById("chaReal");
-  var chaExp = document.getElementById("chaExp");
-  var chaGoal = document.getElementById("chaGoal");
-  var chaBonus = document.getElementById("chaBonus");
-  var chaFunc = document.getElementById("chaFunc");
-}
-/*Navigation*/ {
-  var navReal = document.getElementById("navReal");
-  var navExp = document.getElementById("navExp");
-  var navGoal = document.getElementById("navGoal");
-  var navBonus = document.getElementById("navBonus");
-  var navFunc = document.getElementById("navFunc");
-}
-/*Endurance*/ {
-  var endReal = document.getElementById("endReal");
-  var endExp = document.getElementById("endExp");
-  var endGoal = document.getElementById("endGoal");
-  var endBonus = document.getElementById("endBonus");
-  var endFunc = document.getElementById("endFunc");
-}
-/*Constitution*/ {
-  var conReal = document.getElementById("conReal");
-  var conExp = document.getElementById("conExp");
-  var conGoal = document.getElementById("conGoal");
-  var conBonus = document.getElementById("conBonus");
-  var conFunc = document.getElementById("conFunc");
-}
-/*Stamina*/ {
-  var staReal = document.getElementById("staReal");
-  var staExp = document.getElementById("staExp");
-  var staGoal = document.getElementById("staGoal");
-  var staBonus = document.getElementById("staBonus");
-  var staFunc = document.getElementById("staFunc");
-}
-/*Intelligence*/ {
-  var intReal = document.getElementById("intReal");
-  var intExp = document.getElementById("intExp");
-  var intGoal = document.getElementById("intGoal");
-  var intBonus = document.getElementById("intBonus");
-  var intFunc = document.getElementById("intFunc");
-}
-/*Wisdom*/ {
-  var wisReal = document.getElementById("wisReal");
-  var wisExp = document.getElementById("wisExp");
-  var wisGoal = document.getElementById("wisGoal");
-  var wisBonus = document.getElementById("wisBonus");
-  var wisFunc = document.getElementById("wisFunc");
-}
-/*Knowledge*/ {
-  var knoReal = document.getElementById("knoReal");
-  var knoExp = document.getElementById("knoExp");
-  var knoGoal = document.getElementById("knoGoal");
-  var knoBonus = document.getElementById("knoBonus");
-  var knoFunc = document.getElementById("knoFunc");
-}
-/*SatBarValues*/ {
-  var Hunger = document.getElementById("HungerVal");
-  var Water = document.getElementById("WaterVal");
-  var Sleep = document.getElementById("SleepVal");
-  var Toxic = [document.getElementById("ToxicVal")];
-}
-/*Additional Toxic Bars*/ {
-  var barDups = 0;
-}
-/*Time*/ {
-  var Hour = document.getElementById("CurrentHour");
-}
-/*EXP values*/ {
+
+//Declare Array variables
+var barDups = 0;
+
+  Toxic = [document.getElementById("ToxicVal")]
   var Exp = Array.from(document.querySelectorAll(".EXPvalue"));
   var TraitRanks = Array.from(document.querySelectorAll(".realTrait"));
-}
-/*Abilities*/ {
   var abilities = Array.from(document.querySelectorAll(".Ability"));
   var Ranks = Array.from(document.querySelectorAll(".Rank"));
-}
-/*Ability Slots*/ {
   var Slots = Array.from(document.querySelectorAll(".AbilSlot"));
-}
-/*Temperature Bar*/ {
-  var worldTemp = 0; //Need to define this with serve world info!
-  var TempBar = document.getElementById("ThermBar");
-  var TempFill = document.getElementById("ThermFill");
-}
-/*Inventory*/ {
   var invBonus = 0; //Needed for Weight classn
+
+  var worldTemp = 0; //Need to define this with serve world info!
+
+
+/*Array Variables*/ 
+function updateVariablesOnLoad() {
+  var barDups = 0;
+
+  Toxic = [document.getElementById("ToxicVal")]
+  var Exp = Array.from(document.querySelectorAll(".EXPvalue"));
+  var TraitRanks = Array.from(document.querySelectorAll(".realTrait"));
+  var abilities = Array.from(document.querySelectorAll(".Ability"));
+  var Ranks = Array.from(document.querySelectorAll(".Rank"));
+  var Slots = Array.from(document.querySelectorAll(".AbilSlot"));
+  var invBonus = 0; //Needed for Weight classn
+
+  var worldTemp = 0; //Need to define this with serve world info!
 }
 
-function redeclareVariables(){
-//iable declarationss
-/*Category Bonuses*/ 
-{
-   athBonus = document.getElementById("athBonus");
-   aweBonus = document.getElementById("aweBonus");
-   bodBonus = document.getElementById("bodBonus");
-   mndBonus = document.getElementById("mndBonus");
-}
-/*Strength*/ {
-   strReal = document.getElementById("strReal");
-   strExp = document.getElementById("strExp");
-   strGoal = document.getElementById("strGoal");
-   strBonus = document.getElementById("strBonus");
-   strFunc = document.getElementById("strFunc");
-}
-/*Dexterity*/ {
-   dexReal = document.getElementById("dexReal");
-   dexExp = document.getElementById("dexExp");
-   dexGoal = document.getElementById("dexGoal");
-   dexBonus = document.getElementById("dexBonus");
-   dexFunc = document.getElementById("dexFunc");
-}
-/*Speed*/ {
-   spdReal = document.getElementById("spdReal");
-   spdExp = document.getElementById("spdExp");
-   spdGoal = document.getElementById("spdGoal");
-   spdBonus = document.getElementById("spdBonus");
-   spdFunc = document.getElementById("spdFunc");
-}
-/*Perception*/ {
-   perReal = document.getElementById("perReal");
-   perExp = document.getElementById("perExp");
-   perGoal = document.getElementById("perGoal");
-   perBonus = document.getElementById("perBonus");
-   perFunc = document.getElementById("perFunc");
-}
-/*Charisma*/ {
-   chaReal = document.getElementById("chaReal");
-   chaExp = document.getElementById("chaExp");
-   chaGoal = document.getElementById("chaGoal");
-   chaBonus = document.getElementById("chaBonus");
-   chaFunc = document.getElementById("chaFunc");
-}
-/*Navigation*/ {
-   navReal = document.getElementById("navReal");
-   navExp = document.getElementById("navExp");
-   navGoal = document.getElementById("navGoal");
-   navBonus = document.getElementById("navBonus");
-   navFunc = document.getElementById("navFunc");
-}
-/*Endurance*/ {
-   endReal = document.getElementById("endReal");
-   endExp = document.getElementById("endExp");
-   endGoal = document.getElementById("endGoal");
-   endBonus = document.getElementById("endBonus");
-   endFunc = document.getElementById("endFunc");
-}
-/*Constitution*/ {
-   conReal = document.getElementById("conReal");
-   conExp = document.getElementById("conExp");
-   conGoal = document.getElementById("conGoal");
-   conBonus = document.getElementById("conBonus");
-   conFunc = document.getElementById("conFunc");
-}
-/*Stamina*/ {
-   staReal = document.getElementById("staReal");
-   staExp = document.getElementById("staExp");
-   staGoal = document.getElementById("staGoal");
-   staBonus = document.getElementById("staBonus");
-   staFunc = document.getElementById("staFunc");
-}
-/*Intelligence*/ {
-   intReal = document.getElementById("intReal");
-   intExp = document.getElementById("intExp");
-   intGoal = document.getElementById("intGoal");
-   intBonus = document.getElementById("intBonus");
-   intFunc = document.getElementById("intFunc");
-}
-/*Wisdom*/ {
-   wisReal = document.getElementById("wisReal");
-   wisExp = document.getElementById("wisExp");
-   wisGoal = document.getElementById("wisGoal");
-   wisBonus = document.getElementById("wisBonus");
-   wisFunc = document.getElementById("wisFunc");
-}
-/*Knowledge*/ {
-   knoReal = document.getElementById("knoReal");
-   knoExp = document.getElementById("knoExp");
-   knoGoal = document.getElementById("knoGoal");
-   knoBonus = document.getElementById("knoBonus");
-   knoFunc = document.getElementById("knoFunc");
-}
-/*SatBarValues*/ {
-   Hunger = document.getElementById("HungerVal");
-   Water = document.getElementById("WaterVal");
-   Sleep = document.getElementById("SleepVal");
-   Toxic = [document.getElementById("ToxicVal")];
-}
-/*Additional Toxic Bars*/ {
-   barDups = 0;
-}
-/*Time*/ {
-   Hour = document.getElementById("CurrentHour");
-}
-/*EXP values*/ {
-   Exp = Array.from(document.querySelectorAll(".EXPvalue"));
-   TraitRanks = Array.from(document.querySelectorAll(".realTrait"));
-}
-/*Abilities*/ {
-   abilities = Array.from(document.querySelectorAll(".Ability"));
-   Ranks = Array.from(document.querySelectorAll(".Rank"));
-}
-/*Ability Slots*/ {
-   Slots = Array.from(document.querySelectorAll(".AbilSlot"));
-}
-/*Temperature Bar*/ {
-   worldTemp = 0; //Need to define this with serve world info!
-   TempBar = document.getElementById("ThermBar");
-   TempFill = document.getElementById("ThermFill");
-}
-/*Inventory*/ {
-   invBonus = 0; //Needed for Weight classn
-}
-}
+
+
+
+
+
+
 
 /*Function declarations*/ {
   //Declaring Exp handling function.s
@@ -304,30 +90,30 @@ function redeclareVariables(){
     }
   }
   //Set fed status for weight exp
-  function setFedStatus(goal, hunger, hMax) {
+  function setFedStatus(goal, hMax) {
     hMax = hMax.innerText * 10;
     var hMin = hMax / 2;
-    hunger = hunger.value;
+    document.getElementById("HungerVal") = document.getElementById("HungerVal").value;
     goal = parseInt(goal.innerText.slice(1));
-    if (hunger < hMin && hunger && !underfed) {
+    if (document.getElementById("HungerVal") < hMin && document.getElementById("HungerVal") && !underfed) {
       underfed = true;
     }
-    if (hunger > hMax && hunger && !overfed) {
+    if (document.getElementById("HungerVal") > hMax && document.getElementById("HungerVal") && !overfed) {
       overfed = true;
     }
-    if (hunger >= hMin && hunger <= hMax) {
+    if (document.getElementById("HungerVal") >= hMin && document.getElementById("HungerVal") <= hMax) {
       underfed = false;
       overfed = false;
     }
   }
   //Use Fed Status to calc Weight exp
-  function weightExpGain(real, exp, goal, hunger, hMax) {
+  function weightExpGain(real, exp, goal, hMax) {
     hMax = hMax.innerText * 10;
     var hMin = hMax / 2;
-    hunger = hunger.value;
+    document.getElementById("HungerVal") = document.getElementById("HungerVal").value;
     goal = parseInt(goal.innerText.slice(1));
 
-    if (hunger < hMin && hunger && !underfed) {
+    if (document.getElementById("HungerVal") < hMin && document.getElementById("HungerVal") && !underfed) {
       underfed = true;
       exp.value--;
       if (exp.value * -1 >= goal && real.value > 1) {
@@ -336,7 +122,7 @@ function redeclareVariables(){
         weightGoalCalc(wgtReal, wgtExp, wgtGoal);
       }
     }
-    if (hunger > hMax && hunger && !overfed) {
+    if (document.getElementById("HungerVal") > hMax && document.getElementById("HungerVal") && !overfed) {
       overfed = true;
       exp.value++;
       if (exp.value >= goal && real.value < 5) {
@@ -345,7 +131,7 @@ function redeclareVariables(){
         weightGoalCalc(wgtReal, wgtExp, wgtGoal);
       }
     }
-    if (hunger >= hMin && hunger <= hMax) {
+    if (document.getElementById("HungerVal") >= hMin && document.getElementById("HungerVal") <= hMax) {
       underfed = false;
       overfed = false;
     }
@@ -383,8 +169,8 @@ function redeclareVariables(){
       parseInt(traitBonus.value);
     if (adjFunc) {
       traitFunc.innerHTML = Math.max(Math.min(adjFunc, 6), 0);
-      wildCalc(staFunc, intFunc);
-      secCardCalc(staFunc, intFunc);
+      wildCalc(document.getElementById("staFunc"), document.getElementById("intFunc"));
+      secCardCalc(document.getElementById("staFunc"), document.getElementById("intFunc"));
       if (barDups > 0) {
         var sat = document.getElementById("SatMiddle");
         var barsToGo = barDups;
@@ -429,7 +215,7 @@ function redeclareVariables(){
   //sat bar functionality
   function satBarFill(bar, value) {
     value = parseInt(value.value);
-    var hungerMax = parseInt(conFunc.innerText) * 10;
+    var hungerMax = parseInt(document.getElementById("conFunc").innerText) * 10;
     var scale = hungerMax / value;
     var fillHeight = 26.5 / scale;
 
@@ -480,7 +266,7 @@ function redeclareVariables(){
   }
   //PassTime
   function passHour() {
-    var newHour = parseInt(Hour.innerText) + 1;
+    var newHour = parseInt(document.getElementById("CurrentHour").innerText) + 1;
     /*Sat Decay*/ {
       //Temp Modification
       var coldModded = 1;
@@ -490,17 +276,17 @@ function redeclareVariables(){
       } else if (document.getElementById("hotMultiplier").innerText > 0) {
         hotModded = document.getElementById("hotMultiplier").innerText;
       }
-      Hunger.value = Hunger.value - coldModded;
-      if (Hunger.value < 0) {
-        Hunger.value = 0;
+      document.getElementById("HungerVal").value = document.getElementById("HungerVal").value - coldModded;
+      if (document.getElementById("HungerVal").value < 0) {
+        document.getElementById("HungerVal").value = 0;
       }
-      Water.value = Water.value - hotModded;
-      if (Water.value < 0) {
-        Water.value = 0;
+      document.getElementById("WaterVal").value = document.getElementById("WaterVal").value - hotModded;
+      if (document.getElementById("WaterVal").value < 0) {
+        document.getElementById("WaterVal").value = 0;
       }
-      Sleep.value--;
-      if (Sleep.value < 0) {
-        Sleep.value = 0;
+      document.getElementById("SleepVal").value--;
+      if (document.getElementById("SleepVal").value < 0) {
+        document.getElementById("SleepVal").value = 0;
       }
       //Additional Toxic Bars
       var t = 0;
@@ -517,11 +303,11 @@ function redeclareVariables(){
       //Adjust Bar Sizes
       satBarFill(
         document.getElementById("shBar"),
-        document.getElementById("HungerVal")
+
       );
       satBarFill(
         document.getElementById("swBar"),
-        document.getElementById("WaterVal")
+
       );
       satBarFill(
         document.getElementById("szBar"),
@@ -535,8 +321,8 @@ function redeclareVariables(){
         document.getElementById("wgtReal"),
         document.getElementById("wgtExp"),
         document.getElementById("wgtGoal"),
-        Hunger,
-        document.getElementById("conFunc")
+        document.get
+      
       );
     }
     if (newHour > 23) {
@@ -544,9 +330,10 @@ function redeclareVariables(){
       expDecay();
     }
     newHour = newHour % 24;
-    Hour.innerText = String(newHour).padStart(2, "0");
+    document.getElementById("CurrentHour").innerText = String(newHour).padStart(2, "0");
   }
   //Sleep functionality
+   //Sleep functionality
   function sleep() {
     var sleepVal = document.getElementById("TimeToSleep");
     var sleepHours = parseInt(sleepVal.value);
@@ -881,7 +668,7 @@ function redeclareVariables(){
   //Range Output display
   function rangeReadout(range, out) {
     out.innerText = range.value;
-    thermoBarFunc(worldTemp, TempBar, TempFill);
+    thermoBarFunc(worldTemp, document.getElementById("ThermBar"), document.getElementById("ThermFill"));
   }
   //Thermo Bar Functionality
   function thermoBarFunc(temp, bar, fill) {
@@ -889,8 +676,8 @@ function redeclareVariables(){
     var context = parseInt(
       document.getElementById("TempContextReadout").innerText
     );
-    var barScale = 35 / (conFunc.innerText * 5);
-    var tempState = Math.abs(Math.round((temp + context) / conFunc.innerText));
+    var barScale = 35 / (document.getElementById("conFunc").innerText * 5);
+    var tempState = Math.abs(Math.round((temp + context) / document.getElementById("conFunc").innerText));
     var barHeight = (temp + context) * barScale + 35 / 2;
 
     fill.style.height = barHeight + "em";
@@ -974,7 +761,7 @@ function redeclareVariables(){
   // Carry Weight
   function carryWeight() {
     var carryLimit = document.getElementById("CarryWeight");
-    carryLimit.innerText = strFunc.innerText * 25;
+    carryLimit.innerText = document.getElementById("strFunc").innerText * 25;
   }
   //Toggle Secttons
   function toggleSection(state, section) {}
@@ -991,7 +778,69 @@ function redeclareVariables(){
   }
 } //End of declarations
 
-document.getElementById("CharacterSheet").addEventListener("change", function(event){
+/*Function Calls*/ {
+  /*Initial exp goal Assignments*/ {
+    expGoalCalc(document.getElementById("strReal"), document.getElementById("strExp"), document.getElementById("strGoal"));
+    expGoalCalc(document.getElementById("dexReal"), document.getElementById("dexExp"), document.getElementById("dexGoal"));
+    expGoalCalc(document.getElementById("spdReal"), document.getElementById("spdExp"),  document.getElementById("spdGoal"));
+    expGoalCalc(document.getElementById("perReal"), document.getElementById("perExp"), document.getElementById("perGoal"));
+    expGoalCalc(document.getElementById("chaReal"), document.getElementById("chaExp"), document.getElementById("chaGoal"));
+    expGoalCalc(document.getElementById("navReal"), document.getElementById("navExp"), document.getElementById("navGoal"));
+    expGoalCalc(document.getElementById("endReal"), document.getElementById("endExp"), document.getElementById("endGoal"));
+    expGoalCalc(document.getElementById("conReal"), document.getElementById("conExp"), document.getElementById("conGoal"));
+    expGoalCalc(document.getElementById("staReal"), document.getElementById("staExp"), document.getElementById("staGoal"));
+    expGoalCalc(document.getElementById("intReal"), document.getElementById("intExp"), document.getElementById("intGoal"));
+    expGoalCalc(document.getElementById("wisReal"), document.getElementById("wisExp"), document.getElementById("wisGoal"));
+    expGoalCalc(document.getElementById("knoReal"), document.getElementById("knoExp"), document.getElementById("knoGoal"));
+    //weight goal calc
+    weightGoalCalc(wgtReal, wgtExp, wgtGoal);
+    //Ability Exp Initial Assignment
+    abilExp();
+
+    //Level Calculation
+    levelCalc(TraitRanks, Ranks);
+  }
+  /*Initial assignments of Func trait values*/ {
+    catBonus(document.getElementById("strReal"), document.getElementById("athBonus"), document.getElementById("strBonus"), document.getElementById("strFunc"));
+    catBonus(document.getElementById("dexReal"), document.getElementById("athBonus"), document.getElementById("dexBonus"), document.getElementById("dexFunc"));
+    catBonus(document.getElementById("spdReal"), document.getElementById("athBonus"), document.getElementById("spdBonus"), document.getElementById("spdFunc"));
+    catBonus(document.getElementById("perReal"), document.getElementById("aweBonus"), document.getElementById("perBonus"), document.getElementById("perFunc"));
+    catBonus(document.getElementById("chaReal"), document.getElementById("aweBonus"), document.getElementById("chaBonus"),  document.getElementById("chaFunc"));
+    catBonus(document.getElementById("navReal"), document.getElementById("aweBonus"), document.getElementById("navBonus"), document.getElementById("navFunc"));
+    catBonus(document.getElementById("endReal"), document.getElementById("bodBonus"), document.getElementById("endBonus"), document.getElementById("endFunc"));
+    catBonus(document.getElementById("conReal"), document.getElementById("bodBonus"), document.getElementById("conBonus"), document.getElementById("conFunc"));
+    catBonus(document.getElementById("staReal"), document.getElementById("bodBonus"), document.getElementById("staBonus"), document.getElementById("staFunc"));
+    catBonus(document.getElementById("intReal"), document.getElementById("mndBonus"), document.getElementById("intBonus"), document.getElementById("intFunc"));
+    catBonus(document.getElementById("wisReal"), document.getElementById("mndBonus"), document.getElementById("wisBonus"), document.getElementById("wisFunc"));
+    catBonus(document.getElementById("knoReal"), document.getElementById("mndBonus"), document.getElementById("knoBonus"), document.getElementById("knoFunc"));
+    weightCatBonus(wgtReal, invBonus, wgtBonus, wgtFunc);
+  }
+  //Initials
+  carryWeight();
+  /*Initial assignment of Ability Memory*/ {
+    slotMemoryLimits(Slots, document.getElementById("spdFunc"), document.getElementById("dexFunc"), document.getElementById("intFunc"), document.getElementById("wisFunc"));
+  }
+  /*Initial assignment of Exp Decay Factors*/ {
+    var secSklMem = Math.min(document.getElementById("spdFunc").innerText, document.getElementById("dexFunc").innerText);
+    var secInsMem = Math.min(document.getElementById("intFunc").innerText, document.getElementById("wisFunc").innerText);
+  }
+  /*Weight Management EXP initial set (Testing Only)*/ {
+    weightExpGain(
+      document.getElementById("wgtReal"),
+      document.getElementById("wgtExp"),
+      document.getElementById("wgtGoal"),
+      document.getElementById("HungerVal"),
+      document.getElementById("conFunc")
+    );
+  }
+  /*Initial Assaignment of Card Limits*/ {
+    wildCalc(document.getElementById("staFunc"), document.getElementById("intFunc"));
+    secCardCalc(document.getElementById("staFunc"), document.getElementById("intFunc"));
+    //These are also called inside the category Bonus
+    //function, as those set the functional trait values
+    // and thus are the only way to get the CURRENT TraitFunc
+  }
+  document.getElementById("CharacterSheet").addEventListener("change", function(event){
   if(event.target.id==="Ability"){
     expGoalCalc(Rank, aExp, aGoal);
         levelCalc(TraitRanks, Ranks);
@@ -1019,6 +868,8 @@ document.getElementById("CharacterSheet").addEventListener("change", function(ev
 
 
 })
+
+
 
 //Notes!!!
 //Dont forget to set up Money Total in ID when the Inventory's done.
