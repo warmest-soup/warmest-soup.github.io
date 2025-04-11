@@ -100,7 +100,9 @@ input[type="range"]::-webkit-slider-thumb {
 td {
   text-align: center;
   min-width: 1em;
-  max-width: fit-content;
+  max-width: 5em;
+  min-height: 1em;
+  max-height: 1em;
   text-wrap: nowrap;
 }
 input {
@@ -108,8 +110,15 @@ input {
 }
 #Traits {
   text-align: center;
-  min-width: 15em;
-  max-width: 15em;
+  min-width: 17em;
+  max-width: 17em;
+  overflow:auto;
+}
+#TraitTable{
+  min-width:17em;
+  max-width:17em;
+  min-height:31em;
+  max-height:31em;
 }
 .WeightEXP input {
   min-width: 1.7em;
@@ -671,4 +680,12 @@ input[type="checkbox"]:checked {
   align-items:end;
   justify-content:center;
   padding:.2em;
+  gap:.5em;
+}
+#SaveIndicator{
+  background:white;
+  height:1em;
+  width:1em;
+  border:solid black .2em;
+  border-radius:1em;
 }
