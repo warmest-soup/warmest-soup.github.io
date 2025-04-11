@@ -1,142 +1,21 @@
 var content = document.getElementById("subSheet");
   function jsSave(){
     google.script.run.Save(content.innerHTML);
-
   }
 
   function update(data){
     console.log("Data in Update:  "+data)
     content.innerHTML=data;
-    //Variable declarationss
-/*Category Bonuses*/ {
-  var athBonus = document.getElementById("athBonus");
-  var aweBonus = document.getElementById("aweBonus");
-  var bodBonus = document.getElementById("bodBonus");
-  var mndBonus = document.getElementById("mndBonus");
-}
-/*Strength*/ {
-  var strReal = document.getElementById("strReal");
-  var strExp = document.getElementById("strExp");
-  var strGoal = document.getElementById("strGoal");
-  var strBonus = document.getElementById("strBonus");
-  var strFunc = document.getElementById("strFunc");
-}
-/*Dexterity*/ {
-  var dexReal = document.getElementById("dexReal");
-  var dexExp = document.getElementById("dexExp");
-  var dexGoal = document.getElementById("dexGoal");
-  var dexBonus = document.getElementById("dexBonus");
-  var dexFunc = document.getElementById("dexFunc");
-}
-/*Speed*/ {
-  var spdReal = document.getElementById("spdReal");
-  var spdExp = document.getElementById("spdExp");
-  var spdGoal = document.getElementById("spdGoal");
-  var spdBonus = document.getElementById("spdBonus");
-  var spdFunc = document.getElementById("spdFunc");
-}
-/*Perception*/ {
-  var perReal = document.getElementById("perReal");
-  var perExp = document.getElementById("perExp");
-  var perGoal = document.getElementById("perGoal");
-  var perBonus = document.getElementById("perBonus");
-  var perFunc = document.getElementById("perFunc");
-}
-/*Charisma*/ {
-  var chaReal = document.getElementById("chaReal");
-  var chaExp = document.getElementById("chaExp");
-  var chaGoal = document.getElementById("chaGoal");
-  var chaBonus = document.getElementById("chaBonus");
-  var chaFunc = document.getElementById("chaFunc");
-}
-/*Navigation*/ {
-  var navReal = document.getElementById("navReal");
-  var navExp = document.getElementById("navExp");
-  var navGoal = document.getElementById("navGoal");
-  var navBonus = document.getElementById("navBonus");
-  var navFunc = document.getElementById("navFunc");
-}
-/*Endurance*/ {
-  var endReal = document.getElementById("endReal");
-  var endExp = document.getElementById("endExp");
-  var endGoal = document.getElementById("endGoal");
-  var endBonus = document.getElementById("endBonus");
-  var endFunc = document.getElementById("endFunc");
-}
-/*Constitution*/ {
-  var conReal = document.getElementById("conReal");
-  var conExp = document.getElementById("conExp");
-  var conGoal = document.getElementById("conGoal");
-  var conBonus = document.getElementById("conBonus");
-  var conFunc = document.getElementById("conFunc");
-}
-/*Stamina*/ {
-  var staReal = document.getElementById("staReal");
-  var staExp = document.getElementById("staExp");
-  var staGoal = document.getElementById("staGoal");
-  var staBonus = document.getElementById("staBonus");
-  var staFunc = document.getElementById("staFunc");
-}
-/*Intelligence*/ {
-  var intReal = document.getElementById("intReal");
-  var intExp = document.getElementById("intExp");
-  var intGoal = document.getElementById("intGoal");
-  var intBonus = document.getElementById("intBonus");
-  var intFunc = document.getElementById("intFunc");
-}
-/*Wisdom*/ {
-  var wisReal = document.getElementById("wisReal");
-  var wisExp = document.getElementById("wisExp");
-  var wisGoal = document.getElementById("wisGoal");
-  var wisBonus = document.getElementById("wisBonus");
-  var wisFunc = document.getElementById("wisFunc");
-}
-/*Knowledge*/ {
-  var knoReal = document.getElementById("knoReal");
-  var knoExp = document.getElementById("knoExp");
-  var knoGoal = document.getElementById("knoGoal");
-  var knoBonus = document.getElementById("knoBonus");
-  var knoFunc = document.getElementById("knoFunc");
-}
-/*SatBarValues*/ {
-  var Hunger = document.getElementById("HungerVal");
-  var Water = document.getElementById("WaterVal");
-  var Sleep = document.getElementById("SleepVal");
-  var Toxic = [document.getElementById("ToxicVal")];
-}
-/*Additional Toxic Bars*/ {
-  var barDups = 0;
-}
-/*Time*/ {
-  var Hour = document.getElementById("CurrentHour");
-}
-/*EXP values*/ {
-  var Exp = Array.from(document.querySelectorAll(".EXPvalue"));
-  var TraitRanks = Array.from(document.querySelectorAll(".realTrait"));
-}
-/*Abilities*/ {
-  var abilities = Array.from(document.querySelectorAll(".Ability"));
-  var Ranks = Array.from(document.querySelectorAll(".Rank"));
-}
-/*Ability Slots*/ {
-  var Slots = Array.from(document.querySelectorAll(".AbilSlot"));
-}
-/*Temperature Bar*/ {
-  var worldTemp = 0; //Need to define this with serve world info!
-  var TempBar = document.getElementById("ThermBar");
-  var TempFill = document.getElementById("ThermFill");
-}
-/*Inventory*/ {
-  var invBonus = 0; //Needed for Weight classn
-}
   }
   function jsLoad(){
     google.script.run.withSuccessHandler(update).Load();
     console.log("jsLoad Ran")
+    redeclareVariables()
   }
 
 //Variable declarationss
-/*Category Bonuses*/ {
+/*Category Bonuses*/ 
+{
   var athBonus = document.getElementById("athBonus");
   var aweBonus = document.getElementById("aweBonus");
   var bodBonus = document.getElementById("bodBonus");
@@ -256,6 +135,132 @@ var content = document.getElementById("subSheet");
 }
 /*Inventory*/ {
   var invBonus = 0; //Needed for Weight classn
+}
+
+function redeclareVariables(){
+//iable declarationss
+/*Category Bonuses*/ 
+{
+   athBonus = document.getElementById("athBonus");
+   aweBonus = document.getElementById("aweBonus");
+   bodBonus = document.getElementById("bodBonus");
+   mndBonus = document.getElementById("mndBonus");
+}
+/*Strength*/ {
+   strReal = document.getElementById("strReal");
+   strExp = document.getElementById("strExp");
+   strGoal = document.getElementById("strGoal");
+   strBonus = document.getElementById("strBonus");
+   strFunc = document.getElementById("strFunc");
+}
+/*Dexterity*/ {
+   dexReal = document.getElementById("dexReal");
+   dexExp = document.getElementById("dexExp");
+   dexGoal = document.getElementById("dexGoal");
+   dexBonus = document.getElementById("dexBonus");
+   dexFunc = document.getElementById("dexFunc");
+}
+/*Speed*/ {
+   spdReal = document.getElementById("spdReal");
+   spdExp = document.getElementById("spdExp");
+   spdGoal = document.getElementById("spdGoal");
+   spdBonus = document.getElementById("spdBonus");
+   spdFunc = document.getElementById("spdFunc");
+}
+/*Perception*/ {
+   perReal = document.getElementById("perReal");
+   perExp = document.getElementById("perExp");
+   perGoal = document.getElementById("perGoal");
+   perBonus = document.getElementById("perBonus");
+   perFunc = document.getElementById("perFunc");
+}
+/*Charisma*/ {
+   chaReal = document.getElementById("chaReal");
+   chaExp = document.getElementById("chaExp");
+   chaGoal = document.getElementById("chaGoal");
+   chaBonus = document.getElementById("chaBonus");
+   chaFunc = document.getElementById("chaFunc");
+}
+/*Navigation*/ {
+   navReal = document.getElementById("navReal");
+   navExp = document.getElementById("navExp");
+   navGoal = document.getElementById("navGoal");
+   navBonus = document.getElementById("navBonus");
+   navFunc = document.getElementById("navFunc");
+}
+/*Endurance*/ {
+   endReal = document.getElementById("endReal");
+   endExp = document.getElementById("endExp");
+   endGoal = document.getElementById("endGoal");
+   endBonus = document.getElementById("endBonus");
+   endFunc = document.getElementById("endFunc");
+}
+/*Constitution*/ {
+   conReal = document.getElementById("conReal");
+   conExp = document.getElementById("conExp");
+   conGoal = document.getElementById("conGoal");
+   conBonus = document.getElementById("conBonus");
+   conFunc = document.getElementById("conFunc");
+}
+/*Stamina*/ {
+   staReal = document.getElementById("staReal");
+   staExp = document.getElementById("staExp");
+   staGoal = document.getElementById("staGoal");
+   staBonus = document.getElementById("staBonus");
+   staFunc = document.getElementById("staFunc");
+}
+/*Intelligence*/ {
+   intReal = document.getElementById("intReal");
+   intExp = document.getElementById("intExp");
+   intGoal = document.getElementById("intGoal");
+   intBonus = document.getElementById("intBonus");
+   intFunc = document.getElementById("intFunc");
+}
+/*Wisdom*/ {
+   wisReal = document.getElementById("wisReal");
+   wisExp = document.getElementById("wisExp");
+   wisGoal = document.getElementById("wisGoal");
+   wisBonus = document.getElementById("wisBonus");
+   wisFunc = document.getElementById("wisFunc");
+}
+/*Knowledge*/ {
+   knoReal = document.getElementById("knoReal");
+   knoExp = document.getElementById("knoExp");
+   knoGoal = document.getElementById("knoGoal");
+   knoBonus = document.getElementById("knoBonus");
+   knoFunc = document.getElementById("knoFunc");
+}
+/*SatBarValues*/ {
+   Hunger = document.getElementById("HungerVal");
+   Water = document.getElementById("WaterVal");
+   Sleep = document.getElementById("SleepVal");
+   Toxic = [document.getElementById("ToxicVal")];
+}
+/*Additional Toxic Bars*/ {
+   barDups = 0;
+}
+/*Time*/ {
+   Hour = document.getElementById("CurrentHour");
+}
+/*EXP values*/ {
+   Exp = Array.from(document.querySelectorAll(".EXPvalue"));
+   TraitRanks = Array.from(document.querySelectorAll(".realTrait"));
+}
+/*Abilities*/ {
+   abilities = Array.from(document.querySelectorAll(".Ability"));
+   Ranks = Array.from(document.querySelectorAll(".Rank"));
+}
+/*Ability Slots*/ {
+   Slots = Array.from(document.querySelectorAll(".AbilSlot"));
+}
+/*Temperature Bar*/ {
+   worldTemp = 0; //Need to define this with serve world info!
+   TempBar = document.getElementById("ThermBar");
+   TempFill = document.getElementById("ThermFill");
+}
+/*Inventory*/ {
+   invBonus = 0; //Needed for Weight classn
+}
 }
 
 /*Function declarations*/ {
