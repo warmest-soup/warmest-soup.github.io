@@ -1,9 +1,29 @@
-/*Operations to perform on load*/ {
-  var SatBars = document.getElementsByClassName("satBar");
-  var barDups = SatBars.length - 4;
+/*Operations to perform on load*/
+var SatBars = document.getElementsByClassName("satBar");
+var barDups = SatBars.length - 4;
+
+var Slots = document.getElementsByClassName("AbilSlot");
+var abilities = document.getElementsByClassName("Ability");
+var Ranks = document.getElementsByClassName("Rank");
+var Exp = document.getElementsByClassName("EXPvalue");
+var TraitRanks = document.getElementsByClassName("realTrait");
+
+fedStatus();
+document.getElementById("SaveIndicator").style.background = "cyan";
+function initializeSheet() {
+  SatBars = document.getElementsByClassName("satBar");
+  barDups = SatBars.length - 4;
+
+  Slots = document.getElementsByClassName("AbilSlot");
+  abilities = document.getElementsByClassName("Ability");
+  Ranks = document.getElementsByClassName("Rank");
+  Exp = document.getElementsByClassName("EXPvalue");
+  TraitRanks = document.getElementsByClassName("realTrait");
+
   fedStatus();
-  document.getElementById("SaveIndicator").style.background="cyan"
+  document.getElementById("SaveIndicator").style.background = "cyan";
 }
+initializeSheet();
 
 //Calculate EXP goal for next level of trait
 function expGoalCalc(real, exp, goal) {
@@ -129,6 +149,7 @@ function satBarFill(bar, value) {
 }
 //add Toxic Bars
 function dupBar() {
+  indirectChange();
   var newBar = document.getElementById("Toxic").cloneNode(true);
   var button = document.getElementById("dupButton");
   var madeBar = document.getElementById("SatMiddle").appendChild(newBar);
@@ -142,6 +163,15 @@ function dupBar() {
   //Toxic.push(newInput);
 
   barDups++;
+}
+function remBar() {
+  indirectChange();
+  var sat = document.getElementById("SatMiddle");
+  var barsToGo = barDups;
+  if (barDups > 0) {
+    sat.children[sat.children.length - 2].remove();
+    barDups--;
+  }
 }
 //Weight Handling
 function weightGoalCalc() {
@@ -190,7 +220,6 @@ function fedStatus() {
     overfed = false;
   }
 }
-
 function weightExp() {
   var real = document.getElementById("wgtReal");
   var goal = document.getElementById("wgtGoal");
@@ -200,7 +229,6 @@ function weightExp() {
   var hunger = parseInt(document.getElementById("HungerVal").value);
   goal = parseInt(goal.innerText.slice(1));
 
-  console.log(hungerMin);
   if (hunger < hungerMin && hunger && !underfed) {
     underfed = true;
     exp.value--;
@@ -220,14 +248,26 @@ function weightExp() {
   }
   fedStatus();
 }
+
+//Day Counter
+function dayCount() {
+  var day = document.getElementById("currentDay");
+  var newDay = parseInt(day.innerText) + 1;
+  day.innerText = String(newDay).padStart(4, "0");
+}
+//Manual Event Trigger for non-inputs
+function indirectChange() {
+  document.getElementById("SaveIndicator").style.background = "yellow";
+}
 //PassTime
 function passHour() {
-  var Hour=document.getElementById("CurrentHour");
+  indirectChange();
+  var Hour = document.getElementById("CurrentHour");
   var Hunger = document.getElementById("HungerVal");
   var Water = document.getElementById("WaterVal");
   var Sleep = document.getElementById("SleepVal");
   var Toxic = document.getElementById("ToxicVal");
-  
+
   var newHour = parseInt(Hour.innerText) + 1;
   /*Sat Decay*/ {
     //Temp Modification
@@ -251,16 +291,18 @@ function passHour() {
       Sleep.value = 0;
     }
     //Additional Toxic Bars
-    var t = 0;
-    while (t < Toxic.length) {
-      Toxic[t].value--;
-      satBarFill(Toxic[t].parentNode.children[1], Toxic[t]);
+
+    var t = 3;
+    while (t < SatBars.length) {
+      SatBars[t].parentNode.children[0].value--;
+      satBarFill(SatBars[t], SatBars[t].parentNode.children[0]);
+
       t++;
     }
     /*Preventing Primary 
       Toxic from becoming negative (Additional Toxics can be negative)*/
-    if (Toxic[0].value < 0) {
-      Toxic[0].value = 0;
+    if (SatBars[3].parentNode.children[0].value < 0) {
+      SatBars[3].parentNode.children[0].value = 0;
     }
     //Adjust Bar Sizes
     satBarFill(
@@ -279,13 +321,7 @@ function passHour() {
       document.getElementById("stBar"),
       document.getElementById("ToxicVal")
     );
-    weightExpGain(
-      document.getElementById("wgtReal"),
-      document.getElementById("wgtExp"),
-      document.getElementById("wgtGoal"),
-      Hunger,
-      document.getElementById("conFunc")
-    );
+    weightExp();
   }
   if (newHour > 23) {
     dayCount();
@@ -294,8 +330,57 @@ function passHour() {
   newHour = newHour % 24;
   Hour.innerText = String(newHour).padStart(2, "0");
 }
+//ExpDecay
+function expDecay() {
+  var exp = document.getElementsByClassName("EXPvalue");
+  var secSklMem=Math.min(parseInt(document.getElementById("spdFunc").innerText), parseInt(document.getElementById("dexFunc").innerText))
+  var secInsMem=Math.min(parseInt(document.getElementById("wisFunc").innerText), parseInt(document.getElementById("intFunc").innerText))
+  var i = 0;
+  while (i < exp.length) {
+    if (exp[i].className.includes("aexp")) {
+      if (
+        exp[i].parentNode.parentNode.parentNode.parentNode.className.includes(
+          "Forgotten"
+        ) &&
+        exp[i].parentNode.parentNode.parentNode.id.includes("Skill")
+      ) {
+        exp[i].value = exp[i].value - (5 - secSklMem) - 1;
+        if (exp[i].value < -1) {
+          exp[i].value = -1;
+        }
+      } else if (
+        exp[i].parentNode.parentNode.parentNode.parentNode.className.includes(
+          "Forgotten"
+        ) &&
+        exp[i].parentNode.parentNode.parentNode.id.includes("Insight")
+      ) {
+        exp[i].value = exp[i].value - (5 - secInsMem) - 1;
+        if (exp[i].value < -1) {
+          exp[i].value = -1;
+        }
+      } else {
+        exp[i].value--;
+        if (exp[i].value < -1) {
+          exp[i].value = -1;
+        }
+      }
+    } else {
+      exp[i].value--;
+      if (exp[i].value < -1) {
+        exp[i].value = -1;
+      }
+    }
+    i++;
+  }
+}
 //Sleep functionality
 function sleep() {
+  indirectChange();
+  var Hour = document.getElementById("CurrentHour");
+  var Hunger = document.getElementById("HungerVal");
+  var Water = document.getElementById("WaterVal");
+  var Sleep = document.getElementById("SleepVal");
+  var Toxic = document.getElementById("ToxicVal");
   var sleepVal = document.getElementById("TimeToSleep");
   var sleepHours = parseInt(sleepVal.value);
   var newHour = parseInt(Hour.innerText) + sleepHours;
@@ -332,15 +417,18 @@ function sleep() {
         Sleep.value = 0;
       }
       //Additional Toxic Bars
-      var t = 0;
-      while (t < Toxic.length) {
-        Toxic[t].value = Toxic[t].value - Math.ceil(sleepHours / 2);
-        satBarFill(Toxic[t].parentNode.children[1], Toxic[t]);
+      var t = 3;
+      while (t < SatBars.length) {
+        SatBars[t].parentNode.children[0].value =
+          SatBars[t].parentNode.children[0].value - Math.ceil(sleepHours / 2);
+        satBarFill(SatBars[t], SatBars[t].parentNode.children[0]);
+
         t++;
       }
-      //Preventing Primary Toxic from becoming negative (Additional Toxics can be negative)
-      if (Toxic[0].value < 0) {
-        Toxic[0].value = 0;
+      /*Preventing Primary 
+      Toxic from becoming negative (Additional Toxics can be negative)*/
+      if (SatBars[3].parentNode.children[0].value < 0) {
+        SatBars[3].parentNode.children[0].value = 0;
       }
       //Adjust Bar Sizes
       satBarFill(
@@ -359,7 +447,7 @@ function sleep() {
         document.getElementById("stBar"),
         document.getElementById("ToxicVal")
       );
-      weightExpGain(
+      weightExp(
         document.getElementById("wgtReal"),
         document.getElementById("wgtExp"),
         document.getElementById("wgtGoal"),
@@ -379,6 +467,196 @@ function sleep() {
     newHour = newHour % 24;
     Hour.innerText = String(newHour).padStart(2, "0");
     sleepVal.value = 0;
+  }
+}
+
+//Open windows (Imported As is)
+var openWinlettes = 0;
+function openWinlette(winID) {
+  if (winID.style.display === "none" || winID.style.display === "") {
+    winID.style.display = "block";
+    winID.style.zIndex = String(openWinlettes);
+    openWinlettes++;
+  } else {
+    winID.style.display = "none";
+  }
+}
+function togSec(target, section) {
+  if (target.checked) {
+    section.style.display = "flex";
+  } else {
+    section.style.display = "none";
+  }
+}
+//add new abilities
+function addAbillity() {
+  var type;
+  if (document.getElementById("Atype").checked) {
+    type = "Skill";
+  } else {
+    type = "Insight";
+  }
+  var name = document.getElementById("Aname").value;
+  var des = document.getElementById("Ades").value;
+
+  if (type && name && des) {
+    var i = 0;
+    var aID = abilities.length;
+    while (i < Slots.length) {
+      if (Slots[i].className.includes("openAbil")) {
+        var NewAbil =
+          "<span id='" +
+          type +
+          aID +
+          "' class='Ability' draggable='true' ondragstart='abilDragStart(event)'><div><span><input class='SingleInputNUM EXPvalue SaveInput aexp' placeholder='0' /><span class='abilGoal'>/0</span>|</span><Button onClick='openWinlette(" +
+          type +
+          aID +
+          "Info)'>" +
+          name +
+          "</Button><span>|<input class='SingleInputNUM SaveInput Rank' placeholder='0' /></span></div><pre id='" +
+          type +
+          aID +
+          "Info' class='AbilityInfo'>" +
+          des +
+          "</pre></span>";
+
+        Slots[i].classList.remove("openAbil");
+        Slots[i].insertAdjacentHTML("afterBegin", NewAbil);
+
+        let Rank = abilities[aID].children[0].children[2].children[0];
+        let aExp = abilities[aID].children[0].children[0].children[0];
+        let aGoal = abilities[aID].children[0].children[0].children[1];
+
+        expGoalCalc(Rank, aExp, aGoal);
+        abilities[aID].children[0].children[2].children[0].addEventListener(
+          "input",
+          function () {
+            expGoalCalc(Rank, aExp, aGoal);
+            levelCalc(TraitRanks, Ranks);
+          }
+        );
+
+        i = Slots.length;
+      }
+      i++;
+    }
+    openWinlette(addAbilWindow);
+    document.getElementById("Aname").value = "";
+    document.getElementById("Ades").value = "";
+  } else {
+    window.alert("Some fields were left blank.");
+  }
+}
+//Open Skill index (Needs to redirect to github site!)1
+function openIndex() {
+  let newWindow = window.open("", "_blank");
+  newWindow.document.write(
+    "<iframe src='https://docs.google.com/document/d/e/2PACX-1vRA3LIVvco5Lc4NR9Dxi-Krf13BdxfAH6CXNXLG1f-cvnalKG1SydpMTYj4Vl0Z29lTwRtKG3JrQq9o/pub?embedded=true'  style='top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;' allowfullscreen></iframe> "
+  );
+}
+//Open Rule Book (Needs to redirect to github site!)
+function openRules() {
+  let newWindow = window.open("", "_blank");
+  newWindow.document.write(
+    "<iframe src='https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4bLLyQ1JlPZddxvJGvM2rugr-L4OnbdX4bHG092FUk8QLNGEMxAtHsBQByo47EG051ltYlDcVILd9/pubhtml?widget=true&amp;headers=false' style='top: 0; left: 0; width: 50%; height: 50%; position: absolute; border: 1em;'></iframe> ></iframe>"
+  );
+}
+//Color Ability Slots based on memory
+function slotMemoryLimits(abil, dropTarget) {
+  spd = parseInt(document.getElementById("spdFunc").innerText);
+  dex = parseInt(document.getElementById("dexFunc").innerText);
+  int = parseInt(document.getElementById("intFunc").innerText);
+  wis = parseInt(document.getElementById("wisFunc").innerText);
+  var slots = Slots;
+  var priSklMem = Math.min(spd, dex);
+  var priInsMem = int;
+  var secSklMem = Math.max(spd, dex);
+  var secInsMem = wis;
+  var SKLmemory = priSklMem * 5;
+  var INSmemory = priInsMem * 5;
+  var aKey = [];
+
+  var i = 0;
+  //Create key for ability decay to run later
+  while (i < abilities.length) {
+    if (abilities[i].parentNode.className.includes("Forgotten")) {
+      aKey.push(true);
+    } else {
+      aKey.push(false);
+    }
+    i++;
+  }
+  //Assign Forgotten&Haze tags
+  i = 0;
+  while (i < slots.length) {
+    slots[i].classList.remove("Hazed");
+    slots[i].classList.remove("Forgotten");
+    i++;
+  }
+  i = 0;
+  while (i < 50) {
+    if (i <= SKLmemory) {
+      slots[i].style = "background-color:white;";
+    }
+    if (i >= SKLmemory) {
+      slots[i].style = "background-color:#bbb;";
+      if (slots[i].classList[2] != "Hazed") {
+        slots[i].classList.add("Forgotten");
+      }
+    }
+    if (i >= SKLmemory && i + 1 <= SKLmemory + secSklMem) {
+      slots[i].style = "background-color:#ddd;";
+      slots[i].classList.add("Hazed");
+      slots[i].classList.remove("Forgotten");
+    }
+    i++;
+  }
+  while (i < 100) {
+    if (i <= INSmemory + 50) {
+      slots[i].style = "background-color:white;";
+    }
+    if (i >= INSmemory + 50) {
+      slots[i].style = "background-color:#bbb;";
+      if (slots[i].classList[2] != "Hazed") {
+        slots[i].classList.add("Forgotten");
+      }
+    }
+    if (i >= INSmemory + 50 && i + 1 <= INSmemory + secInsMem + 50) {
+      slots[i].style = "background-color:#ddd;";
+      slots[i].classList.add("Hazed");
+      slots[i].classList.remove("Forgotten");
+    }
+    i++;
+  }
+  if (abil && dropTarget.className.includes("Forgotten")) {
+    var forgotA = document.getElementById(abil);
+    if (!forgotA.parentNode.className.includes("Forgotten")) {
+      var exp = document.getElementById(abil).children[0].children[0]
+        .children[0];
+      exp.value = parseInt(exp.value * 0.8);
+    }
+  }
+  if (!abil) {
+    i = 0;
+    while (i < abilities.length) {
+      if (!aKey[i] && abilities[i].parentNode.className.includes("Forgotten")) {
+        var exp = abilities[i].children[0].children[0].children[0];
+        exp.value = parseInt(exp.value * 0.8);
+      }
+      i++;
+    }
+  }
+}
+function abilExp() {
+  var i = 0;
+  while (i < abilities.length) {
+    let Rank = abilities[i].children[0].children[2].children[0];
+    let aExp = abilities[i].children[0].children[0].children[0];
+    let aGoal = abilities[i].children[0].children[0].children[1];
+
+    expGoalCalc(Rank, aExp, aGoal);
+    levelCalc();
+    i++;
   }
 }
 
@@ -414,6 +692,7 @@ document
       //Functional trait based functions
       fedStatus();
       weightExp();
+      slotMemoryLimits();
 
       var i = 0;
       while (i < SatBars.length) {
@@ -441,15 +720,19 @@ document
     if (event.target.id.includes("wgt")) {
       weightGoalCalc();
     }
+  if(event.target.classList.contains("Rank")){
+    abilExp();
+  }
 
-    //console.log(event.target.id.includes("wgt"))
-  document.getElementById("SaveIndicator").style.background="yellow"
+    console.log(event.target);
+    document.getElementById("SaveIndicator").style.background = "yellow";
   });
 
 /*Initial calls*/ {
   funcTraits();
   cardLimits();
   weightGoalCalc();
+  slotMemoryLimits();
 
   var i = 0;
   while (i < SatBars.length) {
@@ -458,5 +741,121 @@ document
       SatBars[i].parentNode.parentNode.children[1].children[0]
     );
     i++;
+  }
+}
+
+/*Drag & Drop Functions*/ {
+  function allowDrop(event) {
+    event.preventDefault();
+  }
+
+  //variables
+  var leftBehind = "";
+  //Abilities D&D
+  function abilDragStart(event) {
+    leftBehind = event.target.parentNode;
+    event.dataTransfer.setData("Text", event.target.id);
+  }
+
+  function abilDrop(event) {
+    event.preventDefault();
+
+    tClasses = event.target.className;
+    if (tClasses.includes("openAbil")) {
+      var data = event.dataTransfer.getData("Text");
+
+      slotMemoryLimits(
+        Slots,
+        spdFunc,
+        dexFunc,
+        intFunc,
+        wisFunc,
+        event.dataTransfer.getData("Text"),
+        event.target
+      );
+
+      event.target.appendChild(document.getElementById(data));
+      event.dataTransfer.clearData("Text");
+      event.target.classList.remove("openAbil");
+      document.getElementById(leftBehind.id).classList.add("openAbil");
+    }
+  }
+  function removeAbility(event) {
+    var target = document.getElementById(event.dataTransfer.getData("text"));
+    target.remove();
+    document.getElementById(leftBehind.id).classList.add("openAbil");
+    var i = 0;
+    while (i < abilities.length) {
+      if (abilities[i].id.includes(target.id)) {
+        abilities.splice(i, 1);
+      }
+      i++;
+    }
+    i = 0;
+    while (i < Ranks.length) {
+      if (Ranks[i].parentNode.parentNode.id.includes(target.id)) {
+        Ranks.splice(i, 1);
+      }
+      i++;
+    }
+    levelCalc(TraitRanks, Ranks);
+  }
+
+  //Inventory
+  var INVdropType = "";
+  //Quick Items
+  function QIDragStart(event) {
+    event.dataTransfer.setData("Text", event.target.value);
+    INVdropType = "QI";
+  }
+
+  var itemPickUp = "";
+  function INVDragStart(event) {
+    INVdropType = "INV";
+    itemPickUp = event.target;
+  }
+
+  function INVDrop(event) {
+    event.preventDefault();
+    //Validate Target
+    if (event.target.classList.contains("INVopen")) {
+      //Quick Item Drop Function
+      if (INVdropType == "QI") {
+        var input = document.getElementById("QuickItem").value;
+        if (input) {
+          var qEntry = input.split(",");
+          if (qEntry.length < 2 && qEntry[1]) {
+            qEntry[1] = 0;
+            qEntry[2] = 0;
+          } else if (qEntry.length < 3 && qEntry[2]) {
+            qEntry[2] = 0;
+          }
+
+          var qItem =
+            "<div class='QuickMadeItem INV' data-size='" +
+            parseInt(qEntry[1]) +
+            "' data-weight='" +
+            parseInt(qEntry[2]) +
+            "' draggable='true' onDragstart='INVDragStart(event)'>" +
+            qEntry[0] +
+            "</div>";
+
+          event.target.insertAdjacentHTML("beforeend", qItem);
+        }
+        document.getElementById("QuickItem").value = "";
+      }
+
+      //Standard Item Dropsv
+      if (INVdropType == "INV") {
+        var itemClone = itemPickUp.outerHTML;
+        event.target.insertAdjacentHTML("beforeend", itemClone);
+        itemPickUp.remove();
+      }
+    } //Valid Target
+  }
+
+  function INVremove(event) {
+    var target = document.getElementById(event.dataTransfer.getData("text"));
+    itemPickUp.remove();
   }
 }
