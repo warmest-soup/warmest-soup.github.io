@@ -1,0 +1,11 @@
+{
+       "name": "RATTRAPS",
+       "short_name": "RATTRAPS",
+       "icons": [
+         {
+           "src": "https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/IMG_20250415_131403.ico",
+           "type": "image/X-icon",
+           "sizes": "64x64"
+         }
+       ]
+}
