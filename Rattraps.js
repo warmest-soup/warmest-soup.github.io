@@ -7,12 +7,15 @@ var abilities = document.getElementsByClassName("Ability");
 var Ranks = document.getElementsByClassName("Rank");
 var Exp = document.getElementsByClassName("EXPvalue");
 var TraitRanks = document.getElementsByClassName("realTrait");
+var worldTemp = 0;
 
 fedStatus();
 document.getElementById("SaveIndicator").style.background = "cyan";
+
 function initializeSheet() {
   SatBars = document.getElementsByClassName("satBar");
   barDups = SatBars.length - 4;
+  worldTemp = 0;
 
   Slots = document.getElementsByClassName("AbilSlot");
   abilities = document.getElementsByClassName("Ability");
@@ -329,12 +332,21 @@ function passHour() {
   }
   newHour = newHour % 24;
   Hour.innerText = String(newHour).padStart(2, "0");
+
+  //increment Weather
+  worldTemp();
 }
 //ExpDecay
 function expDecay() {
   var exp = document.getElementsByClassName("EXPvalue");
-  var secSklMem=Math.min(parseInt(document.getElementById("spdFunc").innerText), parseInt(document.getElementById("dexFunc").innerText))
-  var secInsMem=Math.min(parseInt(document.getElementById("wisFunc").innerText), parseInt(document.getElementById("intFunc").innerText))
+  var secSklMem = Math.min(
+    parseInt(document.getElementById("spdFunc").innerText),
+    parseInt(document.getElementById("dexFunc").innerText)
+  );
+  var secInsMem = Math.min(
+    parseInt(document.getElementById("wisFunc").innerText),
+    parseInt(document.getElementById("intFunc").innerText)
+  );
   var i = 0;
   while (i < exp.length) {
     if (exp[i].className.includes("aexp")) {
@@ -468,6 +480,9 @@ function sleep() {
     Hour.innerText = String(newHour).padStart(2, "0");
     sleepVal.value = 0;
   }
+
+  //incrementWeather
+  worldTemp();
 }
 
 //Open windows (Imported As is)
@@ -659,8 +674,123 @@ function abilExp() {
     i++;
   }
 }
+//Range Output display
+function rangeReadout(range, out) {
+  out.innerText = range.value;
+  thermoBarFunc(worldTemp);
+  indirectChange();
+}
+//Thermo Bar Functionality
+function thermoBarFunc(temp) {
+  var bar = document.getElementById("ThermBar");
+  var fill = document.getElementById("ThermFill");
 
-//Function Calls
+  var effects = bar.parentNode.parentNode.children[0].children;
+  var context = parseInt(
+    document.getElementById("TempContextReadout").innerText
+  );
+  var barScale = 35 / (conFunc.innerText * 5);
+  var tempState = Math.abs(Math.round((temp + context) / conFunc.innerText));
+  var barHeight = (temp + context) * barScale + 35 / 2;
+
+  fill.style.height = barHeight + "em";
+
+  if (barHeight < 0) {
+    fill.style.height = "0em";
+  }
+
+  if (barHeight > (35 / 5) * 3) {
+    effects[1].style.color = "red";
+    bar.style.borderColor = "red";
+    document.getElementById("hotMultiplier").innerText = tempState + 1;
+    document.getElementById("hotFx").innerText = tempState;
+  } else {
+    effects[1].style.color = "black";
+    bar.style.borderColor = "black";
+    document.getElementById("hotMultiplier").innerText = 0;
+    document.getElementById("hotFx").innerText = 0;
+  }
+  if (barHeight > (35 / 5) * 4) {
+    effects[0].style.color = "red";
+    document.getElementsByClassName("burnFx")[0].innerText = tempState - 1;
+    document.getElementsByClassName("burnFx")[1].innerText = tempState - 1;
+  } else {
+    effects[0].style.color = "black";
+    document.getElementsByClassName("burnFx")[0].innerText = 0;
+    document.getElementsByClassName("burnFx")[1].innerText = 0;
+  }
+  if (barHeight < (35 / 5) * 2) {
+    effects[3].style.color = "blue";
+    bar.style.borderColor = "blue";
+    document.getElementById("coldMultiplier").innerText = tempState + 1;
+    document.getElementById("coldFx").innerText = tempState;
+  } else if (barHeight < (35 / 5) * 3) {
+    effects[3].style.color = "black";
+    bar.style.borderColor = "black";
+    document.getElementById("coldMultiplier").innerText = 0;
+    document.getElementById("coldFx").innerText = tempState;
+  }
+  if (barHeight < (35 / 5) * 1) {
+    effects[4].style.color = "blue";
+    document.getElementsByClassName("freezeFx")[0].innerText = tempState - 1;
+    document.getElementsByClassName("freezeFx")[1].innerText = tempState - 1;
+  } else if (barHeight < (35 / 5) * 3) {
+    effects[4].style.color = "black";
+    document.getElementsByClassName("freezeFx")[0].innerText = 0;
+    document.getElementsByClassName("freezeFx")[1].innerText = 0;
+  }
+}
+//Manage Notes Pages
+function newPage(action) {
+  var notes = document.getElementById("notesPages");
+  var pageTotal = document.getElementById("pageTotal");
+  //Add a page
+  if (action.match("add")) {
+    var newPage =
+      "<div id=Page" +
+      (notes.children.length + 1) +
+      "' class='notesPage'><textArea class='UserNote SaveInputSP' style='resize:none;' spellcheck='false'></textArea><div>Page " +
+      (notes.children.length + 1) +
+      "</div></div>";
+
+    notes.children[notes.children.length - 1].insertAdjacentHTML(
+      "afterEnd",
+      newPage
+    );
+    pageTotal.innerText = String(parseInt(pageTotal.innerText) + 1).padStart(
+      2,
+      "0"
+    );
+  }
+  //Remove a page
+  if (action.match("remove") && notes.children.length > 1) {
+    notes.children[notes.children.length - 1].remove();
+    pageTotal.innerText = String(parseInt(pageTotal.innerText) - 1).padStart(
+      2,
+      "0"
+    );
+  }
+}
+// Carry Weight
+function carryWeight() {
+  var carryLimit = document.getElementById("CarryWeight");
+  carryLimit.innerText = strFunc.innerText * 25;
+}
+
+//Duplicate the tech section when making new armor items
+function dupSection(target) {
+  newSection = target.parentNode.cloneNode("true");
+  target.parentNode.parentNode.appendChild(newSection);
+}
+//Remove New Tech slots when creating items
+function NewItemTechRemove(target) {
+  if (target.parentNode.parentNode.children.length > 1) {
+    target.parentNode.remove();
+  }
+}
+//End of declarations
+
+//Function Calls and Event Listeners
 document
   .getElementById("CharacterSheet")
   .addEventListener("change", function (event) {
@@ -720,9 +850,9 @@ document
     if (event.target.id.includes("wgt")) {
       weightGoalCalc();
     }
-  if(event.target.classList.contains("Rank")){
-    abilExp();
-  }
+    if (event.target.classList.contains("Rank")) {
+      abilExp();
+    }
 
     console.log(event.target);
     document.getElementById("SaveIndicator").style.background = "yellow";
