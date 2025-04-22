@@ -508,9 +508,9 @@ input {
   padding: 0em 0.5em 0.1em 0.5em;
 }
 #NewItemWin {
-  display: block;
-  min-width: 16em;
-  max-width: 16em;
+  display: none;
+  min-width: 17em;
+  max-width: 17em;
   min-height: 22.3em;
   max-height: 22.3em;
   background-color: white;
