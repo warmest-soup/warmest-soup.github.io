@@ -1,7 +1,6 @@
-/*Operations to perform on load*/
+//Operations to perform on load
 var SatBars = document.getElementsByClassName("satBar");
 var barDups = SatBars.length - 4;
-
 var Slots = document.getElementsByClassName("AbilSlot");
 var abilities = document.getElementsByClassName("Ability");
 var Ranks = document.getElementsByClassName("Rank");
@@ -9,8 +8,6 @@ var Exp = document.getElementsByClassName("EXPvalue");
 var TraitRanks = document.getElementsByClassName("realTrait");
 var worldTemp = 0;
 
-fedStatus();
-carryWeight();
 document.getElementById("SaveIndicator").style.background = "cyan";
 
 function initializeSheet() {
@@ -26,10 +23,24 @@ function initializeSheet() {
 
   fedStatus();
   carryWeight();
+  funcTraits();
+  cardLimits();
+  weightGoalCalc();
+  slotMemoryLimits();
+  carryWeight();
+
+  var i = 0;
+  while (i < SatBars.length) {
+    satBarFill(
+      SatBars[i],
+      SatBars[i].parentNode.parentNode.children[1].children[0]
+    );
+    i++;
+  }
   document.getElementById("SaveIndicator").style.background = "cyan";
 }
-initializeSheet();
 
+//Declarations
 //Calculate EXP goal for next level of trait
 function expGoalCalc(real, exp, goal) {
   if (real.value) {
@@ -206,7 +217,6 @@ function weightGoalCalc() {
     func.innerHTML = Math.max(adjFunc, 0);
   }
 }
-
 var underfed = false;
 var overfed = false;
 function fedStatus() {
@@ -253,7 +263,6 @@ function weightExp() {
   }
   fedStatus();
 }
-
 //Day Counter
 function dayCount() {
   var day = document.getElementById("currentDay");
@@ -486,7 +495,6 @@ function sleep() {
   //incrementWeather
   worldTemp();
 }
-
 //Open windows (Imported As is)
 var openWinlettes = 0;
 function openWinlette(winID) {
@@ -776,7 +784,8 @@ function newPage(action) {
 // Carry Weight
 function carryWeight() {
   var carryLimit = document.getElementById("CarryWeight");
-  carryLimit.innerText = document.getElementById("strFunc").innerText * 25;
+  carryLimit.innerText =
+    parseInt(document.getElementById("strFunc").innerText) * 25;
 }
 //setHandedness
 function setHand() {
@@ -789,7 +798,6 @@ function setHand() {
   document.getElementById(newSelect).outerHTML =
     "<option id='" + newSelect + "' selected>" + newSelect + "</option>";
 }
-
 //Duplicate the tech & armor sections when making new armor items
 function dupSection(target) {
   newSection = target.parentNode.cloneNode("true");
@@ -801,6 +809,110 @@ function NewItemTechRemove(target) {
     target.parentNode.remove();
   }
 }
+//Create new Inventory Items
+function createItem() {
+  var itemStats = document.getElementsByClassName("ItemStat");
+  var itemName = document.getElementById("itemName").value;
+
+  document
+    .getElementById("INVcolumn3")
+    .insertAdjacentHTML(
+      "beforeend",
+      "<div id='" +
+        itemName +
+        "' class='INV item' data-size='" +
+        itemStats[0].value +
+        "' data-weight='" +
+        itemStats[1].value +
+        "' draggable='true' ondragstart='INVDragStart(event)'>" +
+        itemName +
+        "</div>"
+    );
+  var newItem = document.getElementById(itemName);
+
+  if (document.getElementById("isWeapon").checked) {
+    var weaponStats = Array.from(
+      document.getElementsByClassName("newWeaponStat")
+    ).map((x) => x.value);
+    var weaponData = "";
+    weaponStats.map((x) => (weaponData = weaponData + x + ", "));
+    weaponData = weaponData.slice(0, -2);
+
+    Array.from(document.getElementsByClassName("newWeaponStat")).map(
+      (x) => (x.value = "")
+    );
+
+    newItem.setAttribute("data-weaponStats", weaponData);
+  }
+  if (document.getElementById("isArmor").checked) {
+    //Coverage
+    var armorCoverage = Array.from(
+      document.getElementsByClassName("naSpotCover")
+    ).map((x) => {
+      if (x.checked == true) {
+        return "tt";
+      } else {
+        return "f";
+      }
+    });
+    var armorCoverData = "";
+    armorCoverage.map((x) => (armorCoverData = armorCoverData + x + ", "));
+    armorCoverData = armorCoverData.slice(0, -2);
+
+    Array.from(document.getElementsByClassName("naSpotCover")).map(
+      (x) => (x.checked = false)
+    );
+
+    newItem.setAttribute("data-Coverage", armorCoverData);
+
+    //Stats
+    var armorStats = Array.from(
+      document.getElementsByClassName("NewArmorStat")
+    ).map((x) => x.value);
+    var armorData = "";
+    armorStats.map((x) => (armorData = armorData + x + ", "));
+    armorData = armorData.slice(0, -2);
+
+    Array.from(document.getElementsByClassName("NewArmorStat")).map(
+      (x) => (x.value = "")
+    );
+
+    newItem.setAttribute("data-armorStats", armorData);
+  }
+  if (document.getElementById("hasTech").checked) {
+    var itemTech = Array.from(document.getElementsByClassName("iTech")).map(
+      (x) => x.value
+    );
+    var techData = "";
+    itemTech.map((x) => (techData = techData + x + ", "));
+    techData = techData.slice(0, -2);
+
+    Array.from(document.getElementsByClassName("iTech")).map(
+      (x) => (x.value = "")
+    );
+
+    newItem.setAttribute("data-itemTech", techData);
+  }
+  if (document.getElementById("isInventory").checked) {
+    var invStats = Array.from(document.getElementsByClassName("invData")).map(
+      (x) => x.value
+    );
+    var invData = "";
+    invStats.map((x) => (invData = invData + x + ", "));
+    invData = invData.slice(0, -2);
+
+    Array.from(document.getElementsByClassName("invData")).map(
+      (x) => (x.value = "")
+    );
+
+    newItem.setAttribute("data-invStats", invData);
+  }
+
+  openWinlette(NewItemWin);
+}
+//World Temperature
+
+
 //End of declarations
 
 //Function Calls and Event Listeners
@@ -871,22 +983,6 @@ document
     //console.log(event.target);
     document.getElementById("SaveIndicator").style.background = "yellow";
   });
-
-/*Initial calls*/ {
-  funcTraits();
-  cardLimits();
-  weightGoalCalc();
-  slotMemoryLimits();
-
-  var i = 0;
-  while (i < SatBars.length) {
-    satBarFill(
-      SatBars[i],
-      SatBars[i].parentNode.parentNode.children[1].children[0]
-    );
-    i++;
-  }
-}
 
 /*Drag & Drop Functions*/ {
   function allowDrop(event) {
@@ -1003,3 +1099,6 @@ document
     itemPickUp.remove();
   }
 }
+
+//Initialize
+initializeSheet();
