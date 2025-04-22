@@ -788,8 +788,6 @@ function setHand() {
   dd.outerHTML = d0;
   document.getElementById(newSelect).outerHTML =
     "<option id='" + newSelect + "' selected>" + newSelect + "</option>";
-
-  console.log(document.getElementById("HandDropdown"));
 }
 
 //Duplicate the tech & armor sections when making new armor items
