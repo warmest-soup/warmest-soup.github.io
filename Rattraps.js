@@ -10,6 +10,7 @@ var TraitRanks = document.getElementsByClassName("realTrait");
 var worldTemp = 0;
 
 fedStatus();
+carryWeight();
 document.getElementById("SaveIndicator").style.background = "cyan";
 
 function initializeSheet() {
@@ -24,6 +25,7 @@ function initializeSheet() {
   TraitRanks = document.getElementsByClassName("realTrait");
 
   fedStatus();
+  carryWeight();
   document.getElementById("SaveIndicator").style.background = "cyan";
 }
 initializeSheet();
@@ -774,10 +776,23 @@ function newPage(action) {
 // Carry Weight
 function carryWeight() {
   var carryLimit = document.getElementById("CarryWeight");
-  carryLimit.innerText = strFunc.innerText * 25;
+  carryLimit.innerText = document.getElementById("strFunc").innerText * 25;
+}
+//setHandedness
+function setHand() {
+  var dd = document.getElementById("HandDropdown");
+  var d0 =
+    "<select id='HandDropdown' class='SaveInputSP'onchange='setHand()'> <option id='Unset'>Unset</option> <option id='Left'>Left</option><option id='Right'>Right</option></select>";
+  var newSelect = event.target.value;
+
+  dd.outerHTML = d0;
+  document.getElementById(newSelect).outerHTML =
+    "<option id='" + newSelect + "' selected>" + newSelect + "</option>";
+
+  console.log(document.getElementById("HandDropdown"));
 }
 
-//Duplicate the tech section when making new armor items
+//Duplicate the tech & armor sections when making new armor items
 function dupSection(target) {
   newSection = target.parentNode.cloneNode("true");
   target.parentNode.parentNode.appendChild(newSection);
@@ -835,6 +850,7 @@ document
     }
     if (
       //Sat bar functions
+      event.target.parentNode &&
       event.target.parentNode.classList.contains("satVal")
     ) {
       satBarFill(event.target.parentNode.children[1], event.target);
@@ -854,7 +870,7 @@ document
       abilExp();
     }
 
-    console.log(event.target);
+    //console.log(event.target);
     document.getElementById("SaveIndicator").style.background = "yellow";
   });
 
