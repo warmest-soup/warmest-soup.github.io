@@ -28,6 +28,7 @@ function initializeSheet() {
   weightGoalCalc();
   slotMemoryLimits();
   carryWeight();
+  thermoBarFunc(worldTemp);
 
   var i = 0;
   while (i < SatBars.length) {
@@ -897,14 +898,18 @@ function createItem() {
     var invStats = Array.from(document.getElementsByClassName("invData")).map(
       (x) => x.value
     );
+    
+    var i=0;
+    while(i<parseInt(invStats[1])){
+      invStats.splice(2+i,0,"<div class='INVopen INVslot'></div>")
+      i++;
+    } invStats.splice(1,1);
     var invData = "";
     invStats.map((x) => (invData = invData + x + ", "));
     invData = invData.slice(0, -2);
-
     Array.from(document.getElementsByClassName("invData")).map(
       (x) => (x.value = "")
     );
-
     newItem.setAttribute("data-invStats", invData);
   }
 
@@ -1055,6 +1060,7 @@ document
     itemPickUp = event.target;
   }
 
+  //Inventory Drag n Drop
   function INVDrop(event) {
     event.preventDefault();
     //Validate Target
@@ -1072,7 +1078,7 @@ document
           }
 
           var qItem =
-            "<div class='QuickMadeItem INV' data-size='" +
+            "<div class='item INV' data-size='" +
             parseInt(qEntry[1]) +
             "' data-weight='" +
             parseInt(qEntry[2]) +
@@ -1087,6 +1093,7 @@ document
 
       //Standard Item Dropsv
       if (INVdropType == "INV") {
+        itemPickUp.classList.remove("Equipped");
         var itemClone = itemPickUp.outerHTML;
         event.target.insertAdjacentHTML("beforeend", itemClone);
         itemPickUp.remove();
@@ -1098,7 +1105,30 @@ document
     var target = document.getElementById(event.dataTransfer.getData("text"));
     itemPickUp.remove();
   }
-}
+  
+  //Equipping Items
+   function equipDrop(event) {
+     event.preventDefault();
+     console.log(itemPickUp);
+     itemPickUp.classList.add("Equipped")
+     document.getElementById("TackColumn").appendChild(itemPickUp);
+     
+     //Act on item's Data Sets
+     if("invstats" in itemPickUp.dataset){
+       var invData =itemPickUp.dataset.invstats.split(",");
+       console.log(invData);
+       document.getElementById("INVcolumn1").insertAdjacentHTML("beforeend", "<div id='" + invData[0] + "' class='INV invContainer' draggable='true' ondragstart='INVDragStart(event)'> <div class='invContainerTop'> " +invData[0]+ " </div> <div class='invContainerBot'> "+invData[invData.length-1]+" </div>");
+       
+       var i=0;
+       while(i<invData.length-2){
+        document.getElementById(invData[0]).children[0].insertAdjacentHTML("afterend", invData[i+1]); 
+         i++;
+       }
+       
+     }//End of INV action
+  }
+  
+}//End of Declarations
 
 //Initialize
 initializeSheet();
