@@ -4,7 +4,7 @@ html {
 }
 * {
   font-family: "caudex";
-  font-size: max(2.1vh, 20px);
+  font-size: 2.1vh;
 }
 button {
   font-weight: 700;
