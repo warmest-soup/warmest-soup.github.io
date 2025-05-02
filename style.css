@@ -471,6 +471,7 @@ input {
   max-height: 25em;
   border: solid 0.1em black;
   border-radius: 1em;
+  overflow:clip;
 }
 #QuickItem {
   margin: 0.5em;
@@ -491,7 +492,6 @@ input {
 }
 .INVcols {
   min-width: 32.9%;
-  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -499,7 +499,7 @@ input {
   padding: 0.5em 0em 0.5em 0em;
   overflow: auto;
 }
-.QuickMadeItem {
+.item {
   background: white;
   border: solid black 0.1em;
   border-radius: 0.7em;
@@ -693,4 +693,61 @@ input[type="checkbox"]:checked {
 .dataSection{
   display:flex;
   gap:.5em;
+}
+#Tack{
+  min-width:13em;
+  max-width:13em;
+  min-height:29em;
+  max-height:29em;
+  display:flex;
+  flex-Direction:column;
+  align-items:center;
+  justify-Content:space-around;
+}
+#TackColumn{
+    background: repeating-linear-gradient(
+    50deg,
+    black,
+    black 0.5px,
+    white 0.5px,
+    white 2%
+  );
+  border:solid black .1em;
+  border-radius:.5em;;
+  height:88%;
+  width:95%;
+  display:flex;
+  padding-top:.5em;
+  flex-direction:column;
+  align-items:center;
+  gap:.5em;
+}
+.Equipped{
+  background:white;
+  padding:.2em 1em .2em 1em;
+  border:solid black .1em;
+  border-radius:.5em;
+  text-Align:center;
+  width:70%;
+}
+.invContainer{
+  background:white;
+  border:solid black .1em;font-size:.8em;
+  border-radius:.5em;
+  width:90%;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.2em;
+}
+.INVslot{
+  border:solid black .1em;
+  border-radius:2em;
+  width:9em;
+  height:2em;
+  padding:.1em 0em .1em 0em;
+  font-size:.8em;
+  display:flex;
+  overflow:clip;
 }
