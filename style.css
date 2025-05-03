@@ -131,7 +131,7 @@ input {
   gap: 0.5em;
   overflow: auto;
   padding: 0.5em;
-  transform:translatex(-.5em);
+  transform:translatex(-1em);
   
 }
 #Photo {
@@ -746,7 +746,7 @@ input[type="checkbox"]:checked {
   border-radius:2em;
   width:9em;
   height:2em;
-  padding:.1em 0em .1em 0em;
+  padding:.1em;
   font-size:.8em;
   display:flex;
   overflow:clip;
