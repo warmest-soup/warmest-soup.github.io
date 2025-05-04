@@ -895,28 +895,59 @@ function createItem() {
     newItem.setAttribute("data-itemTech", techData);
   }
   if (document.getElementById("isInventory").checked) {
+    //get inv stats in array
     var invStats = Array.from(document.getElementsByClassName("invData")).map(
       (x) => x.value
     );
     
+    //split key into pockets
+    var pktCount=invStats.length/3;
+
+    //reformat to multiple pockets
+    var p=0;
+    var pockets=[];
+    while(p<pktCount){
+      //every Pocket
+      pockets[p]=[];
+      pockets[p][0]=invStats[0+p*3];
+
+      var i=0;
+      while(i<parseInt(invStats[1+p*3])){
+        pockets[p].push("<div class='INVopen INVslot'></div>")
+        i++;
+      } pockets[p].push(invStats[2+p*3])
+      p++;
+    } 
+    //Pack Data
     var i=0;
-    while(i<parseInt(invStats[1])){
-      invStats.splice(2+i,0,"<div class='INVopen INVslot'></div>")
+    while(i<pockets.length){
+      newItem.setAttribute("data-"+pockets[i][0].toLowerCase().replaceAll(" ",""), pockets[i].join(", ") );
       i++;
-    } invStats.splice(1,1);
-    var invData = "";
-    invStats.map((x) => (invData = invData + x + ", "));
-    invData = invData.slice(0, -2);
-    Array.from(document.getElementsByClassName("invData")).map(
-      (x) => (x.value = "")
-    );
-    newItem.setAttribute("data-invStats", invData);
+    }
+    //Unload stats from INVData
+    i=0;
+    while(i<pktCount){
+      invStats.splice(1+i,2);
+      i++;
+    } newItem.setAttribute("data-invstats", invStats.join(", ") );
+    console.log(newItem);
+    
   }
 
   openWinlette(NewItemWin);
 }
+//Removal warnings
+function remWarning(rem){
+  rem.style.color="black"
+  rem.style.border="solid black .2em"
+  rem.style.background="red"
+}
+function remWarningReset(rem){
+  rem.style.color="gray"
+  rem.style.border="solid gray 0.1em"
+  rem.style.background="transparent"
+}
 //World Temperature
-
 
 //End of declarations
 
@@ -1001,7 +1032,6 @@ document
     leftBehind = event.target.parentNode;
     event.dataTransfer.setData("Text", event.target.id);
   }
-
   function abilDrop(event) {
     event.preventDefault();
 
@@ -1114,15 +1144,26 @@ document
      document.getElementById("TackColumn").appendChild(itemPickUp);
      
      //Act on item's Data Sets
-     if("invstats" in itemPickUp.dataset){
-       var invData =itemPickUp.dataset.invstats.split(",");
-       console.log(invData);
-       document.getElementById("INVcolumn1").insertAdjacentHTML("beforeend", "<div id='" + invData[0] + "' class='INV invContainer' draggable='true' ondragstart='INVDragStart(event)'> <div class='invContainerTop'> " +invData[0]+ " </div> <div class='invContainerBot'> "+invData[invData.length-1]+" </div>");
+     if(itemPickUp.dataset["invstats"] ){
+       console.log("Running");
+       //Get INV IDs
+       var invData =itemPickUp.dataset.invstats.split(", ");
        
-       var i=0;
-       while(i<invData.length-2){
-        document.getElementById(invData[0]).children[0].insertAdjacentHTML("afterend", invData[i+1]); 
+       var j=0;
+       while(j<invData.length){
+         console.log(invData[j].toLowerCase().replaceAll(" ","-") );
+         var pkt=itemPickUp.dataset[invData[j].toLowerCase().replaceAll(" ","")].split(", ") ;
+         console.log(pkt);
+         //Create Pocket
+       document.getElementById("INVcolumn1").insertAdjacentHTML("beforeend", "<div id='" + pkt[0] + "' class='INV invContainer' draggable='true' ondragstart='INVDragStart(event)'> <div class='invContainerTop'> " +pkt[0].replaceAll("-"," ")+ " </div> <div class='invContainerBot'> "+pkt[pkt.length-1]+" </div>");
+         
+         var i=0;
+         while(i<pkt.length-2){
+           document.getElementById(pkt[0]).children[0].insertAdjacentHTML("afterend", pkt[i+1]); 
          i++;
+       }
+         
+         j++
        }
        
      }//End of INV action
@@ -1132,3 +1173,9 @@ document
 
 //Initialize
 initializeSheet();
+
+/*notes
+-Target Validation for inventory to prevent containers from being equipped
+  or placed inside themselves
+
+*/
