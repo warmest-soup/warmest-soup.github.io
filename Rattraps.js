@@ -426,7 +426,7 @@ function sleep() {
         hotModded =
           sleepHours * document.getElementById("hotMultiplier").innerText;
       }
-      console.log(document.getElementById("coldMultiplier").innerText);
+      //console.log(document.getElementById("coldMultiplier").innerText);
 
       Hunger.value = Hunger.value - Math.ceil(coldModded / 2);
       if (Hunger.value < 0) {
@@ -899,53 +899,59 @@ function createItem() {
     var invStats = Array.from(document.getElementsByClassName("invData")).map(
       (x) => x.value
     );
-    
+
     //split key into pockets
-    var pktCount=invStats.length/3;
+    var pktCount = invStats.length / 3;
 
     //reformat to multiple pockets
-    var p=0;
-    var pockets=[];
-    while(p<pktCount){
+    var p = 0;
+    var pockets = [];
+    while (p < pktCount) {
       //every Pocket
-      pockets[p]=[];
-      pockets[p][0]=invStats[0+p*3];
+      pockets[p] = [];
+      pockets[p][0] = itemName + " " + invStats[0 + p * 3];
 
-      var i=0;
-      while(i<parseInt(invStats[1+p*3])){
-        pockets[p].push("<div class='INVopen INVslot'></div>")
+      var i = 0;
+      while (i < parseInt(invStats[1 + p * 3])) {
+        pockets[p].push("<div class='INVopen INVslot'></div>");
         i++;
-      } pockets[p].push(invStats[2+p*3])
+      }
+      pockets[p].push(invStats[2 + p * 3]);
       p++;
-    } 
+    }
     //Pack Data
-    var i=0;
-    while(i<pockets.length){
-      newItem.setAttribute("data-"+pockets[i][0].toLowerCase().replaceAll(" ",""), pockets[i].join(", ") );
+    var i = 0;
+    while (i < pockets.length) {
+      newItem.setAttribute(
+        "data-" + pockets[i][0].toLowerCase().replaceAll(" ", ""),
+        pockets[i].join(", ")
+      );
       i++;
     }
     //Unload stats from INVData
-    i=0;
-    while(i<pktCount){
-      invStats.splice(1+i,2);
+    i = 0;
+    while (i < pktCount) {
+      invStats.splice(1 + i, 2);
+      invStats[i] = itemName + " " + invStats[i]; 
       i++;
-    } newItem.setAttribute("data-invstats", invStats.join(", ") );
-    console.log(newItem);
-    
+    }
+
+    newItem.setAttribute("data-invstats", invStats.join(", "));
+    //console.log(newItem);
   }
 
   openWinlette(NewItemWin);
 }
 //Removal warnings
-function remWarning(rem){
-  rem.style.color="black"
-  rem.style.border="solid black .2em"
-  rem.style.background="red"
+function remWarning(rem) {
+  rem.style.color = "black";
+  rem.style.border = "solid black .2em";
+  rem.style.background = "red";
 }
-function remWarningReset(rem){
-  rem.style.color="gray"
-  rem.style.border="solid gray 0.1em"
-  rem.style.background="transparent"
+function remWarningReset(rem) {
+  rem.style.color = "gray";
+  rem.style.border = "solid gray 0.1em";
+  rem.style.background = "transparent";
 }
 //World Temperature
 
@@ -1078,23 +1084,60 @@ document
 
   //Inventory
   var INVdropType = "";
+  var itemPickUp = "";
   //Quick Items
   function QIDragStart(event) {
     event.dataTransfer.setData("Text", event.target.value);
     INVdropType = "QI";
   }
 
-  var itemPickUp = "";
   function INVDragStart(event) {
+    //console.log("INVDrag function ran.");
+    
     INVdropType = "INV";
     itemPickUp = event.target;
+    leftBehind = event.target.parentNode;
   }
 
-  //Inventory Drag n Drop
+  //Inventory Drag n Drop & Unequipping
   function INVDrop(event) {
+    //console.log("INVDrop Function ran.");
+    
+    //Unequip function
+    if(leftBehind.id==="TackColumn"){
+      
+      //Get INV IDs
+      var invData = itemPickUp.dataset.invstats.split(", ");
+
+      var j = 0;
+      while (j < invData.length) { 
+        var pkt = document.getElementById(invData[j]);
+        console.log(pkt.children[0]);
+        var contents= Array.from(pkt.children).map(
+        (x) => x.outerHTML
+        );
+        
+        contents[0]=pkt.children[0].innerHTML.trim();
+        contents[contents.length-1] = pkt.children[contents.length-1].innerHTML;
+        contents = contents.join(", ");
+        
+        itemPickUp.dataset[pkt.children[0].innerHTML.toLowerCase().replaceAll(" ","")]=contents;
+        
+        pkt.remove();
+        j++;
+      }
+      
+    } leftBehind="";
+    
     event.preventDefault();
     //Validate Target
-    if (event.target.classList.contains("INVopen")) {
+    if (
+      event.target.classList.contains("INVopen") &
+      !(
+        itemPickUp.classList.contains("invContainer") &
+        !event.target.classList.contains("INVcols")
+      )
+    ) {
       //Quick Item Drop Function
       if (INVdropType == "QI") {
         var input = document.getElementById("QuickItem").value;
@@ -1129,53 +1172,70 @@ document
         itemPickUp.remove();
       }
     } //Valid Target
+    //console.log(event.target);u
   }
 
   function INVremove(event) {
     var target = document.getElementById(event.dataTransfer.getData("text"));
     itemPickUp.remove();
   }
-  
+
   //Equipping Items
-   function equipDrop(event) {
-     event.preventDefault();
-     console.log(itemPickUp);
-     itemPickUp.classList.add("Equipped")
-     document.getElementById("TackColumn").appendChild(itemPickUp);
-     
-     //Act on item's Data Sets
-     if(itemPickUp.dataset["invstats"] ){
-       console.log("Running");
-       //Get INV IDs
-       var invData =itemPickUp.dataset.invstats.split(", ");
-       
-       var j=0;
-       while(j<invData.length){
-         console.log(invData[j].toLowerCase().replaceAll(" ","-") );
-         var pkt=itemPickUp.dataset[invData[j].toLowerCase().replaceAll(" ","")].split(", ") ;
-         console.log(pkt);
-         //Create Pocket
-       document.getElementById("INVcolumn1").insertAdjacentHTML("beforeend", "<div id='" + pkt[0] + "' class='INV invContainer' draggable='true' ondragstart='INVDragStart(event)'> <div class='invContainerTop'> " +pkt[0].replaceAll("-"," ")+ " </div> <div class='invContainerBot'> "+pkt[pkt.length-1]+" </div>");
-         
-         var i=0;
-         while(i<pkt.length-2){
-           document.getElementById(pkt[0]).children[0].insertAdjacentHTML("afterend", pkt[i+1]); 
-         i++;
-       }
-         
-         j++
-       }
-       
-     }//End of INV action
+  function equipDrop(event) {
+    event.preventDefault();
+
+    //console.log(itemPickUp);
+
+    itemPickUp.classList.add("Equipped");
+    document.getElementById("TackColumn").appendChild(itemPickUp);
+
+    //Act on item's Data Sets
+    if (itemPickUp.dataset["invstats"]) {
+
+      //Get INV IDs
+      var invData = itemPickUp.dataset.invstats.split(", ");
+
+      var j = 0;
+      while (j < invData.length) {
+        // console.log(invData[j].toLowerCase().replaceAll(" ","-") );
+        var pkt = itemPickUp.dataset[
+          invData[j].toLowerCase().replaceAll(" ", "")
+        ].split(", ");
+        // console.log(pkt);
+        //Create Pocket
+        document
+          .getElementById("INVcolumn1")
+          .insertAdjacentHTML(
+            "beforeend",
+            "<div id='" +
+              pkt[0] +
+              "' class='INV invContainer' draggable='true' ondragstart='INVDragStart(event)'> <div class='invContainerTop'> " +
+              pkt[0].replaceAll("-", " ") +
+              " </div> <div class='invContainerBot'> " +
+              pkt[pkt.length - 1] +
+              " </div>"
+          );
+
+        var i = 0;
+        while (i < pkt.length - 2) {
+          document
+            .getElementById(pkt[0])
+            .children[0].insertAdjacentHTML("afterend", pkt[i + 1]);
+          i++;
+        }
+
+        j++;
+      }
+    } //End of INV action
   }
-  
-}//End of Declarations
+
+  //Unequip Item
+  function unequipDrop(event) {}
+} //End of Declarations
 
 //Initialize
 initializeSheet();
 
 /*notes
--Target Validation for inventory to prevent containers from being equipped
-  or placed inside themselves
-
+-Quick Items FAIL to be made when ANY CONTAINER exists in inventory It needs to check ONLY THE TARGET
 */
