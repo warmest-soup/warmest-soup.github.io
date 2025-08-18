@@ -924,7 +924,7 @@ function createItem() {
     while (i < pockets.length) {
       newItem.setAttribute(
         "data-" + pockets[i][0].toLowerCase().replaceAll(" ", ""),
-        pockets[i].join(", ")
+        pockets[i].join("○ ")
       );
       i++;
     }
@@ -932,12 +932,11 @@ function createItem() {
     i = 0;
     while (i < pktCount) {
       invStats.splice(1 + i, 2);
-      invStats[i] = itemName + " " + invStats[i]; 
+      invStats[i] = itemName + " " + invStats[i];
       i++;
     }
 
-    newItem.setAttribute("data-invstats", invStats.join(", "));
-    //console.log(newItem);
+    newItem.setAttribute("data-invstats", invStats.join("○ "));
   }
 
   openWinlette(NewItemWin);
@@ -1093,7 +1092,7 @@ document
 
   function INVDragStart(event) {
     //console.log("INVDrag function ran.");
-    
+
     INVdropType = "INV";
     itemPickUp = event.target;
     leftBehind = event.target.parentNode;
@@ -1102,45 +1101,63 @@ document
   //Inventory Drag n Drop & Unequipping
   function INVDrop(event) {
     //console.log("INVDrop Function ran.");
-    
-    //Unequip function
-    if(leftBehind.id==="TackColumn"){
-      
-      //Get INV IDs
-      var invData = itemPickUp.dataset.invstats.split(", ");
 
-      var j = 0;
-      while (j < invData.length) { 
-        var pkt = document.getElementById(invData[j]);
-        console.log(pkt.children[0]);
-        var contents= Array.from(pkt.children).map(
-        (x) => x.outerHTML
-        );
-        
-        contents[0]=pkt.children[0].innerHTML.trim();
-        contents[contents.length-1] = pkt.children[contents.length-1].innerHTML;
-        contents = contents.join(", ");
-        
-        itemPickUp.dataset[pkt.children[0].innerHTML.toLowerCase().replaceAll(" ","")]=contents;
-        
-        pkt.remove();
-        j++;
-      }
-      
-    } leftBehind="";
-    
     event.preventDefault();
+
     //Validate Target
     if (
+      INVdropType == "QI" ||
       event.target.classList.contains("INVopen") &
       !(
         itemPickUp.classList.contains("invContainer") &
         !event.target.classList.contains("INVcols")
       )
     ) {
+      //Unequip function
+      if (leftBehind.id === "TackColumn") {
+        
+        //inventory handler
+        if ("invstats" in itemPickUp.dataset) {
+          //Get INV IDs
+          var invData = itemPickUp.dataset.invstats.split("○ ");
+
+          var k = 0;
+          var inceptionCheck = false;
+          while (k < invData.length) {
+            if (invData[k] == event.target.parentNode.id) {
+              inceptionCheck = true;
+              leftBehind = "";
+            }
+            k++;
+          }
+          if (inceptionCheck) return;
+
+          var j = 0;
+          while (j < invData.length) {
+            var pkt = document.getElementById(invData[j]);
+            
+            var contents = Array.from(pkt.children).map((x) => x.outerHTML.replace(/○/g,"•"));
+
+            contents[0] = pkt.children[0].innerHTML.trim();
+            contents[contents.length - 1] =
+              pkt.children[contents.length - 1].innerHTML;
+            contents = contents.join("○ ");
+
+            itemPickUp.dataset[
+              pkt.children[0].innerHTML.toLowerCase().replaceAll(" ", "")
+            ] = contents;
+
+            pkt.remove();
+            j++;
+          }
+        }
+        leftBehind = "";
+      }
+
       //Quick Item Drop Function
       if (INVdropType == "QI") {
         var input = document.getElementById("QuickItem").value;
+        var qItem="";
         if (input) {
           var qEntry = input.split(",");
           if (qEntry.length < 2 && qEntry[1]) {
@@ -1150,7 +1167,7 @@ document
             qEntry[2] = 0;
           }
 
-          var qItem =
+          qItem =
             "<div class='item INV' data-size='" +
             parseInt(qEntry[1]) +
             "' data-weight='" +
@@ -1162,6 +1179,20 @@ document
           event.target.insertAdjacentHTML("beforeend", qItem);
         }
         document.getElementById("QuickItem").value = "";
+        var madeItem = event.target.children[event.target.children.length-1];
+        var madeItemSize = parseInt(madeItem.dataset.size);
+        if(madeItemSize){
+          madeItem.style.backgroundColor="gray";
+          madeItem.style.padding="0em .2em "+(madeItemSize*1.65-1.5+.2)+"em .2em";
+          madeItem.style.minWidth="6.5em";
+          madeItem.style.maxWidth="6.5em";
+          madeItem.style.minHeight="1.5"
+          madeItem.style.maxHeight="1.5"
+          madeItem.style.marginTop="-.2em";
+          console.log(madeItem);
+        }
+        
+        
       }
 
       //Standard Item Dropsv
@@ -1171,8 +1202,8 @@ document
         event.target.insertAdjacentHTML("beforeend", itemClone);
         itemPickUp.remove();
       }
-    } //Valid Target
-    //console.log(event.target);u
+    }
+    
   }
 
   function INVremove(event) {
@@ -1184,53 +1215,51 @@ document
   function equipDrop(event) {
     event.preventDefault();
 
-    //console.log(itemPickUp);
+    if (INVdropType !== "QI" & !itemPickUp.classList.contains("Equipped")) {
+      
+      itemPickUp.classList.add("Equipped");
+      document.getElementById("TackColumn").appendChild(itemPickUp);
 
-    itemPickUp.classList.add("Equipped");
-    document.getElementById("TackColumn").appendChild(itemPickUp);
+      //Act on item's Data Sets
+      if (itemPickUp.dataset["invstats"]) {
+        //Get INV IDs
+        var invData = itemPickUp.dataset.invstats.split("○ ");
 
-    //Act on item's Data Sets
-    if (itemPickUp.dataset["invstats"]) {
-
-      //Get INV IDs
-      var invData = itemPickUp.dataset.invstats.split(", ");
-
-      var j = 0;
-      while (j < invData.length) {
-        // console.log(invData[j].toLowerCase().replaceAll(" ","-") );
-        var pkt = itemPickUp.dataset[
-          invData[j].toLowerCase().replaceAll(" ", "")
-        ].split(", ");
-        // console.log(pkt);
-        //Create Pocket
-        document
-          .getElementById("INVcolumn1")
-          .insertAdjacentHTML(
-            "beforeend",
-            "<div id='" +
-              pkt[0] +
-              "' class='INV invContainer' draggable='true' ondragstart='INVDragStart(event)'> <div class='invContainerTop'> " +
-              pkt[0].replaceAll("-", " ") +
-              " </div> <div class='invContainerBot'> " +
-              pkt[pkt.length - 1] +
-              " </div>"
-          );
-
-        var i = 0;
-        while (i < pkt.length - 2) {
+        var j = 0;
+        while (j < invData.length) {
+          var pkt = itemPickUp.dataset[
+            invData[j].toLowerCase().replaceAll(" ", "")
+          ].split("○ ");
+          
+          //Create Pocket
           document
-            .getElementById(pkt[0])
-            .children[0].insertAdjacentHTML("afterend", pkt[i + 1]);
-          i++;
+            .getElementById("INVcolumn1")
+            .insertAdjacentHTML(
+              "beforeend",
+              "<div id='" +
+                pkt[0] +
+                "' class='INV invContainer' draggable='true' ondragstart='INVDragStart(event)'> <div class='invContainerTop'> " +
+                pkt[0].replaceAll("-", " ") +
+                " </div> <div class='invContainerBot'> " +
+                pkt[pkt.length - 1] +
+                " </div>"
+            );
+
+          var i = 0;
+          while (i < pkt.length - 2) {
+            document
+              .getElementById(pkt[0])
+              .children[document.getElementById(pkt[0])
+              .children.length-2].insertAdjacentHTML("afterend", pkt[i + 1].replace(/•/g,"○"));
+            i++;
+          }
+
+          j++;
         }
-
-        j++;
-      }
-    } //End of INV action
+      } //End of INV action
+      itemPickUp = "";
+    }
   }
-
-  //Unequip Item
-  function unequipDrop(event) {}
 } //End of Declarations
 
 //Initialize
@@ -1238,4 +1267,6 @@ initializeSheet();
 
 /*notes
 -Quick Items FAIL to be made when ANY CONTAINER exists in inventory It needs to check ONLY THE TARGET
+
+-Currently CANNOT equip non-inventory items.
 */
