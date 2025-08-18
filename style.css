@@ -716,14 +716,6 @@ input[type="checkbox"]:checked {
   align-items:center;
   gap:.5em;
 }
-.Equipped{
-  background:white;
-  padding:.2em 1em .2em 1em;
-  border:solid black .1em;
-  border-radius:.5em;
-  text-Align:center;
-  width:70%;
-}
 .invContainer{
   background:white;
   border:solid black .1em;
@@ -740,6 +732,7 @@ input[type="checkbox"]:checked {
   background-color:rgb(255 255 255 / 50%);
   border-radius:.5em;
   min-width:6.5em;
+  max-width:6.5em;
   min-height:1.3em;
   max-height:1.3em;
   display:flex;
@@ -755,5 +748,12 @@ input[type="checkbox"]:checked {
   text-align: center;
   margin-top:-.1em;
   padding: 0em 0.5em 0.2em 0.5em;
-  
+}
+.Equipped{
+  background:white;
+  padding:.2em 1em .2em 1em;
+  border:solid black .1em;
+  border-radius:.5em;
+  text-Align:center;
+  width:70%;
 }
