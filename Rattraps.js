@@ -1183,12 +1183,13 @@ document
         var madeItemSize = parseInt(madeItem.dataset.size);
         if(madeItemSize){
           madeItem.style.backgroundColor="gray";
-          madeItem.style.padding="0em .2em "+(madeItemSize*1.65-1.5+.2)+"em .2em";
+          madeItem.style.padding="0em .2em "+(madeItemSize*1.65-1.5+.4)+"em .2em";
           madeItem.style.minWidth="6.5em";
           madeItem.style.maxWidth="6.5em";
           madeItem.style.minHeight="1.5"
           madeItem.style.maxHeight="1.5"
           madeItem.style.marginTop="-.2em";
+          madeItem.style.marginLeft="-.25em";
           console.log(madeItem);
         }
         
