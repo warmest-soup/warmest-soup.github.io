@@ -830,6 +830,8 @@ function createItem() {
         "</div>"
     );
   var newItem = document.getElementById(itemName);
+  //Set inv Size
+  assignInvSize(newItem);
 
   if (document.getElementById("isWeapon").checked) {
     var weaponStats = Array.from(
@@ -844,6 +846,11 @@ function createItem() {
     );
 
     newItem.setAttribute("data-weaponStats", weaponData);
+    
+    newItem.style.boxShadow="inset .2em -.3em .4em 0em rgb(20% 0% 0% / 60%)";
+    newItem.style.background="rgb(100% 50% 50%)";
+    newItem.style.textShadow="0em 0em .1em red";
+    newItem.style.border="solid red 0.1em";
   }
   if (document.getElementById("isArmor").checked) {
     //Coverage
@@ -879,6 +886,9 @@ function createItem() {
     );
 
     newItem.setAttribute("data-armorStats", armorData);
+    
+    newItem.style.backgroundColor="rgb(100% 85% 40%)"
+    newItem.style.boxShadow="inset .2em -.3em .4em 0em rgb(100% 25% 0%)"
   }
   if (document.getElementById("hasTech").checked) {
     var itemTech = Array.from(document.getElementsByClassName("iTech")).map(
@@ -893,6 +903,9 @@ function createItem() {
     );
 
     newItem.setAttribute("data-itemTech", techData);
+    
+    newItem.style.border="solid darkblue 0.1em"
+    newItem.style.color="rgb(0% 0% 70%)"
   }
   if (document.getElementById("isInventory").checked) {
     //get inv stats in array
@@ -937,8 +950,12 @@ function createItem() {
     }
 
     newItem.setAttribute("data-invstats", invStats.join("○ "));
+    
+    newItem.style.backgroundColor="rgb(50% 90% 100%)"
+    newItem.style.boxShadow="inset .2em -.3em .4em 0em rgb(70% 0% 50% / 60%)"
   }
-
+  
+  newItem.style.fontWeight="bolder";
   openWinlette(NewItemWin);
 }
 //Removal warnings
@@ -951,6 +968,19 @@ function remWarningReset(rem) {
   rem.style.color = "gray";
   rem.style.border = "solid gray 0.1em";
   rem.style.background = "transparent";
+}
+//assign inventory size
+function assignInvSize (item) {
+  var itemSize = parseInt(item.dataset.size);
+          if(itemSize){
+            item.style.backgroundColor="lightgray";
+            item.style.padding="0em .2em "+(itemSize*1.6-1.3+.1)+"em .2em";
+            item.style.minWidth="6.5em";
+            item.style.maxWidth="6.5em";
+            item.style.marginTop="-.1em";
+            item.style.marginLeft="-.3em";
+            item.style.boxShadow="inset .2em -.1em .4em 0em gray";
+          }
 }
 //World Temperature
 
@@ -1178,22 +1208,9 @@ document
 
           event.target.insertAdjacentHTML("beforeend", qItem);
         }
-        document.getElementById("QuickItem").value = "";
         var madeItem = event.target.children[event.target.children.length-1];
-        var madeItemSize = parseInt(madeItem.dataset.size);
-        if(madeItemSize){
-          madeItem.style.backgroundColor="gray";
-          madeItem.style.padding="0em .2em "+(madeItemSize*1.65-1.5+.4)+"em .2em";
-          madeItem.style.minWidth="6.5em";
-          madeItem.style.maxWidth="6.5em";
-          madeItem.style.minHeight="1.5"
-          madeItem.style.maxHeight="1.5"
-          madeItem.style.marginTop="-.2em";
-          madeItem.style.marginLeft="-.25em";
-          console.log(madeItem);
-        }
         
-        
+        assignInvSize(madeItem);
       }
 
       //Standard Item Dropsv
