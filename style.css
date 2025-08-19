@@ -1,7 +1,7 @@
 html {
   width: 98%;
   overflow-x:clip;
-  background:lightgray;
+  background: lightgray;
 }
 * {
   font-family: "caudex";
@@ -62,6 +62,7 @@ input[type="range"]::-webkit-slider-thumb {
   border: solid, 0.085em;
 }
 .Section {
+  box-shadow:-.25em .3em .3em 0em rgb(0 0 0 / 40%);
   background:white;
   border: solid, 0.15em;
   border-radius: 0.5em;
@@ -253,6 +254,7 @@ input {
   border-radius: 0.75em;
 }
 .aScrollColumns {
+  box-shadow:inset -.5em .5em 2em .5em rgb(0 0 0 / 25%);
   max-height: 1em;
   min-height: 35em;
   max-width: 12.05em;
@@ -466,6 +468,7 @@ input {
     white 0.5px,
     white 2%
   );
+  box-shadow:inset -.5em .5em 2em .5em rgb(0 0 0 / 25%);
   min-width: 26em;
   max-width: 26em;
   min-height: 25em;
@@ -475,9 +478,10 @@ input {
   overflow:clip;
   display:flex;
 }
+#inventoryDisplay * {font-size:2.1vh !important;}
 #QuickItem {
   margin: 0.5em;
-  padding: 0.1em 0em 0.6em 0em;
+  padding: 0.1em 0em 1em 0em;
   border-radius: 0.7em;
   min-height: 1.3em;
   max-height: 1.3em;
@@ -488,17 +492,6 @@ input {
 }
 #QuickItem::-webkit-scrollbar {
   display: none;
-}
-
-.INVcols {
-  min-width: 32.9%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5em;
-  padding: 0.5em 0em 0.5em 0em;
-  overflow: auto;
-  font-size:16px;
 }
 
 #NewItemWin {
@@ -667,7 +660,6 @@ input[type="checkbox"]:checked {
     black 0.5px,
     white 0.5px,
     white .5%);
-  position:relative;
   text-align:center;
   transform:translatex(-15%);
   display:flex;
@@ -706,6 +698,7 @@ input[type="checkbox"]:checked {
     white 0.5px,
     white 2%
   );
+  box-shadow:inset -.5em .5em 2em .5em rgb(0 0 0 / 25%);
   border:solid black .1em;
   border-radius:.5em;;
   height:88%;
@@ -716,8 +709,18 @@ input[type="checkbox"]:checked {
   align-items:center;
   gap:.5em;
 }
+.INVcols {
+  min-width: 32.9%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em 0em 0.5em 0em;
+  overflow: auto;
+}
 .invContainer{
   background:white;
+  box-shadow:-.3em .3em 1em 0em rgb(0 0 0 / 50%);
   border:solid black .1em;
   border-radius:.5em;
   width:90%;
@@ -728,13 +731,15 @@ input[type="checkbox"]:checked {
   gap:.2em;
 }
 .INVslot{
-  border:solid black .1em;
+  box-shadow:
+    inset 0em 0em 0em .05em gray,
+    inset -.1em .2em .1em rgb(0 0 0 / 40%);
   background-color:rgb(255 255 255 / 50%);
   border-radius:.5em;
   min-width:6.5em;
   max-width:6.5em;
-  min-height:1.3em;
-  max-height:1.3em;
+  min-height:1.4em;
+  max-height:1.4em;
   display:flex;
   overflow:show;
 }
@@ -746,14 +751,15 @@ input[type="checkbox"]:checked {
   min-height:1.1em;
   max-height:1.1em;
   text-align: center;
-  margin-top:-.1em;
   padding: 0em 0.5em 0.2em 0.5em;
+  text-wrap:nowrap;
 }
 .Equipped{
   background:white;
-  padding:.2em 1em .2em 1em;
-  border:solid black .1em;
+  padding:.2em 1em .2em 1em !important;
+  box-shadow:none;
   border-radius:.5em;
   text-Align:center;
-  width:70%;
+  min-width:70% !important;
+  max-width:70% !important;
 }
