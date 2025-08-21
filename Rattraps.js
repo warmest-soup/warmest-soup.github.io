@@ -848,7 +848,7 @@ function createItem() {
 
     newItem.style.boxShadow = "inset .2em -.3em .4em 0em maroon";
     newItem.style.background = "rgb(100% 30% 30%)";
-    newItem.style.textShadow = "0em 0em .1em red";
+    newItem.style.textShadow = "0em 0em .1em red,0em 0em .1em red,0em 0em .1em red";
     newItem.style.border = "solid red 0.1em";
   }
   if (document.getElementById("isArmor").checked) {
@@ -887,7 +887,7 @@ function createItem() {
     newItem.setAttribute("data-armorStats", armorData);
 
     newItem.style.backgroundColor = "rgb(80% 60% 10%)";
-    newItem.style.boxShadow = "inset .2em -.3em .4em maroon";
+    newItem.style.boxShadow = "inset .2em -.3em .4em 0em maroon";
   }
   if (document.getElementById("hasTech").checked) {
     var itemTech = Array.from(document.getElementsByClassName("iTech")).map(
@@ -903,7 +903,8 @@ function createItem() {
 
     newItem.setAttribute("data-itemTech", techData);
 
-    newItem.style.border = "solid cyan 0.1em";
+    newItem.style.border = "solid blue 0.1em";
+    newItem.style.boxShadow="inset .2em -.3em .4em 0em blue"
     newItem.style.color = "white";
   }
   if (document.getElementById("isInventory").checked) {
@@ -955,8 +956,8 @@ function createItem() {
 
     newItem.setAttribute("data-invstats", invStats.join("○ "));
 
-    newItem.style.backgroundColor = "purple";
-    newItem.style.boxShadow = "inset .2em -.3em .4em 0em maroon";
+    newItem.style.backgroundColor = "rgb(70% 0% 60%)";
+    newItem.style.boxShadow = "inset .2em -.3em .4em 0em rgb(20% 0% 30%)";
   }
 
   newItem.style.fontWeight = "bolder";
