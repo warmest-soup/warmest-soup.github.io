@@ -7,6 +7,8 @@ var Ranks = document.getElementsByClassName("Rank");
 var Exp = document.getElementsByClassName("EXPvalue");
 var TraitRanks = document.getElementsByClassName("realTrait");
 var worldTemp = 0;
+var allPockets = document.getElementsByClassName("invContainer");
+var pktWeights = document.getElementsByClassName("INVconWGT");
 
 document.getElementById("SaveIndicator").style.background = "cyan";
 
@@ -28,6 +30,8 @@ function initializeSheet() {
   weightGoalCalc();
   slotMemoryLimits();
   carryWeight();
+  carryLimit()
+  
   thermoBarFunc(worldTemp);
 
   var i = 0;
@@ -782,12 +786,6 @@ function newPage(action) {
     );
   }
 }
-// Carry Weight
-function carryWeight() {
-  var carryLimit = document.getElementById("CarryWeight");
-  carryLimit.innerText =
-    parseInt(document.getElementById("strFunc").innerText) * 25;
-}
 //setHandedness
 function setHand() {
   var dd = document.getElementById("HandDropdown");
@@ -829,7 +827,8 @@ function createItem() {
         itemName +
         "</div>"
     );
-  var newItem = document.getElementById(itemName);
+  var newItem = document.getElementById("INVcolumn3").lastChild;
+
   //Set inv Size
   assignInvSize(newItem);
 
@@ -846,11 +845,11 @@ function createItem() {
     );
 
     newItem.setAttribute("data-weaponStats", weaponData);
-    
-    newItem.style.boxShadow="inset .2em -.3em .4em 0em rgb(20% 0% 0% / 60%)";
-    newItem.style.background="rgb(100% 50% 50%)";
-    newItem.style.textShadow="0em 0em .1em red";
-    newItem.style.border="solid red 0.1em";
+
+    newItem.style.boxShadow = "inset .2em -.3em .4em 0em maroon";
+    newItem.style.background = "rgb(100% 30% 30%)";
+    newItem.style.textShadow = "0em 0em .1em red";
+    newItem.style.border = "solid red 0.1em";
   }
   if (document.getElementById("isArmor").checked) {
     //Coverage
@@ -886,9 +885,9 @@ function createItem() {
     );
 
     newItem.setAttribute("data-armorStats", armorData);
-    
-    newItem.style.backgroundColor="rgb(100% 85% 40%)"
-    newItem.style.boxShadow="inset .2em -.3em .4em 0em rgb(100% 25% 0%)"
+
+    newItem.style.backgroundColor = "rgb(80% 60% 10%)";
+    newItem.style.boxShadow = "inset .2em -.3em .4em maroon";
   }
   if (document.getElementById("hasTech").checked) {
     var itemTech = Array.from(document.getElementsByClassName("iTech")).map(
@@ -903,9 +902,9 @@ function createItem() {
     );
 
     newItem.setAttribute("data-itemTech", techData);
-    
-    newItem.style.border="solid darkblue 0.1em"
-    newItem.style.color="rgb(0% 0% 70%)"
+
+    newItem.style.border = "solid cyan 0.1em";
+    newItem.style.color = "white";
   }
   if (document.getElementById("isInventory").checked) {
     //get inv stats in array
@@ -929,7 +928,12 @@ function createItem() {
         pockets[p].push("<div class='INVopen INVslot'></div>");
         i++;
       }
-      pockets[p].push(invStats[2 + p * 3]);
+      pockets[p].push(
+        "<div class='invContainerBot'> <span class='INVconWGT'>0 /</span><span class='INVconLimit'>" +
+          invStats[2 + p * 3] +
+          "</span></div>"
+      );
+
       p++;
     }
     //Pack Data
@@ -950,12 +954,12 @@ function createItem() {
     }
 
     newItem.setAttribute("data-invstats", invStats.join("○ "));
-    
-    newItem.style.backgroundColor="rgb(50% 90% 100%)"
-    newItem.style.boxShadow="inset .2em -.3em .4em 0em rgb(70% 0% 50% / 60%)"
+
+    newItem.style.backgroundColor = "purple";
+    newItem.style.boxShadow = "inset .2em -.3em .4em 0em maroon";
   }
-  
-  newItem.style.fontWeight="bolder";
+
+  newItem.style.fontWeight = "bolder";
   openWinlette(NewItemWin);
 }
 //Removal warnings
@@ -970,18 +974,63 @@ function remWarningReset(rem) {
   rem.style.background = "transparent";
 }
 //assign inventory size
-function assignInvSize (item) {
+function assignInvSize(item) {
   var itemSize = parseInt(item.dataset.size);
-          if(itemSize){
-            item.style.backgroundColor="lightgray";
-            item.style.padding="0em .2em "+(itemSize*1.6-1.3+.1)+"em .2em";
-            item.style.minWidth="6.5em";
-            item.style.maxWidth="6.5em";
-            item.style.marginTop="-.1em";
-            item.style.marginLeft="-.3em";
-            item.style.boxShadow="inset .2em -.1em .4em 0em gray";
-          }
+  if (itemSize) {
+    item.style.backgroundColor = "lightgray";
+    item.style.padding = "0em .2em " + (itemSize * 1.6 - 1.3 + 0.1) + "em .2em";
+    item.style.minWidth = "6.5em";
+    item.style.maxWidth = "6.5em";
+    item.style.marginTop = "-.1em";
+    item.style.marginLeft = "-.3em";
+    item.style.boxShadow = "inset .2em -.1em .4em 0em gray";
+  }
 }
+//set INV pocket weight
+function PKTweight() {
+  var i = 0;
+  var j;
+  while (i < allPockets.length) {
+    j = 1;
+    var weights = [];
+    var pktLoad;
+    var pktReadout;
+
+    while (j < allPockets[i].children.length - 1) {
+      var slot = allPockets[i].children[j];
+
+      if (slot) {
+        var contWgt = slot.outerHTML.match(
+          /data-weight="\d+"|data-weight=&quot;\d+&quot;/g
+        );
+        if (contWgt) weights = weights.concat(contWgt);
+      }
+      j++;
+    }
+    
+    if (weights[0]) {
+      pktLoad = weights.map((x) => parseInt(x.match(/\d+/)));
+      if (pktLoad)
+        allPockets[i].getElementsByClassName("INVconWGT")[0].innerText =
+          pktLoad.reduce((acc, x) => acc + x) + " / ";
+    } else
+      allPockets[i].getElementsByClassName("INVconWGT")[0].innerText = "0 /";
+
+    i++;
+  }
+}
+//SetINV Carryweight
+function carryWeight(){
+  var limits=Array.from(pktWeights).map((x)=>parseInt(x.innerText));
+  document.getElementById("LoadWeight")
+    .innerText=limits.reduce((acc,x)=>acc+x,0);
+}
+function carryLimit(){
+  var charWgtLimit = document.getElementById("CarryWeight");
+  var strVal = parseInt(document.getElementById("strFunc").innerText);
+  charWgtLimit.innerText=strVal*25;
+}
+
 //World Temperature
 
 //End of declarations
@@ -1018,6 +1067,7 @@ document
       //Functional trait based functions
       fedStatus();
       weightExp();
+      carryLimit();
       slotMemoryLimits();
 
       var i = 0;
@@ -1053,6 +1103,13 @@ document
 
     //console.log(event.target);
     document.getElementById("SaveIndicator").style.background = "yellow";
+  });
+//inventory Event Listener
+document
+  .getElementById("CharacterSheet")
+  .addEventListener("INVChanged", function (event) {
+  PKTweight();
+  carryWeight();
   });
 
 /*Drag & Drop Functions*/ {
@@ -1112,6 +1169,7 @@ document
   }
 
   //Inventory
+  const invChange = new Event("INVChanged", { bubbles: true });
   var INVdropType = "";
   var itemPickUp = "";
   //Quick Items
@@ -1136,16 +1194,15 @@ document
 
     //Validate Target
     if (
-      INVdropType == "QI" ||
+      (INVdropType == "QI") & event.target.classList.contains("INVopen") ||
       event.target.classList.contains("INVopen") &
-      !(
-        itemPickUp.classList.contains("invContainer") &
-        !event.target.classList.contains("INVcols")
-      )
+        !(
+          itemPickUp.classList.contains("invContainer") &
+          !event.target.classList.contains("INVcols")
+        )
     ) {
       //Unequip function
       if (leftBehind.id === "TackColumn") {
-        
         //inventory handler
         if ("invstats" in itemPickUp.dataset) {
           //Get INV IDs
@@ -1165,12 +1222,16 @@ document
           var j = 0;
           while (j < invData.length) {
             var pkt = document.getElementById(invData[j]);
-            
-            var contents = Array.from(pkt.children).map((x) => x.outerHTML.replace(/○/g,"•"));
+
+            var contents = Array.from(pkt.children).map((x) =>
+              x.outerHTML.replace(/○/g, "•")
+            );
+            var wgtLimit = contents[contents.length - 1];
 
             contents[0] = pkt.children[0].innerHTML.trim();
             contents[contents.length - 1] =
-              pkt.children[contents.length - 1].innerHTML;
+              pkt.children[contents.length - 1].outerHTML;
+            
             contents = contents.join("○ ");
 
             itemPickUp.dataset[
@@ -1187,7 +1248,7 @@ document
       //Quick Item Drop Function
       if (INVdropType == "QI") {
         var input = document.getElementById("QuickItem").value;
-        var qItem="";
+        var qItem = "";
         if (input) {
           var qEntry = input.split(",");
           if (qEntry.length < 2 && qEntry[1]) {
@@ -1208,8 +1269,8 @@ document
 
           event.target.insertAdjacentHTML("beforeend", qItem);
         }
-        var madeItem = event.target.children[event.target.children.length-1];
-        
+        var madeItem = event.target.children[event.target.children.length - 1];
+
         assignInvSize(madeItem);
       }
 
@@ -1221,7 +1282,7 @@ document
         itemPickUp.remove();
       }
     }
-    
+    event.target.dispatchEvent(invChange);
   }
 
   function INVremove(event) {
@@ -1233,8 +1294,7 @@ document
   function equipDrop(event) {
     event.preventDefault();
 
-    if (INVdropType !== "QI" & !itemPickUp.classList.contains("Equipped")) {
-      
+    if ((INVdropType !== "QI") & !itemPickUp.classList.contains("Equipped")) {
       itemPickUp.classList.add("Equipped");
       document.getElementById("TackColumn").appendChild(itemPickUp);
 
@@ -1248,7 +1308,7 @@ document
           var pkt = itemPickUp.dataset[
             invData[j].toLowerCase().replaceAll(" ", "")
           ].split("○ ");
-          
+
           //Create Pocket
           document
             .getElementById("INVcolumn1")
@@ -1258,25 +1318,27 @@ document
                 pkt[0] +
                 "' class='INV invContainer' draggable='true' ondragstart='INVDragStart(event)'> <div class='invContainerTop'> " +
                 pkt[0].replaceAll("-", " ") +
-                " </div> <div class='invContainerBot'> " +
-                pkt[pkt.length - 1] +
                 " </div>"
             );
-
-          var i = 0;
-          while (i < pkt.length - 2) {
+          //Drawing slots
+          var i = 1;
+          while (i < pkt.length) {
+            
             document
               .getElementById(pkt[0])
-              .children[document.getElementById(pkt[0])
-              .children.length-2].insertAdjacentHTML("afterend", pkt[i + 1].replace(/•/g,"○"));
+              .children[
+                document.getElementById(pkt[0]).children.length - 1
+              ].insertAdjacentHTML("afterend", pkt[i].replace(/•/g, "○"));
             i++;
           }
-
           j++;
         }
+
+        PKTweight();
       } //End of INV action
       itemPickUp = "";
     }
+    event.target.dispatchEvent(invChange);
   }
 } //End of Declarations
 
@@ -1284,7 +1346,6 @@ document
 initializeSheet();
 
 /*notes
--Quick Items FAIL to be made when ANY CONTAINER exists in inventory It needs to check ONLY THE TARGET
-
--Currently CANNOT equip non-inventory items.
+-Turn Unequip in INV drop into a function, that can run before removing Items from Tack.
+that way you won't have stranded pokets.
 */
