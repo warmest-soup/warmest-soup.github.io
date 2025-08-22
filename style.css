@@ -1,11 +1,11 @@
 html {
   width: 98%;
-  overflow-x:clip;
+  overflow-x: clip;
   background: lightgray;
 }
 * {
   font-family: "caudex";
-  font-size: 2.1vh; 
+  font-size: 2.1vh;
 }
 button {
   font-weight: 700;
@@ -26,7 +26,7 @@ button {
 }
 ::-webkit-scrollbar-track {
   background: lightGray;
-  border:solid darkgray .1em;
+  border: solid darkgray 0.1em;
   /*display: none;*/
   /*Display might be important for when background images appear*/
 }
@@ -38,7 +38,7 @@ input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 70%;
-  height: .3em;
+  height: 0.3em;
   background: lightgray;
   border-radius: 0.5em;
   outline: none;
@@ -62,8 +62,8 @@ input[type="range"]::-webkit-slider-thumb {
   border: solid, 0.085em;
 }
 .Section {
-  box-shadow:-.25em .3em .3em 0em rgb(0 0 0 / 40%);
-  background:white;
+  box-shadow: -0.25em 0.3em 0.3em 0em rgb(0 0 0 / 40%);
+  background: white;
   border: solid, 0.15em;
   border-radius: 0.5em;
   padding: 0.5em;
@@ -115,13 +115,13 @@ input {
   text-align: center;
   min-width: 17em;
   max-width: 17em;
-  overflow:auto;
+  overflow: auto;
 }
-#TraitTable{
-  min-width:17em;
-  max-width:17em;
-  min-height:31em;
-  max-height:31em;
+#TraitTable {
+  min-width: 17em;
+  max-width: 17em;
+  min-height: 31em;
+  max-height: 31em;
 }
 .WeightEXP input {
   min-width: 1.7em;
@@ -134,8 +134,7 @@ input {
   gap: 0.5em;
   overflow: auto;
   padding: 0.5em;
-  transform:translatex(-1em);
-  
+  transform: translatex(-1em);
 }
 #Photo {
   text-align: center;
@@ -183,12 +182,14 @@ input {
   border-radius: 1em;
   overflow: hidden;
 }
-#Clock{
+#Clock {
   font-weight: bold;
   font-size: 2.5em;
   padding-top: 0.2em;
 }
-#Clock > *{font-size:1.2em;}
+#Clock > * {
+  font-size: 1.2em;
+}
 
 .satBarFill {
   background-color: black;
@@ -254,7 +255,7 @@ input {
   border-radius: 0.75em;
 }
 .aScrollColumns {
-  box-shadow:inset -.5em .5em 2em .5em rgb(0 0 0 / 25%);
+  box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%);
   max-height: 1em;
   min-height: 35em;
   max-width: 12.05em;
@@ -394,11 +395,11 @@ input {
 #TempBot {
   padding: 1em 0em 0em 0em;
   text-align: center;
-  line-height: .5em;
+  line-height: 0.5em;
   font-size: 2em;
   font-weight: 700;
 }
-#TempBot >*{
+#TempBot > * {
   font-size: 1em;
 }
 #Abilities {
@@ -437,7 +438,7 @@ input {
 #PageButtons {
   text-align: center;
 }
-#Inventory {
+.Inventory {
   padding: 1em;
   user-select: none;
   min-width: 26em;
@@ -460,7 +461,7 @@ input {
 }
 #InvStats {
 }
-#inventoryDisplay {
+.inventoryDisplay {
   background: repeating-linear-gradient(
     50deg,
     black,
@@ -468,17 +469,19 @@ input {
     white 0.5px,
     white 2%
   );
-  box-shadow:inset -.5em .5em 2em .5em rgb(0 0 0 / 25%);
+  box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%);
   min-width: 26em;
   max-width: 26em;
   min-height: 25em;
   max-height: 25em;
   border: solid 0.1em black;
   border-radius: 1em;
-  overflow:clip;
-  display:flex;
+  overflow: clip;
+  display: flex;
 }
-#inventoryDisplay * {font-size:2.1vh !important;}
+#inventoryDisplay * {
+  font-size: 2.1vh !important;
+}
 #QuickItem {
   margin: 0.5em;
   padding: 0.1em 0em 1em 0em;
@@ -528,7 +531,7 @@ input {
 #NewArmorCoverage > * {
   text-align: center;
 }
-#BodyDia { 
+#BodyDia {
   display: flex;
   align-items: center;
   gap: 0.3em;
@@ -592,13 +595,13 @@ input[type="checkbox"]:checked {
   flex-direction: column;
   justify-content: end;
   gap: 0.5em;
-  align-items:center;
+  align-items: center;
 }
 #armorSec {
   display: flex;
   gap: 1em;
   align-items: center;
-  display:none;
+  display: none;
 }
 .ItemTraits {
   border: solid black;
@@ -611,103 +614,105 @@ input[type="checkbox"]:checked {
   flex-direction: column;
   align-items: start;
   gap: 0.5em;
-  display:none;
+  display: none;
 }
-.NewArmorStat{
-  width:2em;
-  border-radius:.5em;
-  border:solid gray .1em;
+.NewArmorStat {
+  width: 2em;
+  border-radius: 0.5em;
+  border: solid gray 0.1em;
 }
-#lowNASG{
-  transform:translatey(-1em);
+#lowNASG {
+  transform: translatey(-1em);
 }
-.longNumIn{
-  min-width:3em;
-  max-width:3em;
-  border-radius:.5em;
-  border:solid gray .1em;
+.longNumIn {
+  min-width: 3em;
+  max-width: 3em;
+  border-radius: 0.5em;
+  border: solid gray 0.1em;
 }
-.iTech{
-  width:6em;
-  border:solid gray .1em;
-  border-radius:.5em;
+.iTech {
+  min-width: 8em;
+  max-width: 8em;
+  border: solid gray 0.1em;
+  border-radius: 0.5em;
 }
-#techSec{
-  display:none;
-  flex-direction:column;
+#techSec {
+  display: none;
+  flex-direction: column;
 }
-#invSec{
-  display:none;
-  flex-direction:column;
-  text-align:center;
-  gap:1em;
-  line-height:2em;
+#invSec {
+  display: none;
+  flex-direction: column;
+  text-align: center;
+  gap: 1em;
+  line-height: 2em;
 }
-#nPocketName{
-  min-width:5em;
-  max-width:5em;
-  border:solid black .1em;
-  border-radius:.5em;
+#nPocketName {
+  min-width: 5em;
+  max-width: 5em;
+  border: solid black 0.1em;
+  border-radius: 0.5em;
 }
-#SheetManager{
-  border:solid black;
-  border-width:.1em 0em .2em 0em;
-  min-width:150%;
-  overflow:clip;
+#SheetManager {
+  border: solid black;
+  border-width: 0.1em 0em 0.2em 0em;
+  min-width: 150%;
+  overflow: clip;
   background: repeating-linear-gradient(
     50deg,
     black,
     black 0.5px,
     white 0.5px,
-    white .5%);
-  text-align:center;
-  transform:translatex(-15%);
-  display:flex;
-  align-items:end;
-  justify-content:center;
-  padding:.2em;
-  gap:.5em;
+    white 0.5%
+  );
+  text-align: center;
+  transform: translatex(-15%);
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  padding: 0.2em;
+  gap: 0.5em;
 }
-#SaveIndicator{
-  background:#gray;
-  height:1em;
-  width:1em;
-  border:solid black .2em;
-  border-radius:1em;
-  box-shadow:inset 0 0 .2em #50a;
+#SaveIndicator {
+  background: #gray;
+  height: 1em;
+  width: 1em;
+  border: solid black 0.2em;
+  border-radius: 1em;
+  box-shadow: inset 0 0 0.2em #50a;
 }
-.dataSection{
-  display:flex;
-  gap:.5em;
+.dataSection {
+  display: flex;
+  gap: 0.5em;
 }
-#Tack{
-  min-width:13em;
-  max-width:13em;
-  min-height:29em;
-  max-height:29em;
-  display:flex;
-  flex-Direction:column;
-  align-items:center;
-  justify-Content:space-around;
+#Tack {
+  min-width: 13em;
+  max-width: 13em;
+  min-height: 29em;
+  max-height: 29em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
-#TackColumn{
-    background: repeating-linear-gradient(
+#TackColumn {
+  background: repeating-linear-gradient(
     50deg,
     black,
     black 0.5px,
     white 0.5px,
     white 2%
   );
-  box-shadow:inset -.5em .5em 2em .5em rgb(0 0 0 / 25%);
-  border:solid black .1em;
-  border-radius:.5em;;
-  height:88%;
-  width:95%;
-  display:flex;
-  padding-top:.5em;
-  flex-direction:column;
-  align-items:center;
-  gap:.5em;
+  box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%);
+  border: solid black 0.1em;
+  border-radius: 0.5em;
+  height: 88%;
+  width: 95%;
+  display: flex;
+  padding-top: 0.5em;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
 }
 .INVcols {
   min-width: 32.9%;
@@ -718,48 +723,87 @@ input[type="checkbox"]:checked {
   padding: 0.5em 0em 0.5em 0em;
   overflow: auto;
 }
-.invContainer{
-  background:white;
-  box-shadow:-.3em .3em 1em 0em rgb(0 0 0 / 50%);
-  border:solid black .1em;
-  border-radius:.5em;
-  width:90%;
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:.2em;
+.invContainer {
+  background: white;
+  box-shadow: -0.3em 0.3em 1em 0em rgb(0 0 0 / 50%);
+  border: solid black 0.1em;
+  border-radius: 0.5em;
+  width: 90%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2em;
 }
-.INVslot{
-  box-shadow:
-    inset 0em 0em 0em .05em gray,
-    inset -.1em .2em .1em rgb(0 0 0 / 40%);
-  background-color:rgb(255 255 255 / 50%);
-  border-radius:.5em;
-  min-width:6.5em;
-  max-width:6.5em;
-  min-height:1.4em;
-  max-height:1.4em;
-  display:flex;
-  overflow:show;
+.INVslot {
+  box-shadow: inset 0em 0em 0em 0.05em gray,
+    inset -0.1em 0.2em 0.1em rgb(0 0 0 / 40%);
+  background-color: rgb(255 255 255 / 50%);
+  border-radius: 0.5em;
+  min-width: 6.5em;
+  max-width: 6.5em;
+  min-height: 1.4em;
+  max-height: 1.4em;
+  display: flex;
+  overflow: show;
 }
 .item {
   background: rgb(255 255 255 / 50%);
   border: solid black 0.1em;
-  border-radius: .5em;
+  border-radius: 0.5em;
   width: fit-content;
-  min-height:1.1em;
-  max-height:1.1em;
+  min-height: 1.1em;
+  max-height: 1.1em;
   text-align: center;
   padding: 0em 0.5em 0.2em 0.5em;
-  text-wrap:nowrap;
+  text-wrap: nowrap;
 }
-.Equipped{
-  background:white;
-  padding:.2em 1em .2em 1em !important;
-  box-shadow:none !important;
-  border-radius:.5em;
-  text-Align:center;
-  min-width:70% !important;
-  max-width:70% !important;
+.Equipped {
+  background: white;
+  padding: 0.2em 1em 0.2em 1em !important;
+  box-shadow: none !important;
+  border-radius: 0.5em;
+  text-align: center;
+  min-width: 70% !important;
+  max-width: 70% !important;
+}
+.storeLocal {
+  resize: none;
+  text-align: left;
+  border: none;
+  min-width: 10em;
+  max-width: 10em;
+  background: transparent;
+  color: black;
+}
+.StoreDis {
+  background: repeating-linear-gradient(
+    50deg,
+    black,
+    black 0.5px,
+    rgb(50% 40% 40%) 0.5px,
+    rgb(50% 40% 40%) 2%
+  );
+}
+.storeLocal::placeholder {
+  color: rgb(50 50 50);
+}
+#Storage1 {
+  background: linear-gradient(to bottom, rgb(155 80 80) 20%, rgb(72 40 60) 50%);
+}
+#Storage2 {
+  background: linear-gradient(to bottom, rgb(80 155 80) 20%, rgb(0 72 60) 50%);
+}
+#Storage3 {
+  background: linear-gradient(to bottom, rgb(80 80 155) 20%, rgb(60 40 72) 50%);
+}
+.tech {
+  background: white;
+  padding: 0.1em 0em 0.1em 0em;
+  min-width: 8em;
+  max-width: 8em;
+  border: solid 0.1em black;
+  border-radius: 1em;
+  text-align: center;
+  font-weight: bold;
 }
