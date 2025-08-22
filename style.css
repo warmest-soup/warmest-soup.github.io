@@ -807,3 +807,6 @@ input[type="checkbox"]:checked {
   text-align: center;
   font-weight: bold;
 }
+#INVhead{
+  display:inline;
+}
