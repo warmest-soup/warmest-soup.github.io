@@ -30,8 +30,8 @@ function initializeSheet() {
   weightGoalCalc();
   slotMemoryLimits();
   carryWeight();
-  carryLimit()
-  
+  carryLimit();
+
   thermoBarFunc(worldTemp);
 
   var i = 0;
@@ -831,6 +831,10 @@ function createItem() {
 
   //Set inv Size
   assignInvSize(newItem);
+  if (parseInt(newItem.dataset.weight)) {
+    newItem.style.backgroundColor = "lightgray";
+    newItem.style.boxShadow = "inset .2em -.1em .4em 0em gray";
+  }
 
   if (document.getElementById("isWeapon").checked) {
     var weaponStats = Array.from(
@@ -848,7 +852,8 @@ function createItem() {
 
     newItem.style.boxShadow = "inset .2em -.3em .4em 0em maroon";
     newItem.style.background = "rgb(100% 30% 30%)";
-    newItem.style.textShadow = "0em 0em .1em red,0em 0em .1em red,0em 0em .1em red";
+    newItem.style.textShadow =
+      "0em 0em .1em red,0em 0em .1em red,0em 0em .1em red";
     newItem.style.border = "solid red 0.1em";
   }
   if (document.getElementById("isArmor").checked) {
@@ -904,7 +909,7 @@ function createItem() {
     newItem.setAttribute("data-itemTech", techData);
 
     newItem.style.border = "solid blue 0.1em";
-    newItem.style.boxShadow="inset .2em -.3em .4em 0em blue"
+    newItem.style.boxShadow = "inset .2em -.3em .4em 0em blue";
     newItem.style.color = "white";
   }
   if (document.getElementById("isInventory").checked) {
@@ -976,15 +981,21 @@ function remWarningReset(rem) {
 }
 //assign inventory size
 function assignInvSize(item) {
-  var itemSize = parseInt(item.dataset.size);
-  if (itemSize) {
-    item.style.backgroundColor = "lightgray";
+  var itemSize = item.dataset.size
+    .split(",")
+    .reduce((acc, x) => parseInt(acc) + parseInt(x));
+  if (parseInt(itemSize)) {
     item.style.padding = "0em .2em " + (itemSize * 1.6 - 1.3 + 0.1) + "em .2em";
     item.style.minWidth = "6.5em";
     item.style.maxWidth = "6.5em";
     item.style.marginTop = "-.1em";
     item.style.marginLeft = "-.3em";
-    item.style.boxShadow = "inset .2em -.1em .4em 0em gray";
+  } else {
+    item.style.padding = "";
+    item.style.minWidth = "";
+    item.style.maxWidth = "";
+    item.style.marginTop = "";
+    item.style.marginLeft = "";
   }
 }
 //set INV pocket weight
@@ -1008,7 +1019,7 @@ function PKTweight() {
       }
       j++;
     }
-    
+
     if (weights[0]) {
       pktLoad = weights.map((x) => parseInt(x.match(/\d+/)));
       if (pktLoad)
@@ -1020,16 +1031,19 @@ function PKTweight() {
     i++;
   }
 }
+
 //SetINV Carryweight
-function carryWeight(){
-  var limits=Array.from(pktWeights).map((x)=>parseInt(x.innerText));
-  document.getElementById("LoadWeight")
-    .innerText=limits.reduce((acc,x)=>acc+x,0);
+function carryWeight() {
+  var limits = Array.from(pktWeights).map((x) => parseInt(x.innerText));
+  document.getElementById("LoadWeight").innerText = limits.reduce(
+    (acc, x) => acc + x,
+    0
+  );
 }
-function carryLimit(){
+function carryLimit() {
   var charWgtLimit = document.getElementById("CarryWeight");
   var strVal = parseInt(document.getElementById("strFunc").innerText);
-  charWgtLimit.innerText=strVal*25;
+  charWgtLimit.innerText = strVal * 25;
 }
 
 //World Temperature
@@ -1109,8 +1123,8 @@ document
 document
   .getElementById("CharacterSheet")
   .addEventListener("INVChanged", function (event) {
-  PKTweight();
-  carryWeight();
+    PKTweight();
+    carryWeight();
   });
 
 /*Drag & Drop Functions*/ {
@@ -1232,8 +1246,24 @@ document
             contents[0] = pkt.children[0].innerHTML.trim();
             contents[contents.length - 1] =
               pkt.children[contents.length - 1].outerHTML;
-            
+
             contents = contents.join("○ ");
+            console.log(contents);
+
+            var accSizes = contents.match(
+              /data-size="\d+"|data-size=&quot;\d+&quot;/g
+            );
+
+            var sizesSum;
+            if (accSizes) {
+              sizesSum = accSizes.map((x) => parseInt(x.match(/\d+/)));
+              sizesSum = sizesSum.reduce((acc, x) => acc + x);
+
+              itemPickUp.dataset.size += ", " + sizesSum;
+            }
+            assignInvSize(itemPickUp);
+
+            console.log(itemPickUp);
 
             itemPickUp.dataset[
               pkt.children[0].innerHTML.toLowerCase().replaceAll(" ", "")
@@ -1243,6 +1273,14 @@ document
             j++;
           }
         }
+
+        if (itemPickUp.dataset["itemtech"]) {
+          Array.from(
+            document.getElementsByClassName(itemPickUp.id + "Tech")
+          ).forEach((x) => x.remove());
+        }
+
+        //end of unequip
         leftBehind = "";
       }
 
@@ -1273,6 +1311,10 @@ document
         var madeItem = event.target.children[event.target.children.length - 1];
 
         assignInvSize(madeItem);
+        if (parseInt(qEntry[1])) {
+          madeItem.style.backgroundColor = "lightgray";
+          madeItem.style.boxShadow = "inset .2em -.1em .4em 0em gray";
+        }
       }
 
       //Standard Item Dropsv
@@ -1324,7 +1366,6 @@ document
           //Drawing slots
           var i = 1;
           while (i < pkt.length) {
-            
             document
               .getElementById(pkt[0])
               .children[
@@ -1336,10 +1377,39 @@ document
         }
 
         PKTweight();
+        //reset size
+        var trueSize = itemPickUp.dataset.size.split(", ")[0];
+        console.log(trueSize);
+        itemPickUp.dataset.size = trueSize;
       } //End of INV action
+
+      //Act on item's Tech
+      if (itemPickUp.dataset["itemtech"]) {
+        var tCol = document.getElementById("TackColumn");
+        var techs = itemPickUp.dataset.itemtech.split(", ");
+
+        console.log(tCol);
+        console.log(techs);
+
+        var i = 0; //
+        while (i < techs.length) {
+          console.log("Got in!");
+          tCol.insertAdjacentHTML(
+            "beforeEnd",
+            "<div class=' tech " +
+              itemPickUp.id +
+              "Tech" +
+              "'>" +
+              techs[i] +
+              "</div>"
+          );
+          i++;
+        }
+      }
+
+      //end
       itemPickUp = "";
     }
-    event.target.dispatchEvent(invChange);
   }
 } //End of Declarations
 
@@ -1349,4 +1419,8 @@ initializeSheet();
 /*notes
 -Turn Unequip in INV drop into a function, that can run before removing Items from Tack.
 that way you won't have stranded pokets.
+
+-Also you need to disable the removal of INVcontainers, likely through more validation.
+
+-You need to clear the bools after creating a new item, so the window resets visually.
 */
