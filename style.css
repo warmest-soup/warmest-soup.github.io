@@ -693,7 +693,7 @@ input[type="checkbox"]:checked {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: start;
 }
 #TackColumn {
   background: repeating-linear-gradient(
@@ -706,14 +706,75 @@ input[type="checkbox"]:checked {
   box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%);
   border: solid black 0.1em;
   border-radius: 0.5em;
-  height: 88%;
+  min-height: 26em;
+  max-height: 26em;
+  padding-bottom:2em;
+  padding-top:.5em;
   width: 95%;
   display: flex;
-  padding-top: 0.5em;
+  box-sizing:border-box;
   flex-direction: column;
   align-items: center;
   gap: 0.5em;
   overflow:auto;
+  font-size:inherit;
+}
+.TackHeader{
+  padding:.2em;
+}
+#Resistances {
+  min-width: 13em;
+  max-width: 13em;
+  min-height: 29em;
+  max-height: 29em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+#ResColumn {
+  background: repeating-linear-gradient(
+    50deg,
+    black,
+    black 0.5px,
+    white 0.5px,
+    white 2%
+  );
+  box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%);
+  border: solid black 0.1em;
+  border-radius: 0.5em;
+  min-height: 24em;
+  max-height: 24em;
+  width: 95%;
+  display: flex;
+  box-sizing:border-box;
+  flex-direction: column;
+  align-items: center;
+  overflow:auto;
+  font-size:inherit;
+}
+#ResColumn > table{
+  table-layout:fixed;
+  border-collapse:seperate;
+  border-spacing:.5em;
+  margin-top:0em;
+}
+#ResColumn>Table>Tbody>tr{
+  height:1.5em;
+}
+#ResColumn>Table>Tbody>tr>td{
+  box-shadow:inset 0em 0em 0em 0.06em;
+  background:white;
+  border-radius:1em;
+  width:4em;
+}
+#ResTotals >tbody>tr>td {
+  font-size:.8em;
+  color:gray;
+  font-weight:bolder;
+}
+.ResTot{
+  font-size:1.4em;
 }
 .INVcols {
   min-width: 32.9%;
@@ -762,8 +823,9 @@ input[type="checkbox"]:checked {
 .Equipped {
   background: white;
   padding: 0.2em 1em 0.2em 1em !important;
-  box-shadow: none !important;
+  box-shadow: inset 0em 0em 0em 0.05em !important;
   border-radius: 0.5em;
+  border:none !important;
   text-align: center;
   min-width: 70% !important;
   max-width: 70% !important;
