@@ -12,6 +12,11 @@ var pktWeights = document.getElementsByClassName("INVconWGT");
 
 document.getElementById("SaveIndicator").style.background = "cyan";
 
+var s1 = document.getElementById("TackColumn");
+var s2 = document.getElementById("ResColumn");
+s1.addEventListener("scroll", twoScroll, false);
+s2.addEventListener("scroll", oneScroll, false);
+
 function initializeSheet() {
   SatBars = document.getElementsByClassName("satBar");
   barDups = SatBars.length - 4;
@@ -42,6 +47,11 @@ function initializeSheet() {
     );
     i++;
   }
+
+  s1 = document.getElementById("TackColumn");
+  s2 = document.getElementById("ResColumn");
+  s1.addEventListener("scroll", twoScroll, false);
+  s2.addEventListener("scroll", oneScroll, false);
   document.getElementById("SaveIndicator").style.background = "cyan";
 }
 
@@ -859,23 +869,34 @@ function createItem() {
   if (document.getElementById("isArmor").checked) {
     //Coverage
     var armorCoverage = Array.from(
-      document.getElementsByClassName("naSpotCover")
-    ).map((x) => {
-      if (x.checked == true) {
-        return "tt";
-      } else {
-        return "f";
-      }
-    });
-    var armorCoverData = "";
-    armorCoverage.map((x) => (armorCoverData = armorCoverData + x + ", "));
-    armorCoverData = armorCoverData.slice(0, -2);
+      document.getElementsByClassName("naSpotCover"));
+    console.log(armorCoverage.every((x) => x.checked == false))
+    
+    
+    if (!armorCoverage.every((x) => x.checked == false)) {
+      armorCoverage=armorCoverage.map((x) => {
+        if (x.checked == true) {
+          console.log("set T");
+          return "tt";
+          console.log("got here!")
+        } else {
+          console.log("set F");
+          return "f";
+        }
+      });
+      console.log(armorCoverage);
+      
+      var armorCoverData = "";
+      armorCoverage.map((x) => (armorCoverData = armorCoverData + x + ", "));
+      armorCoverData = armorCoverData.slice(0, -2);
 
-    Array.from(document.getElementsByClassName("naSpotCover")).map(
-      (x) => (x.checked = false)
-    );
+      //reset diagram inputs
+      Array.from(document.getElementsByClassName("naSpotCover")).map(
+        (x) => (x.checked = false)
+      );
 
-    newItem.setAttribute("data-Coverage", armorCoverData);
+      newItem.setAttribute("data-Coverage", armorCoverData);
+    }
 
     //Stats
     var armorStats = Array.from(
@@ -1031,7 +1052,72 @@ function PKTweight() {
     i++;
   }
 }
+//Populate Resistances
+function addRes(item) {
+  var resistances = document.getElementById("ResColumn").children[0]
+    .children[0];
 
+  if (item.dataset["armorstats"]) {
+    //add resistances 3,4,5, & 6
+
+    var armor = item.dataset.armorstats.split(", ");
+    //replace blanks with zeroes
+    armor = armor.map((x) => {
+      if (!x) {
+        x = 0;
+      }
+      return x;
+    });
+
+    resistances.insertAdjacentHTML(
+      "beforeEnd",
+      "<tr><td class='ins'>" +
+        armor[3] +
+        "</td><td class='abs'>" +
+        armor[4] +
+        "</td><td class='cnd'>" +
+        armor[5] +
+        "</td><td class='bri'>" +
+        armor[6] +
+        "</td></tr>"
+    );
+  } else {
+    //add Spacer
+    resistances.insertAdjacentHTML("beforeEnd", "<tr></tr>");
+  }
+  if (item.dataset["itemtech"]) {
+    //add black rows to space for tech.
+    var techs = item.dataset.itemtech.split(", ");
+
+    var i = 0;
+    while (i < techs.length) {
+      resistances.insertAdjacentHTML("beforeEnd", "<tr></tr>");
+      i++;
+    }
+  }
+  resCalc();
+}
+function removeRes(item) {
+  var resistances = document.getElementById("ResColumn").children[0].children[0]
+    .children;
+  var tack = document.getElementById("TackColumn");
+  var targetSlot = Array.from(tack.children).indexOf(item);
+
+  //remove tech spacersh
+  if (item.dataset["itemtech"]) {
+    var techs = item.dataset.itemtech.split(", ");
+
+    var i = 0;
+    while (i < techs.length + 1) {
+      resistances[targetSlot].remove();
+      i++;
+    }
+  } else {
+    //remove self spacer
+    resistances[targetSlot].remove();
+  }
+  resCalc();
+}
 //SetINV Carryweight
 function carryWeight() {
   var limits = Array.from(pktWeights).map((x) => parseInt(x.innerText));
@@ -1045,7 +1131,106 @@ function carryLimit() {
   var strVal = parseInt(document.getElementById("strFunc").innerText);
   charWgtLimit.innerText = strVal * 25;
 }
+//unify Equipment scrollbars
+function oneScroll(e) {
+  s1.scrollTop = s2.scrollTop;
+}
+function twoScroll(e) {
+  s2.scrollTop = s1.scrollTop;
+}
+//Resistance caluclation
+function resCalc() {
+  var ins = Array.from(document.getElementsByClassName("ins")).reduce(
+    (acc, x) => acc + parseInt(x.innerText),
+    0
+  );
+  var abs = Array.from(document.getElementsByClassName("abs")).reduce(
+    (acc, x) => acc + parseInt(x.innerText),
+    0
+  );
+  var cnd = Array.from(document.getElementsByClassName("cnd")).reduce(
+    (acc, x) => acc + parseInt(x.innerText),
+    0
+  );
+  var bri = Array.from(document.getElementsByClassName("bri")).reduce(
+    (acc, x) => acc + parseInt(x.innerText),
+    0
+  );
 
+  document.getElementById("InsRes").innerText = ins;
+  document.getElementById("AbsRes").innerText = abs;
+  document.getElementById("CndRes").innerText = cnd;
+  document.getElementById("BriRes").innerText = bri;
+}
+//Unequipping
+function unequip() {
+  //Unequip function
+  if (leftBehind.id === "TackColumn") {
+    //inventory handler
+    removeRes(itemPickUp);
+
+    if ("invstats" in itemPickUp.dataset) {
+      //Get INV IDs
+      var invData = itemPickUp.dataset.invstats.split("○ ");
+
+      var k = 0;
+      var inceptionCheck = false;
+      while (k < invData.length) {
+        if (invData[k] == event.target.parentNode.id) {
+          inceptionCheck = true;
+          leftBehind = "";
+        }
+        k++;
+      }
+      if (inceptionCheck) return;
+
+      var j = 0;
+      while (j < invData.length) {
+        var pkt = document.getElementById(invData[j]);
+
+        var contents = Array.from(pkt.children).map((x) =>
+          x.outerHTML.replace(/○/g, "•")
+        );
+        var wgtLimit = contents[contents.length - 1];
+
+        contents[0] = pkt.children[0].innerHTML.trim();
+        contents[contents.length - 1] =
+          pkt.children[contents.length - 1].outerHTML;
+
+        contents = contents.join("○ ");
+
+        var accSizes = contents.match(
+          /data-size="\d+"|data-size=&quot;\d+&quot;/g
+        );
+
+        var sizesSum;
+        if (accSizes) {
+          sizesSum = accSizes.map((x) => parseInt(x.match(/\d+/)));
+          sizesSum = sizesSum.reduce((acc, x) => acc + x);
+
+          itemPickUp.dataset.size += ", " + sizesSum;
+        }
+        assignInvSize(itemPickUp);
+
+        itemPickUp.dataset[
+          pkt.children[0].innerHTML.toLowerCase().replaceAll(" ", "")
+        ] = contents;
+
+        pkt.remove();
+        j++;
+      }
+    }
+
+    if (itemPickUp.dataset["itemtech"]) {
+      Array.from(
+        document.getElementsByClassName(itemPickUp.id + "Tech")
+      ).forEach((x) => x.remove());
+    }
+
+    //end of unequip
+    leftBehind = "";
+  }
+}
 //World Temperature
 
 //End of declarations
@@ -1216,73 +1401,8 @@ document
           !event.target.classList.contains("INVcols")
         )
     ) {
-      //Unequip function
-      if (leftBehind.id === "TackColumn") {
-        //inventory handler
-        if ("invstats" in itemPickUp.dataset) {
-          //Get INV IDs
-          var invData = itemPickUp.dataset.invstats.split("○ ");
-
-          var k = 0;
-          var inceptionCheck = false;
-          while (k < invData.length) {
-            if (invData[k] == event.target.parentNode.id) {
-              inceptionCheck = true;
-              leftBehind = "";
-            }
-            k++;
-          }
-          if (inceptionCheck) return;
-
-          var j = 0;
-          while (j < invData.length) {
-            var pkt = document.getElementById(invData[j]);
-
-            var contents = Array.from(pkt.children).map((x) =>
-              x.outerHTML.replace(/○/g, "•")
-            );
-            var wgtLimit = contents[contents.length - 1];
-
-            contents[0] = pkt.children[0].innerHTML.trim();
-            contents[contents.length - 1] =
-              pkt.children[contents.length - 1].outerHTML;
-
-            contents = contents.join("○ ");
-            console.log(contents);
-
-            var accSizes = contents.match(
-              /data-size="\d+"|data-size=&quot;\d+&quot;/g
-            );
-
-            var sizesSum;
-            if (accSizes) {
-              sizesSum = accSizes.map((x) => parseInt(x.match(/\d+/)));
-              sizesSum = sizesSum.reduce((acc, x) => acc + x);
-
-              itemPickUp.dataset.size += ", " + sizesSum;
-            }
-            assignInvSize(itemPickUp);
-
-            console.log(itemPickUp);
-
-            itemPickUp.dataset[
-              pkt.children[0].innerHTML.toLowerCase().replaceAll(" ", "")
-            ] = contents;
-
-            pkt.remove();
-            j++;
-          }
-        }
-
-        if (itemPickUp.dataset["itemtech"]) {
-          Array.from(
-            document.getElementsByClassName(itemPickUp.id + "Tech")
-          ).forEach((x) => x.remove());
-        }
-
-        //end of unequip
-        leftBehind = "";
-      }
+      //unequip
+      unequip();
 
       //Quick Item Drop Function
       if (INVdropType == "QI") {
@@ -1330,6 +1450,7 @@ document
 
   function INVremove(event) {
     var target = document.getElementById(event.dataTransfer.getData("text"));
+    unequip();
     itemPickUp.remove();
   }
 
@@ -1379,7 +1500,6 @@ document
         PKTweight();
         //reset size
         var trueSize = itemPickUp.dataset.size.split(", ")[0];
-        console.log(trueSize);
         itemPickUp.dataset.size = trueSize;
       } //End of INV action
 
@@ -1388,12 +1508,8 @@ document
         var tCol = document.getElementById("TackColumn");
         var techs = itemPickUp.dataset.itemtech.split(", ");
 
-        console.log(tCol);
-        console.log(techs);
-
         var i = 0; //
         while (i < techs.length) {
-          console.log("Got in!");
           tCol.insertAdjacentHTML(
             "beforeEnd",
             "<div class=' tech " +
@@ -1408,6 +1524,7 @@ document
       }
 
       //end
+      addRes(itemPickUp);
       itemPickUp = "";
     }
   }
