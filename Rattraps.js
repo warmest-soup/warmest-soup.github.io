@@ -839,7 +839,7 @@ function createItem() {
     );
   var newItem = document.getElementById("INVcolumn3").lastChild;
 
-  //Set inv Size
+  //Set inv Size..
   assignInvSize(newItem);
   if (parseInt(newItem.dataset.weight)) {
     newItem.style.backgroundColor = "lightgray";
@@ -936,7 +936,7 @@ function createItem() {
   if (document.getElementById("isInventory").checked) {
     //get inv stats in array
     var invStats = Array.from(document.getElementsByClassName("invData")).map(
-      (x) => x.value
+      (x) => x.value.trim()
     );
 
     //split key into pockets
@@ -1052,7 +1052,7 @@ function PKTweight() {
     i++;
   }
 }
-//Populate Resistances
+//Populate Resistancesy
 function addRes(item) {
   var resistances = document.getElementById("ResColumn").children[0]
     .children[0];
@@ -1164,11 +1164,9 @@ function resCalc() {
 }
 //Unequipping
 function unequip() {
-  //Unequip function
+  //Unequip functionq
   if (leftBehind.id === "TackColumn") {
     //inventory handler
-    removeRes(itemPickUp);
-
     if ("invstats" in itemPickUp.dataset) {
       //Get INV IDs
       var invData = itemPickUp.dataset.invstats.split("○ ");
@@ -1220,13 +1218,15 @@ function unequip() {
         j++;
       }
     }
-
+    
+    //Tech handler
     if (itemPickUp.dataset["itemtech"]) {
       Array.from(
         document.getElementsByClassName(itemPickUp.id + "Tech")
       ).forEach((x) => x.remove());
     }
-
+    
+    removeRes(itemPickUp);
     //end of unequip
     leftBehind = "";
   }
@@ -1401,7 +1401,11 @@ document
           !event.target.classList.contains("INVcols")
         )
     ) {
-      //unequip
+      if(itemPickUp.dataset["invstats"]){
+        if(itemPickUp.dataset.invstats.split(", ").includes(event.target.parentNode.id)){
+          return;
+      }
+      //unequip.
       unequip();
 
       //Quick Item Drop Function
@@ -1446,6 +1450,7 @@ document
       }
     }
     event.target.dispatchEvent(invChange);
+  }
   }
 
   function INVremove(event) {
