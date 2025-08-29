@@ -36,6 +36,7 @@ function initializeSheet() {
   slotMemoryLimits();
   carryWeight();
   carryLimit();
+  weaponDamage();
 
   thermoBarFunc(worldTemp);
 
@@ -869,23 +870,23 @@ function createItem() {
   if (document.getElementById("isArmor").checked) {
     //Coverage
     var armorCoverage = Array.from(
-      document.getElementsByClassName("naSpotCover"));
-    console.log(armorCoverage.every((x) => x.checked == false))
-    
-    
+      document.getElementsByClassName("naSpotCover")
+    );
+    console.log(armorCoverage.every((x) => x.checked == false));
+
     if (!armorCoverage.every((x) => x.checked == false)) {
-      armorCoverage=armorCoverage.map((x) => {
+      armorCoverage = armorCoverage.map((x) => {
         if (x.checked == true) {
           console.log("set T");
           return "tt";
-          console.log("got here!")
+          console.log("got here!");
         } else {
           console.log("set F");
           return "f";
         }
       });
       console.log(armorCoverage);
-      
+
       var armorCoverData = "";
       armorCoverage.map((x) => (armorCoverData = armorCoverData + x + ", "));
       armorCoverData = armorCoverData.slice(0, -2);
@@ -935,9 +936,9 @@ function createItem() {
   }
   if (document.getElementById("isInventory").checked) {
     //get inv stats in array
-    var invStats = Array.from(document.getElementsByClassName("invData")).map(
-      (x) => x.value.trim()
-    );
+    var invStats = Array.from(
+      document.getElementsByClassName("invData")
+    ).map((x) => x.value.trim());
 
     //split key into pockets
     var pktCount = invStats.length / 3;
@@ -1148,14 +1149,13 @@ function resCalc() {
     (acc, x) => acc + parseInt(x.innerText),
     0
   );
-  var cnd = Array.from(document.getElementsByClassName("cnd")).reduce(
-    (acc, x) => acc + parseInt(x.innerText),
-    0
-  );
-  var bri = Array.from(document.getElementsByClassName("bri")).reduce(
-    (acc, x) => acc + parseInt(x.innerText),
-    0
-  );
+  var cndVals = Array.from(document.getElementsByClassName("cnd"));
+  var cnd =
+    cndVals.reduce((acc, x) => acc + parseInt(x.innerText), 0) / cndVals.length;
+
+  var briVals = Array.from(document.getElementsByClassName("bri"));
+  var bri =
+    briVals.reduce((acc, x) => acc + parseInt(x.innerText), 0) / briVals.length;
 
   document.getElementById("InsRes").innerText = ins;
   document.getElementById("AbsRes").innerText = abs;
@@ -1175,13 +1175,17 @@ function unequip() {
       var inceptionCheck = false;
       while (k < invData.length) {
         if (invData[k] == event.target.parentNode.id) {
+          console.log(event.target.parentNode);
           inceptionCheck = true;
           leftBehind = "";
         }
         k++;
       }
-      if (inceptionCheck) return;
-
+      if (inceptionCheck) {
+        inceeded = true;
+        console.log("caught Inception");
+        return true;
+      }
       var j = 0;
       while (j < invData.length) {
         var pkt = document.getElementById(invData[j]);
@@ -1218,18 +1222,211 @@ function unequip() {
         j++;
       }
     }
-    
+
     //Tech handler
     if (itemPickUp.dataset["itemtech"]) {
       Array.from(
         document.getElementsByClassName(itemPickUp.id + "Tech")
       ).forEach((x) => x.remove());
     }
-    
+
     removeRes(itemPickUp);
     //end of unequip
     leftBehind = "";
   }
+  return false;
+}
+//Weapon Damage calculation
+function weaponDamage() {
+  //CharStats
+  var str = parseInt(document.getElementById("strFunc").innerText);
+  var dex = parseInt(document.getElementById("dexFunc").innerText);
+  var spd = parseInt(document.getElementById("spdFunc").innerText);
+  //Sharpness
+  var edg = parseInt(document.getElementById("shpEdg").value);
+  var pnt = parseInt(document.getElementById("shpPnt").value);
+  //Weapon Stats
+  var lng = parseInt(document.getElementById("wepLng").innerText);
+  var wgt = parseInt(document.getElementById("wepWgt").innerText);
+  var bal = parseInt(document.getElementById("wepBal").innerText);
+  //Shaoe Modifiers
+  var swg = parseInt(document.getElementById("swgMod").innerText);
+  var thr = parseInt(document.getElementById("thrMod").innerText);
+  var power = parseInt(document.getElementById("PowerReadout").innerText);
+  //Damage Sections
+  var swingDam = document.getElementById("SwingVal");
+  var thrustDam = document.getElementById("ThrustVal");
+
+  swingDam.innerText = Math.round(
+    ((spd * (lng + wgt) * (dex + edg) * (power * power + 7)) / 16) *
+      (1 + 0.5 * swg)
+  );
+  thrustDam.innerText = Math.round(
+    (((spd + dex) * (dex + pnt) * (power * power + 7)) / 16) * (1 + 0.5 * thr)
+  );
+
+  //attack card cost
+  var cardCost = document.getElementById("AtkCost");
+  if (power < 3) {
+    cardCost.innerText = 3 - power;
+  } else if (power > 3) {
+    cardCost.innerText = power - 3;
+  } else cardCost.innerText = 0;
+
+  //0 & 5 power warning
+  if (power == 1 || power == 5) {
+    document.getElementById("PowerLevel").style.color = "red";
+  } else document.getElementById("PowerLevel").style.color = "black";
+}
+//change equipped weapon                 
+function weaponListUpdate() {
+  //look through tack for weapon stats
+  var tackedWeapons = Array.from(
+    document.getElementById("TackColumn").children
+  ).filter((x) => x.dataset["weaponstats"]);
+
+  //clear all items in drop down (this will remove unequipped items)
+  var weaponList = document.getElementById("WeaponList").children;
+  while (1 < weaponList.length) {
+    weaponList[1].remove();
+  }
+  //re-populate dropdown list with IDs
+  var i = 0;
+  while (i < tackedWeapons.length) {
+    document
+      .getElementById("WeaponList")
+      .insertAdjacentHTML(
+        "beforeEnd",
+        "<option value='" +
+          tackedWeapons[i].id +
+          "'>" +
+          tackedWeapons[i].id +
+          "</option>"
+      );
+    i++;
+  }
+}
+function weaponSwitch() {
+  //Sharpness
+  var edg = document.getElementById("shpEdg");
+  var pnt = document.getElementById("shpPnt");
+  var ret = document.getElementById("WepRet");
+  //Weapon Stats
+  var lng = document.getElementById("wepLng");
+  var wgt = document.getElementById("wepWgt");
+  var bal = document.getElementById("wepBal");
+  var rng = document.getElementById("WepRng");
+  var dt = document.getElementById("wepDT");
+  //Shape Modifiers
+  var swg = document.getElementById("swgMod");
+  var thr = document.getElementById("thrMod");
+  //load weapon stats
+  if (document.getElementById("WeaponList").value == "Unarmed") {
+    rng.innerText = 1;
+    dt.innerText = "000";
+    ret.innerText = 0;
+    edg.value = 2;
+    pnt.value = 2;
+    lng.innerText = 1;
+    wgt.innerText = 1;
+    bal.innerText = 0;
+    swg.innerText = "+0";
+    thr.innerText = "+0";
+    document.getElementById("chipDT").innerText = "000";
+
+    var preChips = document.getElementsByClassName("Chip");
+
+    //remove previous chips
+
+    while (0 < preChips.length) {
+      preChips[0].remove();
+    }
+  } else {
+    var weapon = document
+      .getElementById("TackColumn")
+      .querySelector("#" + document.getElementById("WeaponList").value);
+
+    var wepStats = Array.from(weapon.dataset.weaponstats.split(", "));
+    //assign Values
+    rng.innerText = wepStats[0];
+    dt.innerText = wepStats[1];
+    ret.innerText = wepStats[2];
+    edg.value = wepStats[3];
+    pnt.value = wepStats[4];
+    lng.innerText = wepStats[5];
+    wgt.innerText = wepStats[6];
+    bal.innerText = wepStats[7];
+    swg.innerText = wepStats[8];
+    thr.innerText = wepStats[9];
+    document.getElementById("chipDT").innerText = Math.round(
+      parseInt(wepStats[1]) / 2
+    )
+      .toString()
+      .padStart(3, "0");
+
+    //fill Chips
+    //check for saved chip data
+    var chips = document.getElementById("chips").children;
+    var preChips = document.getElementsByClassName("Chip");
+
+    //remove previous chips
+
+    while (0 < preChips.length) {
+      preChips[0].remove();
+    }
+
+    var k = 0;
+    while (k < 2) {
+      //check for chip data
+      if (weapon.dataset["chips"]) {
+        console.log("In");
+        //load chip Data
+        var oldChips = weapon.dataset.chips.split(",");
+        console.log(oldChips);
+        var f = 0;
+        while (f < oldChips.length / 2) {
+          if (oldChips[f + (k * oldChips.length) / 2] == "true") {
+            console.log("In true");
+            chips[k].children[chips[k].children.length - 1].insertAdjacentHTML(
+              "beforeBegin",
+              "<input type='checkbox' class='Chip' checked>"
+            );
+          } else {
+            console.log("In false");
+            chips[k].children[chips[k].children.length - 1].insertAdjacentHTML(
+              "beforeBegin",
+              "<input type='checkbox' class='Chip'>"
+            );
+          }
+          f++;
+        }
+      } else {
+        var i = 0;
+        while (i < wepStats[2]) {
+          chips[k].children[0].insertAdjacentHTML(
+            "afterEnd",
+            "<input type='checkbox' class='Chip'>"
+          );
+          i++;
+        }
+      }
+      k++;
+    }
+  }
+} 
+function saveChips() {
+  var weapon = document
+    .getElementById("TackColumn")
+    .querySelector("#" + document.getElementById("WeaponList").value);
+
+  var chips = Array.from(document.getElementsByClassName("Chip")).map((x) => {
+    if (x.checked) {
+      return true;
+    } else return false;
+  });
+  chips.join(", ");
+  weapon.dataset.chips = chips;
+  console.log(chips);
 }
 //World Temperature
 
@@ -1269,6 +1466,7 @@ document
       weightExp();
       carryLimit();
       slotMemoryLimits();
+      weaponDamage();
 
       var i = 0;
       while (i < SatBars.length) {
@@ -1300,6 +1498,16 @@ document
     if (event.target.classList.contains("Rank")) {
       abilExp();
     }
+    if (event.target.classList.contains("shpIn")) {
+      weaponDamage();
+    }
+    if (event.target.id === "WeaponList") {
+      weaponSwitch();
+      weaponDamage();
+    }
+    if (event.target.classList.contains("Chip")) {
+      saveChips();
+    }
 
     //console.log(event.target);
     document.getElementById("SaveIndicator").style.background = "yellow";
@@ -1310,6 +1518,8 @@ document
   .addEventListener("INVChanged", function (event) {
     PKTweight();
     carryWeight();
+    weaponListUpdate();
+    weaponSwitch()
   });
 
 /*Drag & Drop Functions*/ {
@@ -1401,13 +1611,6 @@ document
           !event.target.classList.contains("INVcols")
         )
     ) {
-      if(itemPickUp.dataset["invstats"]){
-        if(itemPickUp.dataset.invstats.split(", ").includes(event.target.parentNode.id)){
-          return;
-      }
-      //unequip.
-      unequip();
-
       //Quick Item Drop Function
       if (INVdropType == "QI") {
         var input = document.getElementById("QuickItem").value;
@@ -1441,6 +1644,13 @@ document
         }
       }
 
+      //unequip.
+      var inceeded = false;
+      inceeded = unequip();
+      if (inceeded) {
+        return;
+      }
+
       //Standard Item Dropsv
       if (INVdropType == "INV") {
         itemPickUp.classList.remove("Equipped");
@@ -1448,9 +1658,8 @@ document
         event.target.insertAdjacentHTML("beforeend", itemClone);
         itemPickUp.remove();
       }
+      event.target.dispatchEvent(invChange);
     }
-    event.target.dispatchEvent(invChange);
-  }
   }
 
   function INVremove(event) {
@@ -1463,7 +1672,11 @@ document
   function equipDrop(event) {
     event.preventDefault();
 
-    if ((INVdropType !== "QI") & !itemPickUp.classList.contains("Equipped")) {
+    if (
+      (INVdropType !== "QI") &
+      !itemPickUp.classList.contains("Equipped") &
+      !itemPickUp.classList.contains("invContainer")
+    ) {
       itemPickUp.classList.add("Equipped");
       document.getElementById("TackColumn").appendChild(itemPickUp);
 
@@ -1532,6 +1745,7 @@ document
       addRes(itemPickUp);
       itemPickUp = "";
     }
+    event.target.dispatchEvent(invChange);
   }
 } //End of Declarations
 
