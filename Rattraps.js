@@ -1344,7 +1344,7 @@ function weaponSwitch() {
   } else {
     var weapon = document
       .getElementById("TackColumn")
-      .querySelector("#" + document.getElementById("WeaponList").value);
+      .querySelector("#" + document.getElementById("WeaponList").value.trim());
 
     var wepStats = Array.from(weapon.dataset.weaponstats.split(", "));
     //assign Values
