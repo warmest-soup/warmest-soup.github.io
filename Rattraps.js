@@ -74,8 +74,7 @@ function expGoalCalc(real, exp, goal) {
       exp.style.display = "none";
       goal.innerText = outputTxt;
     }
-      if (real.value.toLowerCase().includes("c")) {
-      
+    if (real.value.toLowerCase().includes("c")) {
       var outputTxt = " T ";
       exp.style.display = "none";
       goal.innerText = outputTxt;
@@ -85,7 +84,9 @@ function expGoalCalc(real, exp, goal) {
 //Character Level
 function levelCalc() {
   var reals = document.getElementsByClassName("realTrait");
-  var ranks = document.getElementsByClassName("Rank");
+  var ranks = Array.from(document.getElementsByClassName("Rank")).filter(
+    (x) => !x.value.toLowerCase().includes("c")
+  );
 
   var i = 0;
   var traitTotal = 0;
@@ -107,7 +108,8 @@ function levelCalc() {
   }
   if (traitTotal) {
     document.getElementById("CharacterLevel").innerText =
-      abilTotal + traitTotal - 22;
+      //Level offset
+      abilTotal + traitTotal - 13;
   }
 }
 //Calculate Functional Trait values
