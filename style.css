@@ -675,7 +675,7 @@ input[type="checkbox"]:checked {
   gap: 0.5em;
 }
 #SaveIndicator {
-  background: #gray;
+  background: gray;
   height: 1em;
   width: 1em;
   border: solid black 0.2em;

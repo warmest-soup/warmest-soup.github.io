@@ -596,17 +596,11 @@ function addAbillity() {
 }
 //Open Skill index (Needs to redirect to github site!)1
 function openIndex() {
-  let newWindow = window.open("", "_blank");
-  newWindow.document.write(
-    "<iframe src='https://docs.google.com/document/d/e/2PACX-1vRA3LIVvco5Lc4NR9Dxi-Krf13BdxfAH6CXNXLG1f-cvnalKG1SydpMTYj4Vl0Z29lTwRtKG3JrQq9o/pub?embedded=true'  style='top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;' allowfullscreen></iframe> "
-  );
+  window.open("https://warmest-soup.github.io/TechIndex", "_blank");
 }
 //Open Rule Book (Needs to redirect to github site!)
 function openRules() {
-  let newWindow = window.open("", "_blank");
-  newWindow.document.write(
-    "<iframe src='https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4bLLyQ1JlPZddxvJGvM2rugr-L4OnbdX4bHG092FUk8QLNGEMxAtHsBQByo47EG051ltYlDcVILd9/pubhtml?widget=true&amp;headers=false' style='top: 0; left: 0; width: 50%; height: 50%; position: absolute; border: 1em;'></iframe> ></iframe>"
-  );
+  window.open("https://warmest-soup.github.io/RuleBook", "_blank");
 }
 //Color Ability Slots based on memory
 function slotMemoryLimits(abil, dropTarget) {
