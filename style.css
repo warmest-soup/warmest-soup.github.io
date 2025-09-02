@@ -1,5 +1,5 @@
 html {
-  width: 98%;
+  width: 100%;
   overflow-x: clip;
   background: lightgray;
 }
@@ -30,7 +30,7 @@ button {
 }
 ::-webkit-scrollbar-track {
   background: lightGray;
-  border: solid darkgray 0.1em;
+  box-Shadow:inset 0em 0em 0em .1em darkgray;
   /*display: none;*/
   /*Display might be important for when background images appear*/
 }
@@ -46,7 +46,7 @@ input[type="range"] {
   background: lightgray;
   border-radius: 0.5em;
   outline: none;
-  border: solid gray 0.07em;
+  box-Shadow:inset 0em 0em 0em .1em gray;
   touch-action: none;
 }
 
@@ -60,16 +60,42 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
 }
 
+input[type="checkbox"] {
+  background-color: white;
+  -webkit-appearance: none;
+  -moz-appeareance: none;
+  width: 1em;
+  height: 1em;
+  box-Shadow: 0em 0em 0em .05em black;
+  border-radius: 0.4em;
+}
+input[type="checkbox"]:checked {
+  background: repeating-linear-gradient(
+    50deg,
+    black,
+    black 44%,
+    white 44%,
+    white 55%,
+    black 55%,
+    black 100%
+  );
+}
+
 .SingleInputNUM {
   min-width: 1.3em;
   max-width: 1.3em;
   border-radius: 0.4em;
-  border: solid, 0.085em;
+}
+.longNumIn {
+  min-width: 3em;
+  max-width: 3em;
+  border-radius: 0.5em;
+  box-Shadow: 0em 0em 0em .01em black;
 }
 .Section {
   box-shadow: -0.25em 0.3em 0.3em 0em rgb(0 0 0 / 40%);
   background: white;
-  border: solid, 0.15em;
+  box-Shadow:inset 0em 0em 0em .1em black;
   border-radius: 0.5em;
   padding: 0.5em;
 }
@@ -79,6 +105,7 @@ input[type="range"]::-webkit-slider-thumb {
   display: flex;
   align-items: end;
   flex-flow: column;
+  gap:.3em;
   padding: 1em;
 }
 #Name textarea {
@@ -89,7 +116,7 @@ input[type="range"]::-webkit-slider-thumb {
   max-width: 13.8em;
 }
 #Photo {
-  border: solid grey 0.1em;
+  box-Shadow: 0em 0em 0em .05em black;
   border-radius: 0.5em;
   min-height: 24em;
   max-height: 24em;
@@ -100,6 +127,7 @@ input[type="range"]::-webkit-slider-thumb {
 #HandDropdown {
   min-width: 9em;
   max-width: 9em;
+  border-radius:.5em;
 }
 #DayCount {
   font-size: 1em;
@@ -179,7 +207,7 @@ input {
   justify-content: space-between;
 }
 .satBar {
-  border: solid, 0.15em;
+  box-Shadow:inset 0em 0em 0em .01em black;
   min-height: 26.5em;
   max-height: 26.5em;
   min-width: 1.3em;
@@ -214,7 +242,7 @@ input {
   gap: 0.5em;
 }
 .AbilSlot {
-  border: 0.16em solid black;
+  box-Shadow: 0em 0em 0em .15em black;
   padding: 0.2em;
   border-radius: 0.7em;
   min-height: 1.6em;
@@ -223,13 +251,10 @@ input {
   max-width: 10.7em;
   white-space: nowrap;
 }
-
-.Rank {
-  font-size: 70%;
-}
 #AbilContainer button,
 #AbilContainer {
   font-size: 80%;
+  
 }
 #abilTitle {
   display: flex;
@@ -237,11 +262,12 @@ input {
   justify-content: space-between;
 }
 .Rank {
+  font-size: 70%;
   font-weight: Bold;
   min-width: 2em;
   background-color: rgba(255, 255, 255, 0.5);
   color: black;
-  border: solid gray 0.1em;
+  box-Shadow: 0em 0em 0em .06em black;
   border-radius: 0.75em;
 }
 .aexp {
@@ -256,17 +282,20 @@ input {
 .Ability button {
   background-color: rgba(255, 255, 255, 0.2);
   color: black;
-  border: solid gray 0.1em;
+  box-Shadow: 0em 0em 0em .1em black;
   border-radius: 0.75em;
 }
 .aScrollColumns {
-  box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%);
+  box-shadow: 
+    inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%),
+    inset 0em -15em 12em -5em rgb(0 0 0 / 30%),
+    0em 0em 0em .1em black;
   max-height: 1em;
   min-height: 35em;
   max-width: 12.05em;
   min-width: 12.05em;
   overflow: auto;
-  border: solid 0.2em;
+  box-Shadow: ;
   padding: 0.3em;
   border-radius: 0.5em;
   background: repeating-linear-gradient(
@@ -276,6 +305,9 @@ input {
     white 0.5px,
     white 1%
   );
+  display:flex;
+  flex-direction:column;
+  gap:.3em;
 }
 .satVal .SingleInputNUM {
   min-width: 1.7em;
@@ -297,7 +329,7 @@ input {
   text-align: left;
 }
 .removalBox {
-  border: solid gray 0.1em;
+  box-Shadow: 0em 0em 0em .05em black;
   padding: 0em 0.5em;
   border-radius: 0.25em;
   color: grey;
@@ -307,7 +339,7 @@ input {
   border-width: 0.01em;
 }
 .openAbil {
-  border: 0.1em solid black;
+  box-Shadow: 0em 0em 0em .1em black;
   padding: 0.2em;
   border-radius: 0.7em;
   min-height: 1em;
@@ -321,7 +353,7 @@ input {
   width: 14em;
   height: 22em;
   background-color: white;
-  border: 0.15em solid black;
+  box-Shadow: 0em 0em 0em .1em black;
   border-radius: 1em;
   position: relative;
   transform: translatey(26.6em) translatex(2em);
@@ -346,7 +378,7 @@ input {
   max-height: 8em;
   overflow: auto;
   background-color: white;
-  border: solid black;
+  box-Shadow: 0em 0em 0em .1em black;
   border-width: 0em 0.2em 0.3em 0.2em;
   border-radius: 0em 0em 1em 1em;
   top: 1em;
@@ -359,6 +391,7 @@ input {
   flex-direction: column;
   min-width: 13em;
   max-width: 18em;
+  padding:0em 0em 0em 1em;
 }
 #TempTop {
   display: flex;
@@ -385,7 +418,7 @@ input {
   max-width: 1em;
   min-height: 35em;
   max-height: 35em;
-  border: solid black 0.2em;
+  box-Shadow: 0em 0em 0em .1em black;
   border-radius: 2em;
   overflow: clip;
 }
@@ -394,7 +427,7 @@ input {
   background-color: black;
   min-width: 1em;
   max-width: 1em;
-  border: solid black 0em;
+  box-Shadow: 0em 0em 0em .1em black;
   border-radius: 5em;
 }
 #TempBot {
@@ -408,11 +441,14 @@ input {
   font-size: 1em;
 }
 #Abilities {
-  max-height: 41em;
+  max-height: 44em;
+  min-height: 44em;
   overflow: show;
   display: flex;
   flex-direction: column;
+  gap:1em;
   justify-content: end;
+  padding:0em 1em 0em 1em;
 }
 .Ability > div {
   display: flex;
@@ -477,12 +513,12 @@ input {
   max-width: 26em;
   min-height: 25em;
   max-height: 25em;
-  border: solid 0.1em black;
+  box-Shadow: 0em 0em 0em .05em black;
   border-radius: 1em;
   overflow: clip;
   display: flex;
 }
-#inventoryDisplay * {
+.inventoryDisplay * {
   font-size: 2.1vh !important;
 }
 #QuickItem {
@@ -507,10 +543,10 @@ input {
   min-height: 22.3em;
   max-height: 22.3em;
   background-color: white;
-  border: 0.15em solid black;
+  box-Shadow: 0em 0em 0em .1em black;
   border-radius: 1em;
   position: relative;
-  transform: translatey(27.5em) translatex(4em);
+  transform: translatey(27.25em) translatex(4em);
   padding: 1em;
   z-index: +1;
   overflow: auto;
@@ -521,7 +557,7 @@ input {
 #itemName {
   width: 7em;
   border-radius: 0.5em;
-  border: solid black 0.1em;
+  box-Shadow: 0em 0em 0em .02em gray;
 }
 #NewItemStats > * {
   padding: 0em 0.2em 0.2em 0.1em;
@@ -546,20 +582,20 @@ input {
 }
 .diaArms {
   margin: 0em 0em 5em 0em;
-  border: solid gray 0.1em;
+  box-Shadow: 0em 0em 0em .05em black;
   border-radius: 0.6em;
   background: lightgray;
   overflow: clip;
   transform: translatey(0.7em);
 }
 #HeadDia {
-  border: solid gray 0.1em;
+  box-Shadow: 0em 0em 0em .05em black;
   border-radius: 4em;
   background: lightgray;
   overflow: clip;
 }
 #TorsoDia {
-  border: solid gray 0.1em;
+  box-Shadow: 0em 0em 0em .05em black;
   border-radius: 0.5em 0.5em 0em 0em;
   background: lightgray;
   overflow: clip;
@@ -567,31 +603,11 @@ input {
   transform: translatey(1.5em);
 }
 .diaLegs {
-  border: solid gray 0.1em;
+  box-Shadow: 0em 0em 0em .05em black;
   border-radius: 0.5em;
   background: lightgray;
   overflow: clip;
   z-index: +1;
-}
-input[type="checkbox"] {
-  background-color: white;
-  -webkit-appearance: none;
-  -moz-appeareance: none;
-  width: 1em;
-  height: 1em;
-  border: solid black 0.1em;
-  border-radius: 0.4em;
-}
-input[type="checkbox"]:checked {
-  background: repeating-linear-gradient(
-    50deg,
-    black,
-    black 44%,
-    white 44%,
-    white 55%,
-    black 55%,
-    black 100%
-  );
 }
 .newArmorStatGroups {
   display: flex;
@@ -607,7 +623,7 @@ input[type="checkbox"]:checked {
   display: none;
 }
 .ItemTraits {
-  border: solid black;
+  box-Shadow: 0em .1em 0em -.05em black;
   border-width: 0em 0em 0.1em 0em;
   padding: 0.5em 0em 0em 0em;
   margin: 1em 0em;
@@ -622,21 +638,13 @@ input[type="checkbox"]:checked {
 .NewArmorStat {
   width: 2em;
   border-radius: 0.5em;
-  border: solid gray 0.1em;
 }
 #lowNASG {
   transform: translatey(-1em);
 }
-.longNumIn {
-  min-width: 3em;
-  max-width: 3em;
-  border-radius: 0.5em;
-  border: solid gray 0.1em;
-}
 .iTech {
   min-width: 8em;
   max-width: 8em;
-  border: solid gray 0.1em;
   border-radius: 0.5em;
 }
 #techSec {
@@ -653,11 +661,10 @@ input[type="checkbox"]:checked {
 #nPocketName {
   min-width: 5em;
   max-width: 5em;
-  border: solid black 0.1em;
   border-radius: 0.5em;
 }
 #SheetManager {
-  border: solid black;
+  box-Shadow: 0em 0em 0em .1em black;
   border-width: 0.1em 0em 0.2em 0em;
   min-width: 150%;
   overflow: clip;
@@ -680,9 +687,9 @@ input[type="checkbox"]:checked {
   background: gray;
   height: 1em;
   width: 1em;
-  border: solid black 0.2em;
+  
   border-radius: 1em;
-  box-shadow: inset 0 0 0.2em #50a;
+  box-shadow: inset 0 0 0.2em #50a,0em 0em 0em .1em black;
 }
 .dataSection {
   display: flex;
@@ -706,8 +713,8 @@ input[type="checkbox"]:checked {
     white 0.5px,
     white 2%
   );
-  box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%);
-  border: solid black 0.1em;
+  box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%),
+    0em 0em 0em 0.07em black;
   border-radius: 0.5em;
   min-height: 26em;
   max-height: 26em;
@@ -743,8 +750,8 @@ input[type="checkbox"]:checked {
     white 0.5px,
     white 2%
   );
-  box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%);
-  border: solid black 0.1em;
+  box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%),
+    0em 0em 0em 0.07em black;
   border-radius: 0.5em;
   min-height: 24em;
   max-height: 24em;
@@ -791,7 +798,7 @@ input[type="checkbox"]:checked {
 .invContainer {
   background: white;
   box-shadow: -0.3em 0.3em 1em 0em rgb(0 0 0 / 50%);
-  border: solid black 0.1em;
+  box-Shadow: 0em 0em 0em .1em black;
   border-radius: 0.5em;
   width: 90%;
   text-align: center;
@@ -814,7 +821,7 @@ input[type="checkbox"]:checked {
 }
 .item {
   background: rgb(255 255 255 / 50%);
-  border: solid black 0.1em;
+  box-Shadow: 0em 0em 0em .1em black;
   border-radius: 0.5em;
   width: fit-content;
   min-height: 1.1em;
@@ -868,7 +875,7 @@ input[type="checkbox"]:checked {
   padding: 0.1em 0em 0.1em 0em;
   min-width: 8em;
   max-width: 8em;
-  border: solid 0.1em black;
+  box-Shadow: 0em 0em 0em .1em black;
   border-radius: 1em;
   text-align: center;
   font-weight: bold;
@@ -892,12 +899,17 @@ input[type="checkbox"]:checked {
   gap:.5em;
   align-items:center;
 }
+#Damage{
+  display:flex;
+  flex-direction:column;
+  gap:.2em;
+}
 .dmgVal{
   padding:.5em;
   margin:.2em;
   min-width:8em;
   max-width:8em;
-  border:solid 0.1em black;
+  box-Shadow: 0em 0em 0em .05em black;
   border-radius:1em;
 }
 #chips{
