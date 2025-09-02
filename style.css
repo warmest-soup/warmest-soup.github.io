@@ -7,6 +7,10 @@ html {
   font-family: "caudex";
   font-size: 2.1vh;
 }
+::selection{
+  color:white;
+  background:black;
+}
 button {
   font-weight: 700;
 }
@@ -460,8 +464,6 @@ input {
 #invTitle {
   font-weight: bold;
 }
-#InvStats {
-}
 .inventoryDisplay {
   background: repeating-linear-gradient(
     50deg,
@@ -889,9 +891,6 @@ input[type="checkbox"]:checked {
   flex-direction:column;
   gap:.5em;
   align-items:center;
-}
-#Damage{
-  
 }
 .dmgVal{
   padding:.5em;
