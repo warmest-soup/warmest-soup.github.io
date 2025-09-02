@@ -477,8 +477,10 @@ input {
   padding: 0.4em;
 }
 #Notes textArea {
-  width: 17em;
-  height: 25em;
+  max-width: 17em;
+  min-width: 17em;
+  max-height: 25em;
+  min-height: 25em;
   border-radius: 0.5em;
   padding: 1em;
 }
