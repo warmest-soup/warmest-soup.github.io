@@ -133,6 +133,8 @@ input[type="checkbox"]:checked {
   min-width: 9em;
   max-width: 9em;
   border-radius:.5em;
+  border:none;
+  box-shadow:0em 0em 0em .05em black;
 }
 #DayCount {
   font-size: 1em;
@@ -561,7 +563,8 @@ input {
 #itemName {
   width: 7em;
   border-radius: 0.5em;
-  box-Shadow: 0em 0em 0em .02em gray;
+  border:none;
+  box-shadow:0em 0em 0em .05em black;
 }
 #NewItemStats > * {
   padding: 0em 0.2em 0.2em 0.1em;
@@ -586,20 +589,20 @@ input {
 }
 .diaArms {
   margin: 0em 0em 5em 0em;
-  box-Shadow: 0em 0em 0em .05em black;
+  box-Shadow: 0em 0em 0em .07em gray;
   border-radius: 0.6em;
   background: lightgray;
   overflow: clip;
   transform: translatey(0.7em);
 }
 #HeadDia {
-  box-Shadow: 0em 0em 0em .05em black;
+  box-Shadow: 0em 0em 0em .07em gray;
   border-radius: 4em;
   background: lightgray;
   overflow: clip;
 }
 #TorsoDia {
-  box-Shadow: 0em 0em 0em .05em black;
+  box-Shadow: 0em 0em 0em .07em gray;
   border-radius: 0.5em 0.5em 0em 0em;
   background: lightgray;
   overflow: clip;
@@ -607,7 +610,7 @@ input {
   transform: translatey(1.5em);
 }
 .diaLegs {
-  box-Shadow: 0em 0em 0em .05em black;
+  box-Shadow: 0em 0em 0em .07em gray;
   border-radius: 0.5em;
   background: lightgray;
   overflow: clip;
