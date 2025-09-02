@@ -68,9 +68,15 @@ function expGoalCalc(real, exp, goal) {
       var outputTxt = "/" + expGoal;
       exp.style.display = "inline";
       goal.innerText = outputTxt;
-    } //
+    }
     if ((traitLv || traitLv === 0) && traitLv >= 5) {
       var outputTxt = "★";
+      exp.style.display = "none";
+      goal.innerText = outputTxt;
+    }
+      if (real.value.toLowerCase().includes("c")) {
+      
+      var outputTxt = " T ";
       exp.style.display = "none";
       goal.innerText = outputTxt;
     }
@@ -829,7 +835,7 @@ function createItem() {
     .insertAdjacentHTML(
       "beforeend",
       "<div id='" +
-        itemName +
+        itemName.trim() +
         "' class='INV item' data-size='" +
         itemStats[0].value +
         "' data-weight='" +
@@ -872,20 +878,15 @@ function createItem() {
     var armorCoverage = Array.from(
       document.getElementsByClassName("naSpotCover")
     );
-    console.log(armorCoverage.every((x) => x.checked == false));
 
     if (!armorCoverage.every((x) => x.checked == false)) {
       armorCoverage = armorCoverage.map((x) => {
         if (x.checked == true) {
-          console.log("set T");
           return "tt";
-          console.log("got here!");
         } else {
-          console.log("set F");
           return "f";
         }
       });
-      console.log(armorCoverage);
 
       var armorCoverData = "";
       armorCoverage.map((x) => (armorCoverData = armorCoverData + x + ", "));
@@ -1150,12 +1151,22 @@ function resCalc() {
     0
   );
   var cndVals = Array.from(document.getElementsByClassName("cnd"));
-  var cnd =
-    cndVals.reduce((acc, x) => acc + parseInt(x.innerText), 0) / cndVals.length;
+  var cnd = cndVals.reduce(
+    (acc, x) => Math.round(acc + parseInt(x.innerText), 0) / cndVals.length,
+    0
+  );
+  if (!cnd) {
+    cnd = 0;
+  }
 
   var briVals = Array.from(document.getElementsByClassName("bri"));
-  var bri =
-    briVals.reduce((acc, x) => acc + parseInt(x.innerText), 0) / briVals.length;
+  var bri = briVals.reduce(
+    (acc, x) => Math.round(acc + parseInt(x.innerText), 0) / briVals.length,
+    0
+  );
+  if (!bri) {
+    bri = 0;
+  }
 
   document.getElementById("InsRes").innerText = ins;
   document.getElementById("AbsRes").innerText = abs;
@@ -1175,7 +1186,6 @@ function unequip() {
       var inceptionCheck = false;
       while (k < invData.length) {
         if (invData[k] == event.target.parentNode.id) {
-          console.log(event.target.parentNode);
           inceptionCheck = true;
           leftBehind = "";
         }
@@ -1183,7 +1193,6 @@ function unequip() {
       }
       if (inceptionCheck) {
         inceeded = true;
-        console.log("caught Inception");
         return true;
       }
       var j = 0;
@@ -1278,8 +1287,11 @@ function weaponDamage() {
     document.getElementById("PowerLevel").style.color = "red";
   } else document.getElementById("PowerLevel").style.color = "black";
 }
-//change equipped weapon                 
+//change equipped weapon
 function weaponListUpdate() {
+  //saved equipped item incase it doesn't need to change
+  var currentEquip = document.getElementById("WeaponList").value;
+
   //look through tack for weapon stats
   var tackedWeapons = Array.from(
     document.getElementById("TackColumn").children
@@ -1303,6 +1315,11 @@ function weaponListUpdate() {
           tackedWeapons[i].id +
           "</option>"
       );
+
+    if (tackedWeapons[i].id == currentEquip) {
+      document.getElementById("WeaponList").value = currentEquip;
+    }
+
     i++;
   }
 }
@@ -1344,7 +1361,7 @@ function weaponSwitch() {
   } else {
     var weapon = document
       .getElementById("TackColumn")
-      .querySelector("#" + document.getElementById("WeaponList").value.trim());
+      .querySelector("#" + document.getElementById("WeaponList").value);
 
     var wepStats = Array.from(weapon.dataset.weaponstats.split(", "));
     //assign Values
@@ -1379,20 +1396,16 @@ function weaponSwitch() {
     while (k < 2) {
       //check for chip data
       if (weapon.dataset["chips"]) {
-        console.log("In");
         //load chip Data
         var oldChips = weapon.dataset.chips.split(",");
-        console.log(oldChips);
         var f = 0;
         while (f < oldChips.length / 2) {
           if (oldChips[f + (k * oldChips.length) / 2] == "true") {
-            console.log("In true");
             chips[k].children[chips[k].children.length - 1].insertAdjacentHTML(
               "beforeBegin",
               "<input type='checkbox' class='Chip' checked>"
             );
           } else {
-            console.log("In false");
             chips[k].children[chips[k].children.length - 1].insertAdjacentHTML(
               "beforeBegin",
               "<input type='checkbox' class='Chip'>"
@@ -1413,7 +1426,8 @@ function weaponSwitch() {
       k++;
     }
   }
-} 
+  weaponDamage();
+}
 function saveChips() {
   var weapon = document
     .getElementById("TackColumn")
@@ -1426,7 +1440,6 @@ function saveChips() {
   });
   chips.join(", ");
   weapon.dataset.chips = chips;
-  console.log(chips);
 }
 //World Temperature
 
@@ -1519,7 +1532,7 @@ document
     PKTweight();
     carryWeight();
     weaponListUpdate();
-    weaponSwitch()
+    weaponSwitch();
   });
 
 /*Drag & Drop Functions*/ {
@@ -1596,7 +1609,7 @@ document
     leftBehind = event.target.parentNode;
   }
 
-  //Inventory Drag n Drop & Unequipping
+  //Inventory Drag n Drop
   function INVDrop(event) {
     //console.log("INVDrop Function ran.");
 
@@ -1625,7 +1638,7 @@ document
           }
 
           qItem =
-            "<div class='item INV' data-size='" +
+            "<div class='item INV QuickItem' data-size='" +
             parseInt(qEntry[1]) +
             "' data-weight='" +
             parseInt(qEntry[2]) +
@@ -1666,6 +1679,23 @@ document
     var target = document.getElementById(event.dataTransfer.getData("text"));
     unequip();
     itemPickUp.remove();
+  }
+
+  //Drop Change Quick Items
+  function QiEdit(event) {
+    if (itemPickUp.classList.contains("QuickItem")) {
+      var qiData = [itemPickUp.innerText];
+      if (itemPickUp.dataset.size != "NaN") {
+        qiData.push(itemPickUp.dataset.size);
+      }
+      if (itemPickUp.dataset.weight != "NaN") {
+        qiData.push(itemPickUp.dataset.weight);
+      }
+
+      var qiTextForm = qiData.join(", ");
+      document.getElementById("QuickItem").value = qiTextForm;
+      itemPickUp.remove();
+    }
   }
 
   //Equipping Items
