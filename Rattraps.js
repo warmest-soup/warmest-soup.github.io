@@ -1147,18 +1147,16 @@ function resCalc() {
     0
   );
   var cndVals = Array.from(document.getElementsByClassName("cnd"));
-  var cnd = cndVals.reduce(
-    (acc, x) => Math.round(acc + parseInt(x.innerText), 0) / cndVals.length,
-    0
+  var cnd = Math.round(
+    cndVals.reduce((acc, x) => acc + parseInt(x.innerText), 0) / cndVals.length
   );
   if (!cnd) {
     cnd = 0;
   }
 
   var briVals = Array.from(document.getElementsByClassName("bri"));
-  var bri = briVals.reduce(
-    (acc, x) => Math.round(acc + parseInt(x.innerText), 0) / briVals.length,
-    0
+  var bri = Math.round(
+    briVals.reduce((acc, x) => acc + parseInt(x.innerText), 0) / briVals.length
   );
   if (!bri) {
     bri = 0;
@@ -1233,6 +1231,34 @@ function unequip() {
       Array.from(
         document.getElementsByClassName(itemPickUp.id + "Tech")
       ).forEach((x) => x.remove());
+    }
+
+    //ArmorGrid Handler
+    if (itemPickUp.dataset["coverage"]) {
+      var laids = document.getElementById("LAids").children;
+
+      var i = 0;
+      while (i < 5) {
+        if (laids[i].innerText == " "+itemPickUp.id) {
+          //get actual column values
+          var armorColumn = Array.from(
+            document.getElementsByClassName(laids[i].classList)
+          );
+
+          armorColumn[0].innerText = "";
+
+          var j = 1;
+          while (j < 6) {
+            armorColumn[j].children[0].checked = false;
+            armorColumn[j].style.background = "transparent";
+            j++;
+          }
+          armorColumn[6].innerText = " ";
+          armorColumn[7].innerText = " ";
+          armorColumn[8].innerText = " ";
+        }
+        i++;
+      }
     }
 
     removeRes(itemPickUp);
@@ -1517,8 +1543,9 @@ document
     if (event.target.classList.contains("Chip")) {
       saveChips();
     }
+    //if (event.target.id==="")
 
-    //console.log(event.target);
+    console.log(event.target);
     document.getElementById("SaveIndicator").style.background = "yellow";
   });
 //inventory Event Listener
@@ -1531,7 +1558,7 @@ document
     weaponSwitch();
   });
 
-/*Drag & Drop Functions*/ {
+/*Drag & Drop Functions..*/ {
   function allowDrop(event) {
     event.preventDefault();
   }
@@ -1598,7 +1625,8 @@ document
   }
 
   function INVDragStart(event) {
-    //console.log("INVDrag function ran.");
+    console.log("INVDrag function ran.");
+    event.dataTransfer.setData("Text", event.target.value);
 
     INVdropType = "INV";
     itemPickUp = event.target;
@@ -1763,6 +1791,43 @@ document
               techs[i] +
               "</div>"
           );
+          i++;
+        }
+      }
+
+      //Act on item's Armor Stats
+      if (itemPickUp.dataset["coverage"]) {
+        var laids = document.getElementById("LAids").children;
+        var coverage = itemPickUp.dataset["coverage"].split(", ");
+        var armorStat = itemPickUp.dataset["armorstats"].split(", ");
+
+        var i = 0;
+        while (i < 5) {
+          if (!laids[i].innerText) {
+            //get actual column values nh
+            var armorColumn = Array.from(
+              document.getElementsByClassName(laids[i].classList)
+            );
+            //assign info
+            laids[i].innerText = " "+itemPickUp.id;
+            var j = 5;
+            while (j < 10) {
+              if (coverage[j][0] == "t") {
+                armorColumn[j - 4].children[0].parentNode.style.background =
+                  "rgb(0 0 0 /25%)";
+              }
+              if (coverage[j][1] == "t") {
+                armorColumn[j - 4].children[0].checked = "true";
+              }
+              j++;
+            }
+
+            armorColumn[6].innerText = armorStat[0];
+            armorColumn[7].innerText = armorStat[1];
+            armorColumn[8].innerText = armorStat[2];
+
+            i = 5;
+          }
           i++;
         }
       }
