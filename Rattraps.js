@@ -1734,6 +1734,7 @@ function updateArmorBreaks(){
     document.getElementsByClassName(
       event.target.parentNode.classList[0])[0]
     .innerText.trim());
+  if(!armor) return;
   var coverage=armor.dataset.coverage.split(", "); 
   var spot=Array.from(event.target
                      .parentNode.parentNode.parentNode
