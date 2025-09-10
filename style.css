@@ -5,7 +5,7 @@ html {
 }
 * {
   font-family: "caudex";
-  font-size: 2.1vh;
+  font-size: 2.05vh;
 }
 ::selection{
   color:white;
@@ -15,6 +15,7 @@ button {
   font-weight: 700;
   border:none;
   box-shadow:0em 0em 0em .05em gray;
+  text-color:black;
 }
 /*Scroll bar adjustments*/
 ::-webkit-scrollbar {
@@ -156,6 +157,9 @@ input {
   min-width: 17em;
   max-width: 17em;
   overflow: auto;
+  display:flex;
+  flex-direction:column;
+  gap:1em;
 }
 #TraitTable {
   min-width: 17em;
@@ -492,8 +496,8 @@ input {
   user-select: none;
   min-width: 26em;
   max-width: 26em;
-  min-height: 28em;
-  max-height: 28em;
+  min-height:35em;
+  max-height:35em;
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -520,8 +524,8 @@ input {
      0em 0em 0em .05em black;
   min-width: 26em;
   max-width: 26em;
-  min-height: 25em;
-  max-height: 25em;
+  min-height:32em;
+  max-height:32em;
   border-radius: 1em;
   overflow: clip;
   display: flex;
@@ -531,7 +535,7 @@ input {
 }
 #QuickItem {
   margin: 0.5em;
-  padding: 0.1em 0em 1em 0em;
+  padding: 0.1em 0em 2em 0em;
   border-radius: 0.7em;
   min-height: 1.3em;
   max-height: 1.3em;
@@ -713,8 +717,8 @@ input {
 #Tack {
   min-width: 13em;
   max-width: 13em;
-  min-height: 29em;
-  max-height: 29em;
+  min-height:36em;
+  max-height:36em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -731,8 +735,8 @@ input {
   box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%),
     0em 0em 0em 0.07em black;
   border-radius: 0.5em;
-  min-height: 26em;
-  max-height: 26em;
+  min-height:33em;
+  max-height:33em;
   padding-bottom:2em;
   padding-top:.5em;
   width: 95%;
@@ -750,8 +754,8 @@ input {
 #Resistances {
   min-width: 13em;
   max-width: 13em;
-  min-height: 29em;
-  max-height: 29em;
+  min-height:36em;
+  max-height:36em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -768,8 +772,8 @@ input {
   box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%),
     0em 0em 0em 0.07em black;
   border-radius: 0.5em;
-  min-height: 24em;
-  max-height: 24em;
+  min-height:31em;
+  max-height:31em;
   width: 95%;
   display: flex;
   box-sizing:border-box;
@@ -812,8 +816,9 @@ input {
 }
 .invContainer {
   background: white;
-  box-shadow: -0.3em 0.3em 1em 0em rgb(0 0 0 / 50%);
-  box-Shadow: 0em 0em 0em .1em black;
+  box-shadow: 
+    -0.3em 0.3em 1em 0em rgb(0 0 0 / 50%), 
+    0em 0em 0em .05em black;
   border-radius: 0.5em;
   width: 90%;
   text-align: center;
@@ -953,4 +958,198 @@ input {
 
 #ArmorGrids{
   padding:1em;
+  min-width:77em;
+  max-width:77em;
+  min-height:35em;
+  max-height:35em;
+  display:flex;
+  flex-wrap:wrap;
+  gap:1em;
+}
+
+#ArmorGrids *{
+  border:none;
+}
+#ArmorGrids * select{
+  box-shadow:0em 0em 0em .05em gray;
+  border-radius:.5em;
+}
+
+
+/*Begining of CSS from armor grid draft*/
+.GridSect{
+  min-height:14.5em;
+  max-height:14.5em;
+  min-width:23em;
+  max-width:23em;
+  display:flex;
+  box-shadow:0em 0em 0em .1em black;
+  padding:1em;
+  justify-content:start;
+  gap:.5em;
+  border-radius:.5em;
+}
+.GridSect * {
+  font-size:.95em;
+}
+.agDamList{
+  margin-left:.2em;
+  display:flex;
+  align-items:center;
+  gap:1em;
+}
+.agDamList > div{
+  text-align:center;
+}
+.agDamList>div>input{
+  width:3em;
+  text-align:center;
+  line-height:1.2em;
+  border:none;
+  box-shadow:
+    0em 0em 0em .05em black,
+    inset -.1em .1em .3em 0em gray;
+  border-radius:.5em;
+}
+.agRight{
+  display:flex;
+  flex-direction:column;
+  justify-content:end;
+  font-weight:bolder;
+  color:rgb(0 0 0 /50%);
+  gap:.2em;
+}
+.agDebuff{
+  margin-left:3.5em;
+  display:flex;
+  gap:.5em;
+  transform:translatey(1em) translatex(-1em);
+}
+.limbStatus{
+  box-shadow:0em 0em 0em .05em black;
+  margin-bottom:.5em;
+  border-radius:.5em;
+}
+.secondDT{
+  font-size:3em;
+  overflow:hide;
+}
+.ag2ndDT{
+  min-height:4em;
+  max-height:3em;
+  text-align:center;
+  transform:translatey(.7em);
+}
+
+.agLeft{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  text-align:center;
+  font-weight:bolder;
+  color:rgb(0 0 0 /50%);
+  padding-right:.5em;
+  text-wrap:nowrap;
+}
+.agInjPenalty{font-size:.8em;}
+
+.agInjuryStatus{
+  width:100%;
+  height:2em;
+  text-align:center;
+}
+.limbEDT{font-size:3em;}
+.agEDT{
+  font-size:1.2em;
+}
+.agDebuff * input{
+  width:4em;
+}
+.agDebuff{
+  display:flex;
+  text-align:center;
+}
+.agLimbTitle{
+  writing-mode:sideways-lr;
+  text-align:left;
+  font-weight:bolder;
+  font-size:1.4em;
+}
+.agStatLabels{
+  font-size:.5em;
+  line-height:1em;
+  writing-mode:horizontal-tb;
+}
+.agCenter{
+  display:flex;
+  flex-direction:column;
+  justify-content:end;
+}
+.armorGrid{
+  table-layout:fixed;
+  width:8em;
+  border-collapse:collapse;
+}
+
+.armorGrid > tbody > tr > td{
+  box-shadow:0em 0em 0em .07em black;
+  text-align:center;
+  padding:0em;
+  height:1.5em;
+}
+.armorGrid > tbody > tr > td *{
+  transform:translatey(.15em);
+  height:1em;
+  width:1em;
+}
+.armorGrid > tbody > tr > th{
+  rotate:-45deg;
+  text-decoration:underline;
+  transform:
+    translatey(.65em) 
+    translatex(1em);
+  text-wrap:nowrap;
+}
+.agStats{
+  table-layout:fixed;
+  border-collapse:collapse;
+  width:8em;
+}
+.agStats>tbody>tr>td{
+  height:1.2em;
+  box-shadow:
+    .05em 0em 0em 0em black,
+    -.05em 0em 0em 0em black;
+}
+#LADT,#LAPD{
+ box-shadow:0em .05em 0em 0em rgb(0 0 0 /25%)
+}
+
+.BT{
+  font-size:2em;
+}
+.PrimaryDebuff{
+  width:2em;
+  height:1.3em;
+  font-size:1.5em;
+  font-weight:bolder;
+}
+.injPenaltyDD{
+  width:2em;
+  height:1.1em;
+  font-size:1.5em;
+  text-align:center;
+}
+#aGridTitle{
+  writing-mode:sideways-lr;
+  text-align:center;
+  font-size:2.5em;
+  line-height:.95em;
+  height:100%;
+  box-shadow:.05em 0em 0em 0em black;
+}
+#ArmorGridSection{
+  display:flex;
+  min-height:36em;
+  max-height:36em;
 }
