@@ -1729,6 +1729,39 @@ function dtLightUp(){
     i++
   }
 }
+function updateArmorBreaks(){
+  var armor = document.getElementById(
+    document.getElementsByClassName(
+      event.target.parentNode.classList[0])[0]
+    .innerText.trim());
+  var coverage=armor.dataset.coverage.split(", "); 
+  var spot=Array.from(event.target
+                     .parentNode.parentNode.parentNode
+                     .children)
+ .indexOf(event.target
+          .parentNode.parentNode)-1;
+  var limb=event.target.parentNode.classList[0].slice(0,2);
+  var state
+  if(event.target.checked){
+    state="t";
+  } else state="f";
+  
+  if(limb=="HD"){
+    coverage[spot]="t"+state;
+  } else if (limb=="LA"){
+    coverage[spot+5]="t"+state;
+  } else if (limb=="BD"){
+    coverage[spot+10]="t"+state;
+  } else if (limb=="LL"){
+    coverage[spot+15]="t"+state;
+  } else if (limb=="RL"){
+    coverage[spot+20]="t"+state;
+  } else if (limb=="RA"){
+    coverage[spot+25]="t"+state;
+  }
+  
+  armor.dataset.coverage=coverage.join(", ");
+}
 //Wolrd Temp
 
 //End of declarations
@@ -1816,6 +1849,11 @@ document
     }
     if (event.target.classList.contains("PrimaryDebuff")) {
       limbDebuffColor();
+    }
+    if (event.target
+        .parentNode.parentNode.parentNode.parentNode
+        .classList=="armorGrid"){
+      updateArmorBreaks();
     }
 
     //console.log(event.target);
