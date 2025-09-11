@@ -684,8 +684,6 @@ input {
 }
 #SheetManager {
   box-Shadow: 0em 0em 0em .1em black;
-  border-width: 0.1em 0em 0.2em 0em;
-  min-width: 150%;
   overflow: clip;
   background: repeating-linear-gradient(
     50deg,
@@ -695,12 +693,19 @@ input {
     white 0.5%
   );
   text-align: center;
-  transform: translatex(-15%);
   display: flex;
-  align-items: end;
-  justify-content: center;
-  padding: 0.2em;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing:border-box;
+  padding: 0.4em 2em 0.4em 2em;
+  width:100vw;
+  transform:translatex(-.9vw);
   gap: 0.5em;
+}
+#SheetManager > span{
+  display:flex;
+  gap:.5em;
+  align-items:center;
 }
 #SaveIndicator {
   background: gray;
