@@ -1260,6 +1260,7 @@ function unequip() {
           var j = 1;
           while (j < 6) {
             armorColumn[j].children[0].checked = false;
+            armorColumn[j].children[0].removeAttribute("checked");
             armorColumn[j].style.background = "transparent";
             j++;
           }
@@ -1282,6 +1283,7 @@ function unequip() {
           var j = 1;
           while (j < 6) {
             armorColumn[j].children[0].checked = false;
+            armorColumn[j].children[0].removeAttribute("checked");
             armorColumn[j].style.background = "transparent";
             j++;
           }
@@ -1304,6 +1306,7 @@ function unequip() {
           var j = 1;
           while (j < 6) {
             armorColumn[j].children[0].checked = false;
+            armorColumn[j].children[0].removeAttribute("checked");
             armorColumn[j].style.background = "transparent";
             j++;
           }
@@ -1326,6 +1329,7 @@ function unequip() {
           var j = 1;
           while (j < 6) {
             armorColumn[j].children[0].checked = false;
+            armorColumn[j].children[0].removeAttribute("checked");
             armorColumn[j].style.background = "transparent";
             j++;
           }
@@ -1348,6 +1352,7 @@ function unequip() {
           var j = 1;
           while (j < 6) {
             armorColumn[j].children[0].checked = false;
+            armorColumn[j].children[0].removeAttribute("checked");
             armorColumn[j].style.background = "transparent";
             j++;
           }
@@ -1370,6 +1375,7 @@ function unequip() {
           var j = 1;
           while (j < 6) {
             armorColumn[j].children[0].checked = false;
+            armorColumn[j].children[0].removeAttribute("checked");
             armorColumn[j].style.background = "transparent";
             j++;
           }
@@ -1743,9 +1749,14 @@ function updateArmorBreaks(){
           .parentNode.parentNode)-1;
   var limb=event.target.parentNode.classList[0].slice(0,2);
   var state
+  console.log(event.target);
   if(event.target.checked){
+    event.target.setAttribute("checked","");
     state="t";
-  } else state="f";
+  } else {
+    event.target.removeAttribute("checked");
+    state="f";
+  }
   
   if(limb=="HD"){
     coverage[spot]="t"+state;
@@ -2117,8 +2128,6 @@ document
         var rlids = document.getElementById("RLids").children;
         var coverage = itemPickUp.dataset["coverage"].split(", ");
         var armorStat = itemPickUp.dataset["armorstats"].split(", ");
-
-        console.log()
         
         //la
         var i = 0;
@@ -2138,7 +2147,8 @@ document
               }
               if (coverage[j][1] == "t") {
                 armorColumn[j - 4].children[0].checked = "true";
-              }
+                armorColumn[j - 4].children[0].setAttribute("checked","");
+              } else armorColumn[j - 4].children[0].removeAttribute("checked");
               j++;
             }
 
@@ -2168,7 +2178,8 @@ document
               }
               if (coverage[j][1] == "t") {
                 armorColumn[j+1].children[0].checked = "true";
-              }
+                armorColumn[j+1].children[0].setAttribute("checked","");
+              } else armorColumn[j+1].children[0].removeAttribute("checked");
               j++;
             }
 
@@ -2198,7 +2209,8 @@ document
               }
               if (coverage[j][1] == "t") {
                 armorColumn[j-24].children[0].checked = "true";
-              }
+                armorColumn[j - 24].children[0].setAttribute("checked","");
+              } else armorColumn[j - 24].children[0].removeAttribute("checked");
               j++;
             }
 
@@ -2228,7 +2240,8 @@ document
               }
               if (coverage[j][1] == "t") {
                 armorColumn[j-14].children[0].checked = "true";
-              }
+                armorColumn[j - 14].children[0].setAttribute("checked","");
+              } else armorColumn[j - 14].children[0].removeAttribute("checked");
               j++;
             }
 
@@ -2258,7 +2271,8 @@ document
               }
               if (coverage[j][1] == "t") {
                 armorColumn[j-9].children[0].checked = "true";
-              }
+                armorColumn[j - 9].children[0].setAttribute("checked","");
+              } else armorColumn[j - 9].children[0].removeAttribute("checked");
               j++;
             }
 
@@ -2288,7 +2302,8 @@ document
               }
               if (coverage[j][1] == "t") {
                 armorColumn[j-19].children[0].checked = "true";
-              }
+                armorColumn[j - 19].children[0].setAttribute("checked","");
+              } else armorColumn[j - 19].children[0].removeAttribute("checked");
               j++;
             }
 
