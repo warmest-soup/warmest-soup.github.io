@@ -699,7 +699,7 @@ input {
   box-sizing:border-box;
   padding: 0.4em 2em 0.4em 2em;
   width:100vw;
-  transform:translatex(-.9vw);
+  transform:translatex(-1em);
   gap: 0.5em;
 }
 #SheetManager > span{
