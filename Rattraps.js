@@ -40,8 +40,7 @@ function initializeSheet() {
   btCalc();
   limbDebuffColor();
   timeBG();
-  setSheetColor(document.getElementById("CustomColor")
-                .dataset.usercolor);
+  setSheetColor();
   invBonus();
 
   thermoBarFunc(worldTemp);
@@ -1927,8 +1926,10 @@ function timeBG() {
   document.body.style.backdropFilter = setting;
 }
 //customcolors
-function setSheetColor(userColor){
+function setSheetColor(){
+  var userColor = document.getElementById("CustomColor").dataset.usercolor;
   var color="hsl("+userColor+" 30% 50% / 70%)"
+  console.log(userColor);
   
   document.documentElement.style.setProperty("--userColor", color);
 }
