@@ -1,11 +1,35 @@
+:root{
+  --darkCol:rgb(80 100 150 / 70%);
+  --screen:repeating-linear-gradient(
+    50deg,
+    black,
+    black 1px,
+    var(--darkCol) 2px,
+    var(--darkCol) 10px
+  );
+  --userColor:hsl(200 30% 50% / 80%);
+}
+
 html {
   width: 100%;
   overflow-x: clip;
-  background: lightgray;
+  
+  background-image:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true");
+  background-repeat:no-repeat;
+  background-position:left;
+  background-attachment:fixed;
+  background-size:cover;
+}
+body{
+  width:200vw;
+  margin:0;
+  padding:1em;
+  position:sticky;
 }
 * {
   font-family: "caudex";
   font-size: 2.05vh;
+  border:none;
 }
 ::selection{
   color:white;
@@ -52,7 +76,6 @@ input[type="range"] {
   box-Shadow:inset 0em 0em 0em .1em gray;
   touch-action: none;
 }
-
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -73,7 +96,7 @@ input[type="checkbox"] {
   border-radius: 0.4em;
 }
 input[type="checkbox"]:checked {
-  background: repeating-linear-gradient(
+  background:repeating-linear-gradient(
     50deg,
     black,
     black 44%,
@@ -82,6 +105,19 @@ input[type="checkbox"]:checked {
     black 55%,
     black 100%
   );
+}
+input[type="radio"]{
+  box-shadow:none;
+}
+
+input::placeholder, textarea::placeholder{
+  color:rgb(0 0 0 / 50%);
+}
+
+button{
+  border-radius:.5em;
+  border:none !important;
+  background:rgb(200 200 200);
 }
 
 .SingleInputNUM {
@@ -98,10 +134,31 @@ input[type="checkbox"]:checked {
   border:none;
   box-shadow:0em 0em 0em .05em black;
 }
+.logIn{
+  background:white;
+}
+#customMenu{
+  position:absolute;
+  transform:translatex(40vw)translatey(1em);
+  background:white;
+  border:solid .1em black;
+  width:10em;
+  height:fit-content;
+  text-align:center;
+  border-radius:1em;
+  padding-bottom:1em;
+}
 .Section {
-  box-shadow: -0.25em 0.3em 0.3em 0em rgb(0 0 0 / 40%);
-  background: white;
-  box-Shadow:inset 0em 0em 0em .1em black;
+  background:linear-gradient(
+    var(--userColor),
+    rgb(245 235 230 / 80%)
+  );
+  backdrop-filter: blur(50px);
+  box-shadow: 
+    -0.25em 0.3em 0.3em 0em rgb(0 0 0 / 50%), 
+    inset 0em 0em 0em .1em black,
+    inset 0em .5em 1em 0em rgb(245 235 230 / 50%),
+    inset 0em 0em .5em .5em var(--userColor);
   border-radius: 0.5em;
   padding: 0.5em;
 }
@@ -120,6 +177,7 @@ input[type="checkbox"]:checked {
   border-radius: 0.5em;
   min-width: 13.8em;
   max-width: 13.8em;
+  background:transparent;
 }
 #Photo {
   box-Shadow: 0em 0em 0em .05em black;
@@ -149,8 +207,15 @@ td {
   max-height: 1em;
   text-wrap: nowrap;
 }
-input {
+input, select {
   text-align: center;
+  background:rgb(240 240 240 / 40%);
+  box-shadow:0em 0em 0em .05em black;
+}
+textarea {
+  background:rgb(240 240 240);
+  box-shadow:0em 0em 0em .05em black;
+  border-radius:.5em;
 }
 #Traits {
   text-align: center;
@@ -172,13 +237,14 @@ input {
   min-width: 1.7em;
 }
 .Row {
-  width: calc(100vw - 1em);
+  width: calc(100vw - .6em);
   height: 100%;
   display: flex;
   gap: 0.5em;
   overflow: auto;
   padding: 0.5em;
-  transform: translatex(-1em);
+  transform: translatex(-.9em);
+  box-sizing:border-box;
 }
 #Photo {
   text-align: center;
@@ -253,7 +319,7 @@ input {
   gap: 0.5em;
 }
 .AbilSlot {
-  box-Shadow: 0em 0em 0em .15em black;
+  box-Shadow: 0em 0em 0em .12em black;
   padding: 0.2em;
   border-radius: 0.7em;
   min-height: 1.6em;
@@ -261,6 +327,20 @@ input {
   min-width: 10.7em;
   max-width: 10.7em;
   white-space: nowrap;
+}
+.technique{
+  font-size:.87em;
+  box-shadow:0em 0em 0em .15em black;
+}
+.technique * input{
+  box-shadow:none;
+  transform:
+    scale(1.2,1.2)
+    translatey(-.2em)
+    translatex(-.1em);
+  background:none;
+  border:none;
+  text-align:center;
 }
 #AbilContainer button,
 #AbilContainer {
@@ -308,13 +388,8 @@ input {
   overflow: auto;
   padding: 0.3em;
   border-radius: 0.5em;
-  background: repeating-linear-gradient(
-    50deg,
-    black,
-    black 0.5px,
-    white 0.5px,
-    white 1%
-  );
+  background: var(--screen);
+  backdrop-filter:opacity(0%);
   display:flex;
   flex-direction:column;
   gap:.3em;
@@ -326,7 +401,21 @@ input {
 }
 .satIcon {
   text-align: center;
-  font-weight: bold;
+  margin-bottom:.5em;
+  width:2em;
+  height:2em;
+}
+#shIcon{
+  background:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SatIcons/h.png?raw=true")center 0%/ cover no-repeat;
+}
+#swIcon{
+  background:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SatIcons/w.png?raw=true")center 0%/ cover no-repeat;
+}
+#szIcon{
+  background:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SatIcons/z.png?raw=true")center 0%/ cover no-repeat;
+}
+#stIcon{
+  background:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SatIcons/t.png?raw=true")center 0%/ cover no-repeat;
 }
 .wgtIn {
   border: none;
@@ -342,7 +431,7 @@ input {
   box-Shadow: 0em 0em 0em .05em black;
   padding: 0em 0.5em;
   border-radius: 0.25em;
-  color: grey;
+  color: rgb(0 0 0 / 50%);
 }
 #AddAbility {
   border-radius: 5em;
@@ -354,8 +443,8 @@ input {
   border-radius: 0.7em;
   min-height: 1em;
   max-height: 1em;
-  min-width: 10em;
-  max-width: 10em;
+  min-width: 8em;
+  max-width: 8em;
   white-space: nowrap;
 }
 #addAbilWindow {
@@ -423,7 +512,6 @@ input {
   display: flex;
   align-items: end;
   justify-content: center;
-  background-color: white;
   min-width: 1em;
   max-width: 1em;
   min-height: 35em;
@@ -487,6 +575,8 @@ input {
   min-height: 25em;
   border-radius: 0.5em;
   padding: 1em;
+  background:url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/Card%20Texture.jpg") center 15%/cover no-repeat;
+  box-shadow:0em 0em 0em .05em black;
 }
 #PageButtons {
   text-align: center;
@@ -513,13 +603,8 @@ input {
   font-weight: bold;
 }
 .inventoryDisplay {
-  background: repeating-linear-gradient(
-    50deg,
-    black,
-    black 0.5px,
-    white 0.5px,
-    white 2%
-  );
+  background: var(--screen);
+  backdrop-filter:opacity(0%);
   box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%),
      0em 0em 0em .05em black;
   min-width: 26em;
@@ -543,6 +628,7 @@ input {
   max-width: 7em;
   text-align: center;
   text-wrap: nowrap;
+  box-shadow:0em 0em 0em .05em black;
 }
 #QuickItem::-webkit-scrollbar {
   display: none;
@@ -685,13 +771,8 @@ input {
 #SheetManager {
   box-Shadow: 0em 0em 0em .1em black;
   overflow: clip;
-  background: repeating-linear-gradient(
-    50deg,
-    black,
-    black 0.5px,
-    white 0.5px,
-    white 0.5%
-  );
+  background: var(--screen);
+  backdrop-filter:opacity(0%);
   text-align: center;
   display: flex;
   align-items: center;
@@ -730,13 +811,8 @@ input {
   justify-content: start;
 }
 #TackColumn {
-  background: repeating-linear-gradient(
-    50deg,
-    black,
-    black 0.5px,
-    white 0.5px,
-    white 2%
-  );
+  background: var(--screen);
+  backdrop-filter:opacity(0%);
   box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%),
     0em 0em 0em 0.07em black;
   border-radius: 0.5em;
@@ -767,13 +843,8 @@ input {
   justify-content: start;
 }
 #ResColumn {
-  background: repeating-linear-gradient(
-    50deg,
-    black,
-    black 0.5px,
-    white 0.5px,
-    white 2%
-  );
+  background: var(--screen);
+  backdrop-filter:opacity(0%);
   box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%),
     0em 0em 0em 0.07em black;
   border-radius: 0.5em;
@@ -820,7 +891,7 @@ input {
   overflow: auto;
 }
 .invContainer {
-  background: white;
+  background: rgb(255 235 220);
   box-shadow: 
     -0.3em 0.3em 1em 0em rgb(0 0 0 / 50%), 
     0em 0em 0em .05em black;
@@ -875,13 +946,8 @@ input {
   color: black;
 }
 .StoreDis {
-  background: repeating-linear-gradient(
-    50deg,
-    black,
-    black 0.5px,
-    rgb(50% 40% 40%) 0.5px,
-    rgb(50% 40% 40%) 2%
-  );
+  background: var(--screen);
+  backdrop-filter:opacity(0%);
 }
 .storeLocal::placeholder {
   color: rgb(50 50 50);
@@ -917,6 +983,10 @@ input {
   gap:.2em;
   align-items:center;
 }
+#WeaponList{
+  width:90%;
+  border-radius:.5em;
+}
 #WeaponStats{
   text-align:center;
   display:flex;
@@ -936,6 +1006,7 @@ input {
   max-width:8em;
   box-Shadow: 0em 0em 0em .05em black;
   border-radius:1em;
+  background:rgb(255 255 255 / 50%);
 }
 #chips{
   display:flex;
@@ -1157,4 +1228,93 @@ input {
   display:flex;
   min-height:36em;
   max-height:36em;
+}
+
+#Health{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:.5em .5em 6em .5em;
+  min-width:10em;
+  max-width:10em;
+}
+#GenHealth{
+  text-align:center;
+  background:rgb(152 112 112);
+  box-shadow:0em 0em 0em .12em black;
+  border-radius:.2em;
+  
+}
+#fatalBleedSect{
+  line-height:2em;
+  color:rgb(92 52 52);
+}
+#FatalBleedCounter{
+  background:transparent;
+  color:rgb(92 52 52);
+  background:rgb(182 142 142);
+  box-shadow:0em 0em 0em .05em rgb(92 52 52);
+  
+}
+#HPSect{
+  font-weight:bolder;
+  font-size:4em;
+  line-height:1em;
+  background:rgb(255 30 30);
+  box-shadow:0em -.03em 0em 0em black;
+}
+#HP{
+  width:1.1em;
+  height:.95em;
+  text-align:center;
+  font-size:2em;
+  font-weight:bolder;
+  border:none;
+  background:transparent;
+  box-shadow:none;
+}
+#DPSect{
+  color:white;
+  background:black;
+  font-weight:bolder;
+}
+#DP{
+  width:1em;
+  border:none;
+  color:white;
+  background:transparent;
+  font-weight:bolder;
+}
+#Injuries{
+  text-align:center;
+  line-height:1.6em;
+}
+#InjuriesTitle{
+  padding-bottom:1em;
+}
+#healthDetails{
+  display:flex;
+  align-items:left;
+  justify-content:space-around;
+}
+#healthDetails > div {
+  box-shadow:
+    0em 0em 0em .05em black,
+    0em 4.5em 0em 0em rgb(0 0 0 / 10%);
+  padding:.2em;
+  border-radius:.5em;
+  background:lightgray;
+}
+#BleedStacks{
+  text-align:center;
+}
+#BleedStacks * input[type="checkbox"]{
+  transform:
+    translatey(.3em)
+    translatex(-.1em)
+    scale(1.2,1.2);
+  border-radius:1em;
+}
+#BleedStacks * input[type="text"]{
+  min-width:2em;
 }

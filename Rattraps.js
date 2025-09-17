@@ -39,7 +39,10 @@ function initializeSheet() {
   weaponDamage();
   btCalc();
   limbDebuffColor();
-  
+  timeBG();
+  setSheetColor(document.getElementById("CustomColor")
+                .dataset.usercolor);
+  invBonus();
 
   thermoBarFunc(worldTemp);
 
@@ -63,8 +66,10 @@ function initializeSheet() {
 //Calculate EXP goal for next level of trait
 function expGoalCalc(real, exp, goal) {
   if (real.value) {
-    let numbers = real.value.match(/\d+/g);
-    let parsedNumbers = numbers.map((num) => parseInt(num, 10));
+    let numbers = real.value.match(/\d+/g) || 0;
+    let parsedNumbers = Array.from(numbers).map((num) =>
+      parseInt(num || 0, 10)
+    );
     var traitLv = Math.min(...parsedNumbers);
     var expGoal = (traitLv + 1) * 10;
     if ((traitLv || traitLv === 0) && traitLv < 5 && traitLv >= 0) {
@@ -77,18 +82,29 @@ function expGoalCalc(real, exp, goal) {
       exp.style.display = "none";
       goal.innerText = outputTxt;
     }
-    if (real.value.toLowerCase().includes("c")) {
+    if (
+      real.value.toLowerCase().includes("c") ||
+      real.value.toLowerCase().includes("p")
+    ) {
       var outputTxt = " T ";
       exp.style.display = "none";
       goal.innerText = outputTxt;
-    }
+      real.parentNode.parentNode.parentNode.parentNode.classList.add(
+        "technique"
+      );
+    } else
+      real.parentNode.parentNode.parentNode.parentNode.classList.remove(
+        "technique"
+      );
   }
 }
 //Character Level
 function levelCalc() {
   var reals = document.getElementsByClassName("realTrait");
   var ranks = Array.from(document.getElementsByClassName("Rank")).filter(
-    (x) => !x.value.toLowerCase().includes("c")
+    (x) =>
+      !x.value.toLowerCase().includes("c") &&
+      !x.value.toLowerCase().includes("p")
   );
 
   var i = 0;
@@ -197,7 +213,7 @@ function dupBar() {
   var button = document.getElementById("dupButton");
   var madeBar = document.getElementById("SatMiddle").appendChild(newBar);
 
-  barDups = SatBars.length - 4;
+  barDups = SatBars.length - 5;
   madeBar.children[1].children[0].id = "Dup" + barDups;
 
   var newInput = document.getElementById("Dup" + barDups);
@@ -371,8 +387,9 @@ function passHour() {
   newHour = newHour % 24;
   Hour.innerText = String(newHour).padStart(2, "0");
 
+  timeBG();
   //increment Weather
-  worldTemp();
+  //worldTemp();
 }
 //ExpDecay
 function expDecay() {
@@ -519,11 +536,12 @@ function sleep() {
     sleepVal.value = 0;
   }
 
+  timeBG();
   //incrementWeather
-  worldTemp();
+  //worldTemp();
 }
 //Open windows (Imported As is)
-var openWinlettes = 0;
+var openWinlettes = 1;
 function openWinlette(winID) {
   if (winID.style.display === "none" || winID.style.display === "") {
     winID.style.display = "block";
@@ -569,6 +587,7 @@ function addAbillity() {
           type +
           aID +
           "Info' class='AbilityInfo'>" +
+          type + "\n" +
           des +
           "</pre></span>";
 
@@ -599,11 +618,11 @@ function addAbillity() {
     window.alert("Some fields were left blank.");
   }
 }
-//Open Skill index (Needs to redirect to github site!)1
+//Open Skill index
 function openIndex() {
   window.open("https://warmest-soup.github.io/TechIndex", "_blank");
 }
-//Open Rule Book (Needs to redirect to github site!)
+//Open Rule Book
 function openRules() {
   window.open("https://warmest-soup.github.io/RuleBook", "_blank");
 }
@@ -803,18 +822,20 @@ function newPage(action) {
   }
 }
 //setHandedness
-function saveDropdown(dd){
-  var chosen = dd.value
-  
-  var thisOption = Array.from(dd.children)
-  .findIndex((x)=> x.outerHTML.includes(chosen))
-  var current = Array.from(dd.children)
-  .findIndex((x)=> x.outerHTML.includes("selected"))
-  console.log(current)
-  if(current!=-1){dd[current].removeAttribute("selected");}
-  dd[thisOption].setAttribute("selected","");
-  
+function saveDropdown(dd) {
+  var chosen = dd.value;
+
+  var thisOption = Array.from(dd.children).findIndex((x) =>
+    x.outerHTML.includes(chosen)
+  );
+  var current = Array.from(dd.children).findIndex((x) =>
+    x.outerHTML.includes("selected")
+  );
+  if (current != -1) {
+    dd[current].removeAttribute("selected");
   }
+  dd[thisOption].setAttribute("selected", "");
+}
 //Duplicate the tech & armor sections when making new armor items
 function dupSection(target) {
   newSection = target.parentNode.cloneNode("true");
@@ -1030,7 +1051,9 @@ function PKTweight() {
     j = 1;
     var weights = [];
     var pktLoad;
+    var pktLimit;
     var pktReadout;
+    
 
     while (j < allPockets[i].children.length - 1) {
       var slot = allPockets[i].children[j];
@@ -1051,9 +1074,37 @@ function PKTweight() {
           pktLoad.reduce((acc, x) => acc + x) + " / ";
     } else
       allPockets[i].getElementsByClassName("INVconWGT")[0].innerText = "0 /";
+    
+    pktLoad=parseInt(allPockets[i].getElementsByClassName("INVconWGT")[0].innerText);
+    pktLimit=parseInt(allPockets[i].getElementsByClassName("INVconLimit")[0].innerText);
+    
+    if(pktLoad<pktLimit){
+      allPockets[i].getElementsByClassName("INVconLimit")[0].parentNode.style.color="black";
+    }else allPockets[i].getElementsByClassName("INVconLimit")[0].parentNode.style.color="red";
 
     i++;
   }
+}
+//INV Bonus
+var encumbered=false;
+function invBonus(){
+  var load = parseInt(document.getElementById("LoadWeight").innerText);
+  var limit = parseInt(document.getElementById("CarryWeight").innerText);
+  var weight=document.getElementById("wgtFunc");
+  
+  var encumberance=Math.round(load/limit);
+  console.log("ec "+encumberance);
+  
+  if(encumberance && encumbered==false){
+    encumbered=true;
+    document.getElementById("wgtFunc").style.color="red";
+    weight.innerText=parseInt(weight.innerText)+1;
+  } else if(encumbered==true){
+    encumbered=false;
+    weight.innerText=parseInt(weight.innerText)-1;
+    document.getElementById("wgtFunc").style.color="black";
+  }
+  
 }
 //Populate Resistancesy
 function addRes(item) {
@@ -1123,11 +1174,21 @@ function removeRes(item) {
 }
 //SetINV Carryweight
 function carryWeight() {
-  var limits = Array.from(pktWeights).map((x) => parseInt(x.innerText));
-  document.getElementById("LoadWeight").innerText = limits.reduce(
+  var weight=document.getElementById("InvStats");
+  var limit=parseInt(document.getElementById("CarryWeight").innerText);
+  var load = Array.from(pktWeights).map((x) => parseInt(x.innerText));
+  document.getElementById("LoadWeight").innerText = load.reduce(
     (acc, x) => acc + x,
     0
   );
+  
+  if(limit>=load){
+    weight.style.color="black";
+    invBonus();
+  }else{
+    weight.style.color="red";
+    invBonus();
+  }
 }
 function carryLimit() {
   var charWgtLimit = document.getElementById("CarryWeight");
@@ -1316,7 +1377,7 @@ function unequip() {
         }
         i++;
       }
-      i=0;
+      i = 0;
       while (i < 5) {
         if (llids[i].innerText == " " + itemPickUp.id) {
           //get actual column values
@@ -1339,7 +1400,7 @@ function unequip() {
         }
         i++;
       }
-      i=0;
+      i = 0;
       while (i < 5) {
         if (bdids[i].innerText == " " + itemPickUp.id) {
           //get actual column values
@@ -1362,7 +1423,7 @@ function unequip() {
         }
         i++;
       }
-      i=0;
+      i = 0;
       while (i < 5) {
         if (rlids[i].innerText == " " + itemPickUp.id) {
           //get actual column values
@@ -1385,9 +1446,7 @@ function unequip() {
         }
         i++;
       }
-      
     }
-    
 
     removeRes(itemPickUp);
     //end of unequip
@@ -1630,9 +1689,13 @@ function damageCalc() {
   ];
 
   var dmgTotal = dmgInputs.reduce(
-    (acc, x) => acc + (parseInt(x.dataset["damage"]) || 0), 0);
+    (acc, x) => acc + (parseInt(x.dataset["damage"]) || 0),
+    0
+  );
   var initialDmg = dmgInputs.reduce(
-    (acc, x) => acc + (parseInt(x.value) || 0), 0)
+    (acc, x) => acc + (parseInt(x.value) || 0),
+    0
+  );
 
   taken.innerText = dmgTotal;
 
@@ -1704,77 +1767,179 @@ function limbDebuffColor() {
     i++;
   }
 }
-function dtLightUp(){
-  var damage=Array.from(document.getElementsByClassName("dmgTaken"));
-  var i=0;
-  while(i<damage.length){
-    var edt=damage[i]
-    .parentNode.parentNode.parentNode.parentNode
-    .children[0].children[0].children[0];
-    var secDT=damage[i]
-    .parentNode.parentNode.parentNode.parentNode
-    .children[3].children[2].children[0];
-    var bt=damage[i]
-    .parentNode.parentNode.parentNode.parentNode
-    .children[3].children[0].children[1].children[1]
-    var dmgVal = parseInt(damage[i].innerText)||0;
-    
+function dtLightUp() {
+  var damage = Array.from(document.getElementsByClassName("dmgTaken"));
+  var i = 0;
+  while (i < damage.length) {
+    var edt =
+      damage[i].parentNode.parentNode.parentNode.parentNode.children[0]
+        .children[0].children[0];
+    var secDT =
+      damage[i].parentNode.parentNode.parentNode.parentNode.children[3]
+        .children[2].children[0];
+    var bt =
+      damage[i].parentNode.parentNode.parentNode.parentNode.children[3]
+        .children[0].children[1].children[1];
+    var dmgVal = parseInt(damage[i].innerText) || 0;
+
     //EDT
-    if(dmgVal>parseInt(edt.innerText)){
-      edt.style.color="red";
-    } else edt.style.color="rgb(0 0 0 / 50%)";
+    if (dmgVal > parseInt(edt.innerText)) {
+      edt.style.color = "red";
+    } else edt.style.color = "rgb(0 0 0 / 50%)";
     //BT
-    if(dmgVal>parseInt(bt.innerText)){
-      bt.style.color="red";
-    } else bt.style.color="rgb(0 0 0 / 50%)";
+    if (dmgVal > parseInt(bt.innerText)) {
+      bt.style.color = "red";
+    } else bt.style.color = "rgb(0 0 0 / 50%)";
     //2DT
-    if(dmgVal>parseInt(secDT.innerText)){
-      secDT.style.color="red";
-    } else secDT.style.color="rgb(0 0 0 / 50%)";
-    
+    if (dmgVal > parseInt(secDT.innerText)) {
+      secDT.style.color = "red";
+    } else secDT.style.color = "rgb(0 0 0 / 50%)";
+
+    i++;
+  }
+}
+function updateArmorBreaks() {
+  var armor = document.getElementById(
+    document
+      .getElementsByClassName(event.target.parentNode.classList[0])[0]
+      .innerText.trim()
+  );
+  if (!armor) return;
+  var coverage = armor.dataset.coverage.split(", ");
+  var spot =
+    Array.from(event.target.parentNode.parentNode.parentNode.children).indexOf(
+      event.target.parentNode.parentNode
+    ) - 1;
+  var limb = event.target.parentNode.classList[0].slice(0, 2);
+  var state;
+  if (event.target.checked) {
+    event.target.setAttribute("checked", "");
+    state = "t";
+  } else {
+    event.target.removeAttribute("checked");
+    state = "f";
+  }
+
+  if (limb == "HD") {
+    coverage[spot] = "t" + state;
+  } else if (limb == "LA") {
+    coverage[spot + 5] = "t" + state;
+  } else if (limb == "BD") {
+    coverage[spot + 10] = "t" + state;
+  } else if (limb == "LL") {
+    coverage[spot + 15] = "t" + state;
+  } else if (limb == "RL") {
+    coverage[spot + 20] = "t" + state;
+  } else if (limb == "RA") {
+    coverage[spot + 25] = "t" + state;
+  }
+
+  armor.dataset.coverage = coverage.join(", ");
+}
+function permanantBleed() {
+  var check = event.target;
+  var num = event.target.parentNode.children[1];
+
+  var bleedRow = event.target.parentNode;
+
+  if (check.checked) {
+    bleedRow.style.background = "red";
+    bleedRow.style.boxShadow = "0em -.3em 0em 0em red, 0em .2em .7em 0em red";
+    bleedRow.style.borderRadius = ".3em";
+    num.style.background = "salmon";
+  } else {
+    bleedRow.removeAttribute("style");
+    num.removeAttribute("style");
+  }
+}
+function injuryStatus(){
+  var limbs=document.getElementsByClassName("InjuryDisplay");
+  var selects=Array.from(document.getElementsByClassName("agInjuryStatus"));
+  var injury = [selects[0], selects[2],selects[1],selects[4],selects[3],selects[5]];
+  
+  var i=0;
+  while(i<limbs.length){
+      if(injury[i].value=="Fine"){
+        limbs[i].removeAttribute("style");
+        limbs[i].style.textDecoration="none";
+        limbs[i].style.color="black";
+      } else if(injury[i].value=="INJ"){
+        limbs[i].removeAttribute("style");
+        limbs[i].style.textDecoration="line-through";
+        limbs[i].style.color="red";
+      } else if(injury[i].value=="CRP"){
+        limbs[i].style.textDecoration="line-through";
+        limbs[i].style.color="black";
+        limbs[i].style.background="red";
+    }
     i++
   }
 }
-function updateArmorBreaks(){
-  var armor = document.getElementById(
-    document.getElementsByClassName(
-      event.target.parentNode.classList[0])[0]
-    .innerText.trim());
-  if(!armor) return;
-  var coverage=armor.dataset.coverage.split(", "); 
-  var spot=Array.from(event.target
-                     .parentNode.parentNode.parentNode
-                     .children)
- .indexOf(event.target
-          .parentNode.parentNode)-1;
-  var limb=event.target.parentNode.classList[0].slice(0,2);
-  var state
-  console.log(event.target);
-  if(event.target.checked){
-    event.target.setAttribute("checked","");
-    state="t";
+//Time BG
+function timeBG() {
+  var hour = parseInt(document.getElementById("CurrentHour").innerText);
+  var brightness = 0;
+  var contrast = 0;
+  var invert = 0;
+  var hue = 0;
+
+  if (5 < hour && hour < 18) {
+      invert = 0;
+    } else invert = 100;
+  if (-1 < hour && hour < 13) {
+    //get brighter start from darkest
+    // DAY
+    brightness = Math.round(100 + 2 * (hour - 7) ** 2);
+    contrast = Math.round(100 + 1.4 * (hour - 6) ** 2);
+    hue = Math.round(45 - 3.75 * hour);
+
+    var setting =
+      "brightness(" +
+      brightness +
+      "%) contrast(" +
+      contrast +
+      "%) invert(" +
+      invert +
+      "%) hue-rotate(" +
+      hue +
+      "deg)";
+    
   } else {
-    event.target.removeAttribute("checked");
-    state="f";
+    //NIGHT
+    hour = 12 - (hour - 12);
+    brightness = Math.round(100 + 2 * (hour - 7) ** 2);
+    contrast = Math.round(100 + 1.4 * (hour - 6) ** 2);
+    hue = Math.round(45 - 3.75 * hour);
+
+    var setting =
+      "brightness(" +
+      brightness +
+      "%) contrast(" +
+      contrast +
+      "%) invert(" +
+      invert +
+      "%) hue-rotate(" +
+      hue +
+      "deg)";
+    
   }
   
-  if(limb=="HD"){
-    coverage[spot]="t"+state;
-  } else if (limb=="LA"){
-    coverage[spot+5]="t"+state;
-  } else if (limb=="BD"){
-    coverage[spot+10]="t"+state;
-  } else if (limb=="LL"){
-    coverage[spot+15]="t"+state;
-  } else if (limb=="RL"){
-    coverage[spot+20]="t"+state;
-  } else if (limb=="RA"){
-    coverage[spot+25]="t"+state;
-  }
-  
-  armor.dataset.coverage=coverage.join(", ");
+  document.body.style.backdropFilter = setting;
 }
-//Wolrd Temp
+//customcolors
+function setSheetColor(userColor){
+  var color="hsl("+userColor+" 30% 50% / 70%)"
+  
+  document.documentElement.style.setProperty("--userColor", color);
+}
+function changeUserColor(color){
+  var userColor=document.getElementById("CustomColor").dataset.usercolor;
+  
+  userColor=color+"deg";
+  
+  setSheetColor(userColor);
+}
+//World Temp
 
 //End of declarations
 
@@ -1862,10 +2027,16 @@ document
     if (event.target.classList.contains("PrimaryDebuff")) {
       limbDebuffColor();
     }
-    if (event.target
-        .parentNode.parentNode.parentNode.parentNode
-        .classList=="armorGrid"){
+    if (
+      event.target.parentNode.parentNode
+      .parentNode.parentNode.classList =="armorGrid") {
       updateArmorBreaks();
+    }
+    if (event.target.classList.contains("BleedState")) {
+      permanantBleed();
+    }
+    if(event.target.classList.contains("agInjuryStatus")){
+      injuryStatus();
     }
 
     //console.log(event.target);
@@ -1888,7 +2059,7 @@ document
 
   //variables
   var leftBehind = "";
-  //Abilities D&D
+  //Abilities D&Dd
   function abilDragStart(event) {
     leftBehind = event.target.parentNode;
     event.dataTransfer.setData("Text", event.target.id);
@@ -1909,6 +2080,11 @@ document
         event.dataTransfer.getData("Text"),
         event.target
       );
+
+      if (leftBehind.classList.contains("technique")) {
+        leftBehind.classList.remove("technique");
+        event.target.classList.add("technique");
+      }
 
       event.target.appendChild(document.getElementById(data));
       event.dataTransfer.clearData("Text");
@@ -2128,11 +2304,14 @@ document
         var rlids = document.getElementById("RLids").children;
         var coverage = itemPickUp.dataset["coverage"].split(", ");
         var armorStat = itemPickUp.dataset["armorstats"].split(", ");
-        
+
         //la
         var i = 0;
         while (i < 5) {
-          if (!laids[i].innerText && coverage.slice(5,10).some((x)=> x.includes("t"))) {
+          if (
+            !laids[i].innerText &&
+            coverage.slice(5, 10).some((x) => x.includes("t"))
+          ) {
             //get actual column values nh
             var armorColumn = Array.from(
               document.getElementsByClassName(laids[i].classList)
@@ -2147,7 +2326,7 @@ document
               }
               if (coverage[j][1] == "t") {
                 armorColumn[j - 4].children[0].checked = "true";
-                armorColumn[j - 4].children[0].setAttribute("checked","");
+                armorColumn[j - 4].children[0].setAttribute("checked", "");
               } else armorColumn[j - 4].children[0].removeAttribute("checked");
               j++;
             }
@@ -2163,7 +2342,10 @@ document
         //hd
         i = 0;
         while (i < 5) {
-          if (!hdids[i].innerText && coverage.slice(0,5).some((x)=> x.includes("t"))) {
+          if (
+            !hdids[i].innerText &&
+            coverage.slice(0, 5).some((x) => x.includes("t"))
+          ) {
             //get actual column values
             var armorColumn = Array.from(
               document.getElementsByClassName(hdids[i].classList)
@@ -2173,13 +2355,13 @@ document
             var j = 0;
             while (j < 5) {
               if (coverage[j][0] == "t") {
-                armorColumn[j+1].children[0].parentNode.style.background =
+                armorColumn[j + 1].children[0].parentNode.style.background =
                   "rgb(0 0 0 /25%)";
               }
               if (coverage[j][1] == "t") {
-                armorColumn[j+1].children[0].checked = "true";
-                armorColumn[j+1].children[0].setAttribute("checked","");
-              } else armorColumn[j+1].children[0].removeAttribute("checked");
+                armorColumn[j + 1].children[0].checked = "true";
+                armorColumn[j + 1].children[0].setAttribute("checked", "");
+              } else armorColumn[j + 1].children[0].removeAttribute("checked");
               j++;
             }
 
@@ -2194,7 +2376,10 @@ document
         //ra
         i = 0;
         while (i < 5) {
-          if (!raids[i].innerText && coverage.slice(25,30).some((x)=> x.includes("t"))) {
+          if (
+            !raids[i].innerText &&
+            coverage.slice(25, 30).some((x) => x.includes("t"))
+          ) {
             //get actual column values
             var armorColumn = Array.from(
               document.getElementsByClassName(raids[i].classList)
@@ -2204,12 +2389,12 @@ document
             var j = 25;
             while (j < 30) {
               if (coverage[j][0] == "t") {
-                armorColumn[j-24].children[0].parentNode.style.background =
+                armorColumn[j - 24].children[0].parentNode.style.background =
                   "rgb(0 0 0 /25%)";
               }
               if (coverage[j][1] == "t") {
-                armorColumn[j-24].children[0].checked = "true";
-                armorColumn[j - 24].children[0].setAttribute("checked","");
+                armorColumn[j - 24].children[0].checked = "true";
+                armorColumn[j - 24].children[0].setAttribute("checked", "");
               } else armorColumn[j - 24].children[0].removeAttribute("checked");
               j++;
             }
@@ -2225,7 +2410,10 @@ document
         //ll
         i = 0;
         while (i < 5) {
-          if (!llids[i].innerText && coverage.slice(15,20).some((x)=> x.includes("t"))) {
+          if (
+            !llids[i].innerText &&
+            coverage.slice(15, 20).some((x) => x.includes("t"))
+          ) {
             //get actual column values
             var armorColumn = Array.from(
               document.getElementsByClassName(llids[i].classList)
@@ -2235,12 +2423,12 @@ document
             var j = 15;
             while (j < 20) {
               if (coverage[j][0] == "t") {
-                armorColumn[j-14].children[0].parentNode.style.background =
+                armorColumn[j - 14].children[0].parentNode.style.background =
                   "rgb(0 0 0 /25%)";
               }
               if (coverage[j][1] == "t") {
-                armorColumn[j-14].children[0].checked = "true";
-                armorColumn[j - 14].children[0].setAttribute("checked","");
+                armorColumn[j - 14].children[0].checked = "true";
+                armorColumn[j - 14].children[0].setAttribute("checked", "");
               } else armorColumn[j - 14].children[0].removeAttribute("checked");
               j++;
             }
@@ -2256,7 +2444,10 @@ document
         //bd
         i = 0;
         while (i < 5) {
-          if (!bdids[i].innerText && coverage.slice(10,15).some((x)=> x.includes("t"))) {
+          if (
+            !bdids[i].innerText &&
+            coverage.slice(10, 15).some((x) => x.includes("t"))
+          ) {
             //get actual column values
             var armorColumn = Array.from(
               document.getElementsByClassName(bdids[i].classList)
@@ -2266,12 +2457,12 @@ document
             var j = 10;
             while (j < 15) {
               if (coverage[j][0] == "t") {
-                armorColumn[j-9].children[0].parentNode.style.background =
+                armorColumn[j - 9].children[0].parentNode.style.background =
                   "rgb(0 0 0 /25%)";
               }
               if (coverage[j][1] == "t") {
-                armorColumn[j-9].children[0].checked = "true";
-                armorColumn[j - 9].children[0].setAttribute("checked","");
+                armorColumn[j - 9].children[0].checked = "true";
+                armorColumn[j - 9].children[0].setAttribute("checked", "");
               } else armorColumn[j - 9].children[0].removeAttribute("checked");
               j++;
             }
@@ -2287,7 +2478,10 @@ document
         //rl
         i = 0;
         while (i < 5) {
-          if (!rlids[i].innerText && coverage.slice(20,25).some((x)=> x.includes("t"))) {
+          if (
+            !rlids[i].innerText &&
+            coverage.slice(20, 25).some((x) => x.includes("t"))
+          ) {
             //get actual column values
             var armorColumn = Array.from(
               document.getElementsByClassName(rlids[i].classList)
@@ -2297,12 +2491,12 @@ document
             var j = 20;
             while (j < 25) {
               if (coverage[j][0] == "t") {
-                armorColumn[j-19].children[0].parentNode.style.background =
+                armorColumn[j - 19].children[0].parentNode.style.background =
                   "rgb(0 0 0 /25%)";
               }
               if (coverage[j][1] == "t") {
-                armorColumn[j-19].children[0].checked = "true";
-                armorColumn[j - 19].children[0].setAttribute("checked","");
+                armorColumn[j - 19].children[0].checked = "true";
+                armorColumn[j - 19].children[0].setAttribute("checked", "");
               } else armorColumn[j - 19].children[0].removeAttribute("checked");
               j++;
             }
