@@ -1935,8 +1935,8 @@ function setSheetColor(userColor){
 function changeUserColor(color){
   var userColor=document.getElementById("CustomColor").dataset.usercolor;
   
-  userColor=color+"deg";
-  
+  document.getElementById("CustomColor").dataset.usercolor=color+"deg";
+  console.log(document.getElementById("CustomColor"))
   setSheetColor(userColor);
 }
 //World Temp
