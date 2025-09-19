@@ -1927,18 +1927,22 @@ function timeBG() {
 }
 //customcolors
 function setSheetColor(){
-  var userColor = document.getElementById("CustomColor").dataset.usercolor;
-  var color="hsl("+userColor+" 30% 50% / 70%)"
-  console.log(userColor);
+  var userHue=document.getElementById("CustomColor").dataset.userhue;
+  var userBri=document.getElementById("CustomColor").dataset.userbri;
+  var userOpa=document.getElementById("CustomColor").dataset.useropa;
+  var color="hsl("+userHue+" 30% "+userBri+" / "+userOpa+")"
+  
+  console.log(userHue);
   
   document.documentElement.style.setProperty("--userColor", color);
 }
-function changeUserColor(color){
-  var userColor=document.getElementById("CustomColor").dataset.usercolor;
+function changeUserColor(hue,bri,opa){
+  document.getElementById("CustomColor").dataset.userhue=hue+"deg";
+  document.getElementById("CustomColor").dataset.userbri=bri+"%";
+  document.getElementById("CustomColor").dataset.useropa=opa+"%";
   
-  document.getElementById("CustomColor").dataset.usercolor=color+"deg";
   console.log(document.getElementById("CustomColor"))
-  setSheetColor(userColor);
+  setSheetColor();
 }
 //World Temp
 
