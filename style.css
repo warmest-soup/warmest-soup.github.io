@@ -891,6 +891,7 @@ textarea {
   gap: 0.5em;
   padding: 0.5em 0em 0.5em 0em;
   overflow: auto;
+  overflow-x:clip;
 }
 .invContainer {
   background: rgb(255 235 220);
@@ -1322,3 +1323,4 @@ textarea {
 #BleedStacks * input[type="text"]{
   min-width:2em;
 }
+
