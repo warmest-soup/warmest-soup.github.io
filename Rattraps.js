@@ -1176,10 +1176,11 @@ function carryWeight() {
   var weight=document.getElementById("InvStats");
   var limit=parseInt(document.getElementById("CarryWeight").innerText);
   var load = Array.from(pktWeights).map((x) => parseInt(x.innerText));
-  document.getElementById("LoadWeight").innerText = load.reduce(
+  var loadTotal=load.reduce(
     (acc, x) => acc + x,
     0
   );
+  document.getElementById("LoadWeight").innerText = loadTotal;
   console.log(limit+ " >= "+load);
   if(limit>=load){
     weight.style.color="black";
