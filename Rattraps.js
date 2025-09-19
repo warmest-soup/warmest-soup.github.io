@@ -1093,18 +1093,15 @@ function invBonus(){
   var weight=document.getElementById("wgtFunc");
   
   var encumberance=Math.round(load/limit);
-  console.log("ec "+encumberance);
   
   if(encumberance && encumbered==false){
     encumbered=true;
     document.getElementById("wgtFunc").style.color="red";
-    document.getElementById("InvStats").style.color="red";
     weight.innerText=parseInt(weight.innerText)+1;
   } else if(encumbered==true){
     encumbered=false;
-    document.getElementById("wgtFunc").style.color="black";
-    document.getElementById("InvStats").style.color="black";
     weight.innerText=parseInt(weight.innerText)-1;
+    document.getElementById("wgtFunc").style.color="black";
   }
   
 }
@@ -1176,12 +1173,21 @@ function removeRes(item) {
 }
 //SetINV Carryweight
 function carryWeight() {
+  var weight=document.getElementById("InvStats");
   var limit=parseInt(document.getElementById("CarryWeight").innerText);
   var load = Array.from(pktWeights).map((x) => parseInt(x.innerText));
   document.getElementById("LoadWeight").innerText = load.reduce(
     (acc, x) => acc + x,
     0
   );
+  console.log(limit+ " >= "+load);
+  if(limit>=load){
+    weight.style.color="black";
+    invBonus();
+  }else{
+    weight.style.color="red";
+    invBonus();
+  }
 }
 function carryLimit() {
   var charWgtLimit = document.getElementById("CarryWeight");
