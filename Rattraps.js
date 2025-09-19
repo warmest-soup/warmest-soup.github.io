@@ -41,7 +41,9 @@ function initializeSheet() {
   limbDebuffColor();
   timeBG();
   setSheetColor();
+  setBG(document.getElementById("CustomColor").dataset.bg);
   invBonus();
+  moneyCalc();
 
   thermoBarFunc(worldTemp);
 
@@ -1019,9 +1021,7 @@ function remWarning(rem) {
   rem.style.background = "red";
 }
 function remWarningReset(rem) {
-  rem.style.color = "gray";
-  rem.style.border = "solid gray 0.1em";
-  rem.style.background = "transparent";
+  rem.removeAttribute("style");
 }
 //assign inventory size
 function assignInvSize(item) {
@@ -1092,7 +1092,6 @@ function invBonus(){
   var weight=document.getElementById("wgtFunc");
   
   var encumberance=Math.round(load/limit);
-  console.log("ec "+encumberance);
   
   if(encumberance && encumbered==false){
     encumbered=true;
@@ -1176,12 +1175,12 @@ function carryWeight() {
   var weight=document.getElementById("InvStats");
   var limit=parseInt(document.getElementById("CarryWeight").innerText);
   var load = Array.from(pktWeights).map((x) => parseInt(x.innerText));
-  document.getElementById("LoadWeight").innerText = load.reduce(
+  var loadTotal=load.reduce(
     (acc, x) => acc + x,
     0
   );
-  
-  if(limit>=load){
+  document.getElementById("LoadWeight").innerText = loadTotal;
+  if(limit>=loadTotal){
     weight.style.color="black";
     invBonus();
   }else{
@@ -1927,18 +1926,49 @@ function timeBG() {
 }
 //customcolors
 function setSheetColor(){
-  var userColor = document.getElementById("CustomColor").dataset.usercolor;
-  var color="hsl("+userColor+" 30% 50% / 70%)"
-  console.log(userColor);
+  var userHue=document.getElementById("CustomColor").dataset.userhue;
+  var userBri=document.getElementById("CustomColor").dataset.userbri;
+  var userOpa=document.getElementById("CustomColor").dataset.useropa;
+  var color="hsl("+userHue+" 30% "+userBri+" / "+userOpa+")"
   
   document.documentElement.style.setProperty("--userColor", color);
 }
-function changeUserColor(color){
-  var userColor=document.getElementById("CustomColor").dataset.usercolor;
+function changeUserColor(hue,bri,opa){
+  document.getElementById("CustomColor").dataset.userhue=hue+"deg";
+  document.getElementById("CustomColor").dataset.userbri=bri+"%";
+  document.getElementById("CustomColor").dataset.useropa=opa+"%";
+  setSheetColor();
+}
+function setBG(moving){
+  if(moving){ document.documentElement.style.backgroundImage="url('https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true')";
+  } else {
+    document.documentElement.style.backgroundImage="url('https://warmest-soup.github.io/Assets/Images/Sheet%20Grand%20BG.png')"
+  };
+}
+function userBG(){
+  var BG=document.getElementById("userBG").checked;
   
-  document.getElementById("CustomColor").dataset.usercolor=color+"deg";
-  console.log(document.getElementById("CustomColor"))
-  setSheetColor(userColor);
+  if(BG){
+    document.getElementById("CustomColor").dataset.bg="true";
+  } else document.getElementById("CustomColor").dataset.bg="false";
+  
+  setBG(BG);
+}
+//Money Total
+function moneyCalc(){
+  var moneyDisplay=document.getElementById("moneyTracker");
+  var invContents=document.getElementById("invDisContents").innerHTML;
+  
+  var moneyVals=invContents.match(/\$\d+\.?\d{0,2}|\d{0,2}¢/g)||["0"];
+  moneyVals=moneyVals.map((x)=> {
+    if(x.includes("¢")){
+      return parseFloat(x)/100;
+    } else return parseFloat(x.replace("$",""));
+  })
+  var moneyTotal=moneyVals.reduce((acc, x)=>acc+(x || 0) ,0);
+  
+  moneyDisplay.placeholder="$"+moneyTotal.toFixed(2)+"¢";
+  
 }
 //World Temp
 
@@ -2051,6 +2081,7 @@ document
     carryWeight();
     weaponListUpdate();
     weaponSwitch();
+    moneyCalc();
   });
 
 /*Drag & Drop Functions..*/ {
@@ -2203,6 +2234,7 @@ document
     var target = document.getElementById(event.dataTransfer.getData("text"));
     unequip();
     itemPickUp.remove();
+    event.target.dispatchEvent(invChange);
   }
 
   //Drop Change Quick Items
@@ -2220,6 +2252,7 @@ document
       document.getElementById("QuickItem").value = qiTextForm;
       itemPickUp.remove();
     }
+    event.target.dispatchEvent(invChange);
   }
 
   //Equipping Items

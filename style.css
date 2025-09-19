@@ -14,11 +14,12 @@ html {
   width: 100%;
   overflow-x: clip;
   
-  background-image:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/Sheet%20Grand%20BG.png?raw=true");
+  background-image:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true");
   background-repeat:no-repeat;
-  background-position:left;
+  background-position:center;
   background-attachment:fixed;
-  background-size:cover;
+  background-size:100% 100%;
+  
 }
 body{
   width:200vw;
@@ -48,7 +49,7 @@ button {
   display: overlay;
 }
 ::-webkit-scrollbar-thumb {
-  background: darkGray;
+  background: var(--userColor);
   border-radius: 1em;
 }
 ::-webkit-scrollbar-corner {
@@ -146,7 +147,8 @@ button{
   height:fit-content;
   text-align:center;
   border-radius:1em;
-  padding-bottom:1em;
+  padding:1em 0em .5em 0em;
+  line-height:1em;
 }
 .Section {
   background:linear-gradient(
@@ -892,6 +894,7 @@ textarea {
 }
 .invContainer {
   background: rgb(255 235 220);
+  overflow-x:clip;
   box-shadow: 
     -0.3em 0.3em 1em 0em rgb(0 0 0 / 50%), 
     0em 0em 0em .05em black;
@@ -939,6 +942,7 @@ textarea {
 .storeLocal {
   resize: none;
   text-align: left;
+  box-shadow:none;
   border: none;
   min-width: 10em;
   max-width: 10em;
@@ -1317,7 +1321,4 @@ textarea {
 }
 #BleedStacks * input[type="text"]{
   min-width:2em;
-
 }
-
-
