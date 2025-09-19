@@ -41,7 +41,7 @@ function initializeSheet() {
   limbDebuffColor();
   timeBG();
   setSheetColor();
-  setBG();
+  setBG(document.getElementById("CustomColor").dataset.bg);
   invBonus();
 
   thermoBarFunc(worldTemp);
