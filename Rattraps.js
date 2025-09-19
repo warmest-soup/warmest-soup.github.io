@@ -43,6 +43,7 @@ function initializeSheet() {
   setSheetColor();
   setBG(document.getElementById("CustomColor").dataset.bg);
   invBonus();
+  moneyCalc();
 
   thermoBarFunc(worldTemp);
 
@@ -1020,9 +1021,7 @@ function remWarning(rem) {
   rem.style.background = "red";
 }
 function remWarningReset(rem) {
-  rem.style.color = "gray";
-  rem.style.border = "solid gray 0.1em";
-  rem.style.background = "transparent";
+  rem.removeAttribute("style");
 }
 //assign inventory size
 function assignInvSize(item) {
@@ -1181,7 +1180,6 @@ function carryWeight() {
     0
   );
   document.getElementById("LoadWeight").innerText = loadTotal;
-  console.log(limit+ " >= "+loadTotal);
   if(limit>=loadTotal){
     weight.style.color="black";
     invBonus();
@@ -1933,23 +1931,18 @@ function setSheetColor(){
   var userOpa=document.getElementById("CustomColor").dataset.useropa;
   var color="hsl("+userHue+" 30% "+userBri+" / "+userOpa+")"
   
-  console.log(userHue);
-  
   document.documentElement.style.setProperty("--userColor", color);
 }
 function changeUserColor(hue,bri,opa){
   document.getElementById("CustomColor").dataset.userhue=hue+"deg";
   document.getElementById("CustomColor").dataset.userbri=bri+"%";
   document.getElementById("CustomColor").dataset.useropa=opa+"%";
-  
-  console.log(document.getElementById("CustomColor"))
   setSheetColor();
 }
 function setBG(moving){
   if(moving){ document.documentElement.style.backgroundImage="url('https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true')";
   } else {
     document.documentElement.style.backgroundImage="url('https://warmest-soup.github.io/Assets/Images/Sheet%20Grand%20BG.png')"
-    console.log("stillBG")
   };
 }
 function userBG(){
@@ -1960,6 +1953,22 @@ function userBG(){
   } else document.getElementById("CustomColor").dataset.bg="false";
   
   setBG(BG);
+}
+//Money Total
+function moneyCalc(){
+  var moneyDisplay=document.getElementById("moneyTracker");
+  var invContents=document.getElementById("invDisContents").innerHTML;
+  
+  var moneyVals=invContents.match(/\$\d+\.?\d{0,2}|\d{0,2}¢/g)||["0"];
+  moneyVals=moneyVals.map((x)=> {
+    if(x.includes("¢")){
+      return parseFloat(x)/100;
+    } else return parseFloat(x.replace("$",""));
+  })
+  var moneyTotal=moneyVals.reduce((acc, x)=>acc+(x || 0) ,0);
+  
+  moneyDisplay.placeholder="$"+moneyTotal.toFixed(2)+"¢";
+  
 }
 //World Temp
 
@@ -2072,6 +2081,7 @@ document
     carryWeight();
     weaponListUpdate();
     weaponSwitch();
+    moneyCalc();
   });
 
 /*Drag & Drop Functions..*/ {
@@ -2224,6 +2234,7 @@ document
     var target = document.getElementById(event.dataTransfer.getData("text"));
     unequip();
     itemPickUp.remove();
+    event.target.dispatchEvent(invChange);
   }
 
   //Drop Change Quick Items
@@ -2241,6 +2252,7 @@ document
       document.getElementById("QuickItem").value = qiTextForm;
       itemPickUp.remove();
     }
+    event.target.dispatchEvent(invChange);
   }
 
   //Equipping Items

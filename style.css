@@ -49,7 +49,7 @@ button {
   display: overlay;
 }
 ::-webkit-scrollbar-thumb {
-  background: darkGray;
+  background: var(--userColor);
   border-radius: 1em;
 }
 ::-webkit-scrollbar-corner {
@@ -147,7 +147,8 @@ button{
   height:fit-content;
   text-align:center;
   border-radius:1em;
-  padding-bottom:1em;
+  padding:1em 0em .5em 0em;
+  line-height:1em;
 }
 .Section {
   background:linear-gradient(
@@ -941,6 +942,7 @@ textarea {
 .storeLocal {
   resize: none;
   text-align: left;
+  box-shadow:none;
   border: none;
   min-width: 10em;
   max-width: 10em;
