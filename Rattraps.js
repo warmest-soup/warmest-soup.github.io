@@ -1181,8 +1181,8 @@ function carryWeight() {
     0
   );
   document.getElementById("LoadWeight").innerText = loadTotal;
-  console.log(limit+ " >= "+load);
-  if(limit>=load){
+  console.log(limit+ " >= "+loadTotal);
+  if(limit>=loadTotal){
     weight.style.color="black";
     invBonus();
   }else{
