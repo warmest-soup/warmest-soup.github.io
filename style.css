@@ -14,7 +14,7 @@ html {
   width: 100%;
   overflow-x: clip;
   
-  background-image:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/Sheet%20Grand%20BG.png?raw=true");
+  background-image:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true");
   background-repeat:no-repeat;
   background-position:left;
   background-attachment:fixed;
@@ -892,6 +892,7 @@ textarea {
 }
 .invContainer {
   background: rgb(255 235 220);
+  overflow-x:clip;
   box-shadow: 
     -0.3em 0.3em 1em 0em rgb(0 0 0 / 50%), 
     0em 0em 0em .05em black;
@@ -1317,7 +1318,4 @@ textarea {
 }
 #BleedStacks * input[type="text"]{
   min-width:2em;
-
 }
-
-

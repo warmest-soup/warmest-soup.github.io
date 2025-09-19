@@ -41,6 +41,7 @@ function initializeSheet() {
   limbDebuffColor();
   timeBG();
   setSheetColor();
+  setBG();
   invBonus();
 
   thermoBarFunc(worldTemp);
@@ -1943,6 +1944,22 @@ function changeUserColor(hue,bri,opa){
   
   console.log(document.getElementById("CustomColor"))
   setSheetColor();
+}
+function setBG(moving){
+  if(moving){ document.documentElement.style.backgroundImage="url('https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true')";
+  } else {
+    document.documentElement.style.backgroundImage="url('https://warmest-soup.github.io/Assets/Images/Sheet%20Grand%20BG.png')"
+    console.log("stillBG")
+  };
+}
+function userBG(){
+  var BG=document.getElementById("userBG").checked;
+  
+  if(BG){
+    document.getElementById("CustomColor").dataset.bg="true";
+  } else document.getElementById("CustomColor").dataset.bg="false";
+  
+  setBG(BG);
 }
 //World Temp
 
