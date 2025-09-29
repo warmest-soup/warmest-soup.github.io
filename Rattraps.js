@@ -822,7 +822,7 @@ function newPage(action) {
     );
   }
 }
-//setHandedness
+//setHandednes
 function saveDropdown(dd) {
   var chosen = dd.value;
 
@@ -1636,6 +1636,7 @@ function weaponSwitch() {
   weaponDamage();
 }
 function saveChips() {
+  console.log("In Func");
   var weapon = document
     .getElementById("TackColumn")
     .querySelector("#" + document.getElementById("WeaponList").value);
@@ -1647,6 +1648,18 @@ function saveChips() {
   });
   chips.join(", ");
   weapon.dataset.chips = chips;
+}
+function saveSharp(){
+  var equipped=document.getElementById("WeaponList").value;
+  var weapon=document.getElementById(equipped);
+  var current=document.getElementsByClassName("shpIn");
+  //3=e 4=p
+  var stats=weapon.dataset.weaponstats.split(", ");
+  stats[3]=current[0].value;
+  stats[4]=current[1].value;
+  weapon.dataset.weaponstats=stats.join(", ");
+  
+  console.log(weapon);
 }
 //Damage
 function damageCalc() {
@@ -2068,6 +2081,9 @@ document
     }
     if(event.target.classList.contains("agInjuryStatus")){
       injuryStatus();
+    }
+    if(event.target.classList.contains("shpIn")){
+      saveSharp();
     }
 
     //console.log(event.target);
@@ -2557,10 +2573,7 @@ document
 initializeSheet();
 
 /*notes
--Turn Unequip in INV drop into a function, that can run before removing Items from Tack.
-that way you won't have stranded pokets.
-
--Also you need to disable the removal of INVcontainers, likely through more validation.
-
--You need to clear the bools after creating a new item, so the window resets visually.
+- greater bleed light up
+- dp needs to set it's own max
+- bg custom settings don't save
 */
