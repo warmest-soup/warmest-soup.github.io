@@ -1983,18 +1983,6 @@ function moneyCalc(){
   moneyDisplay.placeholder="$"+moneyTotal.toFixed(2)+"¢";
   
 }
-//urlParameters
-function urlLogIn(){
-  var urlLog= new URLSearchParams(window.location.search);
-    console.log(window.location.href);
-    console.log("hotlog:");
-    console.log(urlLog.get("hotLogU"));
-    document.getElementById("User").value=urlLog.get("hotLogU");
-    console.log(urlLog.get("hotLogK"));
-    document.getElementById("Key").value=urlLog.get("hotLogK");
-    jsLoad();
-  
-}
 //World Temp
 
 //End of declarations
