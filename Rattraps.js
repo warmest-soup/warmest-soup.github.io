@@ -1987,7 +1987,10 @@ function moneyCalc(){
 function urlLogIn(){
   var urlLog= new URLSearchParams(window.location.search);
   if(urlLog.get("hotLogU")&&urlLog.get("hotLogK")){
+    console.log("hotlog:");
+    console.log(urlLog.get("hotLogU"));
     document.getElementById("User").value=urlLog.get("hotLogU");
+    console.log(urlLog.get("hotLogK"));
     document.getElementById("Key").value=urlLog.get("hotLogK");
     jsLoad();
   }
