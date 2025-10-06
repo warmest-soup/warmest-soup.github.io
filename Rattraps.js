@@ -1986,10 +1986,11 @@ function moneyCalc(){
 //urlParameters
 function urlLogIn(){
   var urlLog= new URLSearchParams(window.location.search);
-  if(urlLog.get("hotLogU")&&urlLog.get("hotLogK"));
-  document.getElementById("User").value=urlLog.get("hotLogU");
-  document.getElementById("Key").value=urlLog.get("hotLogK");
-  jsLoad();
+  if(urlLog.get("hotLogU")&&urlLog.get("hotLogK")){
+    document.getElementById("User").value=urlLog.get("hotLogU");
+    document.getElementById("Key").value=urlLog.get("hotLogK");
+    jsLoad();
+  }
 }
 //World Temp
 
