@@ -1661,7 +1661,7 @@ function saveSharp(){
   
   console.log(weapon);
 }
-//Damage
+//Damage0
 function damageCalc() {
   var armor = document.getElementById(event.target.id.substring(6)).children;
   var damage = parseInt(event.target.value);
@@ -1982,6 +1982,14 @@ function moneyCalc(){
   
   moneyDisplay.placeholder="$"+moneyTotal.toFixed(2)+"¢";
   
+}
+//urlParameters
+function urlLogIn(){
+  var urlLog= new URLSearchParams(window.location.search);
+  if(urlLog.get("hotLogU")&&urlLog.get("hotLogK"));
+  document.getElementById("User").value=urlLog.get("hotLogU");
+  document.getElementById("Key").value=urlLog.get("hotLogK");
+  jsLoad();
 }
 //World Temp
 
@@ -2571,6 +2579,7 @@ document
 
 //Initialize
 initializeSheet();
+urlLogIn();
 
 /*notes
 - greater bleed light up
