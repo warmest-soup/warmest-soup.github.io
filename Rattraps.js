@@ -42,6 +42,7 @@ function initializeSheet() {
   timeBG();
   setSheetColor();
   setBG(document.getElementById("CustomColor").dataset.bg);
+  console.log(document.getElementById("CustomColor").dataset.bg);
   invBonus();
   moneyCalc();
   dpCalc();
@@ -1968,9 +1969,14 @@ function changeUserColor(hue,bri,opa){
   setSheetColor();
 }
 function setBG(moving){
-  if(moving){ document.documentElement.style.backgroundImage="url('https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true')";
-  } else {
+
+  var moving=document.getElementById("CustomColor").dataset.bg;
+  console.log(moving);
+  if(moving=="true"){ document.documentElement.style.backgroundImage="url('https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true')";
+  console.log("In THIS one!?");
+} else {
     document.documentElement.style.backgroundImage="url('https://warmest-soup.github.io/Assets/Images/Sheet%20Grand%20BG.png')"
+    console.log("In Here!");
   };
 }
 function userBG(){
@@ -1980,7 +1986,7 @@ function userBG(){
     document.getElementById("CustomColor").dataset.bg="true";
   } else document.getElementById("CustomColor").dataset.bg="false";
   
-  setBG(BG);
+  setBG();
 }
 //Money Total
 function moneyCalc(){
