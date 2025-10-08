@@ -62,8 +62,6 @@ function initializeSheet() {
   s1.addEventListener("scroll", twoScroll, false);
   s2.addEventListener("scroll", oneScroll, false);
   document.getElementById("SaveIndicator").style.background = "cyan";
-
-  hotLog();
 }
 
 //Declarations
@@ -2046,16 +2044,6 @@ function greaterBleed(){
   if(greatBleed.value>0){
     greatBleed.parentNode.classList.add("Bleeding");
   } else greatBleed.parentNode.classList.remove("Bleeding");
-}
-//Hot Log-in
-function hotLog(){
-  var urlData=new URLSearchParams(window.location.search);
-  console.log(urlData.get("hlgU"));
-  if(urlData.get("hlgU") && urlData.get("hlgK")){
-    document.getElementById("User").value=urlData.get("hlgU");
-    document.getElementById("Key").value=urlData.get("hlgK");
-    jsLoad()();
-  }
 }
 
 //World Temp
