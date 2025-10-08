@@ -44,6 +44,7 @@ function initializeSheet() {
   setBG(document.getElementById("CustomColor").dataset.bg);
   invBonus();
   moneyCalc();
+  dpCalc();
 
   thermoBarFunc(worldTemp);
 
@@ -61,6 +62,8 @@ function initializeSheet() {
   s1.addEventListener("scroll", twoScroll, false);
   s2.addEventListener("scroll", oneScroll, false);
   document.getElementById("SaveIndicator").style.background = "cyan";
+
+  hotLog();
 }
 
 //Declarations
@@ -389,6 +392,13 @@ function passHour() {
   Hour.innerText = String(newHour).padStart(2, "0");
 
   timeBG();
+  //rust traits
+  var decayables=document.getElementsByClassName("decayTarget");
+  var i=0;
+  while(i<decayables.length){
+    rustify(decayables[i]);
+    i++;
+  }
   //increment Weather
   //worldTemp();
 }
@@ -538,6 +548,13 @@ function sleep() {
   }
 
   timeBG();
+  //rust traits
+  var decayables=document.getElementsByClassName("decayTarget");
+  var i=0;
+  while(i<decayables.length){
+    rustify(decayables[i]);
+    i++;
+  }
   //incrementWeather
   //worldTemp();
 }
@@ -1983,6 +2000,64 @@ function moneyCalc(){
   moneyDisplay.placeholder="$"+moneyTotal.toFixed(2)+"¢";
   
 }
+//quirks
+function quirkColor(){
+  var inc=event.target;
+  if(inc.value.toUpperCase()=="A"){
+    inc.classList.add("advantage");
+    inc.classList.remove("quirk");
+    inc.classList.remove("penalty");
+  } else if(inc.value.toUpperCase()=="P"){
+    inc.classList.add("penalty");
+    inc.classList.remove("quirk");
+    inc.classList.remove("advantage");
+  } else if(inc.value.toUpperCase()=="Q"){
+    inc.classList.add("quirk");
+    inc.classList.remove("advantage");
+    inc.classList.remove("penalty");
+  } else {
+    inc.value="";
+    inc.classList.remove("advantage");
+    inc.classList.remove("quirk");
+    inc.classList.remove("penalty");
+  }
+}
+//Trait Coloring
+function rustify(rusty){
+  var leadRow=rusty.parentNode.parentNode;
+  var header=leadRow.parentNode;
+  var targetIndex=Array.from(header.children).indexOf(leadRow);
+  if(rusty.value==-1){
+    header.children[targetIndex].classList.add("Rusty");
+    header.children[targetIndex+1].classList.add("Rusty");
+  } else {
+    header.children[targetIndex].classList.remove("Rusty");
+    header.children[targetIndex+1].classList.remove("Rusty");
+  }
+}
+//DP assignment
+function dpCalc(){
+  var con=document.getElementById("conFunc").innerText;
+  document.getElementById("DPTotal").innerText="/"+con;
+}
+//greater Bleed Light
+function greaterBleed(){
+  var greatBleed=document.getElementById("FatalBleedCounter");
+  if(greatBleed.value>0){
+    greatBleed.parentNode.classList.add("Bleeding");
+  } else greatBleed.parentNode.classList.remove("Bleeding");
+}
+//Hot Log-in
+function hotLog(){
+  var urlData=new URLSearchParams(window.location.search);
+  console.log(urlData.get("hlgU"));
+  if(urlData.get("hlgU") && urlData.get("hlgK")){
+    document.getElementById("User").value=urlData.get("hlgU");
+    document.getElementById("Key").value=urlData.get("hlgK");
+    jsLoad()();
+  }
+}
+
 //World Temp
 
 //End of declarations
@@ -2023,6 +2098,7 @@ document
       slotMemoryLimits();
       weaponDamage();
       btCalc();
+      dpCalc();
 
       var i = 0;
       while (i < SatBars.length) {
@@ -2085,11 +2161,20 @@ document
     if(event.target.classList.contains("shpIn")){
       saveSharp();
     }
+    if(event.target.classList.contains("incSpot")){
+      quirkColor();
+    }
+    if(event.target.id.includes("Exp")){
+      rustify(event.target);
+    }
+    if(event.target.id.includes("FatalBleedCounter")){
+      greaterBleed();
+    }
 
     //console.log(event.target);
     document.getElementById("SaveIndicator").style.background = "yellow";
   });
-//inventory Event Listenerhh
+//inventory Event Listener
 document
   .getElementById("CharacterSheet")
   .addEventListener("INVChanged", function (event) {
@@ -2571,7 +2656,6 @@ document
 
 //Initialize
 initializeSheet();
-urlLogIn();
 
 /*notes
 - greater bleed light up
