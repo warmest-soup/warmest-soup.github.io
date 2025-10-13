@@ -1,0 +1,51 @@
+* {
+  font-size:max(15px,2vh);
+}
+html{
+  background:hsl(190deg 20% 5%);
+}
+#Preserved{
+  display:flex;
+  flex-direction:column;
+  gap:.5em;
+  margin:2em 2em 2em 2em;
+}
+/* Authors */
+.TeamWidgetProfileDetails-name{
+  padding-left:2%;
+  --plateBlue:hsl(200deg 50% 20%);
+  background:linear-Gradient(
+    90deg, 
+    transparent 1%,
+    var(--plateBlue) 1.6%,
+    yellow,
+    var(--plateBlue) 2%,
+    transparent 15%
+  ) ;
+}
+.GradientText-overlay{
+  color:transparent !important;
+}
+/* Messages */
+.BlockTextRendererV2-container{
+  color:white;
+  background:hsl(180deg 50% 10%);
+  padding:.5em 1em .5em 1em;
+  border-radius:1em;
+  min-width:13em;
+  max-width:30em;
+  box-shadow:
+    inset .2em -.2em .2em 0em hsl(180deg 100% 11%),
+    inset -.1em .2em .3em -.1em hsl(180deg 20% 80%);
+}
+.gmNote{
+  color:khaki;
+  background:hsl(30deg 50% 10%);
+  padding:1em 2em 1em 2em;
+  border-radius:1em;
+  min-width:13em;
+  max-width:50em;
+  box-shadow:
+    inset .2em -.2em .2em 0em hsl(50deg 100% 11%),
+    inset -.1em .2em .3em -.1em hsl(50deg 20% 80%);
+}
