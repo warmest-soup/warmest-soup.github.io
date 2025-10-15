@@ -1,0 +1,34 @@
+<div id="pics"></div>
+<script>
+  var picAmount=25;
+var i=1;
+while(i<picAmount+1){
+  document.getElementById("pics").insertAdjacentHTML("beforeEnd", 
+    "<div id='file'><img src='warmest-soup.github.io/GuildedLogs/ggLogOutput/LoserOOTD ("+i+").webp'>");
+  i++;
+}
+
+</script>
+<script>
+  var picAmount=59;
+var i=1;
+while(i<picAmount+1){
+  document.getElementById("pics").insertAdjacentHTML("beforeEnd", 
+    "<div id='file'><img src='warmest-soup.github.io/GuildedLogs/ggFoodLogOutput/LoserFood ("+i+").webp'>");
+  i++;
+}
+
+</script>
+<style>
+  html{
+    background:black;
+  }
+  #pics{
+    background: black;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2em;
+    justify-content: center;
+  }
+</style>

@@ -1,0 +1,29 @@
+<div id="pics">
+    <div class="file">
+        <img src="warmest-soup.github.io/GuildedLogs/CatPicsLogOutput/CatPic (1).png">
+    </div>
+
+</div>
+<script>
+  var picAmount=18;
+var i=2;
+while(i<picAmount+1){
+  document.getElementById("pics").insertAdjacentHTML("beforeEnd", 
+    "<div id='file'><img src='https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/GuildedLogs/CatPicsLogOutput/CatPic ("+i+").webp'>");
+  i++;
+}
+
+</script>
+<style>
+  html{
+    background:black;
+  }
+  #pics{
+    background: black;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2em;
+    justify-content: center;
+  }
+</style>
