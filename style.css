@@ -155,7 +155,6 @@ button{
     var(--userColor),
     rgb(245 235 230 / 80%)
   );
-  backdrop-filter: blur(50px);
   box-shadow: 
     -0.25em 0.3em 0.3em 0em rgb(0 0 0 / 50%), 
     inset 0em 0em 0em .1em black,
@@ -1323,5 +1322,6 @@ textarea {
 #BleedStacks * input[type="text"]{
   min-width:2em;
 }
+
 
 
