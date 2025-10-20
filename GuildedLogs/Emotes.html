@@ -1,0 +1,24 @@
+<div id="pics"></div>
+<script>
+  var picAmount=57;
+var i=0;
+while(i<picAmount){
+  document.getElementById("pics").insertAdjacentHTML("beforeEnd", 
+    "<div id='file'><img src='http://warmest-soup.github.io/GuildedLogs/Emotes/Emote%20("+i+").webp'>");
+  i++;
+}
+
+</script>
+<style>
+  html{
+    background:black;
+  }
+  #pics{
+    background: black;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2em;
+    justify-content: center;
+  }
+</style>
