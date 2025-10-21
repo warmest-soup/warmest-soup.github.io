@@ -1,0 +1,1631 @@
+:root{
+  --SectGap:1.5em;
+  --darkCol:hsl(200deg 40% 30%);
+  --screen:repeating-linear-gradient(
+    50deg,
+    black,
+    black 1px,
+    var(--darkCol) 2px,
+    var(--darkCol) 10px
+  );
+  --userColor:hsl(200 30% 50% / 80%);
+}
+
+html {
+  width: 100%;
+  overflow-x: clip;
+  
+  background-image:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true");
+  background-repeat:no-repeat;
+  background-position:center;
+  background-attachment:fixed;
+  background-size:100% 100%;
+  
+}
+body{
+  width:200vw;
+  margin:0;
+  padding:1em;
+  position:sticky;
+}
+* {
+  font-family: "caudex";
+  font-size: 2.05vh;
+  border:none;
+}
+::selection{
+  color:white;
+  background:black;
+}
+button {
+  background:hsl(from var(--userColor) h 60% 90%/ 100%);
+  font-weight: 700;
+  box-shadow:0em 0em 0em .05em gray;
+  text-color:black;
+  border-radius:.5em;
+  border:none !important;
+}
+/*Scroll bar adjustments*/
+::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.5em;
+  display: overlay;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(from var(--darkCol) h 50% 60%);
+  border-radius: 1em;
+}
+::-webkit-scrollbar-corner {
+  display: visible;
+  background: white;
+}
+::-webkit-scrollbar-track {
+  background: lightGray;
+  box-Shadow:inset 0em 0em 0em .1em darkgray;
+  /*display: none;*/
+  /*Display might be important for when background images appear*/
+}
+html > * ::-webkit-scrollbar-track {
+  border-radius: 1em;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 70%;
+  height: 0.3em;
+  background: transparent;
+  border-radius: 0.5em;
+  outline: none;
+  box-Shadow:inset 0em 0em .2em .1em rgb(0 0 0 /50%);
+  touch-action: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1em;
+  height: 1em;
+  background: black;
+  border-radius: 1em;
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  background-color: white;
+  -webkit-appearance: none;
+  -moz-appeareance: none;
+  width: 1em;
+  height: 1em;
+  box-Shadow: 0em 0em 0em .05em black;
+  border-radius: 0.4em;
+}
+input[type="checkbox"]:checked {
+  background:repeating-linear-gradient(
+    50deg,
+    black,
+    black 44%,
+    white 44%,
+    white 55%,
+    black 55%,
+    black 100%
+  );
+}
+input[type="radio"]{
+  box-shadow:none;
+}
+
+input::placeholder, textarea::placeholder{
+  color:rgb(0 0 0 / 50%);
+}
+
+.SingleInputNUM {
+  min-width: 1.3em;
+  max-width: 1.3em;
+  border:none;
+  box-shadow:0em 0em 0em .05em black;
+  border-radius: 0.4em;
+}
+.longNumIn {
+  min-width: 3em;
+  max-width: 3em;
+  border-radius: 0.5em;
+  border:none;
+  box-shadow:0em 0em 0em .05em black;
+}
+.logIn{
+  background:white;
+}
+#customMenu{
+  position:absolute;
+  transform:translatex(40vw)translatey(1em);
+  background:white;
+  border:solid .1em black;
+  width:10em;
+  height:fit-content;
+  text-align:center;
+  border-radius:1em;
+  padding:1em 0em .5em 0em;
+  line-height:1em;
+}
+.Section {
+  background:linear-gradient(
+    var(--userColor),
+    rgb(245 235 230 / 80%)
+  );
+  box-shadow: 
+    -0.25em 0.3em 0.3em 0em rgb(0 0 0 / 50%), 
+    inset 0em 0em 0em .1em black,
+    inset 0em .5em 1em 0em rgb(245 235 230 / 50%),
+    inset 0em 0em .5em .5em var(--userColor);
+  border-radius: 1em;
+  padding: 0.5em;
+}
+#CharID {
+  min-width: 16em;
+  max-width: 16em;
+  display: flex;
+  align-items: end;
+  flex-flow: column;
+  gap:.3em;
+  padding: 1em;
+}
+#Name textarea {
+  resize: none;
+  text-align: center;
+  border-radius: 0.5em;
+  min-width: 13.8em;
+  max-width: 13.8em;
+  background:transparent;
+  box-shadow:none;
+  overflow:hidden;
+  font-weight: 900;
+  font-size: 1em;
+  padding:0em;
+}
+#Photo {
+  box-Shadow: 0em 0em 0em .05em black;
+  border-radius: 0.5em;
+  min-height: 24em;
+  max-height: 24em;
+  min-width: 14em;
+  max-width: 14em;
+}
+.CharInfo input,
+#HandDropdown {
+  min-width: 9em;
+  max-width: 9em;
+  border-radius:.5em;
+  border:none;
+  box-shadow:0em 0em 0em .05em black;
+}
+#DayCount {
+  font-size: 1em;
+  font-weight: bold;
+}
+td {
+  text-align: center;
+  min-width: 1em;
+  max-width: 5em;
+  min-height: 1em;
+  max-height: 1em;
+  text-wrap: nowrap;
+}
+input, select {
+  text-align: center;
+  background:rgb(240 240 240 / 40%);
+  box-shadow:0em 0em 0em .05em black;
+}
+textarea {
+  background:rgb(240 240 240);
+  box-shadow:0em 0em 0em .05em black;
+  border-radius:.5em;
+}
+#Traits {
+  text-align: center;
+  min-width: 17em;
+  max-width: 17em;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-around;
+}
+#TraitTable {
+  min-width: 17em;
+  max-width: 17em;
+  min-height: 31em;
+  max-height: 31em;
+  table-layout:fixed;
+  border-collapse:collapse;
+}
+.WeightEXP input {
+  min-width: 1.7em;
+  min-width: 1.7em;
+}
+.Row {
+  width: calc(100vw - .6em);
+  height: 100%;
+  display: flex;
+  gap: var(--SectGap);
+  overflow: auto;
+  padding: 0.5em;
+  transform: translatex(-.9em);
+  box-sizing:border-box;
+}
+#Photo {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.CharInfo {
+  text-align: right;
+}
+#abilityColumns {
+  display: flex;
+  gap: 1em;
+}
+#Insights, #Skills{
+  background:linear-gradient(90deg,
+  rgb(245 235 230 / 80%),
+  transparent 50%);
+  border-radius:0em;
+  padding-top:.1em;
+  padding-left:.1em;
+  border-radius:.5em;
+}
+#Satiety {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+}
+#SatTop {
+  display: flex;
+  flex-direction:column;
+  gap: 1em;
+  align-items:center;
+  text-wrap: nowrap;
+  background:linear-gradient(90deg, transparent,rgb(255 255 255 /70%),transparent);
+}
+#SatMiddle {
+  display: flex;
+  gap: 1em;
+}
+.satVal {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  min-height: 29em;
+  justify-content: space-between;
+}
+.satBar {
+  box-Shadow:inset 0em 0em 0em .01em black;
+  min-height: 26.5em;
+  max-height: 26.5em;
+  min-width: 1.3em;
+  max-width: 1.3em;
+  border-radius: 1em;
+  overflow: hidden;
+}
+#Clock {
+  font-weight: bold;
+  font-size: 2.5em;
+  padding: 0em;
+}
+#Clock > * {
+  font-size: 1.2em;
+}
+#ProgressTime{
+  transform:translatey(-.5em);
+}
+.satBarFill {
+  background-color: black;
+  height: 6em;
+  border-radius: 0.8em;
+}
+.ToxicButtons {
+  max-width: 2em;
+  min-width: 2em;
+  max-height: 2em;
+  min-height: 2em;
+}
+#SatBottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+.AbilSlot {
+  box-Shadow: 0em 0em 0em .12em black;
+  padding: 0.2em;
+  border-radius: 0.7em;
+  min-height: 1.6em;
+  max-height: 1.6em;
+  min-width: 10.7em;
+  max-width: 10.7em;
+  white-space: nowrap;
+}
+.technique{
+  font-size:.87em;
+  box-shadow:0em 0em 0em .15em black;
+}
+.technique * input{
+  box-shadow:none;
+  transform:
+    scale(1.2,1.2)
+    translatey(-.2em)
+    translatex(-.1em);
+  background:none;
+  border:none;
+  text-align:center;
+}
+#AbilContainer button,
+#AbilContainer {
+  font-size: 80%;
+  
+}
+#abilTitle {
+  display: flex;
+  margin-bottom: 0.5em;
+  justify-content: space-between;
+}
+.Rank {
+  font-size: 70%;
+  font-weight: Bold;
+  min-width: 2em;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: black;
+  box-Shadow: 0em 0em 0em .06em black;
+  border-radius: 0.75em;
+}
+.aexp {
+  border: none;
+  text-align: right;
+  font-weight: bold;
+  font-size: 90%;
+  height: 100%;
+  width: 1em;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.Ability button {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: black;
+  box-Shadow: 0em 0em 0em .1em black;
+  border-radius: 0.75em;
+}
+.aScrollColumns {
+  box-shadow: 
+    inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%),
+    inset 0em -15em 12em -5em rgb(0 0 0 / 30%),
+    0em 0em 0em .1em black;
+  max-height: 1em;
+  min-height: 35em;
+  max-width: 12.05em;
+  min-width: 12.05em;
+  overflow: auto;
+  padding: 0.3em;
+  border-radius: 0.5em;
+  background: var(--screen);
+  backdrop-filter:opacity(0%);
+  display:flex;
+  flex-direction:column;
+  gap:.3em;
+}
+.aScrollColumns > * button{
+  background:white !important;
+}
+.satVal .SingleInputNUM {
+  min-width: 1.7em;
+  max-width: 1.7em;
+  border-radius: 0.7em;
+}
+.satIcon {
+  text-align: center;
+  margin-bottom:.5em;
+  width:2em;
+  height:2em;
+}
+#shIcon{
+  background:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SatIcons/h.png?raw=true")center 0%/ cover no-repeat;
+}
+#swIcon{
+  background:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SatIcons/w.png?raw=true")center 0%/ cover no-repeat;
+}
+#szIcon{
+  background:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SatIcons/z.png?raw=true")center 0%/ cover no-repeat;
+}
+#stIcon{
+  background:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SatIcons/t.png?raw=true")center 0%/ cover no-repeat;
+}
+.wgtIn {
+  border: none;
+}
+#wgtExp {
+  text-align: right;
+  width: 1.6em;
+}
+.WeightEXP {
+  text-align: left;
+}
+.removalBox {
+  box-Shadow: 0em 0em 0em .05em black;
+  padding: 0em 0.5em;
+  border-radius: 0.25em;
+  color: rgb(0 0 0 / 50%);
+}
+#AddAbility {
+  border-radius: 5em;
+  border-width: 0.01em;
+}
+.openAbil {
+  box-Shadow: 0em 0em 0em .1em black;
+  padding: 0.2em;
+  border-radius: 0.7em;
+  min-height: 1em;
+  max-height: 1em;
+  min-width: 8em;
+  max-width: 8em;
+  white-space: nowrap;
+}
+#addAbilWindow {
+  display: none;
+  width: 14em;
+  height: 22em;
+  background-color: white;
+  box-Shadow: 0em 0em 0em .1em black;
+  border-radius: 1em;
+  position: absolute;
+  transform: translatey(-10em) translatex(5em);
+  padding: 1em;
+  z-index: +1;
+}
+#addAbilWindow input {
+  max-width: 5em;
+  min-width: 0em;
+  border-radius: 0.5em;
+  border-color: gray;
+  border-width: 0.05em;
+}
+#addAbilWindow textarea {
+  width: 100%;
+}
+.AbilityInfo {
+  display: none;
+  position: relative;
+  width: 7.9em;
+  min-height: 1em;
+  max-height: 8em;
+  overflow: auto;
+  background-color: white;
+  box-Shadow: 0em 0em 0em .1em black;
+  border-width: 0em 0.2em 0.3em 0.2em;
+  border-radius: 0em 0em 1em 1em;
+  top: 1em;
+  transform: translatey(-1.5em) translatex(0.2em);
+  padding: 1em;
+  text-wrap: wrap;
+}
+#Temperature {
+  display: flex;
+  flex-direction: column;
+  min-width: 13em;
+  max-width: 18em;
+  padding:0em 0em 0em 1em;
+}
+#TempTop {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-around;
+}
+#TempEffects {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+#ThermBar {
+  padding: 0.2em;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  min-width: 1em;
+  max-width: 1em;
+  min-height: 35em;
+  max-height: 35em;
+  box-Shadow: 0em 0em 0em .1em black;
+  border-radius: 2em;
+  overflow: clip;
+}
+
+#ThermFill {
+  background-color: black;
+  min-width: 1em;
+  max-width: 1em;
+  box-Shadow: 0em 0em 0em .1em black;
+  border-radius: 5em;
+}
+#TempBot {
+  padding: .5em 0em .5em 0em;
+  text-align: center;
+  line-height: 0.5em;
+  font-size: 2em;
+  font-weight: 700;
+}
+#TempBot > * {
+  font-size: 1em;
+}
+#Abilities {
+  overflow: show;
+  display: flex;
+  flex-direction: column;
+  gap:1em;
+  justify-content: end;
+  padding:0em 1em 0em 1em;
+}
+.Ability > div {
+  display: flex;
+  justify-content: space-between;
+}
+#Notes {
+  max-width: 20em;
+  min-width: 20em;
+  max-height: 35em;
+  min-height: 35em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#notesPages {
+  display: flex;
+  overflow: auto;
+  gap: 1em;
+  padding: 0.4em;
+}
+#Notes textArea {
+  max-width: 17em;
+  min-width: 17em;
+  max-height: 25em;
+  min-height: 25em;
+  border-radius: 0.5em;
+  padding: 1em;
+  background:url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/Card%20Texture.jpg") center 15%/cover no-repeat;
+  box-shadow:0em 0em 0em .05em black;
+}
+#PageButtons {
+  text-align: center;
+}
+.Inventory {
+  padding: 1em;
+  user-select: none;
+  min-width: 26em;
+  max-width: 26em;
+  min-height:35em;
+  max-height:35em;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+#InvTop {
+  display: flex;
+  justify-content: start;
+  gap: 1em;
+  padding: 0.5em;
+  align-items: center;
+}
+#invTitle {
+  font-weight: bold;
+}
+.inventoryDisplay {
+  background: var(--screen);
+  backdrop-filter:opacity(0%);
+  box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%),
+     0em 0em 0em .05em black;
+  min-width: 26em;
+  max-width: 26em;
+  min-height:32em;
+  max-height:32em;
+  border-radius: 1em;
+  overflow: clip;
+  display: flex;
+}
+.inventoryDisplay * {
+  font-size: 2.1vh !important;
+}
+#QuickItem {
+  margin: 0.5em;
+  padding: 0.1em 0em 2em 0em;
+  border-radius: 0.7em;
+  min-height: 1.3em;
+  max-height: 1.3em;
+  min-width: 7em;
+  max-width: 7em;
+  text-align: center;
+  text-wrap: nowrap;
+  box-shadow:0em 0em 0em .05em black;
+}
+#QuickItem::-webkit-scrollbar {
+  display: none;
+}
+
+#NewItemWin {
+  display: none;
+  min-width: 17em;
+  max-width: 17em;
+  min-height: 22.3em;
+  max-height: 22.3em;
+  background-color: white;
+  box-Shadow: 0em 0em 0em .1em black;
+  border-radius: 1em;
+  position: relative;
+  transform: translatey(27.25em) translatex(4em);
+  padding: 1em;
+  z-index: +1;
+  overflow: auto;
+}
+#NewItemStats {
+  display: flex;
+}
+#itemName {
+  width: 7em;
+  border-radius: 0.5em;
+  border:none;
+  box-shadow:0em 0em 0em .05em black;
+}
+#NewItemStats > * {
+  padding: 0em 0.2em 0.2em 0.1em;
+}
+#NewArmorCoverage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#NewArmorCoverage > * {
+  text-align: center;
+}
+#BodyDia {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  transform: translatey(-1em);
+}
+#LegsDia {
+  display: flex;
+  gap: 0.5em;
+}
+.diaArms {
+  margin: 0em 0em 5em 0em;
+  box-Shadow: 0em 0em 0em .07em gray;
+  border-radius: 0.6em;
+  background: lightgray;
+  overflow: clip;
+  transform: translatey(0.7em);
+}
+#HeadDia {
+  box-Shadow: 0em 0em 0em .07em gray;
+  border-radius: 4em;
+  background: lightgray;
+  overflow: clip;
+}
+#TorsoDia {
+  box-Shadow: 0em 0em 0em .07em gray;
+  border-radius: 0.5em 0.5em 0em 0em;
+  background: lightgray;
+  overflow: clip;
+  padding: 0em 0em 1.5em 0em;
+  transform: translatey(1.5em);
+}
+.diaLegs {
+  box-Shadow: 0em 0em 0em .07em gray;
+  border-radius: 0.5em;
+  background: lightgray;
+  overflow: clip;
+  z-index: +1;
+}
+.newArmorStatGroups {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 0.5em;
+  align-items: center;
+}
+#armorSec {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  display: none;
+}
+.ItemTraits {
+  box-Shadow: 0em .1em 0em -.05em black;
+  border-width: 0em 0em 0.1em 0em;
+  padding: 0.5em 0em 0em 0em;
+  margin: 1em 0em;
+}
+#weaponSec {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5em;
+  display: none;
+}
+.NewArmorStat {
+  width: 2em;
+  border-radius: 0.5em;
+  border:none;
+  box-shadow:0em 0em 0em .05em black;
+}
+#lowNASG {
+  transform: translatey(-1em);
+}
+.iTech {
+  min-width: 8em;
+  max-width: 8em;
+  border-radius: 0.5em;
+  border:none;
+  box-shadow:0em 0em 0em .05em black;
+}
+#techSec {
+  display: none;
+  flex-direction: column;
+}
+#invSec {
+  display: none;
+  flex-direction: column;
+  text-align: center;
+  gap: 1em;
+  line-height: 2em;
+}
+#nPocketName {
+  min-width: 5em;
+  max-width: 5em;
+  border-radius: 0.5em;
+  border:none;
+  box-shadow:0em 0em 0em .05em black;
+}
+#SheetManager {
+  box-Shadow: 0em 0em 0em .1em black;
+  overflow: clip;
+  background: var(--screen);
+  backdrop-filter:opacity(0%);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing:border-box;
+  padding: 0.4em 2em 0.4em 2em;
+  width:100vw;
+  transform:translatex(-1em);
+  gap: 0.5em;
+}
+#SheetManager > span{
+  display:flex;
+  gap:.5em;
+  align-items:center;
+}
+#SaveIndicator {
+  background: gray;
+  height: 1em;
+  width: 1em;
+  
+  border-radius: 1em;
+  box-shadow: inset 0 0 0.2em #50a,0em 0em 0em .1em black;
+}
+.dataSection {
+  display: flex;
+  gap: var(--SectGap);
+}
+#Tack {
+  min-width: 13em;
+  max-width: 13em;
+  min-height:36em;
+  max-height:36em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+#TackColumn {
+  background: var(--screen);
+  backdrop-filter:opacity(0%);
+  box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%),
+    0em 0em 0em 0.07em black;
+  border-radius: 0.5em;
+  min-height:33em;
+  max-height:33em;
+  padding-bottom:2em;
+  padding-top:.5em;
+  width: 95%;
+  display: flex;
+  box-sizing:border-box;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  overflow:auto;
+  font-size:inherit;
+}
+.TackHeader{
+  padding:.2em;
+}
+#Resistances {
+  min-width: 13em;
+  max-width: 13em;
+  min-height:36em;
+  max-height:36em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+#ResColumn {
+  background: var(--screen);
+  backdrop-filter:opacity(0%);
+  box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 25%),
+    0em 0em 0em 0.07em black;
+  border-radius: 0.5em;
+  min-height:31em;
+  max-height:31em;
+  width: 95%;
+  display: flex;
+  box-sizing:border-box;
+  flex-direction: column;
+  align-items: center;
+  overflow:auto;
+  font-size:inherit;
+}
+#ResColumn > table{
+  table-layout:fixed;
+  border-spacing:.42em;
+  margin:0em;
+}
+#ResColumn>Table>Tbody>tr{
+  height:1.57em;
+}
+#ResColumn>Table>Tbody>tr>td{
+  box-shadow:inset 0em 0em 0em 0.06em;
+  background:white;
+  border-radius:1em;
+  width:4em;
+}
+#ResTotals >tbody>tr>td {
+  font-size:.8em;
+  color:gray;
+  font-weight:bolder;
+}
+.ResTot{
+  font-size:1.4em;
+}
+.INVcols {
+  min-width: 32.9%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em 0em 0.5em 0em;
+  overflow: auto;
+  overflow-x:clip;
+}
+.invContainer {
+  background: rgb(255 235 220);
+  overflow-x:clip;
+  box-shadow: 
+    -0.3em 0.3em 1em 0em rgb(0 0 0 / 50%), 
+    0em 0em 0em .05em black;
+  border-radius: 0.5em;
+  width: 90%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2em;
+}
+.INVslot {
+  box-shadow: inset 0em 0em 0em 0.05em gray,
+    inset -0.1em 0.2em 0.1em rgb(0 0 0 / 40%);
+  background-color: rgb(255 255 255 / 50%);
+  border-radius: 0.5em;
+  min-width: 6.5em;
+  max-width: 6.5em;
+  min-height: 1.4em;
+  max-height: 1.4em;
+  display: flex;
+  overflow: show;
+}
+.item {
+  background: rgb(255 255 255 / 50%);
+  box-Shadow: 0em 0em 0em .1em black;
+  border-radius: 0.5em;
+  width: fit-content;
+  min-height: 1.1em;
+  max-height: 1.1em;
+  text-align: center;
+  padding: 0em 0.5em 0.2em 0.5em;
+  text-wrap: nowrap;
+}
+.Equipped {
+  background: white;
+  padding: 0.2em 1em 0.2em 1em !important;
+  box-shadow: inset 0em 0em 0em 0.05em !important;
+  border-radius: 0.5em;
+  border:none !important;
+  text-align: center;
+  min-width: 70% !important;
+  max-width: 70% !important;
+}
+.storeLocal {
+  resize: none;
+  text-align: left;
+  box-shadow:none;
+  border: none;
+  min-width: 10em;
+  max-width: 10em;
+  background: transparent;
+  color: black;
+}
+.StoreDis {
+  background: var(--screen);
+  backdrop-filter:opacity(0%);
+}
+.storeLocal::placeholder {
+  color: rgb(50 50 50);
+}
+#Storage1 {
+  background: linear-gradient(
+    hsl(from rgb(from var(--userColor) 255 g b) h 70% 70%),
+    var(--userColor));
+}
+#Storage2 {
+  background: linear-gradient(
+    hsl(from rgb(from var(--userColor) r 255 b) h 70% 70%),
+    var(--userColor));
+}
+#Storage3 {
+  background: linear-gradient(
+    hsl(from rgb(from var(--userColor) r g 255) h 70% 70%),
+    var(--userColor));
+}
+.tech {
+  background: white;
+  padding: 0.1em 0em 0.1em 0em;
+  min-width: 8em;
+  max-width: 8em;
+  box-Shadow: 0em 0em 0em .1em black;
+  border-radius: 1em;
+  text-align: center;
+  font-weight: bold;
+}
+#INVhead{
+  display:inline;
+}
+#Weapon{
+  min-width:10em;
+  max-width:10em;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  gap:.2em;
+  align-items:center;
+}
+#WeaponList{
+  width:90%;
+  border-radius:.5em;
+}
+#WeaponStats{
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  gap:.5em;
+  align-items:center;
+}
+#Damage{
+  display:flex;
+  flex-direction:column;
+  gap:.2em;
+}
+.dmgVal{
+  padding:.5em;
+  margin:.2em;
+  min-width:8em;
+  max-width:8em;
+  box-Shadow: 0em 0em 0em .05em black;
+  border-radius:1em;
+  background:rgb(255 255 255 / 50%);
+}
+#chips{
+  display:flex;
+  gap:.5em;
+}
+.shpIn{
+  min-width:1em;
+  max-width:1em;
+  border:none;
+}
+.ShapeModifier{font-size:.8em;}
+#weaponDT{
+  font-weight:bolder;
+  font-size:1.2em;
+}
+#wepDT{
+  font-size:2em;
+}
+#ThrustVal,#SwingVal{
+  min-width:4em;
+}
+#PowerReadout, #AtkCost{
+  font-size:1.25em;
+}
+
+#ArmorGrids{
+  padding:1em;
+  min-width:77em;
+  max-width:77em;
+  min-height:35em;
+  max-height:35em;
+  display:flex;
+  flex-wrap:wrap;
+  gap:1em;
+}
+
+#ArmorGrids *{
+  border:none;
+}
+#ArmorGrids * select{
+  box-shadow:0em 0em 0em .05em gray;
+  border-radius:.5em;
+}
+
+
+/*Begining of CSS from armor grid draft*/
+.GridSect{
+  min-height:14.5em;
+  max-height:14.5em;
+  min-width:23em;
+  max-width:23em;
+  display:flex;
+  box-shadow:0em 0em 0em .1em black;
+  padding:1em;
+  justify-content:start;
+  gap:.5em;
+  border-radius:.5em;
+}
+.GridSect * {
+  font-size:.95em;
+}
+.agDamList{
+  margin-left:.2em;
+  display:flex;
+  align-items:center;
+  gap:1em;
+}
+.agDamList > div{
+  text-align:center;
+}
+.agDamList>div>input{
+  width:3em;
+  text-align:center;
+  line-height:1.2em;
+  border:none;
+  box-shadow:
+    0em 0em 0em .05em black,
+    inset -.1em .1em .3em 0em gray;
+  border-radius:.5em;
+}
+.agRight{
+  display:flex;
+  flex-direction:column;
+  justify-content:end;
+  font-weight:bolder;
+  color:rgb(0 0 0 /50%);
+  gap:.2em;
+}
+.agDebuff{
+  margin-left:3.5em;
+  display:flex;
+  gap:.5em;
+  transform:translatey(1em) translatex(-1em);
+}
+.limbStatus{
+  box-shadow:0em 0em 0em .05em black;
+  margin-bottom:.5em;
+  border-radius:.5em;
+}
+.secondDT{
+  font-size:3em;
+  overflow:hide;
+}
+.ag2ndDT{
+  min-height:4em;
+  max-height:3em;
+  text-align:center;
+  transform:translatey(.7em);
+}
+
+.agLeft{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  text-align:center;
+  font-weight:bolder;
+  color:rgb(0 0 0 /50%);
+  padding-right:.5em;
+  text-wrap:nowrap;
+}
+.agInjPenalty{font-size:.8em;}
+
+.agInjuryStatus{
+  width:100%;
+  height:2em;
+  text-align:center;
+}
+.limbEDT{font-size:3em;}
+.agEDT{
+  font-size:1.2em;
+}
+.agDebuff * input{
+  width:4em;
+}
+.agDebuff{
+  display:flex;
+  text-align:center;
+}
+.agLimbTitle{
+  writing-mode:sideways-lr;
+  text-align:left;
+  font-weight:bolder;
+  font-size:1.4em;
+}
+.agStatLabels{
+  font-size:.5em;
+  line-height:1em;
+  writing-mode:horizontal-tb;
+}
+.agCenter{
+  display:flex;
+  flex-direction:column;
+  justify-content:end;
+}
+.armorGrid{
+  table-layout:fixed;
+  width:8em;
+  border-collapse:collapse;
+}
+
+.armorGrid > tbody > tr > td{
+  box-shadow:0em 0em 0em .07em black;
+  text-align:center;
+  padding:0em;
+  height:1.5em;
+}
+.armorGrid > tbody > tr > td *{
+  transform:translatey(.15em);
+  height:1em;
+  width:1em;
+}
+.armorGrid > tbody > tr > th{
+  rotate:-45deg;
+  text-decoration:underline;
+  transform:
+    translatey(.65em) 
+    translatex(1em);
+  text-wrap:nowrap;
+}
+.agStats{
+  table-layout:fixed;
+  border-collapse:collapse;
+  width:8em;
+}
+.agStats>tbody>tr>td{
+  height:1.2em;
+  box-shadow:
+    .05em 0em 0em 0em black,
+    -.05em 0em 0em 0em black;
+}
+#LADT,#LAPD{
+ box-shadow:0em .05em 0em 0em rgb(0 0 0 /25%)
+}
+
+.BT{
+  font-size:2em;
+}
+.PrimaryDebuff{
+  width:2em;
+  height:1.3em;
+  font-size:1.5em;
+  font-weight:bolder;
+}
+.injPenaltyDD{
+  width:2em;
+  height:1.1em;
+  font-size:1.5em;
+  text-align:center;
+}
+#aGridTitle{
+  writing-mode:sideways-lr;
+  text-align:center;
+  font-size:2.5em;
+  line-height:.95em;
+  height:100%;
+  box-shadow:.05em 0em 0em 0em black;
+}
+#ArmorGridSection{
+  display:flex;
+  min-height:36em;
+  max-height:36em;
+}
+
+#Health{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:.5em .5em 6em .5em;
+  min-width:10em;
+  max-width:10em;
+}
+#GenHealth{
+  text-align:center;
+  background:rgb(152 112 112);
+  box-shadow:0em 0em 0em .12em black;
+  border-radius:.2em;
+  
+}
+#fatalBleedSect{
+  line-height:2em;
+  color:rgb(92 52 52);
+}
+#FatalBleedCounter{
+  background:transparent;
+  color:rgb(92 52 52);
+  background:rgb(182 142 142);
+  box-shadow:0em 0em 0em .05em rgb(92 52 52);
+  
+}
+#HPSect{
+  font-weight:bolder;
+  font-size:4em;
+  line-height:1em;
+  background:rgb(255 30 30);
+  box-shadow:0em -.03em 0em 0em black;
+}
+#HP{
+  width:1.1em;
+  height:.95em;
+  text-align:center;
+  font-size:2em;
+  font-weight:bolder;
+  border:none;
+  background:transparent;
+  box-shadow:none;
+}
+#DPSect{
+  color:white;
+  background:black;
+  font-weight:bolder;
+}
+#DP{
+  width:1em;
+  border:none;
+  color:white;
+  background:transparent;
+  font-weight:bolder;
+}
+#Injuries{
+  text-align:center;
+  line-height:1.6em;
+}
+#InjuriesTitle{
+  padding-bottom:1em;
+}
+#healthDetails{
+  display:flex;
+  align-items:left;
+  justify-content:space-around;
+}
+#healthDetails > div {
+  box-shadow:
+    0em 0em 0em .05em black,
+    0em 4.5em 0em 0em rgb(0 0 0 / 10%);
+  padding:.2em;
+  border-radius:.5em;
+  background:lightgray;
+}
+#BleedStacks{
+  text-align:center;
+}
+#BleedStacks * input[type="checkbox"]{
+  transform:
+    translatey(.3em)
+    translatex(-.1em)
+    scale(1.2,1.2);
+  border-radius:1em;
+}
+#BleedStacks * input[type="text"]{
+  min-width:2em;
+}
+.incumbent{
+  font-size:.5em;
+  padding-top:0em;
+  padding-bottom:.4em;
+  transform:translatex(-1.3em);
+}
+.incSpot{
+  font-size:.8em;
+  min-width: 1.2em;
+  max-width: 1.2em;
+  border-radius:1em !important;
+  color:black;
+  background:transparent;
+  box-shadow:
+    0em 0em 0em .08em rgb(0 0 0 /50%),
+    inset -.2em .1em .5em 0em rgb(0 0 0 / 20%);
+  text-transform:uppercase;
+}
+.quirk{
+  background:rgb(255 255 255/30%);
+  box-shadow:
+    0em 0em 0em .08em rgb(0 0 0 /70%),
+    inset .1em -.1em .3em 0em rgb(0 0 0 / 50%),
+    inset -.2em .1em .5em 0em white;
+  font-weight:bolder;
+}
+.advantage{
+  background:rgb(from hsl(from var(--userColor) h 20% 50%/100%) r g 255);
+  box-shadow:
+    0em 0em 0em .08em rgb(0 0 0 /70%),
+    inset .3em -.3em .3em 0em hsl(from var(--userColor) h 100% 5% /60%),
+    inset -.2em .1em .5em 0em white;
+  font-weight:bolder;
+}
+.penalty{
+  background:rgb(from hsl(from var(--userColor) h 20% 50%/100%) 255 g b);
+  box-shadow:
+    0em 0em 0em .08em rgb(0 0 0 /70%),
+    inset .3em -.3em .3em 0em hsl(from var(--userColor) h 100% 5% /60%),
+    inset -.2em .1em .5em 0em white;
+  font-weight:bolder;
+}
+#TraitTable>tbody>tr:nth-child(7n+1):nth-child(-n+24){
+  background:linear-Gradient(90deg, transparent, rgb(225 225 220 / 30%), transparent);
+  box-shadow:0em -.6em .8em -.6em rgb(0 0 0 /50%);
+}
+.Rusty{
+  background:linear-gradient(90deg, transparent, rgb(0 0 0/30%), transparent);
+  color:rgb(0 0 0/50%);
+}
+#blankTraitSpace *{
+  font-size:0em;
+}
+.Bleeding{
+  background:rgb(200 0 0);
+  color:black !important;
+  font-weight:bold;
+}
+.traitEXP{
+  transform:translatey(.4em);
+}
+.WeightEXP,#TraitTable>tbody>tr:nth-of-type(30)>td:nth-of-type(1){
+  transform:translatey(0em) translatex(1em);}
+
+#Combat{
+  min-width:24em;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  text-align:center;
+}
+#ComTitle{
+  font-size:1.7em;
+  font-weight:bolder;
+}
+#ComBody{
+  display:flex;
+  justify-content:space-around;
+  min-height:30em;
+  max-height:30em;
+}
+#comMeasure{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+}
+.momMeasure{
+  font-size:1.5em;
+  color:rgb(0 0 0 /20%);
+}
+
+#ComBottom{
+  color:black;
+  font-weight:bolder;
+  width:100%;
+  height:2.5em;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+}
+#ComMoments{
+  background:var(--screen);
+  box-shadow:
+    .3em -.3em .4em 0em var(--userColor),
+    inset 0em 0em .0em .05em black,
+    inset -.5em .5em .5em 0em rgb(0 0 0 /60%);
+  width:20em;
+  height:100%;
+  border-radius:.5em;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+  align-items:center;
+  padding:.5em;
+  box-sizing:border-box;
+  gap:.7em;
+}
+.moment{
+  display:flex;
+  align-items:center;
+  justify-content:space-around;
+  background:rgb(215 215 210);
+  border-radius:2em;
+  flex-grow:.95;
+  box-shadow:
+    0em 0em 0em .2em black,
+    inset .5em -.5em 1em 0em rgb(0 0 0 /50%),
+    inset -.4em .3em .5em 0em white;
+  padding:0em 1em 0em .5em;
+}
+.actionCounter{
+  font-size:1.5em;
+  color:rgb(0 0 0/50%);
+}
+.action{
+  width:70%;
+  font-size:1.5em;
+  border-radius:1em;
+  box-shadow:
+    0em .05em 0em 0em black,
+    inset -.1em .1em .3em 0em rgb(0 0 0 /50%);
+  color:rgb(0 0 0 /70%);
+}
+#ComBonus{
+  display:flex;
+  flex-direction:column;
+  margin:.5em;
+  justify-content:space-around;
+}
+.CombatBonusChip{
+  Background:white;
+  box-shadow:
+    0em 0em 0em .1em black,
+    0em .3em 0em 0.1em rgb(from var(--userColor) r g b /60%);
+  border-radius:0em .5em 0em .5em;
+  font-size:1.5em;
+  width:2.5em;
+  height:3em;
+}
+.CombatBonusChip>select{
+  border-radius:.5em;
+  font-size:1em;
+}
+.CombatBonusChip:nth-child(1){
+  background:hsl(50deg 50% 70%);
+}
+.CombatBonusChip:nth-child(2){
+  background:hsl(200deg 50% 70%);
+}
+.CombatBonusChip:nth-child(3){
+  background:hsl(150deg 50% 70%);
+}
+#actionCounter{
+  background:rgb(255 255 255/50%);
+  border-radius:1em;
+  width:8em;
+  padding:.1em 0em .1em 0em;
+  box-shadow:
+    0em 0em 0em .05em black,
+    inset .2em -.2em .3em 0em hsl(from var(--userColor)h 100% 30%/80%);
+}
+.perChunk{
+  background:hsl(from var(--userColor) h 50% 75% /100%);
+}
+.tooManyAct{
+  background:red;
+}
+.hitMoment{
+  box-shadow:
+    0em 0em 0em .2em black,
+    inset .5em -.5em 1em 0em rgb(0 0 0 /50%),
+    inset -.4em .3em .5em 0em white,
+    inset -3.6em 0em 1em 0em red,
+    inset -3.6em 0em 2em 0em yellow;
+}
+
+
+#map{
+  border:none;
+  box-shadow:none;
+  width:100%;
+  height:100%;
+  overflow:clip;
+  border-radius:1em;
+}
+#MapContainer{
+  box-shadow:0em 0em 0em .3em black;
+  background:hsl(from var(--userColor) h s 70% /100%);
+  width:90%;
+  height:85%;
+  border-radius:1em;
+}
+#Maps{
+  min-width:40em;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-around;
+}
+#mapConsole{
+  display:flex;
+  justify-content:space-around;
+  gap:1em;
+  width:80%;
+  align-items:center;
+}
+#mapConsole select{
+  width:8em;
+  border-radius:.5em;
+}
+#addAMap input{
+  border-radius:.5em;
+  width:8em;
+}
+#newMapButton{
+  transform:translatex(1em);
+}
+#files{
+  width:20em;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:43em;
+  max-height:43em;
+}
+#filesHeader{
+  font-size:2em;
+  font-weight:bolder;
+}
+#filesColumn{
+  text-align:center;
+  width:85%;
+  height:90%;
+  background:var(--screen);
+  box-shadow: inset -0.5em 0.5em 2em 0.5em rgb(0 0 0 / 50%),
+     0em 0em 0em .05em black;
+  border-radius:1em;
+  padding:.5em;
+  display:flex;
+  flex-direction:column;
+  gap:.5em;
+  overflow:auto;
+}
+.file{
+  background:hsl(from var(--userColor) h 30% 40%/100%);
+  border-radius:.7em;
+  min-width:15em;
+  max-width:15em;
+  padding:.5em 0em .5em 0em;
+  box-shadow:0em 0em 0em .1em black;
+  display:flex;
+  flex-direction:column;
+  gap:.5em;
+}
+.file>div:nth-child(1){
+  background:white;
+  box-shadow:
+    0em .15em 0em 0em rgb(from hsl(from var(--userColor) h s 50%/100%) r 255 b),
+    0em -.15em 0em 0em rgb(from hsl(from var(--userColor) h s 50%/100%) r 255 b);;
+}
+.file>div:nth-child(2){
+  background:white;
+  box-shadow:inset 0em .5em 2em -.5em black;
+  
+}
