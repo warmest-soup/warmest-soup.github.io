@@ -1972,7 +1972,7 @@ function setBG(moving){
 
   var moving=document.getElementById("CustomColor").dataset.bg;
   console.log(moving);
-  if(moving=="true"){ document.documentElement.style.backgroundImage="url('https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetABGg2.gif?raw=true')";
+  if(moving=="true"){ document.documentElement.style.backgroundImage="url('https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetABGg.gif?raw=true')";
   console.log("In THIS one!?");
 } else {
     document.documentElement.style.backgroundImage="url('https://warmest-soup.github.io/Assets/Images/Sheet%20Grand%20BG.png')"
