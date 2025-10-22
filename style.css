@@ -14,7 +14,7 @@ html {
   width: 100%;
   overflow-x: clip;
   
-  background-image:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetABGg2.gif?raw=true");
+  background-image:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetABGg.gif?raw=true");
   background-repeat:no-repeat;
   background-position:center;
   background-attachment:fixed;
@@ -1322,6 +1322,7 @@ textarea {
 #BleedStacks * input[type="text"]{
   min-width:2em;
 }
+
 
 
 
