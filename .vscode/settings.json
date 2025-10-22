@@ -1,0 +1,11 @@
+{
+    "diffEditor.wordWrap": "on",
+    "editor.parameterHints.cycle": false,
+    "editor.parameterHints.enabled": false,
+    "editor.suggest.showTypeParameters": true,
+    "breadcrumbs.showTypeParameters": true,
+    "outline.showTypeParameters": true,
+    "html.autoClosingTags": false,
+    "javascript.autoClosingTags": false,
+    "typescript.autoClosingTags": false
+}
