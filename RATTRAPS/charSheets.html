@@ -42,408 +42,411 @@
     <div id="subSheet">
 
         <div class="Row">
+            
+            <div class="dataSection">
+                <div hidden id="CustomColor" data-userhue="200" data-userbri="50%" data-useropa="80%" data-userhue2="200"
+                    data-bg="true">
+                </div>
 
-            <div hidden id="CustomColor" data-userhue="200" data-userbri="50%" data-useropa="80%" data-userhue2="200"
-                data-bg="true"></div>
+                <div id="CharID" class="Section">
+                    <div id="Name">
+                        <textarea rows="2" type="text" autocapitalize="words" placeholder="-Name-&#10-" spellcheck="false"
+                            class="SaveInput"></textarea>
+                    </div>
+                    <img id="Photo" src="https://warmest-soup.github.io/RATTRAPS/PlayerImages/cgmc.png">
 
-            <div id="CharID" class="Section">
-                <div id="Name">
-                    <textarea rows="2" type="text" autocapitalize="words" placeholder="-Name-&#10-" spellcheck="false"
-                        class="SaveInput"></textarea>
+                    </img>
+                    <div id="Occupation" class="CharInfo"> Occupation:
+                        <Input type="Text" class="SaveInput" autocapitalize="words" PlaceHolder="Adventurer"></Input>
+                    </div>
+                    <div id="Age" class="CharInfo"> Age:
+                        <Input type="Text" class="SaveInput" autocapitalize="words" PlaceHolder="--"></Input>
+                    </div>
+                    <div id="Sex" class="CharInfo"> Sex:
+                        <Input type="Text" class="SaveInput" autocapitalize="words" PlaceHolder="--"></Input>
+                    </div>
+                    <div id="Handed" class="CharInfo"> Handed:
+                        <select onchange="saveDropdown(this)" this id='HandDropdown' class='SaveInputSP'>
+                            <option id='Unset'>Unset</option>
+                            <option id='Left'>Left</option>
+                            <option id='Right'>Right</option>
+                        </select>
+                    </div>
+                    <div id="Money" class="CharInfo"> Money:
+                        <Input type="Text" id="moneyTracker" autocapitalize="words" PlaceHolder="$0.00¢"></Input>
+                    </div>
+                    <div id="Status" class="CharInfo"> Status:
+                        <Input type="Text" class="SaveInput" autocapitalize="words" PlaceHolder="Fine"></Input>
+                    </div> <br>
+                    <div id="DayCount" style="text-align:center;">Day <Span id="currentDay">0000</Span></div>
                 </div>
-                <img id="Photo" src="https://warmest-soup.github.io/RATTRAPS/PlayerImages/cgmc.png">
 
-                </img>
-                <div id="Occupation" class="CharInfo"> Occupation:
-                    <Input type="Text" class="SaveInput" autocapitalize="words" PlaceHolder="Adventurer"></Input>
+                <div id="Traits" class="Section"> <span>~Traits~  
+                                <button id="RulesShortcut" onclick="openRules()">Rule Book</button></span>
+                    <table id="TraitTable">
+                        <tr class="TraitHeader">
+                            <td colspan="2">SKL</td>
+                            <td colspan="3">Athleticism</td>
+                            <td></td>
+                            <td><input maxLength="3" id="athBonus" type="text" class="SingleInputNUM SaveInput CatBonus"
+                                    value="+0" onFocus="this.select()" />
+                            </td>
+                            <td></td>
+                        </tr>
+
+                        <tr id="Dexterity">
+                            <td colspan="2" class="traitEXP"> <input maxLength="3" id="dexExp"
+                                    class="decayTarget EXPvalue SingleInputNUM SaveInput" type="text" value="0" />
+                                <span id="dexGoal"></span>
+                            </td>
+                            <td colspan="3"> Dexterity </td>
+                            <td><input maxLength="3" id="dexReal" type="text" class="SingleInputNUM SaveInput realTrait"
+                                    value="3" onFocus="this.select()" />
+                            </td>
+                            <td><input maxLength="3" id="dexBonus" type="text"
+                                    class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
+                                    onFocus="this.select()" />
+                            </td>
+                            <td id="dexFunc" class="traitFunc" /> x </td>
+                        </tr>
+                        <tr class="incumbentRows">
+                            <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
+                                    class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
+                            </td>
+                        </tr>
+
+                        <tr id="Speed">
+                            <td colspan="2" class="traitEXP"> <input maxLength="3" id="spdExp"
+                                    class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
+                                <span id="spdGoal"></span>
+                            </td>
+                            <td colspan="3"> Speed </td>
+                            <td><input maxLength="3" id="spdReal" type="text" class="SingleInputNUM SaveInput realTrait"
+                                    value="3" onFocus="this.select()" />
+                            </td>
+                            <td><input maxLength="3" id="spdBonus" type="text"
+                                    class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
+                                    onFocus="this.select()" />
+                            </td>
+                            <td id="spdFunc" class="traitFunc" /> x </td>
+                        </tr>
+                        <tr class="incumbentRows">
+                            <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
+                                    class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
+                            </td>
+                        </tr>
+
+                        <tr id="Strength">
+                            <td colspan="2" class="traitEXP"> <input maxLength="3" id="strExp"
+                                    class="decayTarget EXPvalue SingleInputNUM SaveInput" type="text" value="0" />
+                                <span id="strGoal"></span>
+                            </td>
+                            <td colspan="3"> Strength </td>
+                            <td><input maxLength="3" id="strReal" type="text" class="SingleInputNUM SaveInput realTrait"
+                                    value="3" onFocus="this.select()" />
+                            </td>
+                            <td><input maxLength="3" id="strBonus" type="text"
+                                    class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
+                                    onFocus="this.select()" />
+                            </td>
+                            <td id="strFunc" class="traitFunc" /> x </td>
+                        </tr>
+                        <tr class="incumbentRows">
+                            <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
+                                    class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
+                            </td>
+                        </tr>
+
+                        <tr class="TraitHeader">
+                            <td colspan="2">INS</td>
+                            <td colspan="3">Awareness</td>
+                            <td></td>
+                            <td><input maxLength="3" id="aweBonus" type="text" class="SingleInputNUM SaveInput CatBonus"
+                                    value="+0" onFocus="this.select()" />
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr id="Perception">
+                            <td colspan="2" class="traitEXP"> <input maxLength="3" id="perExp"
+                                    class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
+                                <span id="perGoal"></span>
+                            </td>
+                            <td colspan="3"> Perception </td>
+                            <td><input maxLength="3" id="perReal" type="text" class="SingleInputNUM SaveInput realTrait"
+                                    value="3" onFocus="this.select()" />
+                            </td>
+                            <td><input maxLength="3" id="perBonus" type="text"
+                                    class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
+                                    onFocus="this.select()" />
+                            </td>
+                            <td id="perFunc" class="traitFunc" /> x </td>
+                        </tr>
+
+                        <tr class="incumbentRows">
+                            <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
+                                    class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
+                            </td>
+                        </tr>
+
+                        <tr id="Charisma">
+                            <td colspan="2" class="traitEXP"> <input maxLength="3" id="chaExp"
+                                    class="decayTarget EXPvalue  SaveInput SingleInputNUM" type="text" value="0" />
+                                <span id="chaGoal"></span>
+                            </td>
+                            <td colspan="3"> Charisma </td>
+                            <td><input maxLength="3" id="chaReal" type="text" class="SingleInputNUM SaveInput realTrait"
+                                    value="3" onFocus="this.select()" />
+                            </td>
+                            <td><input maxLength="3" id="chaBonus" type="text"
+                                    class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
+                                    onFocus="this.select()" />
+                            </td>
+                            <td id="chaFunc" class="traitFunc" /> x </td>
+                        </tr>
+                        <tr class="incumbentRows">
+                            <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
+                                    class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
+                            </td>
+                        </tr>
+
+                        <tr id="Navigation">
+                            <td colspan="2" class="traitEXP"> <input maxLength="3" id="navExp"
+                                    class="decayTarget EXPvalue SingleInputNUM SaveInput" type="text" value="0" />
+                                <span id="navGoal"></span>
+                            </td>
+                            <td colspan="3"> Navigation </td>
+                            <td><input maxLength="3" id="navReal" type="text" class="SingleInputNUM SaveInput realTrait"
+                                    value="3" onFocus="this.select()" />
+                            </td>
+                            <td><input maxLength="3" id="navBonus" type="text"
+                                    class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
+                                    onFocus="this.select()" />
+                            </td>
+                            <td id="navFunc" class="traitFunc" /> x </td>
+                        </tr>
+                        <tr class="incumbentRows">
+                            <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
+                                    class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
+                            </td>
+                        </tr>
+
+                        <tr class="TraitHeader">
+                            <td colspan="2">SKL</td>
+                            <td colspan="3">Body</td>
+                            <td></td>
+                            <td><input maxLength="3" id="bodBonus" type="text" class="SingleInputNUM SaveInput CatBonus"
+                                    value="+0" onFocus="this.select()" />
+                            </td>
+                            <td></td>
+                        </tr>
+
+                        <tr id="Constitution">
+                            <td colspan="2" class="traitEXP"> <input maxLength="3" id="conExp"
+                                    class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
+                                <span id="conGoal"></span>
+                            </td>
+                            <td colspan="3"> Constitution </td>
+                            <td><input maxLength="3" id="conReal" type="text" class="SingleInputNUM SaveInput realTrait"
+                                    value="3" onFocus="this.select()" />
+                            </td>
+                            <td><input maxLength="3" id="conBonus" type="text"
+                                    class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
+                                    onFocus="this.select()" />
+                            </td>
+                            <td id="conFunc" class="traitFunc" /> x </td>
+                        </tr>
+                        <tr class="incumbentRows">
+                            <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
+                                    class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
+                            </td>
+                        </tr>
+
+                        <tr id="Endurance">
+                            <td colspan="2" class="traitEXP"> <input maxLength="3" id="endExp"
+                                    class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
+                                <span id="endGoal"></span>
+                            </td>
+                            <td colspan="3"> Endurance </td>
+                            <td><input maxLength="3" id="endReal" type="text" class="SingleInputNUM SaveInput realTrait"
+                                    value="3" onFocus="this.select()" />
+                            </td>
+                            <td><input maxLength="3" id="endBonus" type="text"
+                                    class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
+                                    onFocus="this.select()" />
+                            </td>
+                            <td id="endFunc" class="traitFunc" /> x </td>
+                        </tr>
+                        <tr class="incumbentRows">
+                            <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
+                                    class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
+                            </td>
+                        </tr>
+
+                        <tr id="Stamina">
+                            <td colspan="2" class="traitEXP"> <input maxLength="3" id="staExp"
+                                    class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
+                                <span id="staGoal"></span>
+                            </td>
+                            <td colspan="3"> Stamina </td>
+                            <td><input maxLength="3" id="staReal" type="text" class="SingleInputNUM  SaveInput realTrait"
+                                    value="3" onFocus="this.select()" />
+                            </td>
+                            <td><input maxLength="3" id="staBonus" type="text"
+                                    class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
+                                    onFocus="this.select()" />
+                            </td>
+                            <td id="staFunc" class="traitFunc" /> x </td>
+                        </tr>
+                        <tr class="incumbentRows">
+                            <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
+                                    class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
+                            </td>
+                        </tr>
+
+                        <tr class="TraitHeader">
+                            <td colspan="2">INS</td>
+                            <td colspan="3">Mind</td>
+                            <td></td>
+                            <td><input maxLength="3" id="mndBonus" type="text" class="SingleInputNUM SaveInput CatBonus"
+                                    value="+0" onFocus="this.select()" />
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr id="Intelligence">
+                            <td colspan="2" class="traitEXP"> <input maxLength="3" id="intExp"
+                                    class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
+                                <span id="intGoal"></span>
+                            </td>
+                            <td colspan="3"> Intelligence </td>
+                            <td><input maxLength="3" id="intReal" type="text" class="SingleInputNUM SaveInput realTrait"
+                                    value="3" onFocus="this.select()" />
+                            </td>
+                            <td><input maxLength="3" id="intBonus" type="text"
+                                    class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
+                                    onFocus="this.select()" />
+                            </td>
+                            <td id="intFunc" class="traitFunc" /> x </td>
+                        </tr>
+                        <tr class="incumbentRows">
+                            <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
+                                    class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
+                            </td>
+                        </tr>
+
+                        <tr id="Wisdom">
+                            <td colspan="2" class="traitEXP"> <input maxLength="3" id="wisExp"
+                                    class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
+                                <span id="wisGoal"></span>
+                            </td>
+                            <td colspan="3"> Wisdom </td>
+                            <td><input maxLength="3" id="wisReal" type="text" class="SingleInputNUM SaveInput realTrait"
+                                    value="3" onFocus="this.select()" />
+                            </td>
+                            <td><input maxLength="3" id="wisBonus" type="text"
+                                    class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
+                                    onFocus="this.select()" />
+                            </td>
+                            <td id="wisFunc" class="traitFunc" /> x </td>
+                        </tr>
+                        <tr class="incumbentRows">
+                            <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
+                                    class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
+                            </td>
+                        </tr>
+
+                        <tr id="Knowledge">
+                            <td colspan="2" class="traitEXP"> <input maxLength="3" id="knoExp"
+                                    class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
+                                <span id="knoGoal"></span>
+                            </td>
+                            <td colspan="3"> Knowledge </td>
+                            <td><input maxLength="3" id="knoReal" type="text" class="SingleInputNUM SaveInput realTrait"
+                                    value="3" onFocus="this.select()" />
+                            </td>
+                            <td><input maxLength="3" id="knoBonus" type="text"
+                                    class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
+                                    onFocus="this.select()" />
+                            </td>
+                            <td id="knoFunc" class="traitFunc" /> x </td>
+                        </tr>
+                        <tr class="incumbentRows">
+                            <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
+                                    class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
+                                <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
+                            </td>
+                        </tr>
+
+                        <tr id="blankTraitSpace">
+                            <td colspan="8"> </td>
+                        </tr>
+                        <tr id="Level">
+                            <td colspan="2" class="traitEXP" style="text-align:center;">EXP</td>
+                            <td colspan="3"> Level: </td>
+                            <td id="CharacterLevel">0</td>
+                        </tr>
+                        <tr id="WeightClass">
+                            <td colspan="2" class="WeightEXP traitEXP"> <input maxLength="3" id="wgtExp"
+                                    class="EXPvalue SaveInput SingleInputNUM wgtIn" type="text" value="0" />
+                                <span id="wgtGoal">/0</span>
+                            </td>
+                            <td colspan="3"> Weight </td>
+                            <td><input maxLength="3" id="wgtReal" type="text" class="SingleInputNUM SaveInput wgtIn"
+                                    value="3" /></td>
+                            <td><input maxLength="3" id="wgtBonus" type="text" class="SingleInputNUM SaveInput wgtIn"
+                                    value="+0" />
+                            </td>
+                            <td id="wgtFunc" /> x </td>
+                        </tr>
+                    </table>
                 </div>
-                <div id="Age" class="CharInfo"> Age:
-                    <Input type="Text" class="SaveInput" autocapitalize="words" PlaceHolder="--"></Input>
-                </div>
-                <div id="Sex" class="CharInfo"> Sex:
-                    <Input type="Text" class="SaveInput" autocapitalize="words" PlaceHolder="--"></Input>
-                </div>
-                <div id="Handed" class="CharInfo"> Handed:
-                    <select onchange="saveDropdown(this)" this id='HandDropdown' class='SaveInputSP'>
-                        <option id='Unset'>Unset</option>
-                        <option id='Left'>Left</option>
-                        <option id='Right'>Right</option>
-                    </select>
-                </div>
-                <div id="Money" class="CharInfo"> Money:
-                    <Input type="Text" id="moneyTracker" autocapitalize="words" PlaceHolder="$0.00¢"></Input>
-                </div>
-                <div id="Status" class="CharInfo"> Status:
-                    <Input type="Text" class="SaveInput" autocapitalize="words" PlaceHolder="Fine"></Input>
-                </div> <br>
-                <div id="DayCount" style="text-align:center;">Day <Span id="currentDay">0000</Span></div>
             </div>
-            <div id="Traits" class="Section"> <span>~Traits~  
-                            <button id="RulesShortcut" onclick="openRules()">Rule Book</button></span>
-                <table id="TraitTable">
-                    <tr class="TraitHeader">
-                        <td colspan="2">SKL</td>
-                        <td colspan="3">Athleticism</td>
-                        <td></td>
-                        <td><input maxLength="3" id="athBonus" type="text" class="SingleInputNUM SaveInput CatBonus"
-                                value="+0" onFocus="this.select()" />
-                        </td>
-                        <td></td>
-                    </tr>
-
-                    <tr id="Dexterity">
-                        <td colspan="2" class="traitEXP"> <input maxLength="3" id="dexExp"
-                                class="decayTarget EXPvalue SingleInputNUM SaveInput" type="text" value="0" />
-                            <span id="dexGoal"></span>
-                        </td>
-                        <td colspan="3"> Dexterity </td>
-                        <td><input maxLength="3" id="dexReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                value="3" onFocus="this.select()" />
-                        </td>
-                        <td><input maxLength="3" id="dexBonus" type="text"
-                                class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
-                                onFocus="this.select()" />
-                        </td>
-                        <td id="dexFunc" class="traitFunc" /> x </td>
-                    </tr>
-                    <tr class="incumbentRows">
-                        <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
-                                class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
-                        </td>
-                    </tr>
-
-                    <tr id="Speed">
-                        <td colspan="2" class="traitEXP"> <input maxLength="3" id="spdExp"
-                                class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
-                            <span id="spdGoal"></span>
-                        </td>
-                        <td colspan="3"> Speed </td>
-                        <td><input maxLength="3" id="spdReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                value="3" onFocus="this.select()" />
-                        </td>
-                        <td><input maxLength="3" id="spdBonus" type="text"
-                                class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
-                                onFocus="this.select()" />
-                        </td>
-                        <td id="spdFunc" class="traitFunc" /> x </td>
-                    </tr>
-                    <tr class="incumbentRows">
-                        <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
-                                class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
-                        </td>
-                    </tr>
-
-                    <tr id="Strength">
-                        <td colspan="2" class="traitEXP"> <input maxLength="3" id="strExp"
-                                class="decayTarget EXPvalue SingleInputNUM SaveInput" type="text" value="0" />
-                            <span id="strGoal"></span>
-                        </td>
-                        <td colspan="3"> Strength </td>
-                        <td><input maxLength="3" id="strReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                value="3" onFocus="this.select()" />
-                        </td>
-                        <td><input maxLength="3" id="strBonus" type="text"
-                                class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
-                                onFocus="this.select()" />
-                        </td>
-                        <td id="strFunc" class="traitFunc" /> x </td>
-                    </tr>
-                    <tr class="incumbentRows">
-                        <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
-                                class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
-                        </td>
-                    </tr>
-
-                    <tr class="TraitHeader">
-                        <td colspan="2">INS</td>
-                        <td colspan="3">Awareness</td>
-                        <td></td>
-                        <td><input maxLength="3" id="aweBonus" type="text" class="SingleInputNUM SaveInput CatBonus"
-                                value="+0" onFocus="this.select()" />
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr id="Perception">
-                        <td colspan="2" class="traitEXP"> <input maxLength="3" id="perExp"
-                                class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
-                            <span id="perGoal"></span>
-                        </td>
-                        <td colspan="3"> Perception </td>
-                        <td><input maxLength="3" id="perReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                value="3" onFocus="this.select()" />
-                        </td>
-                        <td><input maxLength="3" id="perBonus" type="text"
-                                class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
-                                onFocus="this.select()" />
-                        </td>
-                        <td id="perFunc" class="traitFunc" /> x </td>
-                    </tr>
-
-                    <tr class="incumbentRows">
-                        <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
-                                class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
-                        </td>
-                    </tr>
-
-                    <tr id="Charisma">
-                        <td colspan="2" class="traitEXP"> <input maxLength="3" id="chaExp"
-                                class="decayTarget EXPvalue  SaveInput SingleInputNUM" type="text" value="0" />
-                            <span id="chaGoal"></span>
-                        </td>
-                        <td colspan="3"> Charisma </td>
-                        <td><input maxLength="3" id="chaReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                value="3" onFocus="this.select()" />
-                        </td>
-                        <td><input maxLength="3" id="chaBonus" type="text"
-                                class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
-                                onFocus="this.select()" />
-                        </td>
-                        <td id="chaFunc" class="traitFunc" /> x </td>
-                    </tr>
-                    <tr class="incumbentRows">
-                        <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
-                                class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
-                        </td>
-                    </tr>
-
-                    <tr id="Navigation">
-                        <td colspan="2" class="traitEXP"> <input maxLength="3" id="navExp"
-                                class="decayTarget EXPvalue SingleInputNUM SaveInput" type="text" value="0" />
-                            <span id="navGoal"></span>
-                        </td>
-                        <td colspan="3"> Navigation </td>
-                        <td><input maxLength="3" id="navReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                value="3" onFocus="this.select()" />
-                        </td>
-                        <td><input maxLength="3" id="navBonus" type="text"
-                                class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
-                                onFocus="this.select()" />
-                        </td>
-                        <td id="navFunc" class="traitFunc" /> x </td>
-                    </tr>
-                    <tr class="incumbentRows">
-                        <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
-                                class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
-                        </td>
-                    </tr>
-
-                    <tr class="TraitHeader">
-                        <td colspan="2">SKL</td>
-                        <td colspan="3">Body</td>
-                        <td></td>
-                        <td><input maxLength="3" id="bodBonus" type="text" class="SingleInputNUM SaveInput CatBonus"
-                                value="+0" onFocus="this.select()" />
-                        </td>
-                        <td></td>
-                    </tr>
-
-                    <tr id="Constitution">
-                        <td colspan="2" class="traitEXP"> <input maxLength="3" id="conExp"
-                                class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
-                            <span id="conGoal"></span>
-                        </td>
-                        <td colspan="3"> Constitution </td>
-                        <td><input maxLength="3" id="conReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                value="3" onFocus="this.select()" />
-                        </td>
-                        <td><input maxLength="3" id="conBonus" type="text"
-                                class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
-                                onFocus="this.select()" />
-                        </td>
-                        <td id="conFunc" class="traitFunc" /> x </td>
-                    </tr>
-                    <tr class="incumbentRows">
-                        <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
-                                class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
-                        </td>
-                    </tr>
-
-                    <tr id="Endurance">
-                        <td colspan="2" class="traitEXP"> <input maxLength="3" id="endExp"
-                                class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
-                            <span id="endGoal"></span>
-                        </td>
-                        <td colspan="3"> Endurance </td>
-                        <td><input maxLength="3" id="endReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                value="3" onFocus="this.select()" />
-                        </td>
-                        <td><input maxLength="3" id="endBonus" type="text"
-                                class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
-                                onFocus="this.select()" />
-                        </td>
-                        <td id="endFunc" class="traitFunc" /> x </td>
-                    </tr>
-                    <tr class="incumbentRows">
-                        <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
-                                class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
-                        </td>
-                    </tr>
-
-                    <tr id="Stamina">
-                        <td colspan="2" class="traitEXP"> <input maxLength="3" id="staExp"
-                                class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
-                            <span id="staGoal"></span>
-                        </td>
-                        <td colspan="3"> Stamina </td>
-                        <td><input maxLength="3" id="staReal" type="text" class="SingleInputNUM  SaveInput realTrait"
-                                value="3" onFocus="this.select()" />
-                        </td>
-                        <td><input maxLength="3" id="staBonus" type="text"
-                                class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
-                                onFocus="this.select()" />
-                        </td>
-                        <td id="staFunc" class="traitFunc" /> x </td>
-                    </tr>
-                    <tr class="incumbentRows">
-                        <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
-                                class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
-                        </td>
-                    </tr>
-
-                    <tr class="TraitHeader">
-                        <td colspan="2">INS</td>
-                        <td colspan="3">Mind</td>
-                        <td></td>
-                        <td><input maxLength="3" id="mndBonus" type="text" class="SingleInputNUM SaveInput CatBonus"
-                                value="+0" onFocus="this.select()" />
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr id="Intelligence">
-                        <td colspan="2" class="traitEXP"> <input maxLength="3" id="intExp"
-                                class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
-                            <span id="intGoal"></span>
-                        </td>
-                        <td colspan="3"> Intelligence </td>
-                        <td><input maxLength="3" id="intReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                value="3" onFocus="this.select()" />
-                        </td>
-                        <td><input maxLength="3" id="intBonus" type="text"
-                                class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
-                                onFocus="this.select()" />
-                        </td>
-                        <td id="intFunc" class="traitFunc" /> x </td>
-                    </tr>
-                    <tr class="incumbentRows">
-                        <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
-                                class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
-                        </td>
-                    </tr>
-
-                    <tr id="Wisdom">
-                        <td colspan="2" class="traitEXP"> <input maxLength="3" id="wisExp"
-                                class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
-                            <span id="wisGoal"></span>
-                        </td>
-                        <td colspan="3"> Wisdom </td>
-                        <td><input maxLength="3" id="wisReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                value="3" onFocus="this.select()" />
-                        </td>
-                        <td><input maxLength="3" id="wisBonus" type="text"
-                                class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
-                                onFocus="this.select()" />
-                        </td>
-                        <td id="wisFunc" class="traitFunc" /> x </td>
-                    </tr>
-                    <tr class="incumbentRows">
-                        <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
-                                class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
-                        </td>
-                    </tr>
-
-                    <tr id="Knowledge">
-                        <td colspan="2" class="traitEXP"> <input maxLength="3" id="knoExp"
-                                class="decayTarget EXPvalue SaveInput SingleInputNUM" type="text" value="0" />
-                            <span id="knoGoal"></span>
-                        </td>
-                        <td colspan="3"> Knowledge </td>
-                        <td><input maxLength="3" id="knoReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                value="3" onFocus="this.select()" />
-                        </td>
-                        <td><input maxLength="3" id="knoBonus" type="text"
-                                class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
-                                onFocus="this.select()" />
-                        </td>
-                        <td id="knoFunc" class="traitFunc" /> x </td>
-                    </tr>
-                    <tr class="incumbentRows">
-                        <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
-                                class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot saveInput">  
-                            <input type="text" onfocus="select(this)" maxlength="1" class="incSpot  saveInput">
-                        </td>
-                    </tr>
-
-                    <tr id="blankTraitSpace">
-                        <td colspan="8"> </td>
-                    </tr>
-                    <tr id="Level">
-                        <td colspan="2" class="traitEXP" style="text-align:center;">EXP</td>
-                        <td colspan="3"> Level: </td>
-                        <td id="CharacterLevel">0</td>
-                    </tr>
-                    <tr id="WeightClass">
-                        <td colspan="2" class="WeightEXP traitEXP"> <input maxLength="3" id="wgtExp"
-                                class="EXPvalue SaveInput SingleInputNUM wgtIn" type="text" value="0" />
-                            <span id="wgtGoal">/0</span>
-                        </td>
-                        <td colspan="3"> Weight </td>
-                        <td><input maxLength="3" id="wgtReal" type="text" class="SingleInputNUM SaveInput wgtIn"
-                                value="3" /></td>
-                        <td><input maxLength="3" id="wgtBonus" type="text" class="SingleInputNUM SaveInput wgtIn"
-                                value="+0" />
-                        </td>
-                        <td id="wgtFunc" /> x </td>
-                    </tr>
-                </table>
-            </div>
-
 
             <div id="Abilities" class="Section">
                 <div id="addAbilWindow">
@@ -865,7 +868,6 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
                 <div> </div>
             </div>
 
-
             <div id="Satiety" class="Section">
 
                 <div id="SatBottom">
@@ -933,6 +935,7 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
                     </div>
                 </div>
             </div>
+
             <div id="Temperature" class="Section">
                 <div id="TempBot">
                     <div id="TempContextReadout">0</div>
