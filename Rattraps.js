@@ -1101,22 +1101,26 @@ function PKTweight() {
   }
 }
 //INV Bonus
-var encumbered=false;
 function invBonus(){
-  var load = parseInt(document.getElementById("LoadWeight").innerText);
-  var limit = parseInt(document.getElementById("CarryWeight").innerText);
+  var load = parseFloat(document.getElementById("LoadWeight").innerText);
+  var limit = parseFloat(document.getElementById("CarryWeight").innerText);
   var weight=document.getElementById("wgtFunc");
   
-  var encumberance=Math.round(load/limit);
+  var encumberance=Math.floor(load/limit);
+  console.log(Math.floor(load/limit));
   
-  if(encumberance && encumbered==false){
-    encumbered=true;
+  if(encumberance){
     document.getElementById("wgtFunc").style.color="red";
-    weight.innerText=parseInt(weight.innerText)+1;
-  } else if(encumbered==true){
-    encumbered=false;
-    weight.innerText=parseInt(weight.innerText)-1;
+    weight.innerText=(
+      parseInt(document.getElementById("wgtReal").value) +
+      parseInt(document.getElementById("wgtBonus").value) +
+      encumberance   );
+  } else{
     document.getElementById("wgtFunc").style.color="black";
+    weight.innerText=(
+      parseInt(document.getElementById("wgtReal").value) +
+      parseInt(document.getElementById("wgtBonus").value) +
+      encumberance   );
   }
   
 }
