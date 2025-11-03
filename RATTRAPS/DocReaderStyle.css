@@ -1,0 +1,47 @@
+:root{
+    --paper:hsl(180deg 10% 80%);
+    --rattraps:#ffff00;
+    --ratshade:hsl(340deg 50% 50%);
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-size:2vh;
+  }
+
+  #navigator {
+    background: var(--rattraps);
+    width: 100%;
+    height: 30%;
+    box-shadow:
+    0em 0em 5em 2em rgb(0 0 0/70%),
+    inset -6.4em 6.3em 1em -6em black,
+    inset 0em 0em 4em 0em var(--ratshade);
+}
+  #reader {
+    background: var(--paper);
+    width: 100%;
+    height: 70%;
+    box-shadow:
+    inset 0em 0em 3em black;
+    overflow:auto;
+}
+
+  @media (min-aspect-Ratio: 12/16) {
+    body {
+      display: flex;
+      flex-direction:row-reverse;
+    }
+
+    #navigator {
+      width: 30%;
+      height: 100%;
+      z-index:+1;
+    }
+
+    #reader {
+      width: 70%;
+      height: 100%;
+    }
+}

@@ -638,11 +638,11 @@ function addAbillity() {
 }
 //Open Skill index
 function openIndex() {
-  window.open("https://warmest-soup.github.io/TechIndex", "_blank");
+  window.open("https://warmest-soup.github.io/RATTRAPS/TechIndex", "_blank");
 }
 //Open Rule Book
 function openRules() {
-  window.open("https://warmest-soup.github.io/RuleBook", "_blank");
+  window.open("https://warmest-soup.github.io/RATTRAPS/RuleBook", "_blank");
 }
 //Color Ability Slots based on memory
 function slotMemoryLimits(abil, dropTarget) {
