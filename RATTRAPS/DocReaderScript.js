@@ -13,3 +13,14 @@
     glossaryContent.innerHTML = formatTerms.join("");
 }
 
+//Exception for Character sheet.
+/*Format all key terms*/{
+    var mainText=document.getElementById("mainText");
+    var mainFormat=mainText.innerHTML;
+    //Word exceptions
+    keyTerms[8]="Character Sheet";
+    
+    keyTerms.forEach((x)=>{
+        mainText.innerHTML.replace()
+    });
+}
