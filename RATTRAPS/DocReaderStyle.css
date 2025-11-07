@@ -35,6 +35,13 @@
 html > * ::-webkit-scrollbar-track {
   border-radius: 1em;
 }
+sup{
+    font-size:.6em;
+    display:inline-block;
+    transform:
+    translateX(.25em)
+    translateY(-.4em);
+}
 #overlay {
     position: absolute;
     z-index: +2;
@@ -99,9 +106,13 @@ html > * ::-webkit-scrollbar-track {
     font-size: 1.4em;
     font-family: "cinzel";
 }
-a {
+
+#Reader a {
+    text-decoration:none;
+}
+#navigator a {
     font-weight: bolder;
-    color: black;
+    color: rgb(0 0 0 /60%);
     background: hsl(from var(--rattraps) h 20% 60%);
     display: block;
     text-decoration: none;
@@ -143,7 +154,7 @@ a {
     overflow-x:hidden;
 }
 
-@media (min-aspect-Ratio: 12/16) {
+@media (min-aspect-Ratio: 1) {
     body {
         display: flex;
         flex-direction: row-reverse;
