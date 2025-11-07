@@ -19,18 +19,23 @@
      
     //Word exceptions
     var wordSearches=Array.from(keyTerms);
+    function updateTerm(id, func){
+        wordSearches[keyTerms.indexOf(id)]=func;
+    }
     
-    wordSearches[4]="Direct";
-    wordSearches[9]="Sheet";
-    wordSearches[11]="Check";
-    wordSearches[12]="Trait";
-    wordSearches[13]="Abilit";
-    wordSearches[14]="Skill";
-    wordSearches[15]="Insight";
-    wordSearches[23]="Ticket";
-    wordSearches[29]="Grid";
-    wordSearches[31]="Retire";
-     
+    updateTerm("Direction", "Direct");
+    updateTerm("Char-Sheet", "Sheet");
+    updateTerm("Checks", "Check");
+    updateTerm("Traits", "Trait");
+    updateTerm("Abilities", "Abilit");
+    updateTerm("Skills", "Skill");
+    updateTerm("Insights", "Insight");
+    updateTerm("Battle-Ticket", "Ticket");
+    updateTerm("Armor-Grids", "Grid");
+    updateTerm("Retirement", "Retire");
+    updateTerm("Penalty", "Penalt");
+    updateTerm("Incumbents", "Incumbent");
+    
     wordSearches.forEach((x)=>{
         var l1=x.substring(0,1);
         var termIndex=wordSearches.indexOf(x)+1;
@@ -40,7 +45,7 @@
         "<a style='display:inline-block;' href=#"+keyTerms[termIndex-1]+"><i>$3"+xl+"$4<sup>"+termIndex+"</sup></i></a>";
          
         var pattern = new RegExp(
-           `((?<!(\"|>|-))(${l1}|${l1.toLowerCase()})${xl}(y|ies|sets|s|'s|es|ed|ment|ion|ing)?)(?!<|:|s:)`,"g" 
+           `((?<!(\"|>|-))(${l1}|${l1.toLowerCase()})${xl}(y|ies|sets|s|'s|es|ed|ment|ion|ing)?)(?!:|s:)`,"g" 
         );
         
         
@@ -55,7 +60,7 @@
 /*Format terms entries*/{
     var entries = Array.from(document.getElementsByClassName("Term"));
     entries.forEach((x)=>{
-        if(x.parentNode.id=="definitions"){
+        if(x.parentNode.parentNode.id=="definitions"){
             x.innerText=(keyTerms.indexOf(x.id)+1)+". "+x.innerHTML;
         }
         
@@ -64,7 +69,7 @@
 
 /*Exectional Exceptions like Deaths/Dies*/{
     mainText.innerHTML=mainText.innerHTML.replace( 
-        /([Dd]ie|[Dd]eath)(s?)/g,"<a style='display:inline-block;' href='#Death'><i>$1$2<sup>"+keyTerms.indexOf("Death")+"</sup></i></a>");
+        /(?<!>)([Dd]ie|[Dd]eath)(s?)/g,"<a style='display:inline-block;' href='#Death'><i>$1$2<sup>"+keyTerms.indexOf("Death")+"</sup></i></a>");
 }
 
 
