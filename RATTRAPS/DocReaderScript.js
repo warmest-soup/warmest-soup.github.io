@@ -86,21 +86,27 @@
 
 /*UrlHighlight*/{
 
-    var reader=document.getElementById("reader");
+    var reader = document.getElementById("reader");
 
-    window.addEventListener('hashchange', function(){
+
+    function highlight() {
         var Hilights = Array.from(document.getElementsByClassName("Highlight"));
-        Hilights.forEach((x)=> x.classList.remove("Highlight"));
+        Hilights.forEach((x) => x.classList.remove("Highlight"));
 
 
         document.getElementById(window.location.hash.substring(1)).classList.add("Highlight");
 
         reader.scrollBy({
-            top: -window.innerHeight*.05,
+            top: -window.innerHeight * .05,
             behavior: "smooth"
         });
-    });
+    };
 
+
+    if(window.location.hash){highlight();}
+    window.addEventListener('hashchange', function (){
+        highlight();
+    })
 }
 
 
