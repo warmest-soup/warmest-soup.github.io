@@ -39,6 +39,8 @@
     updateTerm("Bonuses", "Bonus");
     updateTerm("Techniques", "Technique");
     updateTerm("Toxicity", "Toxic");
+    updateTerm("Round", "---");
+    
 
 
     wordSearches.forEach((x) => {
@@ -75,12 +77,19 @@
 /*Exectional Exceptions like Deaths/Dies*/{
     //Death
     mainText.innerHTML = mainText.innerHTML.replace(
-        /(?<!>)([Dd]ie|[Dd]eath)(s?)/g, "<a style='display:inline-block;' href='#Death'><i>$1$2<sup>" + keyTerms.indexOf("Death") + "</sup></i></a>");
+        /(?<!>)([Dd]ie|[Dd]eath)(s?)/g, "<a style='display:inline-block;' href='#Death'><i>$1$2<sup>" + keyTerms.indexOf("Death") + "</sup></i></a>"
+    );
 
     //DP
     updateTerm("Death-Points", "DP");
     mainText.innerHTML = mainText.innerHTML.replace(
-        /(?<!>)DP(?!<)/g, "<a style='display:inline-block;' href='#Death'><i>DP<sup>" + keyTerms.indexOf("Death-Points") + "</sup></i></a>");
+        /(?<!>)DP(?!<)/g, "<a style='display:inline-block;' href='#Death'><i>DP<sup>" + keyTerms.indexOf("Death-Points") + "</sup></i></a>"
+    );
+    // Combat Round "Rounding"
+    updateTerm("Round", "Round");
+    mainText.innerHTML = mainText.innerHTML.replace(
+        /\b(R|r)ound(s)?\b/g, "<a style='display:inline-block;' href='#Round'><i>$1ound<sup>" + keyTerms.indexOf("Round") + "</sup></i></a>");    
+        
 
 }
 
