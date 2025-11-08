@@ -206,7 +206,7 @@ td {
   text-align: center;
   min-width: 1em;
   max-width: 5em;
-  min-height: 1em;
+  min-height: 5em;
   max-height: 1em;
   text-wrap: nowrap;
 }
@@ -1630,7 +1630,8 @@ textarea {
   
 }
 .traitFunc{
-  color:black;
+  color:
+  rgb(0 0 0 /80%);
   font-weight:bolder;
   text-shadow:
   -.07em .07em .05em
@@ -1640,9 +1641,10 @@ textarea {
   border-radius:1em;
   box-shadow:
   -.1em .1em .4em 0em black,
-  inset -.05em .05em .2em .05em white,
+  inset -.05em .05em .2em .1em white,
   inset -.2em .2em .3em 0em 
-  hsl(from var(--darkCol)h 100% 70% /80%),
+  hsl(from var(--darkCol)h 1000% 70% /80%),
   inset .25em -.25em .4em 0em 
-  hsl(from var(--darkCol)h 100% 15% /80%);
+  hsl(from var(--darkCol)h 100% 30% /80%);
+  
 }
