@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  #mainText {
+    height: 100vh;
+    overflow-y: scroll;
+    border: 2px solid black;
+  }
+  .content {
+    height: 300vh;
+    background: linear-gradient(to bottom, lightblue, pink);
+  }
+</style>
+</head>
+<body>
+  <div id="mainText">
+    <div class="content"></div>
+  </div>
+  <script>
+    const mainText = document.getElementById("mainText");
+    mainText.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+  </script>
+</body>
+</html>

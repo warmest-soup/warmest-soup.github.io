@@ -37,7 +37,8 @@
     updateTerm("Incumbents", "Incumbent");
     updateTerm("Classes", "Class");
     updateTerm("Bonuses", "Bonus");
-    updateTerm("Techniques", "Technique")
+    updateTerm("Techniques", "Technique");
+    updateTerm("Toxicity", "Toxic");
 
 
     wordSearches.forEach((x) => {
@@ -49,7 +50,7 @@
             "<a style='display:inline-block;' href=#" + keyTerms[termIndex - 1] + "><i>$3" + xl + "$4<sup>" + termIndex + "</sup></i></a>";
 
         var pattern = new RegExp(
-            `((?<!(\"|>|-))(${l1}|${l1.toLowerCase()})${xl}(y|ies|sets|s|'s|es|ed|ment|ion|ing)?)(?!:|s:|=")`, "g"
+            `((?<!(\"|>|-))(${l1}|${l1.toLowerCase()})${xl}(y|ies|sets|s|'s|es|ed|ment|ity|ion|ing)?)(?!:|s:|=")`, "g"
         );
 
 
@@ -84,10 +85,23 @@
 }
 
 /*UrlHighlight*/{
-    if(window.location.hash){
-        console.log("Redirected!!!!");
-    }
+
+    var reader=document.getElementById("reader");
+
+    window.addEventListener('hashchange', function(){
+        var Hilights = Array.from(document.getElementsByClassName("Highlight"));
+        Hilights.forEach((x)=> x.classList.remove("Highlight"));
+
+
+        document.getElementById(window.location.hash.substring(1)).classList.add("Highlight");
+
+        reader.scrollBy({
+            top: -window.innerHeight*.05,
+            behavior: "smooth"
+        });
+    });
+
 }
 
 
-console.log(mainText.innerHTML);
+//console.log(mainText.innerHTML);
