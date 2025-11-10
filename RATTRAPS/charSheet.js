@@ -678,34 +678,24 @@ function slotMemoryLimits(abil, dropTarget) {
   }
   i = 0;
   while (i < 50) {
-    if (i <= SKLmemory) {
-      slots[i].style = "background-color:white;";
-    }
     if (i >= SKLmemory) {
-      slots[i].style = "background-color:#bbb;";
       if (slots[i].classList[2] != "Hazed") {
         slots[i].classList.add("Forgotten");
       }
     }
     if (i >= SKLmemory && i + 1 <= SKLmemory + secSklMem) {
-      slots[i].style = "background-color:#ddd;";
       slots[i].classList.add("Hazed");
       slots[i].classList.remove("Forgotten");
     }
     i++;
   }
   while (i < 100) {
-    if (i <= INSmemory + 50) {
-      slots[i].style = "background-color:white;";
-    }
     if (i >= INSmemory + 50) {
-      slots[i].style = "background-color:#bbb;";
       if (slots[i].classList[2] != "Hazed") {
         slots[i].classList.add("Forgotten");
       }
     }
     if (i >= INSmemory + 50 && i + 1 <= INSmemory + secInsMem + 50) {
-      slots[i].style = "background-color:#ddd;";
       slots[i].classList.add("Hazed");
       slots[i].classList.remove("Forgotten");
     }

@@ -243,7 +243,6 @@ textarea {
 }
 .Row {
   width: calc(100vw - .6em);
-  height: 100%;
   display: flex;
   gap: var(--SectGap);
   overflow: auto;
@@ -335,7 +334,12 @@ textarea {
   gap: 0.5em;
 }
 .AbilSlot {
-  box-Shadow: 0em 0em 0em .12em black;
+  background:hsl(from var(--userColor) h 100% 80% /100%); 
+  box-Shadow: 
+  0em 0em 0em .12em black,
+  inset .2em -.2em .5em 0em 
+  hsl(from var(--userColor) h 100% 10% /100%),
+  inset -.2em .2em .5em 0em white;  
   padding: 0.2em;
   border-radius: 0.7em;
   min-height: 1.6em;
@@ -345,8 +349,13 @@ textarea {
   white-space: nowrap;
 }
 .technique{
+  background:hsl(from var(--userColor) h s l /100%); 
+  box-Shadow: 
+  0em 0em 0em .12em black,
+  inset .4em -.4em .5em 0em 
+  hsl(from var(--userColor) h 100% 10% /100%),
+  inset -.1em .1em .5em 0em white;  
   font-size:.87em;
-  box-shadow:0em 0em 0em .15em black;
 }
 .technique * input{
   box-shadow:none;
@@ -457,6 +466,7 @@ textarea {
   border-width: 0.01em;
 }
 .openAbil {
+  background:white;
   box-Shadow: 0em 0em 0em .1em black;
   padding: 0.2em;
   border-radius: 0.7em;
@@ -550,7 +560,6 @@ textarea {
 #TempBot {
   padding: .5em 0em .5em 0em;
   text-align: center;
-  line-height: 0.5em;
   font-size: 2em;
   font-weight: 700;
 }
@@ -813,9 +822,8 @@ textarea {
   border-radius: 1em;
   box-shadow: inset 0 0 0.2em #50a,0em 0em 0em .1em black;
 }
-.dataSection {
-  display: flex;
-  gap: var(--SectGap);
+.divDataSection {
+  display: contents;
 }
 #Tack {
   min-width: 13em;
@@ -1347,7 +1355,9 @@ textarea {
   font-size:.5em;
   padding-top:0em;
   padding-bottom:.4em;
-  transform:translatex(-1.3em);
+  transform:
+  translatex(-.5em)
+  scalex(1.2);
 }
 .incSpot{
   font-size:.8em;
@@ -1582,7 +1592,8 @@ textarea {
   transform:translatex(1em);
 }
 #files{
-  width:20em;
+  min-width:20em;
+  max-width:20em;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -1647,4 +1658,13 @@ textarea {
   inset .25em -.25em .4em 0em 
   hsl(from var(--darkCol)h 100% 30% /80%);
   
+}
+
+.Hazed{
+  filter:blur(.1em); 
+  background:var(--darkCol);
+}
+.Forgotten{
+  filter:blur(.2em); 
+  background:hsl(from var(--darkCol) h 10% 40%);
 }

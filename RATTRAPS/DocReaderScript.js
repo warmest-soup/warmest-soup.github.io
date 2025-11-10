@@ -77,7 +77,7 @@
 /*Exectional Exceptions like Deaths/Dies*/{
     //Death
     mainText.innerHTML = mainText.innerHTML.replace(
-        /(?<!>)([Dd]ie|[Dd]eath)(s?)/g, "<a style='display:inline-block;' href='#Death'><i>$1$2<sup>" + keyTerms.indexOf("Death") + "</sup></i></a>"
+        /(?<!>)([Dd]ie|[Dd]eath)(s?)(?!\w)/g, "<a style='display:inline-block;' href='#Death'><i>$1$2<sup>" + keyTerms.indexOf("Death") + "</sup></i></a>"
     );
 
     //DP
