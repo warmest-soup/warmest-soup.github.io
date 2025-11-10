@@ -1356,8 +1356,7 @@ textarea {
   padding-top:0em;
   padding-bottom:.4em;
   transform:
-  translatex(-.5em)
-  scalex(1.2);
+  translatex(-1em); 
 }
 .incSpot{
   font-size:.8em;
