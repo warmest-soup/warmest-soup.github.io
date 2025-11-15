@@ -1098,7 +1098,6 @@ function invBonus(){
   var weight=document.getElementById("wgtFunc");
   
   var encumberance=Math.floor(load/limit);
-  console.log(Math.floor(load/limit));
   
   if(encumberance){
     document.getElementById("wgtFunc").style.color="red";
@@ -2847,6 +2846,25 @@ document
 //Initialize
 initializeSheet();
 
+//cookie Log-in
+function lastLog(){
+  if(document.cookie.includes("lastLog")){
+    var user=document.getElementById("User");
+    var key=document.getElementById("Key");
+    
+    //Substring must be the number of letters +1 of the Cookie name.
+    var lastUser=document.cookie.split("-")[0].substring(9);
+    var lastKey=document.cookie.split("-")[1];
+  
+    user.value=lastUser;
+    key.value=lastKey;
+  
+    console.log(lastUser+" | "+lastKey);
+    jsLoad();
+  }
+  
+}
+lastLog();
 /*notes
 - greater bleed light up
 - dp needs to set it's own max

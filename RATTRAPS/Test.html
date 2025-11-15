@@ -869,106 +869,110 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
             </div>
 
             <div class="dataSection divDataSection">
-            <div id="Satiety" class="Section">
+                <div id="Satiety" class="Section">
 
-                <div id="SatBottom">
-                    <div id="Clock"><span id="CurrentHour">00</span>:00</div>
-                    <div id="ProgressTime">
-                        <Button id="PassTime" onClick="passHour()">Pass Time</button>
-                        <Button id="Sleep" onClick="sleep()">Sleep</button>
-                        <input id="TimeToSleep" class="SingleInputNUM" value="0" />
+                    <div id="SatBottom">
+                        <div id="Clock"><span id="CurrentHour">00</span>:00</div>
+                        <div id="ProgressTime">
+                            <Button id="PassTime" onClick="passHour()">Pass Time</button>
+                            <Button id="Sleep" onClick="sleep()">Sleep</button>
+                            <input id="TimeToSleep" class="SingleInputNUM" value="0" />
+                        </div>
+
+                    </div>
+                    <div id="SatMiddle">
+                        <div id="Hunger">
+                            <div class=satIcon id=shIcon></div>
+                            <div class=satVal>
+                                <input onfocus="select(this)" id="HungerVal" value="15"
+                                    class="SaveInput SingleInputNUM" />
+                                <div class=satBar id=shBar onchange="console.log('I broke!')">
+                                    <div class="satBarFill" id="shFill"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="Water">
+                            <div class=satIcon id=swIcon></div>
+                            <div class=satVal>
+                                <input onfocus="select(this)" id="WaterVal" value="15"
+                                    class="SaveInput SingleInputNUM" />
+                                <div class=satBar id=swBar>
+                                    <div class="satBarFill" id="swFill"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="Sleep">
+                            <div class=satIcon id=szIcon></div>
+                            <div class=satVal>
+                                <input onfocus="select(this)" id="SleepVal" value="15"
+                                    class=" SaveInput SingleInputNUM" />
+                                <div class=satBar id=szBar>
+                                    <div class="satBarFill" id="szFill"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="Toxic">
+                            <div class=satIcon id=stIcon></div>
+                            <div class=satVal>
+                                <input onfocus="select(this)" id="ToxicVal" value="0"
+                                    class="SaveInput SaveInput SingleInputNUM" />
+                                <div class=satBar id=stBar>
+                                    <div class="satBarFill" id="stFill"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="dupButton"> <br>
+                            <Button class="ToxicButtons" onClick="dupBar()">+</button> <br> <br>
+                            <Button class="ToxicButtons" onClick="remBar()">-</button>
+                        </div>
+                    </div>
+                    <div id="SatTop">
+                        <div id="Cards1">
+                            <div> Wild Cards <input type="text" class="SaveInput SingleInputNUM" /> <span
+                                    id="WildCardTotal">X</Span>
+                            </div>
+                        </div>
+                        <div id="Cards2">
+                            <div> <Span id="card2Type"> Cards </span> <input type="text"
+                                    class="SaveInput SingleInputNUM" />
+                                <span id="2ndCardTotal">X</Span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Temperature" class="Section">
+                    <div id="TempBot">
+                        <div id="TempContextReadout">0</div>
+                        <div id="TempContextAdjust">
+                            <input type="range" class="UserSlider SaveInputSP" id="TempAdjust" min="-5" max="5"
+                                value="0" oninput="rangeReadout(this,TempContextReadout)">
+                        </div>
+                    </div>
+                    <div id=TempTop>
+                        <div id="TempEffects">
+                            <div id="Burning">BURN!<br>-<span class="burnFx">1</span> MND -<span class="burnFx">1</span>
+                                AWE</div>
+                            <div id="Hot">Hot!<br>Water Sat Loss • <span id="hotMultiplier">1</span><br>-<span
+                                    id="hotFx">1</span> WIS
+                            </div>
+                            <div id="Fine">Fine</div>
+                            <div id="Cold">Cold!<br>Hunger Sat loss • <span id="coldMultiplier">1</span><br>-<span
+                                    id="coldFx">1</span>
+                                DEX</div>
+                            <div id="Freezing">FREEZE!<br>-<span class="freezeFx">1</span> BOD -<span
+                                    class="freezeFx">1</span> ATH
+                            </div>
+                        </div>
+                        <div id="thermometer">
+                            <div id="ThermBar">
+                                <div id="ThermFill"></div>
+                            </div>
+                        </div>
                     </div>
 
-                </div>
-                <div id="SatMiddle">
-                    <div id="Hunger">
-                        <div class=satIcon id=shIcon></div>
-                        <div class=satVal>
-                            <input onfocus="select(this)" id="HungerVal" value="15" class="SaveInput SingleInputNUM" />
-                            <div class=satBar id=shBar onchange="console.log('I broke!')">
-                                <div class="satBarFill" id="shFill"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="Water">
-                        <div class=satIcon id=swIcon></div>
-                        <div class=satVal>
-                            <input onfocus="select(this)" id="WaterVal" value="15" class="SaveInput SingleInputNUM" />
-                            <div class=satBar id=swBar>
-                                <div class="satBarFill" id="swFill"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="Sleep">
-                        <div class=satIcon id=szIcon></div>
-                        <div class=satVal>
-                            <input onfocus="select(this)" id="SleepVal" value="15" class=" SaveInput SingleInputNUM" />
-                            <div class=satBar id=szBar>
-                                <div class="satBarFill" id="szFill"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="Toxic">
-                        <div class=satIcon id=stIcon></div>
-                        <div class=satVal>
-                            <input onfocus="select(this)" id="ToxicVal" value="0"
-                                class="SaveInput SaveInput SingleInputNUM" />
-                            <div class=satBar id=stBar>
-                                <div class="satBarFill" id="stFill"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="dupButton"> <br>
-                        <Button class="ToxicButtons" onClick="dupBar()">+</button> <br> <br>
-                        <Button class="ToxicButtons" onClick="remBar()">-</button>
-                    </div>
-                </div>
-                <div id="SatTop">
-                    <div id="Cards1">
-                        <div> Wild Cards <input type="text" class="SaveInput SingleInputNUM" /> <span
-                                id="WildCardTotal">X</Span>
-                        </div>
-                    </div>
-                    <div id="Cards2">
-                        <div> <Span id="card2Type"> Cards </span> <input type="text" class="SaveInput SingleInputNUM" />
-                            <span id="2ndCardTotal">X</Span>
-                        </div>
-                    </div>
                 </div>
             </div>
-
-            <div id="Temperature" class="Section">
-                <div id="TempBot">
-                    <div id="TempContextReadout">0</div>
-                    <div id="TempContextAdjust">
-                        <input type="range" class="UserSlider SaveInputSP" id="TempAdjust" min="-5" max="5" value="0"
-                            oninput="rangeReadout(this,TempContextReadout)">
-                    </div>
-                </div>
-                <div id=TempTop>
-                    <div id="TempEffects">
-                        <div id="Burning">BURN!<br>-<span class="burnFx">1</span> MND -<span class="burnFx">1</span>
-                            AWE</div>
-                        <div id="Hot">Hot!<br>Water Sat Loss • <span id="hotMultiplier">1</span><br>-<span
-                                id="hotFx">1</span> WIS
-                        </div>
-                        <div id="Fine">Fine</div>
-                        <div id="Cold">Cold!<br>Hunger Sat loss • <span id="coldMultiplier">1</span><br>-<span
-                                id="coldFx">1</span>
-                            DEX</div>
-                        <div id="Freezing">FREEZE!<br>-<span class="freezeFx">1</span> BOD -<span
-                                class="freezeFx">1</span> ATH
-                        </div>
-                    </div>
-                    <div id="thermometer">
-                        <div id="ThermBar">
-                            <div id="ThermFill"></div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-</div>
             <div id="files" class="Section dataSection">
                 <div id="filesHeader">Files</div>
                 <div id=filesColumn>
@@ -976,7 +980,7 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
 
                 </div>
             </div>
-        
+
 
         </div>
         <div class="Row">
@@ -996,174 +1000,176 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
                 </div>
             </div>
 
-<div class="dataSection divDataSection">
-            <div id="Weapon" class="Section">
-                <div id="Name">Weapon:</div>
-                <select onChange="saveDropdown(this)" id="WeaponList">
-                    <option value="Unarmed">Unarmed</option>
-                </select>
-                <div id="WeaponStats">
-                    <div id="Range">Range:<span id="WepRng">1</span></div>
-                    <div id="Damage">
-                        <div class="dmgVal" id="SwingDam">Swing:
-                            <span id="SwingVal">0</span>
-                        </div>
-                        <div class="dmgVal" id="ThrustDam">Thrust:
-                            <span id="ThrustVal">0</span>
-                        </div>
-                    </div>
-                    <div id="PowerLevel">Power: <span id="PowerReadout">3</span> Skl: <span id="AtkCost">0</span><br>
-                        <input type="range" class="UserSlider SaveInputSP" id="PowerLevel" min="1" max="5" value="3"
-                            oninput="rangeReadout(this,PowerReadout); weaponDamage();">
-                    </div>
-
-                    <div id="Retention">Retention: <span id="WepRet">0</span></div>
-                    <div id="chips">
-                        <div>
-                            <div id="Sharpness">Edge: <input class="shpIn SingleInputNUM" id="shpEdg" maxlength="1"
-                                    value="2"></input>
-                            </div>
-                            <div class="ShapeModifier">Swing: <span id="swgMod">+0</span></div>
-
-                        </div>
-                        <div>
-                            <div>Point: <input class="shpIn SingleInputNUM" id="shpPnt" maxlength="1" value="2"></input>
-                            </div>
-                            <div class="ShapeModifier">Thrust: <span id="thrMod">+0</span></div>
-                        </div>
-                    </div>
-
-                    <div id="Length">Length: <span id="wepLng">1</span></div>
-                    <div id="Weight">Weight: <span id="wepBal">0</span>|<span id="wepWgt">1</span></div>
-                    <div id=weaponDT>DT<br><span id="wepDT">000</span><span id="chipDT">000</span></div>
-                </div>
-
-            </div>
-            <div id="Combat" class="Section">
-
-                <div id="ComTitle">⚔ ~Battle Ticket~ ⚔</div>
-                <div id="ComBody">
-
-                    <div id="comMeasure">
-                        <div class=momMeasure>1.</div>
-                        <div class=momMeasure>2.</div>
-                        <div class=momMeasure>3.</div>
-                        <div class=momMeasure>4.</div>
-                        <div class=momMeasure>5.</div>
-                    </div>
-                    <div id="ComMoments">
-                    </div>
-                    <div id="ComBonus">
-                        <div class="CombatBonusChip">PER<br>
-                            <select id="perComBonus" onchange="saveDropdown(this)">
-                                <option value="-2">-2</option>
-                                <option value="-1">-1</option>
-                                <option value="+0" selected>+0</option>
-                                <option value="+1">+1</option>
-                                <option value="+2">+2</option>
-                            </select>
-                        </div>
-                        <div class="CombatBonusChip">SPD<br>
-                            <select id="spdComBonus" onchange="saveDropdown(this)">
-                                <option value="-2">-2</option>
-                                <option value="-1">-1</option>
-                                <option value="+0" selected>+0</option>
-                                <option value="+1">+1</option>
-                                <option value="+2">+2</option>
-                            </select>
-                        </div>
-                        <div class="CombatBonusChip">Dex<br>
-                            <select id="dexComBonus" onchange="saveDropdown(this)">
-                                <option value="-2">-2</option>
-                                <option value="-1">-1</option>
-                                <option value="+0" selected>+0</option>
-                                <option value="+1">+1</option>
-                                <option value="+2">+2</option>
-                            </select>
-                        </div>
-                    </div>
-
-                </div>
-                <div id="ComBottom">
-                    <div id="actionCounter">Actions: <span id="aTaken">X</span>/<span id="aMax">Y</span></div>
-                    <button id="TurnIn" onclick="turnInTicket()">Turn In</button>
-                    <button id="nextRound" onclick="nextRound()">Next!</button>
-
-                </div>
-
-            </div>
-            <div id="Health" class="Section">
-                <div id="GenHealth">
-                    <div id=fatalBleedSect>
-                        Greater Bleed <Input type="text" id="FatalBleedCounter" class="SingleInputNUM SaveInput"
-                            onfocus="select(this)">
-                    </div>
-                    <div id=HPSect>
-                        HP<br>
-                        <Input class="SaveInput" type="text" id="HP" onfocus="select(this)" value="25">
-                    </div>
-                    <div id=DPSect>
-                        DP
-                        <input class="SaveInput" id="DP" type="text" onfocus="select(this)" value="0"><span
-                            id="DPTotal">/0</span>
-                    </div>
-                </div>
-                <div id=healthDetails>
-                    <div id=BleedStacks>
-                        Lesser<br>Bleeds<br>
-                        <span><input type="checkbox" class="BleedState" onChange="toggleCheck(this)"><input
-                                onfocus="select(this)" type="text" class="SingleInputNUM SaveInput  LesserBleed"
-                                placeholder="0"></span>
-                        <br>
-                        <span><input type="checkbox" class="BleedState" onChange="toggleCheck(this)"><input
-                                onfocus="select(this)" type="text" class="SingleInputNUM SaveInput  LesserBleed"
-                                placeholder="0"></span>
-                        <br>
-                        <span><input type="checkbox" class="BleedState" onChange="toggleCheck(this)"> <input
-                                onfocus="select(this)" type="text" class="SingleInputNUM SaveInput  LesserBleed"
-                                placeholder="0"></span>
-                        <br>
-                        <span><input type="checkbox" class="BleedState" onChange="toggleCheck(this)"><input
-                                onfocus="select(this)" type="text" class="SingleInputNUM SaveInput  LesserBleed"
-                                placeholder="0"></span>
-                        <br>
-                        <span><input type="checkbox" class="BleedState" onChange="toggleCheck(this)"><input
-                                onfocus="select(this)" type="text" class="SingleInputNUM SaveInput  LesserBleed"
-                                placeholder="0"></span>
-                        <br>
-                    </div>
-
-                    <div id=Injuries>
-                        <div id="InjuriesTitle">Injuries</div>
-                        <div Class="InjuryDisplay">Left Arm</div>
-                        <div Class="InjuryDisplay">Right Arm</div>
-                        <div Class="InjuryDisplay">Head</div>
-                        <div Class="InjuryDisplay">Body</div>
-                        <div Class="InjuryDisplay">Left Leg</div>
-                        <div Class="InjuryDisplay">Right Leg</div>
-
-                    </div>
-                </div>
-
-            </div>
-            <div id="Maps" class="Section">
-                <div id="MapContainer">
-                    <iframe id="map"></iframe>
-                </div>
-                <div id="mapConsole">
-                    <select id="currentMap" onchange="saveDropdown(this); updateMap(map)">
-                        <option value="936065367">None</option>
+            <div class="dataSection divDataSection">
+                <div id="Weapon" class="Section">
+                    <div id="Name">Weapon:</div>
+                    <select onChange="saveDropdown(this)" id="WeaponList">
+                        <option value="Unarmed">Unarmed</option>
                     </select>
-                    <button onclick="updateMap(map)">Reload</button>
-                    <button id="newMapButton" onclick="addMap(newMapName,newMapId)">Add Map</button>
-                    <div id="addAMap">
-                        <input type="text" id="newMapName" placeHolder="Map Name"><br>
-                        <input type="text" id="newMapId" placeHolder="ID Number">
+                    <div id="WeaponStats">
+                        <div id="Range">Range:<span id="WepRng">1</span></div>
+                        <div id="Damage">
+                            <div class="dmgVal" id="SwingDam">Swing:
+                                <span id="SwingVal">0</span>
+                            </div>
+                            <div class="dmgVal" id="ThrustDam">Thrust:
+                                <span id="ThrustVal">0</span>
+                            </div>
+                        </div>
+                        <div id="PowerLevel">Power: <span id="PowerReadout">3</span> Skl: <span
+                                id="AtkCost">0</span><br>
+                            <input type="range" class="UserSlider SaveInputSP" id="PowerLevel" min="1" max="5" value="3"
+                                oninput="rangeReadout(this,PowerReadout); weaponDamage();">
+                        </div>
+
+                        <div id="Retention">Retention: <span id="WepRet">0</span></div>
+                        <div id="chips">
+                            <div>
+                                <div id="Sharpness">Edge: <input class="shpIn SingleInputNUM" id="shpEdg" maxlength="1"
+                                        value="2"></input>
+                                </div>
+                                <div class="ShapeModifier">Swing: <span id="swgMod">+0</span></div>
+
+                            </div>
+                            <div>
+                                <div>Point: <input class="shpIn SingleInputNUM" id="shpPnt" maxlength="1"
+                                        value="2"></input>
+                                </div>
+                                <div class="ShapeModifier">Thrust: <span id="thrMod">+0</span></div>
+                            </div>
+                        </div>
+
+                        <div id="Length">Length: <span id="wepLng">1</span></div>
+                        <div id="Weight">Weight: <span id="wepBal">0</span>|<span id="wepWgt">1</span></div>
+                        <div id=weaponDT>DT<br><span id="wepDT">000</span><span id="chipDT">000</span></div>
+                    </div>
+
+                </div>
+                <div id="Combat" class="Section">
+
+                    <div id="ComTitle">⚔ ~Battle Ticket~ ⚔</div>
+                    <div id="ComBody">
+
+                        <div id="comMeasure">
+                            <div class=momMeasure>1.</div>
+                            <div class=momMeasure>2.</div>
+                            <div class=momMeasure>3.</div>
+                            <div class=momMeasure>4.</div>
+                            <div class=momMeasure>5.</div>
+                        </div>
+                        <div id="ComMoments">
+                        </div>
+                        <div id="ComBonus">
+                            <div class="CombatBonusChip">PER<br>
+                                <select id="perComBonus" onchange="saveDropdown(this)">
+                                    <option value="-2">-2</option>
+                                    <option value="-1">-1</option>
+                                    <option value="+0" selected>+0</option>
+                                    <option value="+1">+1</option>
+                                    <option value="+2">+2</option>
+                                </select>
+                            </div>
+                            <div class="CombatBonusChip">SPD<br>
+                                <select id="spdComBonus" onchange="saveDropdown(this)">
+                                    <option value="-2">-2</option>
+                                    <option value="-1">-1</option>
+                                    <option value="+0" selected>+0</option>
+                                    <option value="+1">+1</option>
+                                    <option value="+2">+2</option>
+                                </select>
+                            </div>
+                            <div class="CombatBonusChip">Dex<br>
+                                <select id="dexComBonus" onchange="saveDropdown(this)">
+                                    <option value="-2">-2</option>
+                                    <option value="-1">-1</option>
+                                    <option value="+0" selected>+0</option>
+                                    <option value="+1">+1</option>
+                                    <option value="+2">+2</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="ComBottom">
+                        <div id="actionCounter">Actions: <span id="aTaken">X</span>/<span id="aMax">Y</span></div>
+                        <button id="TurnIn" onclick="turnInTicket()">Turn In</button>
+                        <button id="nextRound" onclick="nextRound()">Next!</button>
+
+                    </div>
+
+                </div>
+                <div id="Health" class="Section">
+                    <div id="GenHealth">
+                        <div id=fatalBleedSect>
+                            Greater Bleed <Input type="text" id="FatalBleedCounter" class="SingleInputNUM SaveInput"
+                                onfocus="select(this)">
+                        </div>
+                        <div id=HPSect>
+                            HP<br>
+                            <Input class="SaveInput" type="text" id="HP" onfocus="select(this)" value="25">
+                        </div>
+                        <div id=DPSect>
+                            DP
+                            <input class="SaveInput" id="DP" type="text" onfocus="select(this)" value="0"><span
+                                id="DPTotal">/0</span>
+                        </div>
+                    </div>
+                    <div id=healthDetails>
+                        <div id=BleedStacks>
+                            Lesser<br>Bleeds<br>
+                            <span><input type="checkbox" class="BleedState" onChange="toggleCheck(this)"><input
+                                    onfocus="select(this)" type="text" class="SingleInputNUM SaveInput  LesserBleed"
+                                    placeholder="0"></span>
+                            <br>
+                            <span><input type="checkbox" class="BleedState" onChange="toggleCheck(this)"><input
+                                    onfocus="select(this)" type="text" class="SingleInputNUM SaveInput  LesserBleed"
+                                    placeholder="0"></span>
+                            <br>
+                            <span><input type="checkbox" class="BleedState" onChange="toggleCheck(this)"> <input
+                                    onfocus="select(this)" type="text" class="SingleInputNUM SaveInput  LesserBleed"
+                                    placeholder="0"></span>
+                            <br>
+                            <span><input type="checkbox" class="BleedState" onChange="toggleCheck(this)"><input
+                                    onfocus="select(this)" type="text" class="SingleInputNUM SaveInput  LesserBleed"
+                                    placeholder="0"></span>
+                            <br>
+                            <span><input type="checkbox" class="BleedState" onChange="toggleCheck(this)"><input
+                                    onfocus="select(this)" type="text" class="SingleInputNUM SaveInput  LesserBleed"
+                                    placeholder="0"></span>
+                            <br>
+                        </div>
+
+                        <div id=Injuries>
+                            <div id="InjuriesTitle">Injuries</div>
+                            <div Class="InjuryDisplay">Left Arm</div>
+                            <div Class="InjuryDisplay">Right Arm</div>
+                            <div Class="InjuryDisplay">Head</div>
+                            <div Class="InjuryDisplay">Body</div>
+                            <div Class="InjuryDisplay">Left Leg</div>
+                            <div Class="InjuryDisplay">Right Leg</div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div id="Maps" class="Section">
+                    <div id="MapContainer">
+                        <iframe id="map"></iframe>
+                    </div>
+                    <div id="mapConsole">
+                        <select id="currentMap" onchange="saveDropdown(this); updateMap(map)">
+                            <option value="936065367">None</option>
+                        </select>
+                        <button onclick="updateMap(map)">Reload</button>
+                        <button id="newMapButton" onclick="addMap(newMapName,newMapId)">Add Map</button>
+                        <div id="addAMap">
+                            <input type="text" id="newMapName" placeHolder="Map Name"><br>
+                            <input type="text" id="newMapId" placeHolder="ID Number">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
+
         </div>
         <div class="Row">
             <div class=" Inventory Section">
@@ -1302,14 +1308,17 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
                 </div>
 
                 <div class="inventoryDisplay" id="invDisContents">
-                    <div class="INVcols INVopen dataSection" id="INVcolumn1" onDragover="allowDrop(event)" onDrop="INVDrop(event)">
+                    <div class="INVcols INVopen dataSection" id="INVcolumn1" onDragover="allowDrop(event)"
+                        onDrop="INVDrop(event)">
                         <textarea id="QuickItem" style="resize:none;" placeholder="Item, Sz, Wgt" draggable="true"
                             ondragstart="QIDragStart(event)" onDragover="allowDrop(event)" onDrop="QiEdit(event)"
                             onFocus="this.select()"></textarea>
                     </div>
-                    <div class="INVcols INVopen dataSection" id="INVcolumn2" onDragover="allowDrop(event)" onDrop="INVDrop(event)">
+                    <div class="INVcols INVopen dataSection" id="INVcolumn2" onDragover="allowDrop(event)"
+                        onDrop="INVDrop(event)">
                     </div>
-                    <div class="INVcols INVopen dataSection" id="INVcolumn3" onDragover="allowDrop(event)" onDrop="INVDrop(event)">
+                    <div class="INVcols INVopen dataSection" id="INVcolumn3" onDragover="allowDrop(event)"
+                        onDrop="INVDrop(event)">
                     </div>
                 </div>
 
@@ -1344,880 +1353,915 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
                 <div id="ArmorGrids">
 
                     <div class="dataSection divDataSection">
-                    <div class="GridSect">
-                        <div class="agLeft">
-                            <div class="agEDT">
-                                <span class="limbEDT" id="LAEDT">5</span><br>EDT
-                            </div>
-                            <div class="agInjury">
-                                <select onChange="saveDropdown(this)" this id="LAinjuryStatus" class="agInjuryStatus">
-                                    <option value="Fine">Fine</option>
-                                    <option value="INJ">INJ</option>
-                                    <option value="CRP">CRP</option>
-                                </select> <br>
-                                -1 ATH<br>
-                                Swing/2
-                            </div>
-                            <div class="agInjPenalty">
-                                INJ Penalty <br>
-                                <select onChange="saveDropdown(this)" this class="injPenaltyDD">
-                                    <option>-</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="agLimbTitle">
-                            <span class="agStatLabels">D</span>
-                            <span class="agStatLabels">PD</span>
-                            <span class="agStatLabels">DT</span>
-                            Left Arm
-                        </div>
-                        <div class="agCenter">
-                            <table class="armorGrid">
-                                <tr id="LAids">
-                                    <th class="LAarmor1"></th>
-                                    <th class="LAarmor2"></th>
-                                    <th class="LAarmor3"></th>
-                                    <th class="LAarmor4"></th>
-                                    <th class="LAarmor5"></th>
-                                </tr>
-                                <tr id="LA1" class="agFirstRow">
-                                    <td class="LAarmor1"><input type="checkbox"></td>
-                                    <td class="LAarmor2"><input type="checkbox"></td>
-                                    <td class="LAarmor3"><input type="checkbox"></td>
-                                    <td class="LAarmor4"><input type="checkbox"></td>
-                                    <td class="LAarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="LA2">
-                                    <td class="LAarmor1"><input type="checkbox"></td>
-                                    <td class="LAarmor2"><input type="checkbox"></td>
-                                    <td class="LAarmor3"><input type="checkbox"></td>
-                                    <td class="LAarmor4"><input type="checkbox"></td>
-                                    <td class="LAarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="LA3">
-                                    <td class="LAarmor1"><input type="checkbox"></td>
-                                    <td class="LAarmor2"><input type="checkbox"></td>
-                                    <td class="LAarmor3"><input type="checkbox"></td>
-                                    <td class="LAarmor4"><input type="checkbox"></td>
-                                    <td class="LAarmor5"><input type="checkbox"></td>
-                                    </t>
-                                <tr id="LA4">
-                                    <td class="LAarmor1"><input type="checkbox"></td>
-                                    <td class="LAarmor2"><input type="checkbox"></td>
-                                    <td class="LAarmor3"><input type="checkbox"></td>
-                                    <td class="LAarmor4"><input type="checkbox"></td>
-                                    <td class="LAarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="LA5">
-                                    <td class="LAarmor1"><input type="checkbox"></td>
-                                    <td class="LAarmor2"><input type="checkbox"></td>
-                                    <td class="LAarmor3"><input type="checkbox"></td>
-                                    <td class="LAarmor4"><input type="checkbox"></td>
-                                    <td class="LAarmor5"><input type="checkbox"></td>
-                                </tr>
-                            </table>
-                            <table class="agStats">
-                                <tr id="LADT">
-                                    <td class="LAarmor1 aStatGrid"> </td>
-                                    <td class="LAarmor2 aStatGrid"> </td>
-                                    <td class="LAarmor3 aStatGrid"> </td>
-                                    <td class="LAarmor4 aStatGrid"> </td>
-                                    <td class="LAarmor5 aStatGrid"> </td>
-                                </tr>
-                                <tr id="LAPD">
-                                    <td class="LAarmor1 aStatGrid"> </td>
-                                    <td class="LAarmor2 aStatGrid"> </td>
-                                    <td class="LAarmor3 aStatGrid"> </td>
-                                    <td class="LAarmor4 aStatGrid"> </td>
-                                    <td class="LAarmor5 aStatGrid"> </td>
-                                </tr>
-                                <tr id="LAD">
-                                    <td class="LAarmor1 aStatGrid"> </td>
-                                    <td class="LAarmor2 aStatGrid"> </td>
-                                    <td class="LAarmor3 aStatGrid"> </td>
-                                    <td class="LAarmor4 aStatGrid"> </td>
-                                    <td class="LAarmor5 aStatGrid"> </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="agRight">
-                            <div class="agDebuff">
-                                <div>
-                                    <input class="limbStatus SaveInput" placeholder="Status"><br>
-                                    <select onChange="saveDropdown(this)" this class="PrimaryDebuff">
+                        <div class="GridSect">
+                            <div class="agLeft">
+                                <div class="agEDT">
+                                    <span class="limbEDT" id="LAEDT">5</span><br>EDT
+                                </div>
+                                <div class="agInjury">
+                                    <select onChange="saveDropdown(this)" this id="LAinjuryStatus"
+                                        class="agInjuryStatus">
+                                        <option value="Fine">Fine</option>
+                                        <option value="INJ">INJ</option>
+                                        <option value="CRP">CRP</option>
+                                    </select> <br>
+                                    -1 ATH<br>
+                                    Swing/2
+                                </div>
+                                <div class="agInjPenalty">
+                                    INJ Penalty <br>
+                                    <select onChange="saveDropdown(this)" this class="injPenaltyDD">
                                         <option>-</option>
-                                        <option style="color:blue;">🜄</option>
-                                        <option style="color:red;">🜂</option>
-                                        <option style="color:darkkhaki;">🜁</option>
-                                        <option style="color:black;">🜃</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
                                     </select>
                                 </div>
-                                <div>
-                                    Bleed<br><span class="BT">30</span><br>
-                                    <select onChange="saveDropdown(this)" this class="SecondaryDebuff">
-                                        <option>-</option>
-                                        <option style="color:blue;">🜄</option>
-                                        <option style="color:red;">🜂</option>
-                                        <option style="color:darkkhaki;">🜁</option>
-                                        <option style="color:black;">🜃</option>
-                                    </select>
+                            </div>
+                            <div class="agLimbTitle">
+                                <span class="agStatLabels">D</span>
+                                <span class="agStatLabels">PD</span>
+                                <span class="agStatLabels">DT</span>
+                                Left Arm
+                            </div>
+                            <div class="agCenter">
+                                <table class="armorGrid">
+                                    <tr id="LAids">
+                                        <th class="LAarmor1"></th>
+                                        <th class="LAarmor2"></th>
+                                        <th class="LAarmor3"></th>
+                                        <th class="LAarmor4"></th>
+                                        <th class="LAarmor5"></th>
+                                    </tr>
+                                    <tr id="LA1" class="agFirstRow">
+                                        <td class="LAarmor1"><input type="checkbox"></td>
+                                        <td class="LAarmor2"><input type="checkbox"></td>
+                                        <td class="LAarmor3"><input type="checkbox"></td>
+                                        <td class="LAarmor4"><input type="checkbox"></td>
+                                        <td class="LAarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="LA2">
+                                        <td class="LAarmor1"><input type="checkbox"></td>
+                                        <td class="LAarmor2"><input type="checkbox"></td>
+                                        <td class="LAarmor3"><input type="checkbox"></td>
+                                        <td class="LAarmor4"><input type="checkbox"></td>
+                                        <td class="LAarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="LA3">
+                                        <td class="LAarmor1"><input type="checkbox"></td>
+                                        <td class="LAarmor2"><input type="checkbox"></td>
+                                        <td class="LAarmor3"><input type="checkbox"></td>
+                                        <td class="LAarmor4"><input type="checkbox"></td>
+                                        <td class="LAarmor5"><input type="checkbox"></td>
+                                        </t>
+                                    <tr id="LA4">
+                                        <td class="LAarmor1"><input type="checkbox"></td>
+                                        <td class="LAarmor2"><input type="checkbox"></td>
+                                        <td class="LAarmor3"><input type="checkbox"></td>
+                                        <td class="LAarmor4"><input type="checkbox"></td>
+                                        <td class="LAarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="LA5">
+                                        <td class="LAarmor1"><input type="checkbox"></td>
+                                        <td class="LAarmor2"><input type="checkbox"></td>
+                                        <td class="LAarmor3"><input type="checkbox"></td>
+                                        <td class="LAarmor4"><input type="checkbox"></td>
+                                        <td class="LAarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                </table>
+                                <table class="agStats">
+                                    <tr id="LADT">
+                                        <td class="LAarmor1 aStatGrid"> </td>
+                                        <td class="LAarmor2 aStatGrid"> </td>
+                                        <td class="LAarmor3 aStatGrid"> </td>
+                                        <td class="LAarmor4 aStatGrid"> </td>
+                                        <td class="LAarmor5 aStatGrid"> </td>
+                                    </tr>
+                                    <tr id="LAPD">
+                                        <td class="LAarmor1 aStatGrid"> </td>
+                                        <td class="LAarmor2 aStatGrid"> </td>
+                                        <td class="LAarmor3 aStatGrid"> </td>
+                                        <td class="LAarmor4 aStatGrid"> </td>
+                                        <td class="LAarmor5 aStatGrid"> </td>
+                                    </tr>
+                                    <tr id="LAD">
+                                        <td class="LAarmor1 aStatGrid"> </td>
+                                        <td class="LAarmor2 aStatGrid"> </td>
+                                        <td class="LAarmor3 aStatGrid"> </td>
+                                        <td class="LAarmor4 aStatGrid"> </td>
+                                        <td class="LAarmor5 aStatGrid"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="agRight">
+                                <div class="agDebuff">
+                                    <div>
+                                        <input class="limbStatus SaveInput" placeholder="Status"><br>
+                                        <select onChange="saveDropdown(this)" this class="PrimaryDebuff">
+                                            <option>-</option>
+                                            <option style="color:blue;">🜄</option>
+                                            <option style="color:red;">🜂</option>
+                                            <option style="color:darkkhaki;">🜁</option>
+                                            <option style="color:black;">🜃</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        Bleed<br><span class="BT">30</span><br>
+                                        <select onChange="saveDropdown(this)" this class="SecondaryDebuff">
+                                            <option>-</option>
+                                            <option style="color:blue;">🜄</option>
+                                            <option style="color:red;">🜂</option>
+                                            <option style="color:darkkhaki;">🜁</option>
+                                            <option style="color:black;">🜃</option>
+                                        </select>
 
+                                    </div>
+                                </div>
+                                <div class="agDamList">
+                                    <div>
+                                         Damage:<br>
+                                        1. <input type="text" id="DmgRecLA1" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        2. <input type="text" id="DmgRecLA2" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        3. <input type="text" id="DmgRecLA3" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        4. <input type="text" id="DmgRecLA4" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        5. <input type="text" id="DmgRecLA5" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                    </div>
+                                    <div>
+                                        <span class="dmgTaken" id="LAtaken">Take</span><br>
+                                        <span style="text-decoration:line-through;">              </span><br>
+                                        <span class="dmgRepel" id="LArepel">Repel</span>
+                                    </div>
+                                </div>
+                                <div class="ag2ndDT">
+                                    <span class="secondDT dropDT">2</span>Drop
                                 </div>
                             </div>
-                            <div class="agDamList">
-                                <div>
-                                     Damage:<br>
-                                    1. <input type="text" id="DmgRecLA1" placeholder="0" onFocus="this.select()"><br>
-                                    2. <input type="text" id="DmgRecLA2" placeholder="0" onFocus="this.select()"><br>
-                                    3. <input type="text" id="DmgRecLA3" placeholder="0" onFocus="this.select()"><br>
-                                    4. <input type="text" id="DmgRecLA4" placeholder="0" onFocus="this.select()"><br>
-                                    5. <input type="text" id="DmgRecLA5" placeholder="0" onFocus="this.select()"><br>
+                        </div>
+                        <div class="GridSect">
+                            <div class="agLeft">
+                                <div class="agEDT">
+                                    <span class="limbEDT" id="HDEDT">5</span><br>EDT
                                 </div>
-                                <div>
-                                    <span class="dmgTaken" id="LAtaken">Take</span><br>
-                                    <span style="text-decoration:line-through;">              </span><br>
-                                    <span class="dmgRepel" id="LArepel">Repel</span>
+                                <div class="agInjury">
+                                    <select onChange="saveDropdown(this)" this id="HDinjuryStatus"
+                                        class="agInjuryStatus">
+                                        <option value="Fine">Fine</option>
+                                        <option value="INJ">INJ</option>
+                                        <option value="CRP">CRP</option>
+                                    </select> <br>
+                                    -1 DEX<br>
+                                    -1 SPD<br>
+                                    -1 MND
+                                </div>
+                                <div class="agInjPenalty">
+                                    INJ Penalty <br>
+                                    <select onChange="saveDropdown(this)" this class="injPenaltyD" D>
+                                        <option>-</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="ag2ndDT">
-                                <span class="secondDT dropDT">2</span>Drop
+                            <div class="agLimbTitle">
+                                <span class="agStatLabels">D</span>
+                                <span class="agStatLabels">PD</span>
+                                <span class="agStatLabels">DT</span>
+                                Head
+                            </div>
+                            <div class="agCenter">
+                                <table class="armorGrid">
+                                    <tr id="HDids">
+                                        <th class="HDarmor1"></th>
+                                        <th class="HDarmor2"></th>
+                                        <th class="HDarmor3"></th>
+                                        <th class="HDarmor4"></th>
+                                        <th class="HDarmor5"></th>
+                                    </tr>
+                                    <tr id="HD1" class="agFirstRow">
+                                        <td class="HDarmor1"><input type="checkbox"></td>
+                                        <td class="HDarmor2"><input type="checkbox"></td>
+                                        <td class="HDarmor3"><input type="checkbox"></td>
+                                        <td class="HDarmor4"><input type="checkbox"></td>
+                                        <td class="HDarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="HD2">
+                                        <td class="HDarmor1"><input type="checkbox"></td>
+                                        <td class="HDarmor2"><input type="checkbox"></td>
+                                        <td class="HDarmor3"><input type="checkbox"></td>
+                                        <td class="HDarmor4"><input type="checkbox"></td>
+                                        <td class="HDarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="HD3">
+                                        <td class="HDarmor1"><input type="checkbox"></td>
+                                        <td class="HDarmor2"><input type="checkbox"></td>
+                                        <td class="HDarmor3"><input type="checkbox"></td>
+                                        <td class="HDarmor4"><input type="checkbox"></td>
+                                        <td class="HDarmor5"><input type="checkbox"></td>
+                                        </t>
+                                    <tr id="HD4">
+                                        <td class="HDarmor1"><input type="checkbox"></td>
+                                        <td class="HDarmor2"><input type="checkbox"></td>
+                                        <td class="HDarmor3"><input type="checkbox"></td>
+                                        <td class="HDarmor4"><input type="checkbox"></td>
+                                        <td class="HDarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="HD5">
+                                        <td class="HDarmor1"><input type="checkbox"></td>
+                                        <td class="HDarmor2"><input type="checkbox"></td>
+                                        <td class="HDarmor3"><input type="checkbox"></td>
+                                        <td class="HDarmor4"><input type="checkbox"></td>
+                                        <td class="HDarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                </table>
+                                <table class="agStats">
+                                    <tr id="HDDT">
+                                        <td class="HDarmor1 aStatGrid"> </td>
+                                        <td class="HDarmor2 aStatGrid"> </td>
+                                        <td class="HDarmor3 aStatGrid"> </td>
+                                        <td class="HDarmor4 aStatGrid"> </td>
+                                        <td class="HDarmor5 aStatGrid"> </td>
+                                    </tr>
+                                    <tr id="HDPD">
+                                        <td class="HDarmor1 aStatGrid"> </td>
+                                        <td class="HDarmor2 aStatGrid"> </td>
+                                        <td class="HDarmor3 aStatGrid"> </td>
+                                        <td class="HDarmor4 aStatGrid"> </td>
+                                        <td class="HDarmor5 aStatGrid"> </td>
+                                    </tr>
+                                    <tr id="HDD">
+                                        <td class="HDarmor1 aStatGrid"> </td>
+                                        <td class="HDarmor2 aStatGrid"> </td>
+                                        <td class="HDarmor3 aStatGrid"> </td>
+                                        <td class="HDarmor4 aStatGrid"> </td>
+                                        <td class="HDarmor5 aStatGrid"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="agRight">
+                                <div class="agDebuff">
+                                    <div>
+                                        <input class="limbStatus SaveInput" placeholder="Status"><br>
+                                        <select onChange="saveDropdown(this)" this class="PrimaryDebuff">
+                                            <option>-</option>
+                                            <option style="color:blue;">🜄</option>
+                                            <option style="color:red;">🜂</option>
+                                            <option style="color:darkkhaki;">🜁</option>
+                                            <option style="color:black;">🜃</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        Bleed<br><span class="BT">30</span><br>
+                                        <select onChange="saveDropdown(this)" this class="SecondaryDebuff">
+                                            <option>-</option>
+                                            <option style="color:blue;">🜄</option>
+                                            <option style="color:red;">🜂</option>
+                                            <option style="color:darkkhaki;">🜁</option>
+                                            <option style="color:black;">🜃</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="agDamList">
+                                    <div>
+                                         Damage:<br>
+                                        1. <input type="text" id="DmgRecHD1" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        2. <input type="text" id="DmgRecHD2" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        3. <input type="text" id="DmgRecHD3" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        4. <input type="text" id="DmgRecHD4" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        5. <input type="text" id="DmgRecHD5" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                    </div>
+                                    <div>
+                                        <span class="dmgTaken" id="HDtaken">Take</span><br>
+                                        <span style="text-decoration:line-through;">              </span><br>
+                                        <span class="dmgRepel" id="HDrepel">Repel</span>
+                                    </div>
+                                </div>
+                                <div class="ag2ndDT">
+                                    <span class="secondDT CDT" id="HDCDT">2</span>CDT
+                                </div>
+                            </div>
+                        </div>
+                        <div class="GridSect">
+                            <div class="agLeft">
+                                <div class="agEDT">
+                                    <span class="limbEDT" id="RAEDT">5</span><br>EDT
+                                </div>
+                                <div class="agInjury">
+                                    <select onChange="saveDropdown(this)" this id="RAinjuryStatus"
+                                        class="agInjuryStatus">
+                                        <option value="Fine">Fine</option>
+                                        <option value="INJ">INJ</option>
+                                        <option value="CRP">CRP</option>
+                                    </select> <br>
+                                    -1 ATH<br>
+                                    Attack/2
+                                </div>
+                                <div class="agInjPenalty">
+                                    INJ Penalty <br>
+                                    <select onChange="saveDropdown(this)" this class="injPenaltyDD">
+                                        <option>-</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="agLimbTitle">
+                                <span class="agStatLabels">D</span>
+                                <span class="agStatLabels">PD</span>
+                                <span class="agStatLabels">DT</span>
+                                Right Arm
+                            </div>
+                            <div class="agCenter">
+                                <table class="armorGrid">
+                                    <tr id="RAids">
+                                        <th class="RAarmor1"></th>
+                                        <th class="RAarmor2"></th>
+                                        <th class="RAarmor3"></th>
+                                        <th class="RAarmor4"></th>
+                                        <th class="RAarmor5"></th>
+                                    </tr>
+                                    <tr id="RA1" class="agFirstRow">
+                                        <td class="RAarmor1"><input type="checkbox"></td>
+                                        <td class="RAarmor2"><input type="checkbox"></td>
+                                        <td class="RAarmor3"><input type="checkbox"></td>
+                                        <td class="RAarmor4"><input type="checkbox"></td>
+                                        <td class="RAarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="RA2">
+                                        <td class="RAarmor1"><input type="checkbox"></td>
+                                        <td class="RAarmor2"><input type="checkbox"></td>
+                                        <td class="RAarmor3"><input type="checkbox"></td>
+                                        <td class="RAarmor4"><input type="checkbox"></td>
+                                        <td class="RAarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="RA3">
+                                        <td class="RAarmor1"><input type="checkbox"></td>
+                                        <td class="RAarmor2"><input type="checkbox"></td>
+                                        <td class="RAarmor3"><input type="checkbox"></td>
+                                        <td class="RAarmor4"><input type="checkbox"></td>
+                                        <td class="RAarmor5"><input type="checkbox"></td>
+                                        </t>
+                                    <tr id="RA4">
+                                        <td class="RAarmor1"><input type="checkbox"></td>
+                                        <td class="RAarmor2"><input type="checkbox"></td>
+                                        <td class="RAarmor3"><input type="checkbox"></td>
+                                        <td class="RAarmor4"><input type="checkbox"></td>
+                                        <td class="RAarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="RA5">
+                                        <td class="RAarmor1"><input type="checkbox"></td>
+                                        <td class="RAarmor2"><input type="checkbox"></td>
+                                        <td class="RAarmor3"><input type="checkbox"></td>
+                                        <td class="RAarmor4"><input type="checkbox"></td>
+                                        <td class="RAarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                </table>
+                                <table class="agStats">
+                                    <tr id="RADT">
+                                        <td class="RAarmor1 aStatGrid"> </td>
+                                        <td class="RAarmor2 aStatGrid"> </td>
+                                        <td class="RAarmor3 aStatGrid"> </td>
+                                        <td class="RAarmor4 aStatGrid"> </td>
+                                        <td class="RAarmor5 aStatGrid"> </td>
+                                    </tr>
+                                    <tr id="RAPD">
+                                        <td class="RAarmor1 aStatGrid"> </td>
+                                        <td class="RAarmor2 aStatGrid"> </td>
+                                        <td class="RAarmor3 aStatGrid"> </td>
+                                        <td class="RAarmor4 aStatGrid"> </td>
+                                        <td class="RAarmor5 aStatGrid"> </td>
+                                    </tr>
+                                    <tr id="RAD">
+                                        <td class="RAarmor1 aStatGrid"> </td>
+                                        <td class="RAarmor2 aStatGrid"> </td>
+                                        <td class="RAarmor3 aStatGrid"> </td>
+                                        <td class="RAarmor4 aStatGrid"> </td>
+                                        <td class="RAarmor5 aStatGrid"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="agRight">
+                                <div class="agDebuff">
+                                    <div>
+                                        <input class="limbStatus SaveInput" placeholder="Status"><br>
+                                        <select onChange="saveDropdown(this)" this class="PrimaryDebuff">
+                                            <option>-</option>
+                                            <option style="color:blue;">🜄</option>
+                                            <option style="color:red;">🜂</option>
+                                            <option style="color:darkkhaki;">🜁</option>
+                                            <option style="color:black;">🜃</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        Bleed<br><span class="BT">30</span><br>
+                                        <select onChange="saveDropdown(this)" this class="SecondaryDebuff">
+                                            <option>-</option>
+                                            <option style="color:blue;">🜄</option>
+                                            <option style="color:red;">🜂</option>
+                                            <option style="color:darkkhaki;">🜁</option>
+                                            <option style="color:black;">🜃</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="agDamList">
+                                    <div>
+                                         Damage:<br>
+                                        1. <input type="text" id="DmgRecRA1" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        2. <input type="text" id="DmgRecRA2" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        3. <input type="text" id="DmgRecRA3" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        4. <input type="text" id="DmgRecRA4" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        5. <input type="text" id="DmgRecRA5" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                    </div>
+                                    <div>
+                                        <span class="dmgTaken" id="RAtaken">Take</span><br>
+                                        <span style="text-decoration:line-through;">              </span><br>
+                                        <span class="dmgRepel" id="RArepel">Repel</span>
+                                    </div>
+                                </div>
+                                <div class="ag2ndDT">
+                                    <span class="secondDT dropDT">2</span>Drop
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="GridSect">
-                        <div class="agLeft">
-                            <div class="agEDT">
-                                <span class="limbEDT" id="HDEDT">5</span><br>EDT
-                            </div>
-                            <div class="agInjury">
-                                <select onChange="saveDropdown(this)" this id="HDinjuryStatus" class="agInjuryStatus">
-                                    <option value="Fine">Fine</option>
-                                    <option value="INJ">INJ</option>
-                                    <option value="CRP">CRP</option>
-                                </select> <br>
-                                -1 DEX<br>
-                                -1 SPD<br>
-                                -1 MND
-                            </div>
-                            <div class="agInjPenalty">
-                                INJ Penalty <br>
-                                <select onChange="saveDropdown(this)" this class="injPenaltyD" D>
-                                    <option>-</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="agLimbTitle">
-                            <span class="agStatLabels">D</span>
-                            <span class="agStatLabels">PD</span>
-                            <span class="agStatLabels">DT</span>
-                            Head
-                        </div>
-                        <div class="agCenter">
-                            <table class="armorGrid">
-                                <tr id="HDids">
-                                    <th class="HDarmor1"></th>
-                                    <th class="HDarmor2"></th>
-                                    <th class="HDarmor3"></th>
-                                    <th class="HDarmor4"></th>
-                                    <th class="HDarmor5"></th>
-                                </tr>
-                                <tr id="HD1" class="agFirstRow">
-                                    <td class="HDarmor1"><input type="checkbox"></td>
-                                    <td class="HDarmor2"><input type="checkbox"></td>
-                                    <td class="HDarmor3"><input type="checkbox"></td>
-                                    <td class="HDarmor4"><input type="checkbox"></td>
-                                    <td class="HDarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="HD2">
-                                    <td class="HDarmor1"><input type="checkbox"></td>
-                                    <td class="HDarmor2"><input type="checkbox"></td>
-                                    <td class="HDarmor3"><input type="checkbox"></td>
-                                    <td class="HDarmor4"><input type="checkbox"></td>
-                                    <td class="HDarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="HD3">
-                                    <td class="HDarmor1"><input type="checkbox"></td>
-                                    <td class="HDarmor2"><input type="checkbox"></td>
-                                    <td class="HDarmor3"><input type="checkbox"></td>
-                                    <td class="HDarmor4"><input type="checkbox"></td>
-                                    <td class="HDarmor5"><input type="checkbox"></td>
-                                    </t>
-                                <tr id="HD4">
-                                    <td class="HDarmor1"><input type="checkbox"></td>
-                                    <td class="HDarmor2"><input type="checkbox"></td>
-                                    <td class="HDarmor3"><input type="checkbox"></td>
-                                    <td class="HDarmor4"><input type="checkbox"></td>
-                                    <td class="HDarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="HD5">
-                                    <td class="HDarmor1"><input type="checkbox"></td>
-                                    <td class="HDarmor2"><input type="checkbox"></td>
-                                    <td class="HDarmor3"><input type="checkbox"></td>
-                                    <td class="HDarmor4"><input type="checkbox"></td>
-                                    <td class="HDarmor5"><input type="checkbox"></td>
-                                </tr>
-                            </table>
-                            <table class="agStats">
-                                <tr id="HDDT">
-                                    <td class="HDarmor1 aStatGrid"> </td>
-                                    <td class="HDarmor2 aStatGrid"> </td>
-                                    <td class="HDarmor3 aStatGrid"> </td>
-                                    <td class="HDarmor4 aStatGrid"> </td>
-                                    <td class="HDarmor5 aStatGrid"> </td>
-                                </tr>
-                                <tr id="HDPD">
-                                    <td class="HDarmor1 aStatGrid"> </td>
-                                    <td class="HDarmor2 aStatGrid"> </td>
-                                    <td class="HDarmor3 aStatGrid"> </td>
-                                    <td class="HDarmor4 aStatGrid"> </td>
-                                    <td class="HDarmor5 aStatGrid"> </td>
-                                </tr>
-                                <tr id="HDD">
-                                    <td class="HDarmor1 aStatGrid"> </td>
-                                    <td class="HDarmor2 aStatGrid"> </td>
-                                    <td class="HDarmor3 aStatGrid"> </td>
-                                    <td class="HDarmor4 aStatGrid"> </td>
-                                    <td class="HDarmor5 aStatGrid"> </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="agRight">
-                            <div class="agDebuff">
-                                <div>
-                                    <input class="limbStatus SaveInput" placeholder="Status"><br>
-                                    <select onChange="saveDropdown(this)" this class="PrimaryDebuff">
-                                        <option>-</option>
-                                        <option style="color:blue;">🜄</option>
-                                        <option style="color:red;">🜂</option>
-                                        <option style="color:darkkhaki;">🜁</option>
-                                        <option style="color:black;">🜃</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    Bleed<br><span class="BT">30</span><br>
-                                    <select onChange="saveDropdown(this)" this class="SecondaryDebuff">
-                                        <option>-</option>
-                                        <option style="color:blue;">🜄</option>
-                                        <option style="color:red;">🜂</option>
-                                        <option style="color:darkkhaki;">🜁</option>
-                                        <option style="color:black;">🜃</option>
-                                    </select>
-
-                                </div>
-                            </div>
-                            <div class="agDamList">
-                                <div>
-                                     Damage:<br>
-                                    1. <input type="text" id="DmgRecHD1" placeholder="0" onFocus="this.select()"><br>
-                                    2. <input type="text" id="DmgRecHD2" placeholder="0" onFocus="this.select()"><br>
-                                    3. <input type="text" id="DmgRecHD3" placeholder="0" onFocus="this.select()"><br>
-                                    4. <input type="text" id="DmgRecHD4" placeholder="0" onFocus="this.select()"><br>
-                                    5. <input type="text" id="DmgRecHD5" placeholder="0" onFocus="this.select()"><br>
-                                </div>
-                                <div>
-                                    <span class="dmgTaken" id="HDtaken">Take</span><br>
-                                    <span style="text-decoration:line-through;">              </span><br>
-                                    <span class="dmgRepel" id="HDrepel">Repel</span>
-                                </div>
-                            </div>
-                            <div class="ag2ndDT">
-                                <span class="secondDT CDT" id="HDCDT">2</span>CDT
-                            </div>
-                        </div>
-                    </div>
-                    <div class="GridSect">
-                        <div class="agLeft">
-                            <div class="agEDT">
-                                <span class="limbEDT" id="RAEDT">5</span><br>EDT
-                            </div>
-                            <div class="agInjury">
-                                <select onChange="saveDropdown(this)" this id="RAinjuryStatus" class="agInjuryStatus">
-                                    <option value="Fine">Fine</option>
-                                    <option value="INJ">INJ</option>
-                                    <option value="CRP">CRP</option>
-                                </select> <br>
-                                -1 ATH<br>
-                                Attack/2
-                            </div>
-                            <div class="agInjPenalty">
-                                INJ Penalty <br>
-                                <select onChange="saveDropdown(this)" this class="injPenaltyDD">
-                                    <option>-</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="agLimbTitle">
-                            <span class="agStatLabels">D</span>
-                            <span class="agStatLabels">PD</span>
-                            <span class="agStatLabels">DT</span>
-                            Right Arm
-                        </div>
-                        <div class="agCenter">
-                            <table class="armorGrid">
-                                <tr id="RAids">
-                                    <th class="RAarmor1"></th>
-                                    <th class="RAarmor2"></th>
-                                    <th class="RAarmor3"></th>
-                                    <th class="RAarmor4"></th>
-                                    <th class="RAarmor5"></th>
-                                </tr>
-                                <tr id="RA1" class="agFirstRow">
-                                    <td class="RAarmor1"><input type="checkbox"></td>
-                                    <td class="RAarmor2"><input type="checkbox"></td>
-                                    <td class="RAarmor3"><input type="checkbox"></td>
-                                    <td class="RAarmor4"><input type="checkbox"></td>
-                                    <td class="RAarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="RA2">
-                                    <td class="RAarmor1"><input type="checkbox"></td>
-                                    <td class="RAarmor2"><input type="checkbox"></td>
-                                    <td class="RAarmor3"><input type="checkbox"></td>
-                                    <td class="RAarmor4"><input type="checkbox"></td>
-                                    <td class="RAarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="RA3">
-                                    <td class="RAarmor1"><input type="checkbox"></td>
-                                    <td class="RAarmor2"><input type="checkbox"></td>
-                                    <td class="RAarmor3"><input type="checkbox"></td>
-                                    <td class="RAarmor4"><input type="checkbox"></td>
-                                    <td class="RAarmor5"><input type="checkbox"></td>
-                                    </t>
-                                <tr id="RA4">
-                                    <td class="RAarmor1"><input type="checkbox"></td>
-                                    <td class="RAarmor2"><input type="checkbox"></td>
-                                    <td class="RAarmor3"><input type="checkbox"></td>
-                                    <td class="RAarmor4"><input type="checkbox"></td>
-                                    <td class="RAarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="RA5">
-                                    <td class="RAarmor1"><input type="checkbox"></td>
-                                    <td class="RAarmor2"><input type="checkbox"></td>
-                                    <td class="RAarmor3"><input type="checkbox"></td>
-                                    <td class="RAarmor4"><input type="checkbox"></td>
-                                    <td class="RAarmor5"><input type="checkbox"></td>
-                                </tr>
-                            </table>
-                            <table class="agStats">
-                                <tr id="RADT">
-                                    <td class="RAarmor1 aStatGrid"> </td>
-                                    <td class="RAarmor2 aStatGrid"> </td>
-                                    <td class="RAarmor3 aStatGrid"> </td>
-                                    <td class="RAarmor4 aStatGrid"> </td>
-                                    <td class="RAarmor5 aStatGrid"> </td>
-                                </tr>
-                                <tr id="RAPD">
-                                    <td class="RAarmor1 aStatGrid"> </td>
-                                    <td class="RAarmor2 aStatGrid"> </td>
-                                    <td class="RAarmor3 aStatGrid"> </td>
-                                    <td class="RAarmor4 aStatGrid"> </td>
-                                    <td class="RAarmor5 aStatGrid"> </td>
-                                </tr>
-                                <tr id="RAD">
-                                    <td class="RAarmor1 aStatGrid"> </td>
-                                    <td class="RAarmor2 aStatGrid"> </td>
-                                    <td class="RAarmor3 aStatGrid"> </td>
-                                    <td class="RAarmor4 aStatGrid"> </td>
-                                    <td class="RAarmor5 aStatGrid"> </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="agRight">
-                            <div class="agDebuff">
-                                <div>
-                                    <input class="limbStatus SaveInput" placeholder="Status"><br>
-                                    <select onChange="saveDropdown(this)" this class="PrimaryDebuff">
-                                        <option>-</option>
-                                        <option style="color:blue;">🜄</option>
-                                        <option style="color:red;">🜂</option>
-                                        <option style="color:darkkhaki;">🜁</option>
-                                        <option style="color:black;">🜃</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    Bleed<br><span class="BT">30</span><br>
-                                    <select onChange="saveDropdown(this)" this class="SecondaryDebuff">
-                                        <option>-</option>
-                                        <option style="color:blue;">🜄</option>
-                                        <option style="color:red;">🜂</option>
-                                        <option style="color:darkkhaki;">🜁</option>
-                                        <option style="color:black;">🜃</option>
-                                    </select>
-
-                                </div>
-                            </div>
-                            <div class="agDamList">
-                                <div>
-                                     Damage:<br>
-                                    1. <input type="text" id="DmgRecRA1" placeholder="0" onFocus="this.select()"><br>
-                                    2. <input type="text" id="DmgRecRA2" placeholder="0" onFocus="this.select()"><br>
-                                    3. <input type="text" id="DmgRecRA3" placeholder="0" onFocus="this.select()"><br>
-                                    4. <input type="text" id="DmgRecRA4" placeholder="0" onFocus="this.select()"><br>
-                                    5. <input type="text" id="DmgRecRA5" placeholder="0" onFocus="this.select()"><br>
-                                </div>
-                                <div>
-                                    <span class="dmgTaken" id="RAtaken">Take</span><br>
-                                    <span style="text-decoration:line-through;">              </span><br>
-                                    <span class="dmgRepel" id="RArepel">Repel</span>
-                                </div>
-                            </div>
-                            <div class="ag2ndDT">
-                                <span class="secondDT dropDT">2</span>Drop
-                            </div>
-                        </div>
-                    </div>
-                </div>
                     <div class="dataSection divDataSection">
-                    <div class="GridSect">
-                        <div class="agLeft">
-                            <div class="agEDT">
-                                <span class="limbEDT" id="LLEDT">5</span><br>EDT
-                            </div>
-                            <div class="agInjury">
-                                <select onChange="saveDropdown(this)" this id="LLinjuryStatus" class="agInjuryStatus">
-                                    <option value="Fine">Fine</option>
-                                    <option value="INJ">INJ</option>
-                                    <option value="CRP">CRP</option>
-                                </select> <br>
-                                -1 SPD<br>
-                                -1 STR
-                            </div>
-                            <div class="agInjPenalty">
-                                INJ Penalty <br>
-                                <select onChange="saveDropdown(this)" this class="injPenaltyDD">
-                                    <option>-</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="agLimbTitle">
-                            <span class="agStatLabels">D</span>
-                            <span class="agStatLabels">PD</span>
-                            <span class="agStatLabels">DT</span>
-                            Left Leg
-                        </div>
-                        <div class="agCenter">
-                            <table class="armorGrid">
-                                <tr id="LLids">
-                                    <th class="LLarmor1"></th>
-                                    <th class="LLarmor2"></th>
-                                    <th class="LLarmor3"></th>
-                                    <th class="LLarmor4"></th>
-                                    <th class="LLarmor5"></th>
-                                </tr>
-                                <tr id="LL1" class="agFirstRow">
-                                    <td class="LLarmor1"><input type="checkbox"></td>
-                                    <td class="LLarmor2"><input type="checkbox"></td>
-                                    <td class="LLarmor3"><input type="checkbox"></td>
-                                    <td class="LLarmor4"><input type="checkbox"></td>
-                                    <td class="LLarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="LL2">
-                                    <td class="LLarmor1"><input type="checkbox"></td>
-                                    <td class="LLarmor2"><input type="checkbox"></td>
-                                    <td class="LLarmor3"><input type="checkbox"></td>
-                                    <td class="LLarmor4"><input type="checkbox"></td>
-                                    <td class="LLarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="LL3">
-                                    <td class="LLarmor1"><input type="checkbox"></td>
-                                    <td class="LLarmor2"><input type="checkbox"></td>
-                                    <td class="LLarmor3"><input type="checkbox"></td>
-                                    <td class="LLarmor4"><input type="checkbox"></td>
-                                    <td class="LLarmor5"><input type="checkbox"></td>
-                                    </t>
-                                <tr id="LL4">
-                                    <td class="LLarmor1"><input type="checkbox"></td>
-                                    <td class="LLarmor2"><input type="checkbox"></td>
-                                    <td class="LLarmor3"><input type="checkbox"></td>
-                                    <td class="LLarmor4"><input type="checkbox"></td>
-                                    <td class="LLarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="LL5">
-                                    <td class="LLarmor1"><input type="checkbox"></td>
-                                    <td class="LLarmor2"><input type="checkbox"></td>
-                                    <td class="LLarmor3"><input type="checkbox"></td>
-                                    <td class="LLarmor4"><input type="checkbox"></td>
-                                    <td class="LLarmor5"><input type="checkbox"></td>
-                                </tr>
-                            </table>
-                            <table class="agStats">
-                                <tr id="LLDT">
-                                    <td class="LLarmor1 aStatGrid"> </td>
-                                    <td class="LLarmor2 aStatGrid"> </td>
-                                    <td class="LLarmor3 aStatGrid"> </td>
-                                    <td class="LLarmor4 aStatGrid"> </td>
-                                    <td class="LLarmor5 aStatGrid"> </td>
-                                </tr>
-                                <tr id="LLPD">
-                                    <td class="LLarmor1 aStatGrid"> </td>
-                                    <td class="LLarmor2 aStatGrid"> </td>
-                                    <td class="LLarmor3 aStatGrid"> </td>
-                                    <td class="LLarmor4 aStatGrid"> </td>
-                                    <td class="LLarmor5 aStatGrid"> </td>
-                                </tr>
-                                <tr id="LLD">
-                                    <td class="LLarmor1 aStatGrid"> </td>
-                                    <td class="LLarmor2 aStatGrid"> </td>
-                                    <td class="LLarmor3 aStatGrid"> </td>
-                                    <td class="LLarmor4 aStatGrid"> </td>
-                                    <td class="LLarmor5 aStatGrid"> </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="agRight">
-                            <div class="agDebuff">
-                                <div>
-                                    <input class="limbStatus SaveInput" placeholder="Status"><br>
-                                    <select onChange="saveDropdown(this)" this class="PrimaryDebuff">
+                        <div class="GridSect">
+                            <div class="agLeft">
+                                <div class="agEDT">
+                                    <span class="limbEDT" id="LLEDT">5</span><br>EDT
+                                </div>
+                                <div class="agInjury">
+                                    <select onChange="saveDropdown(this)" this id="LLinjuryStatus"
+                                        class="agInjuryStatus">
+                                        <option value="Fine">Fine</option>
+                                        <option value="INJ">INJ</option>
+                                        <option value="CRP">CRP</option>
+                                    </select> <br>
+                                    -1 SPD<br>
+                                    -1 STR
+                                </div>
+                                <div class="agInjPenalty">
+                                    INJ Penalty <br>
+                                    <select onChange="saveDropdown(this)" this class="injPenaltyDD">
                                         <option>-</option>
-                                        <option style="color:blue;">🜄</option>
-                                        <option style="color:red;">🜂</option>
-                                        <option style="color:darkkhaki;">🜁</option>
-                                        <option style="color:black;">🜃</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
                                     </select>
                                 </div>
-                                <div>
-                                    Bleed<br><span class="BT">30</span><br>
-                                    <select onChange="saveDropdown(this)" this class="SecondaryDebuff">
-                                        <option>-</option>
-                                        <option style="color:blue;">🜄</option>
-                                        <option style="color:red;">🜂</option>
-                                        <option style="color:darkkhaki;">🜁</option>
-                                        <option style="color:black;">🜃</option>
-                                    </select>
+                            </div>
+                            <div class="agLimbTitle">
+                                <span class="agStatLabels">D</span>
+                                <span class="agStatLabels">PD</span>
+                                <span class="agStatLabels">DT</span>
+                                Left Leg
+                            </div>
+                            <div class="agCenter">
+                                <table class="armorGrid">
+                                    <tr id="LLids">
+                                        <th class="LLarmor1"></th>
+                                        <th class="LLarmor2"></th>
+                                        <th class="LLarmor3"></th>
+                                        <th class="LLarmor4"></th>
+                                        <th class="LLarmor5"></th>
+                                    </tr>
+                                    <tr id="LL1" class="agFirstRow">
+                                        <td class="LLarmor1"><input type="checkbox"></td>
+                                        <td class="LLarmor2"><input type="checkbox"></td>
+                                        <td class="LLarmor3"><input type="checkbox"></td>
+                                        <td class="LLarmor4"><input type="checkbox"></td>
+                                        <td class="LLarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="LL2">
+                                        <td class="LLarmor1"><input type="checkbox"></td>
+                                        <td class="LLarmor2"><input type="checkbox"></td>
+                                        <td class="LLarmor3"><input type="checkbox"></td>
+                                        <td class="LLarmor4"><input type="checkbox"></td>
+                                        <td class="LLarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="LL3">
+                                        <td class="LLarmor1"><input type="checkbox"></td>
+                                        <td class="LLarmor2"><input type="checkbox"></td>
+                                        <td class="LLarmor3"><input type="checkbox"></td>
+                                        <td class="LLarmor4"><input type="checkbox"></td>
+                                        <td class="LLarmor5"><input type="checkbox"></td>
+                                        </t>
+                                    <tr id="LL4">
+                                        <td class="LLarmor1"><input type="checkbox"></td>
+                                        <td class="LLarmor2"><input type="checkbox"></td>
+                                        <td class="LLarmor3"><input type="checkbox"></td>
+                                        <td class="LLarmor4"><input type="checkbox"></td>
+                                        <td class="LLarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="LL5">
+                                        <td class="LLarmor1"><input type="checkbox"></td>
+                                        <td class="LLarmor2"><input type="checkbox"></td>
+                                        <td class="LLarmor3"><input type="checkbox"></td>
+                                        <td class="LLarmor4"><input type="checkbox"></td>
+                                        <td class="LLarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                </table>
+                                <table class="agStats">
+                                    <tr id="LLDT">
+                                        <td class="LLarmor1 aStatGrid"> </td>
+                                        <td class="LLarmor2 aStatGrid"> </td>
+                                        <td class="LLarmor3 aStatGrid"> </td>
+                                        <td class="LLarmor4 aStatGrid"> </td>
+                                        <td class="LLarmor5 aStatGrid"> </td>
+                                    </tr>
+                                    <tr id="LLPD">
+                                        <td class="LLarmor1 aStatGrid"> </td>
+                                        <td class="LLarmor2 aStatGrid"> </td>
+                                        <td class="LLarmor3 aStatGrid"> </td>
+                                        <td class="LLarmor4 aStatGrid"> </td>
+                                        <td class="LLarmor5 aStatGrid"> </td>
+                                    </tr>
+                                    <tr id="LLD">
+                                        <td class="LLarmor1 aStatGrid"> </td>
+                                        <td class="LLarmor2 aStatGrid"> </td>
+                                        <td class="LLarmor3 aStatGrid"> </td>
+                                        <td class="LLarmor4 aStatGrid"> </td>
+                                        <td class="LLarmor5 aStatGrid"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="agRight">
+                                <div class="agDebuff">
+                                    <div>
+                                        <input class="limbStatus SaveInput" placeholder="Status"><br>
+                                        <select onChange="saveDropdown(this)" this class="PrimaryDebuff">
+                                            <option>-</option>
+                                            <option style="color:blue;">🜄</option>
+                                            <option style="color:red;">🜂</option>
+                                            <option style="color:darkkhaki;">🜁</option>
+                                            <option style="color:black;">🜃</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        Bleed<br><span class="BT">30</span><br>
+                                        <select onChange="saveDropdown(this)" this class="SecondaryDebuff">
+                                            <option>-</option>
+                                            <option style="color:blue;">🜄</option>
+                                            <option style="color:red;">🜂</option>
+                                            <option style="color:darkkhaki;">🜁</option>
+                                            <option style="color:black;">🜃</option>
+                                        </select>
 
+                                    </div>
+                                </div>
+                                <div class="agDamList">
+                                    <div>
+                                         Damage:<br>
+                                        1. <input type="text" id="DmgRecLL1" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        2. <input type="text" id="DmgRecLL2" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        3. <input type="text" id="DmgRecLL3" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        4. <input type="text" id="DmgRecLL4" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        5. <input type="text" id="DmgRecLL5" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                    </div>
+                                    <div>
+                                        <span class="dmgTaken" id="LLtaken">Take</span><br>
+                                        <span style="text-decoration:line-through;">              </span><br>
+                                        <span class="dmgRepel" id="LLrepel">Repel</span>
+                                    </div>
+                                </div>
+                                <div class="ag2ndDT">
+                                    <span class="secondDT tripDT">2</span>Trip
                                 </div>
                             </div>
-                            <div class="agDamList">
-                                <div>
-                                     Damage:<br>
-                                    1. <input type="text" id="DmgRecLL1" placeholder="0" onFocus="this.select()"><br>
-                                    2. <input type="text" id="DmgRecLL2" placeholder="0" onFocus="this.select()"><br>
-                                    3. <input type="text" id="DmgRecLL3" placeholder="0" onFocus="this.select()"><br>
-                                    4. <input type="text" id="DmgRecLL4" placeholder="0" onFocus="this.select()"><br>
-                                    5. <input type="text" id="DmgRecLL5" placeholder="0" onFocus="this.select()"><br>
+                        </div>
+                        <div class="GridSect">
+                            <div class="agLeft">
+                                <div class="agEDT">
+                                    <span class="limbEDT" id="BDEDT">5</span><br>EDT
                                 </div>
-                                <div>
-                                    <span class="dmgTaken" id="LLtaken">Take</span><br>
-                                    <span style="text-decoration:line-through;">              </span><br>
-                                    <span class="dmgRepel" id="LLrepel">Repel</span>
+                                <div class="agInjury">
+                                    <select onChange="saveDropdown(this)" id="BDinjuryStatus" class="agInjuryStatus">
+                                        <option value="Fine">Fine</option>
+                                        <option value="INJ">INJ</option>
+                                        <option value="CRP">CRP</option>
+                                    </select> <br>
+                                    -1 ATH<br>
+                                    -1 BOD
+                                </div>
+                                <div class="agInjPenalty">
+                                    INJ Penalty <br>
+                                    <select onChange="saveDropdown(this)" this class="injPenaltyDD">
+                                        <option>-</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="ag2ndDT">
-                                <span class="secondDT tripDT">2</span>Trip
+                            <div class="agLimbTitle">
+                                <span class="agStatLabels">D</span>
+                                <span class="agStatLabels">PD</span>
+                                <span class="agStatLabels">DT</span>
+                                Body
+                            </div>
+                            <div class="agCenter">
+                                <table class="armorGrid">
+                                    <tr id="BDids">
+                                        <th class="BDarmor1"></th>
+                                        <th class="BDarmor2"></th>
+                                        <th class="BDarmor3"></th>
+                                        <th class="BDarmor4"></th>
+                                        <th class="BDarmor5"></th>
+                                    </tr>
+                                    <tr id="BD1" class="agFirstRow">
+                                        <td class="BDarmor1"><input type="checkbox"></td>
+                                        <td class="BDarmor2"><input type="checkbox"></td>
+                                        <td class="BDarmor3"><input type="checkbox"></td>
+                                        <td class="BDarmor4"><input type="checkbox"></td>
+                                        <td class="BDarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="BD2">
+                                        <td class="BDarmor1"><input type="checkbox"></td>
+                                        <td class="BDarmor2"><input type="checkbox"></td>
+                                        <td class="BDarmor3"><input type="checkbox"></td>
+                                        <td class="BDarmor4"><input type="checkbox"></td>
+                                        <td class="BDarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="BD3">
+                                        <td class="BDarmor1"><input type="checkbox"></td>
+                                        <td class="BDarmor2"><input type="checkbox"></td>
+                                        <td class="BDarmor3"><input type="checkbox"></td>
+                                        <td class="BDarmor4"><input type="checkbox"></td>
+                                        <td class="BDarmor5"><input type="checkbox"></td>
+                                        </t>
+                                    <tr id="BD4">
+                                        <td class="BDarmor1"><input type="checkbox"></td>
+                                        <td class="BDarmor2"><input type="checkbox"></td>
+                                        <td class="BDarmor3"><input type="checkbox"></td>
+                                        <td class="BDarmor4"><input type="checkbox"></td>
+                                        <td class="BDarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="BD5">
+                                        <td class="BDarmor1"><input type="checkbox"></td>
+                                        <td class="BDarmor2"><input type="checkbox"></td>
+                                        <td class="BDarmor3"><input type="checkbox"></td>
+                                        <td class="BDarmor4"><input type="checkbox"></td>
+                                        <td class="BDarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                </table>
+                                <table class="agStats">
+                                    <tr id="BDDT">
+                                        <td class="BDarmor1 aStatGrid"> </td>
+                                        <td class="BDarmor2 aStatGrid"> </td>
+                                        <td class="BDarmor3 aStatGrid"> </td>
+                                        <td class="BDarmor4 aStatGrid"> </td>
+                                        <td class="BDarmor5 aStatGrid"> </td>
+                                    </tr>
+                                    <tr id="BDPD">
+                                        <td class="BDarmor1 aStatGrid"> </td>
+                                        <td class="BDarmor2 aStatGrid"> </td>
+                                        <td class="BDarmor3 aStatGrid"> </td>
+                                        <td class="BDarmor4 aStatGrid"> </td>
+                                        <td class="BDarmor5 aStatGrid"> </td>
+                                    </tr>
+                                    <tr id="BDD">
+                                        <td class="BDarmor1 aStatGrid"> </td>
+                                        <td class="BDarmor2 aStatGrid"> </td>
+                                        <td class="BDarmor3 aStatGrid"> </td>
+                                        <td class="BDarmor4 aStatGrid"> </td>
+                                        <td class="BDarmor5 aStatGrid"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="agRight">
+                                <div class="agDebuff">
+                                    <div>
+                                        <input class="limbStatus SaveInput" placeholder="Status"><br>
+                                        <select onChange="saveDropdown(this)" this class="PrimaryDebuff">
+                                            <option>-</option>
+                                            <option style="color:blue;">🜄</option>
+                                            <option style="color:red;">🜂</option>
+                                            <option style="color:darkkhaki;">🜁</option>
+                                            <option style="color:black;">🜃</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        Bleed<br><span class="BT">30</span><br>
+                                        <select onChange="saveDropdown(this)" this class="SecondaryDebuff">
+                                            <option>-</option>
+                                            <option style="color:blue;">🜄</option>
+                                            <option style="color:red;">🜂</option>
+                                            <option style="color:darkkhaki;">🜁</option>
+                                            <option style="color:black;">🜃</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="agDamList">
+                                    <div>
+                                         Damage:<br>
+                                        1. <input type="text" id="DmgRecBD1" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        2. <input type="text" id="DmgRecBD2" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        3. <input type="text" id="DmgRecBD3" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        4. <input type="text" id="DmgRecBD4" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        5. <input type="text" id="DmgRecBD5" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                    </div>
+                                    <div>
+                                        <span class="dmgTaken" id="BDtaken">Take</span><br>
+                                        <span style="text-decoration:line-through;">              </span><br>
+                                        <span class="dmgRepel" id="BDrepel">Repel</span>
+                                    </div>
+                                </div>
+                                <div class="ag2ndDT">
+                                    <span class="secondDT CDT" id="BDCDT">2</span>CDT
+                                </div>
+                            </div>
+                        </div>
+                        <div class="GridSect">
+                            <div class="agLeft">
+                                <div class="agEDT">
+                                    <span class="limbEDT" id="RLEDT">5</span><br>EDT
+                                </div>
+                                <div class="agInjury">
+                                    <select onChange="saveDropdown(this)" this id="RLinjuryStatus"
+                                        class="agInjuryStatus">
+                                        <option value="Fine">Fine</option>
+                                        <option value="INJ">INJ</option>
+                                        <option value="CRP">CRP</option>
+                                    </select> <br>
+                                    -1 SPD<br>
+                                    -1 STR
+                                </div>
+                                <div class="agInjPenalty">
+                                    INJ Penalty <br>
+                                    <select onChange="saveDropdown(this)" this class="injPenaltyDD">
+                                        <option>-</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="agLimbTitle">
+                                <span class="agStatLabels">D</span>
+                                <span class="agStatLabels">PD</span>
+                                <span class="agStatLabels">DT</span>
+                                Right Leg
+                            </div>
+                            <div class="agCenter">
+                                <table class="armorGrid">
+                                    <tr id="RLids">
+                                        <th class="RLarmor1"></th>
+                                        <th class="RLarmor2"></th>
+                                        <th class="RLarmor3"></th>
+                                        <th class="RLarmor4"></th>
+                                        <th class="RLarmor5"></th>
+                                    </tr>
+                                    <tr id="RL1" class="agFirstRow">
+                                        <td class="RLarmor1"><input type="checkbox"></td>
+                                        <td class="RLarmor2"><input type="checkbox"></td>
+                                        <td class="RLarmor3"><input type="checkbox"></td>
+                                        <td class="RLarmor4"><input type="checkbox"></td>
+                                        <td class="RLarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="RL2">
+                                        <td class="RLarmor1"><input type="checkbox"></td>
+                                        <td class="RLarmor2"><input type="checkbox"></td>
+                                        <td class="RLarmor3"><input type="checkbox"></td>
+                                        <td class="RLarmor4"><input type="checkbox"></td>
+                                        <td class="RLarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="RL3">
+                                        <td class="RLarmor1"><input type="checkbox"></td>
+                                        <td class="RLarmor2"><input type="checkbox"></td>
+                                        <td class="RLarmor3"><input type="checkbox"></td>
+                                        <td class="RLarmor4"><input type="checkbox"></td>
+                                        <td class="RLarmor5"><input type="checkbox"></td>
+                                        </t>
+                                    <tr id="RL4">
+                                        <td class="RLarmor1"><input type="checkbox"></td>
+                                        <td class="RLarmor2"><input type="checkbox"></td>
+                                        <td class="RLarmor3"><input type="checkbox"></td>
+                                        <td class="RLarmor4"><input type="checkbox"></td>
+                                        <td class="RLarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                    <tr id="RL5">
+                                        <td class="RLarmor1"><input type="checkbox"></td>
+                                        <td class="RLarmor2"><input type="checkbox"></td>
+                                        <td class="RLarmor3"><input type="checkbox"></td>
+                                        <td class="RLarmor4"><input type="checkbox"></td>
+                                        <td class="RLarmor5"><input type="checkbox"></td>
+                                    </tr>
+                                </table>
+                                <table class="agStats">
+                                    <tr id="RLDT">
+                                        <td class="RLarmor1 aStatGrid"> </td>
+                                        <td class="RLarmor2 aStatGrid"> </td>
+                                        <td class="RLarmor3 aStatGrid"> </td>
+                                        <td class="RLarmor4 aStatGrid"> </td>
+                                        <td class="RLarmor5 aStatGrid"> </td>
+                                    </tr>
+                                    <tr id="RLPD">
+                                        <td class="RLarmor1 aStatGrid"> </td>
+                                        <td class="RLarmor2 aStatGrid"> </td>
+                                        <td class="RLarmor3 aStatGrid"> </td>
+                                        <td class="RLarmor4 aStatGrid"> </td>
+                                        <td class="RLarmor5 aStatGrid"> </td>
+                                    </tr>
+                                    <tr id="RLD">
+                                        <td class="RLarmor1 aStatGrid"> </td>
+                                        <td class="RLarmor2 aStatGrid"> </td>
+                                        <td class="RLarmor3 aStatGrid"> </td>
+                                        <td class="RLarmor4 aStatGrid"> </td>
+                                        <td class="RLarmor5 aStatGrid"> </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="agRight">
+                                <div class="agDebuff">
+                                    <div>
+                                        <input class="limbStatus SaveInput" placeholder="Status"><br>
+                                        <select onChange="saveDropdown(this)" this class="PrimaryDebuff">
+                                            <option>-</option>
+                                            <option style="color:blue;">🜄</option>
+                                            <option style="color:red;">🜂</option>
+                                            <option style="color:darkkhaki;">🜁</option>
+                                            <option style="color:black;">🜃</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        Bleed<br><span class="BT">30</span><br>
+                                        <select onChange="saveDropdown(this)" this class="SecondaryDebuff">
+                                            <option>-</option>
+                                            <option style="color:blue;">🜄</option>
+                                            <option style="color:red;">🜂</option>
+                                            <option style="color:darkkhaki;">🜁</option>
+                                            <option style="color:black;">🜃</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="agDamList">
+                                    <div>
+                                         Damage:<br>
+                                        1. <input type="text" id="DmgRecRL1" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        2. <input type="text" id="DmgRecRL2" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        3. <input type="text" id="DmgRecRL3" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        4. <input type="text" id="DmgRecRL4" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                        5. <input type="text" id="DmgRecRL5" placeholder="0"
+                                            onFocus="this.select()"><br>
+                                    </div>
+                                    <div>
+                                        <span class="dmgTaken" id="RLtaken">Take</span><br>
+                                        <span style="text-decoration:line-through;">              </span><br>
+                                        <span class="dmgRepel" id="RLrepel">Repel</span>
+                                    </div>
+                                </div>
+                                <div class="ag2ndDT">
+                                    <span class="secondDT tripDT">2</span>Trip
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="GridSect">
-                        <div class="agLeft">
-                            <div class="agEDT">
-                                <span class="limbEDT" id="BDEDT">5</span><br>EDT
-                            </div>
-                            <div class="agInjury">
-                                <select onChange="saveDropdown(this)" id="BDinjuryStatus" class="agInjuryStatus">
-                                    <option value="Fine">Fine</option>
-                                    <option value="INJ">INJ</option>
-                                    <option value="CRP">CRP</option>
-                                </select> <br>
-                                -1 ATH<br>
-                                -1 BOD
-                            </div>
-                            <div class="agInjPenalty">
-                                INJ Penalty <br>
-                                <select onChange="saveDropdown(this)" this class="injPenaltyDD">
-                                    <option>-</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="agLimbTitle">
-                            <span class="agStatLabels">D</span>
-                            <span class="agStatLabels">PD</span>
-                            <span class="agStatLabels">DT</span>
-                            Body
-                        </div>
-                        <div class="agCenter">
-                            <table class="armorGrid">
-                                <tr id="BDids">
-                                    <th class="BDarmor1"></th>
-                                    <th class="BDarmor2"></th>
-                                    <th class="BDarmor3"></th>
-                                    <th class="BDarmor4"></th>
-                                    <th class="BDarmor5"></th>
-                                </tr>
-                                <tr id="BD1" class="agFirstRow">
-                                    <td class="BDarmor1"><input type="checkbox"></td>
-                                    <td class="BDarmor2"><input type="checkbox"></td>
-                                    <td class="BDarmor3"><input type="checkbox"></td>
-                                    <td class="BDarmor4"><input type="checkbox"></td>
-                                    <td class="BDarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="BD2">
-                                    <td class="BDarmor1"><input type="checkbox"></td>
-                                    <td class="BDarmor2"><input type="checkbox"></td>
-                                    <td class="BDarmor3"><input type="checkbox"></td>
-                                    <td class="BDarmor4"><input type="checkbox"></td>
-                                    <td class="BDarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="BD3">
-                                    <td class="BDarmor1"><input type="checkbox"></td>
-                                    <td class="BDarmor2"><input type="checkbox"></td>
-                                    <td class="BDarmor3"><input type="checkbox"></td>
-                                    <td class="BDarmor4"><input type="checkbox"></td>
-                                    <td class="BDarmor5"><input type="checkbox"></td>
-                                    </t>
-                                <tr id="BD4">
-                                    <td class="BDarmor1"><input type="checkbox"></td>
-                                    <td class="BDarmor2"><input type="checkbox"></td>
-                                    <td class="BDarmor3"><input type="checkbox"></td>
-                                    <td class="BDarmor4"><input type="checkbox"></td>
-                                    <td class="BDarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="BD5">
-                                    <td class="BDarmor1"><input type="checkbox"></td>
-                                    <td class="BDarmor2"><input type="checkbox"></td>
-                                    <td class="BDarmor3"><input type="checkbox"></td>
-                                    <td class="BDarmor4"><input type="checkbox"></td>
-                                    <td class="BDarmor5"><input type="checkbox"></td>
-                                </tr>
-                            </table>
-                            <table class="agStats">
-                                <tr id="BDDT">
-                                    <td class="BDarmor1 aStatGrid"> </td>
-                                    <td class="BDarmor2 aStatGrid"> </td>
-                                    <td class="BDarmor3 aStatGrid"> </td>
-                                    <td class="BDarmor4 aStatGrid"> </td>
-                                    <td class="BDarmor5 aStatGrid"> </td>
-                                </tr>
-                                <tr id="BDPD">
-                                    <td class="BDarmor1 aStatGrid"> </td>
-                                    <td class="BDarmor2 aStatGrid"> </td>
-                                    <td class="BDarmor3 aStatGrid"> </td>
-                                    <td class="BDarmor4 aStatGrid"> </td>
-                                    <td class="BDarmor5 aStatGrid"> </td>
-                                </tr>
-                                <tr id="BDD">
-                                    <td class="BDarmor1 aStatGrid"> </td>
-                                    <td class="BDarmor2 aStatGrid"> </td>
-                                    <td class="BDarmor3 aStatGrid"> </td>
-                                    <td class="BDarmor4 aStatGrid"> </td>
-                                    <td class="BDarmor5 aStatGrid"> </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="agRight">
-                            <div class="agDebuff">
-                                <div>
-                                    <input class="limbStatus SaveInput" placeholder="Status"><br>
-                                    <select onChange="saveDropdown(this)" this class="PrimaryDebuff">
-                                        <option>-</option>
-                                        <option style="color:blue;">🜄</option>
-                                        <option style="color:red;">🜂</option>
-                                        <option style="color:darkkhaki;">🜁</option>
-                                        <option style="color:black;">🜃</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    Bleed<br><span class="BT">30</span><br>
-                                    <select onChange="saveDropdown(this)" this class="SecondaryDebuff">
-                                        <option>-</option>
-                                        <option style="color:blue;">🜄</option>
-                                        <option style="color:red;">🜂</option>
-                                        <option style="color:darkkhaki;">🜁</option>
-                                        <option style="color:black;">🜃</option>
-                                    </select>
-
-                                </div>
-                            </div>
-                            <div class="agDamList">
-                                <div>
-                                     Damage:<br>
-                                    1. <input type="text" id="DmgRecBD1" placeholder="0" onFocus="this.select()"><br>
-                                    2. <input type="text" id="DmgRecBD2" placeholder="0" onFocus="this.select()"><br>
-                                    3. <input type="text" id="DmgRecBD3" placeholder="0" onFocus="this.select()"><br>
-                                    4. <input type="text" id="DmgRecBD4" placeholder="0" onFocus="this.select()"><br>
-                                    5. <input type="text" id="DmgRecBD5" placeholder="0" onFocus="this.select()"><br>
-                                </div>
-                                <div>
-                                    <span class="dmgTaken" id="BDtaken">Take</span><br>
-                                    <span style="text-decoration:line-through;">              </span><br>
-                                    <span class="dmgRepel" id="BDrepel">Repel</span>
-                                </div>
-                            </div>
-                            <div class="ag2ndDT">
-                                <span class="secondDT CDT" id="BDCDT">2</span>CDT
-                            </div>
-                        </div>
-                    </div>
-                    <div class="GridSect">
-                        <div class="agLeft">
-                            <div class="agEDT">
-                                <span class="limbEDT" id="RLEDT">5</span><br>EDT
-                            </div>
-                            <div class="agInjury">
-                                <select onChange="saveDropdown(this)" this id="RLinjuryStatus" class="agInjuryStatus">
-                                    <option value="Fine">Fine</option>
-                                    <option value="INJ">INJ</option>
-                                    <option value="CRP">CRP</option>
-                                </select> <br>
-                                -1 SPD<br>
-                                -1 STR
-                            </div>
-                            <div class="agInjPenalty">
-                                INJ Penalty <br>
-                                <select onChange="saveDropdown(this)" this class="injPenaltyDD">
-                                    <option>-</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="agLimbTitle">
-                            <span class="agStatLabels">D</span>
-                            <span class="agStatLabels">PD</span>
-                            <span class="agStatLabels">DT</span>
-                            Right Leg
-                        </div>
-                        <div class="agCenter">
-                            <table class="armorGrid">
-                                <tr id="RLids">
-                                    <th class="RLarmor1"></th>
-                                    <th class="RLarmor2"></th>
-                                    <th class="RLarmor3"></th>
-                                    <th class="RLarmor4"></th>
-                                    <th class="RLarmor5"></th>
-                                </tr>
-                                <tr id="RL1" class="agFirstRow">
-                                    <td class="RLarmor1"><input type="checkbox"></td>
-                                    <td class="RLarmor2"><input type="checkbox"></td>
-                                    <td class="RLarmor3"><input type="checkbox"></td>
-                                    <td class="RLarmor4"><input type="checkbox"></td>
-                                    <td class="RLarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="RL2">
-                                    <td class="RLarmor1"><input type="checkbox"></td>
-                                    <td class="RLarmor2"><input type="checkbox"></td>
-                                    <td class="RLarmor3"><input type="checkbox"></td>
-                                    <td class="RLarmor4"><input type="checkbox"></td>
-                                    <td class="RLarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="RL3">
-                                    <td class="RLarmor1"><input type="checkbox"></td>
-                                    <td class="RLarmor2"><input type="checkbox"></td>
-                                    <td class="RLarmor3"><input type="checkbox"></td>
-                                    <td class="RLarmor4"><input type="checkbox"></td>
-                                    <td class="RLarmor5"><input type="checkbox"></td>
-                                    </t>
-                                <tr id="RL4">
-                                    <td class="RLarmor1"><input type="checkbox"></td>
-                                    <td class="RLarmor2"><input type="checkbox"></td>
-                                    <td class="RLarmor3"><input type="checkbox"></td>
-                                    <td class="RLarmor4"><input type="checkbox"></td>
-                                    <td class="RLarmor5"><input type="checkbox"></td>
-                                </tr>
-                                <tr id="RL5">
-                                    <td class="RLarmor1"><input type="checkbox"></td>
-                                    <td class="RLarmor2"><input type="checkbox"></td>
-                                    <td class="RLarmor3"><input type="checkbox"></td>
-                                    <td class="RLarmor4"><input type="checkbox"></td>
-                                    <td class="RLarmor5"><input type="checkbox"></td>
-                                </tr>
-                            </table>
-                            <table class="agStats">
-                                <tr id="RLDT">
-                                    <td class="RLarmor1 aStatGrid"> </td>
-                                    <td class="RLarmor2 aStatGrid"> </td>
-                                    <td class="RLarmor3 aStatGrid"> </td>
-                                    <td class="RLarmor4 aStatGrid"> </td>
-                                    <td class="RLarmor5 aStatGrid"> </td>
-                                </tr>
-                                <tr id="RLPD">
-                                    <td class="RLarmor1 aStatGrid"> </td>
-                                    <td class="RLarmor2 aStatGrid"> </td>
-                                    <td class="RLarmor3 aStatGrid"> </td>
-                                    <td class="RLarmor4 aStatGrid"> </td>
-                                    <td class="RLarmor5 aStatGrid"> </td>
-                                </tr>
-                                <tr id="RLD">
-                                    <td class="RLarmor1 aStatGrid"> </td>
-                                    <td class="RLarmor2 aStatGrid"> </td>
-                                    <td class="RLarmor3 aStatGrid"> </td>
-                                    <td class="RLarmor4 aStatGrid"> </td>
-                                    <td class="RLarmor5 aStatGrid"> </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="agRight">
-                            <div class="agDebuff">
-                                <div>
-                                    <input class="limbStatus SaveInput" placeholder="Status"><br>
-                                    <select onChange="saveDropdown(this)" this class="PrimaryDebuff">
-                                        <option>-</option>
-                                        <option style="color:blue;">🜄</option>
-                                        <option style="color:red;">🜂</option>
-                                        <option style="color:darkkhaki;">🜁</option>
-                                        <option style="color:black;">🜃</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    Bleed<br><span class="BT">30</span><br>
-                                    <select onChange="saveDropdown(this)" this class="SecondaryDebuff">
-                                        <option>-</option>
-                                        <option style="color:blue;">🜄</option>
-                                        <option style="color:red;">🜂</option>
-                                        <option style="color:darkkhaki;">🜁</option>
-                                        <option style="color:black;">🜃</option>
-                                    </select>
-
-                                </div>
-                            </div>
-                            <div class="agDamList">
-                                <div>
-                                     Damage:<br>
-                                    1. <input type="text" id="DmgRecRL1" placeholder="0" onFocus="this.select()"><br>
-                                    2. <input type="text" id="DmgRecRL2" placeholder="0" onFocus="this.select()"><br>
-                                    3. <input type="text" id="DmgRecRL3" placeholder="0" onFocus="this.select()"><br>
-                                    4. <input type="text" id="DmgRecRL4" placeholder="0" onFocus="this.select()"><br>
-                                    5. <input type="text" id="DmgRecRL5" placeholder="0" onFocus="this.select()"><br>
-                                </div>
-                                <div>
-                                    <span class="dmgTaken" id="RLtaken">Take</span><br>
-                                    <span style="text-decoration:line-through;">              </span><br>
-                                    <span class="dmgRepel" id="RLrepel">Repel</span>
-                                </div>
-                            </div>
-                            <div class="ag2ndDT">
-                                <span class="secondDT tripDT">2</span>Trip
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 </div>
             </div>
 
@@ -2231,11 +2275,14 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
                         class="storeLocal SaveInput" spellcheck="false"></textarea>
                 </div>
                 <div class="inventoryDisplay StoreDis">
-                    <div class="INVcols INVopen dataSection" id="INVcolumn4" onDragover="allowDrop(event)" onDrop="INVDrop(event)">
+                    <div class="INVcols INVopen dataSection" id="INVcolumn4" onDragover="allowDrop(event)"
+                        onDrop="INVDrop(event)">
                     </div>
-                    <div class="INVcols INVopen dataSection" id="INVcolumn5" onDragover="allowDrop(event)" onDrop="INVDrop(event)">
+                    <div class="INVcols INVopen dataSection" id="INVcolumn5" onDragover="allowDrop(event)"
+                        onDrop="INVDrop(event)">
                     </div>
-                    <div class="INVcols INVopen dataSection" id="INVcolumn6" onDragover="allowDrop(event)" onDrop="INVDrop(event)">
+                    <div class="INVcols INVopen dataSection" id="INVcolumn6" onDragover="allowDrop(event)"
+                        onDrop="INVDrop(event)">
                     </div>
                 </div>
             </div>
@@ -2246,11 +2293,14 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
                         class="storeLocal SaveInput" spellcheck="false"></textarea>
                 </div>
                 <div class="inventoryDisplay StoreDis">
-                    <div class="INVcols INVopen dataSection" id="INVcolumn7" onDragover="allowDrop(event)" onDrop="INVDrop(event)">
+                    <div class="INVcols INVopen dataSection" id="INVcolumn7" onDragover="allowDrop(event)"
+                        onDrop="INVDrop(event)">
                     </div>
-                    <div class="INVcols INVopen dataSection" id="INVcolumn8" onDragover="allowDrop(event)" onDrop="INVDrop(event)">
+                    <div class="INVcols INVopen dataSection" id="INVcolumn8" onDragover="allowDrop(event)"
+                        onDrop="INVDrop(event)">
                     </div>
-                    <div class="INVcols INVopen dataSection" id="INVcolumn9" onDragover="allowDrop(event)" onDrop="INVDrop(event)">
+                    <div class="INVcols INVopen dataSection" id="INVcolumn9" onDragover="allowDrop(event)"
+                        onDrop="INVDrop(event)">
                     </div>
                 </div>
             </div>
@@ -2261,9 +2311,11 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
                         class="storeLocal SaveInput" spellcheck="false"></textarea>
                 </div>
                 <div class="inventoryDisplay StoreDis">
-                    <div class="INVcols INVopen dataSection" id="INVcolumn10" onDragover="allowDrop(event)" onDrop="INVDrop(event)">
+                    <div class="INVcols INVopen dataSection" id="INVcolumn10" onDragover="allowDrop(event)"
+                        onDrop="INVDrop(event)">
                     </div>
-                    <div class="INVcols INVopen dataSection" id="INVcolumn11" onDragover="allowDrop(event)" onDrop="INVDrop(event)">
+                    <div class="INVcols INVopen dataSection" id="INVcolumn11" onDragover="allowDrop(event)"
+                        onDrop="INVDrop(event)">
                     </div>
                     <div class="INVcols INVopen dataSection" id="INVcolumn12" onDragover="allowDrop(event)"
                         onDrop="INVDrop(event)">
@@ -2329,7 +2381,12 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
         if (data) {
             content.innerHTML = data;
             initializeSheet();
-            document.getElementById("SaveIndicator").style.background = "cyan";
+
+            //Cookie Log-in Save
+            document.cookie = "lastLog=" +
+                document.getElementById("User").value.toUpperCase() + "-" +
+                document.getElementById("Key").value.toUpperCase() + ";path=/;SameSite=None;Secure"
+
         } else { document.getElementById("SaveIndicator").style.background = "orange"; }
     }
 
