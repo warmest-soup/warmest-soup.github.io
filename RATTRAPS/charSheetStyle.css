@@ -54,6 +54,12 @@ button {
 ::-webkit-scrollbar-thumb {
   background: hsl(from var(--darkCol) h 50% 60%);
   border-radius: 1em;
+  box-shadow:
+  inset -.05em .05em .2em .1em white,
+  inset -.2em .2em .3em 0em 
+  hsl(from var(--darkCol)h 1000% 70% /80%),
+  inset .25em -.25em .1em 0em 
+  hsl(from var(--darkCol)h 100% 30% /80%);
 }
 ::-webkit-scrollbar-corner {
   display: visible;

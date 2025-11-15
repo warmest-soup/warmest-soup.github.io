@@ -33,6 +33,7 @@ function initializeSheet() {
   carryWeight();
   funcTraits();
   cardLimits();
+  colorTrait();
   weightGoalCalc();
   slotMemoryLimits();
   carryWeight();
@@ -150,13 +151,13 @@ function funcTraits() {
       parseInt(reals[i].value) +
       parseInt(traitBonuses[i].value) +
       parseInt(catBonuses[Math.floor(j)].value);
-    if (adjFunc) {
+    if (adjFunc | adjFunc==0) {
       traitFuncs[i].innerText = adjFunc;
     }
-    if (parseInt(traitFuncs[i].innerText) > 6) {
+    if (parseInt(traitFuncs[i].innerText) >= 6) {
       traitFuncs[i].innerText = 6;
     }
-    if (parseInt(traitFuncs[i].innerText) < 0) {
+    if (parseInt(traitFuncs[i].innerText) <= 0) {
       traitFuncs[i].innerText = 0;
     }
 
@@ -2229,6 +2230,21 @@ function addMap(name, id){
 function useFile(file){
   file.children[1].toggleAttribute("Hidden")
 }
+// Trait Color display
+function colorTrait(){
+  var traits = Array.from(document.getElementsByClassName("traitFunc"));
+  
+  traits.forEach((x)=>{
+    var value= parseInt(x.innerText);
+    
+    x.style.background="hsl(from var(--darkCol) h s "+
+    ((100/6 * value)+10)
+    +"% /100%)";
+    
+  });
+  
+}
+
 //World Temp
 
 //End of declarations
@@ -2261,6 +2277,7 @@ document
     ) {
       funcTraits();
       cardLimits();
+      colorTrait();
 
       //Functional trait based functions
       fedStatus();
