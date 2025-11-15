@@ -2852,8 +2852,8 @@ function lastLog(){
     var user=document.getElementById("User");
     var key=document.getElementById("Key");
     
-    //Substring must be the number of letters +1 of the Cookie name.
-    var lastUser=document.cookie.split("-")[0].substring(9);
+    //Substring must be the number of letters of the Cookie name and the = sign.
+    var lastUser=document.cookie.split("-")[0].substring(8);
     var lastKey=document.cookie.split("-")[1];
   
     user.value=lastUser;
