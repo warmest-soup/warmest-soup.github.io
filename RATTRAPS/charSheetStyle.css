@@ -40,10 +40,18 @@ body{
 button {
   background:hsl(from var(--userColor) h 60% 90%/ 100%);
   font-weight: 700;
-  box-shadow:0em 0em 0em .05em gray;
-  text-color:black;
+  box-shadow:0em 0em 0em .05em black,
+  inset .1em -.1em .2em 0em 
+  hsl(from var(--userColor) h s l);
   border-radius:.5em;
   border:none !important;
+}
+button:active {
+  background:hsl(from var(--userColor)
+  h s l / 100%); 
+  box-shadow:0em 0em 0em .05em black,
+  inset -.1em .1em .2em 0em 
+  hsl(from var(--userColor) h s 20%); 
 }
 /*Scroll bar adjustments*/
 ::-webkit-scrollbar {
@@ -303,13 +311,23 @@ textarea {
   justify-content: space-between;
 }
 .satBar {
-  box-Shadow:inset 0em 0em 0em .01em black;
+  box-Shadow:
+  inset 0em 0em 0em .01em black,
+  inset -.05em .1em .3em .1em white,
+  inset .1em -.3em 1em 0em 
+  hsl(from var(--userColor) h 100% 10% / 100%),
+  inset -.1em .4em 1em 0em 
+  hsl(from var(--userColor) h 0% 70% / 100%),
+  -.1em .1em .5em 0em var(--userColor);
+  filter:contrast(120%);
   min-height: 26.5em;
   max-height: 26.5em;
   min-width: 1.3em;
   max-width: 1.3em;
   border-radius: 1em;
   overflow: hidden;
+  
+  
 }
 #Clock {
   font-weight: bold;
@@ -324,8 +342,10 @@ textarea {
 }
 .satBarFill {
   background-color: black;
+  mix-blend-mode:overlay;
   height: 6em;
   border-radius: 0.8em;
+  
 }
 .ToxicButtons {
   max-width: 2em;
@@ -525,7 +545,8 @@ textarea {
   flex-direction: column;
   min-width: 13em;
   max-width: 18em;
-  padding:0em 0em 0em 1em;
+  padding:0em .5em 0em 1em;
+  
 }
 #TempTop {
   display: flex;
@@ -534,13 +555,19 @@ textarea {
   justify-content: space-around;
 }
 #TempEffects {
+  background:linear-gradient(180deg,
+  rgb(245 235 230 / 50%),
+  transparent 50%);
   height: 100%;
-  width: 100%;
+  width: 70%;
+  border-radius:.5em;
+  box-shadow:inset 0em .1em 0em .07em 
+  hsl(from var(--userColor) h s 30%/100%);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 #ThermBar {
   padding: 0.2em;
@@ -551,16 +578,26 @@ textarea {
   max-width: 1em;
   min-height: 35em;
   max-height: 35em;
-  box-Shadow: 0em 0em 0em .1em black;
+  box-Shadow: 0em 0em 0em .1em black,
+  inset 0em 0em 0em .01em black,
+  inset -.05em .1em .3em .1em white,
+  inset .1em -.3em 1em 0em 
+  hsl(from var(--userColor) h 100% 10% / 100%),
+  inset -.1em .4em 1em 0em 
+  hsl(from var(--userColor) h 0% 70% / 100%),
+  -.3em .3em .5em 0em var(--userColor);
+  filter:contrast(120%);
   border-radius: 2em;
   overflow: clip;
 }
 
 #ThermFill {
+  
   background-color: black;
   min-width: 1em;
   max-width: 1em;
   box-Shadow: 0em 0em 0em .1em black;
+  mix-blend-mode:overlay;
   border-radius: 5em;
 }
 #TempBot {
@@ -895,7 +932,7 @@ textarea {
   margin:0em;
 }
 #ResColumn>Table>Tbody>tr{
-  height:1.57em;
+  height:1.52em;
 }
 #ResColumn>Table>Tbody>tr>td{
   box-shadow:inset 0em 0em 0em 0.06em;
