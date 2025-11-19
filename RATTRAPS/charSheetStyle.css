@@ -42,7 +42,7 @@ button {
   font-weight: 700;
   box-shadow:0em 0em 0em .05em black,
   inset .1em -.1em .2em 0em 
-  hsl(from var(--userColor) h s l);
+  hsl(from var(--userColor) h s 30% /100%);
   border-radius:.5em;
   border:none !important;
 }
