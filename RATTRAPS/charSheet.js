@@ -2249,9 +2249,11 @@ function blankSheet(){
   fetch("https://warmest-soup.github.io/RATTRAPS/BlankSheet.txt")
   .then(x => x.text())
   .then(x => {
-    var content = document.getElementById("subSheet");
-    content.innerHTML=x;
-    initializeSheet();
+    if(confirm("Loading a new sheet will discard all unsaved changes to the currently loaded sheet. \n\nAre you sure you'd like to load a blank sheet?")){
+      var content = document.getElementById("subSheet");
+      content.innerHTML=x;
+      initializeSheet();
+    }
   }) 
 }
 
