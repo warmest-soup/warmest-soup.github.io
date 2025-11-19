@@ -2244,6 +2244,16 @@ function colorTrait(){
   });
   
 }
+//Load empty sheet
+function blankSheet(){
+  fetch("https://warmest-soup.github.io/RATTRAPS/BlankSheet.txt")
+  .then(x => x.text())
+  .then(x => {
+    var content = document.getElementById("subSheet");
+    content.innerHTML=x;
+    initializeSheet();
+  }) 
+}
 
 //World Temp
 
