@@ -1608,7 +1608,8 @@ textarea {
   border-radius:1em;
 }
 #Maps{
-  min-width:40em;
+  min-width:26em;
+  max-width:26em;
   text-align:center;
   display:flex;
   flex-direction:column;
@@ -1629,9 +1630,6 @@ textarea {
 #addAMap input{
   border-radius:.5em;
   width:8em;
-}
-#newMapButton{
-  transform:translatex(1em);
 }
 #files{
   min-width:20em;
