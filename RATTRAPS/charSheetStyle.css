@@ -1620,7 +1620,6 @@ textarea {
   display:flex;
   justify-content:space-around;
   gap:1em;
-  width:80%;
   align-items:center;
 }
 #mapConsole select{

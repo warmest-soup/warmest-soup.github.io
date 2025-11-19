@@ -2220,8 +2220,9 @@ function addMap(name, id){
   if(id.value && name.value){
     var mapList=document.getElementById("currentMap");
     mapList.insertAdjacentHTML("beforeEnd",
-                               "<option value='"+id.value+"'>"+name.value+"<option>"
+                               "<option value='"+id.value+"'>"+name.value+"</option>"
                               );
+    console.log("Ran once!");
     id.value="";
     name.value="";
   }
