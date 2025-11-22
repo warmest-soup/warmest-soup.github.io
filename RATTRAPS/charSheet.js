@@ -50,7 +50,7 @@ function initializeSheet() {
   dpCalc();
   moments();
 
-  weather();
+  forecast();
   thermoBarFunc();
 
   var i = 0;
