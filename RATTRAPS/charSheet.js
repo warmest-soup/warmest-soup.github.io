@@ -50,7 +50,7 @@ function initializeSheet() {
   dpCalc();
   moments();
 
-  thermoBarFunc(worldTemp);
+  thermoBarFunc();
 
   var i = 0;
   while (i < SatBars.length) {
@@ -737,11 +737,12 @@ function abilExp() {
 //Range Output display
 function rangeReadout(range, out) {
   out.innerText = range.value;
-  thermoBarFunc(worldTemp);
+  thermoBarFunc();
   indirectChange();
 }
 //Thermo Bar Functionality
-function thermoBarFunc(temp) {
+function thermoBarFunc() {
+  var temp = parseFloat(document.getElementById("Temperature").getAttribute("temp"));
   var bar = document.getElementById("ThermBar");
   var fill = document.getElementById("ThermFill");
 
@@ -1670,7 +1671,7 @@ function saveSharp(){
   stats[4]=current[1].value;
   weapon.dataset.weaponstats=stats.join(", ");
 }
-//Damage0
+//Damage
 function damageCalc() {
   var armor = document.getElementById(event.target.id.substring(6)).children;
   var damage = parseInt(event.target.value);
