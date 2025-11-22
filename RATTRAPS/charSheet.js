@@ -746,8 +746,8 @@ function thermoBarFunc() {
   var wind = parseFloat(document.getElementById("Temperature").getAttribute("wind"))* 10;
   var bar = document.getElementById("ThermBar");
   var fill = document.getElementById("ThermFill");
-  var ins = document.getElementById("InsRes");
-  var abs = document.getElementById("AbsRes");
+  var ins = parseInt(document.getElementById("InsRes").innerText);
+  var abs = parseInt(document.getElementById("AbsRes").innerText);
 
   var effects = bar.parentNode.parentNode.children[0].children;
   var context = parseInt(
