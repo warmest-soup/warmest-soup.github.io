@@ -756,6 +756,7 @@ function thermoBarFunc() {
   var barScale = 35 / (conFunc.innerText * 5);
   var tempState = Math.abs(Math.round((temp + context + ins + Math.max(0, wind-abs)) / conFunc.innerText));
   var barHeight = (temp + context + ins - Math.max(0, wind-abs) ) * barScale + 35 / 2;
+  console.log(barHeight);
 
   fill.style.height = barHeight + "em";
 
