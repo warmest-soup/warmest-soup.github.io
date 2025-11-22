@@ -2311,6 +2311,7 @@ document
       weaponDamage();
       btCalc();
       dpCalc();
+      thermoBarFunc();
 
       var i = 0;
       while (i < SatBars.length) {
