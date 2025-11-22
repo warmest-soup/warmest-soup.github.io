@@ -753,7 +753,7 @@ function thermoBarFunc() {
   
   var windAdjust;
   if(windBar>=wind){
-    windAdjust=Math.min(0, (wind-abs)*10);
+    windAdjust=Math.max(0, (wind-abs)*10);
   } else windAdjust=0;
   
   var effects = bar.parentNode.parentNode.children[0].children;
