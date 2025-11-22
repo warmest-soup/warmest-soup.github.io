@@ -20,7 +20,8 @@ s2.addEventListener("scroll", oneScroll, false);
 function initializeSheet() {
   SatBars = document.getElementsByClassName("satBar");
   barDups = SatBars.length - 4;
-  worldTemp = 0;
+  worldTemp = document.getElementById("Temperature").getAttribute("temp") || 0;
+  console.log(worldTemp); 
 
   Slots = document.getElementsByClassName("AbilSlot");
   abilities = document.getElementsByClassName("Ability");

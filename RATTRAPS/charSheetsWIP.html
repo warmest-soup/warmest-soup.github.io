@@ -776,7 +776,7 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
         <div id="SatBottom">
           <div id="Clock"><span id="CurrentHour">00</span>:00</div>
           <div id="ProgressTime">
-            <Button id="PassTime" onClick="passHour(); forecast();">Pass Time</button>
+            <Button id="PassTime" onClick="passHour(); weather(0);">Pass Time</button>
             <Button id="Sleep" onClick="sleep()">Sleep</button>
             <input id="TimeToSleep" class="SingleInputNUM" value="0" />
           </div>
@@ -838,8 +838,8 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
           </div>
         </div>
       </div>
-
-      <div id="Temperature" class="Section">
+ 
+      <div id="Temperature" class="Section" temp="0">
         <div id="TempBot">
           <div id="TempContextReadout">0</div>
           <div id="TempContextAdjust">
