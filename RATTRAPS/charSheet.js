@@ -748,12 +748,12 @@ function thermoBarFunc() {
   var windBar = parseFloat(document.getElementById("Temperature").getAttribute("windBar"));
   var bar = document.getElementById("ThermBar");
   var fill = document.getElementById("ThermFill");
-  var ins = parseInt(document.getElementById("InsRes").innerText)/5;
+  var ins = parseInt(document.getElementById("InsRes").innerText)/10;
   var abs = parseInt(document.getElementById("AbsRes").innerText);
   
   var windAdjust;
   if(windBar>=wind){
-    windAdjust=Math.max(0, (wind-abs)*10);
+    windAdjust=Math.max(0, (wind-abs)*5);
   } else windAdjust=0;
   
   var effects = bar.parentNode.parentNode.children[0].children;
