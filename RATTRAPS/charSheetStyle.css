@@ -327,7 +327,6 @@ textarea {
   border-radius: 1em;
   overflow: hidden;
   
-  
 }
 #Clock {
   font-weight: bold;
@@ -345,7 +344,7 @@ textarea {
   mix-blend-mode:overlay;
   height: 6em;
   border-radius: 0.8em;
-  
+  transition:height .5s ease;
 }
 .ToxicButtons {
   max-width: 2em;
@@ -599,6 +598,7 @@ textarea {
   box-Shadow: 0em 0em 0em .1em black;
   mix-blend-mode:overlay;
   border-radius: 5em;
+  transition:height .5s ease;
 }
 #TempBot {
   padding: .5em 0em .5em 0em;
@@ -1696,7 +1696,7 @@ textarea {
   hsl(from var(--darkCol)h 1000% 70% /80%),
   inset .25em -.25em .4em 0em 
   hsl(from var(--darkCol)h 100% 30% /80%);
-  
+  transition:background .5s ease;
 }
 
 .Hazed{
