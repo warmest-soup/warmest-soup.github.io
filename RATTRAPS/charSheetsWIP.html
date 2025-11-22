@@ -776,7 +776,7 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
         <div id="SatBottom">
           <div id="Clock"><span id="CurrentHour">00</span>:00</div>
           <div id="ProgressTime">
-            <Button id="PassTime" onClick="passHour()">Pass Time</button>
+            <Button id="PassTime" onClick="passHour(); forecast();">Pass Time</button>
             <Button id="Sleep" onClick="sleep()">Sleep</button>
             <input id="TimeToSleep" class="SingleInputNUM" value="0" />
           </div>
@@ -870,6 +870,15 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
         </div>
 
       </div>
+      <script>
+        function forecast(){
+          var hour = parseInt(document.getElementById("CurrentHour").innerText);
+          var day = parseInt(document.getElementById("currentDay").innerText);
+          var tempSection =document.getElementById("Temperature");
+          console.log(tempSection);
+        }
+      </script>
+      
     </div>
     <div id="files" class="Section dataSection">
       <div id="filesHeader">Files</div>

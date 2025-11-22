@@ -557,7 +557,7 @@ function sleep() {
     i++;
   }
   //incrementWeather
-  //worldTemp();
+  weather(sleepHours);
 }
 //Open windows (Imported As is)
 var openWinlettes = 1;
