@@ -1710,13 +1710,21 @@ textarea {
 
 .Rain::after {
   content: '';
+  background-image:url("https://64.media.tumblr.com/efd1ec0430e0105eb44498c285119a2e/tumblr_nkm0ccJIZi1rfp1lho1_1280.gif");
+  mix-blend-mode:overlay;
+  filter:opacity(.3);
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   backdrop-filter:
   sepia(1) 
-  hue-rotate(150deg) 
-  opacity(40%)  
+  hue-rotate(200deg) 
+  opacity(100%)  
   brightness(.8) 
   contrast(2);
   pointer-events: none;
+  animation: fade .5s forwards;
+}
+@keyframes fade{
+  0%{opacity:0;}
+  100%{opacity:1;}
 }
