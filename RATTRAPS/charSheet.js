@@ -742,7 +742,7 @@ function rangeReadout(range, out) {
 }
 //Thermo Bar Functionality
 function thermoBarFunc() {
-  var temp = parseFloat(document.getElementById("Temperature").getAttribute("temp"));
+  var temp = parseFloat(document.getElementById("Temperature").getAttribute("temp"))/10;
   var bar = document.getElementById("ThermBar");
   var fill = document.getElementById("ThermFill");
 
