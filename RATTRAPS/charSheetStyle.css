@@ -1707,9 +1707,16 @@ textarea {
   background:hsl(from var(--darkCol) h 10% 40%);
 }
 
-.Rain{
-  filter:
-  sepia(.4)
-  hue-rotate(160deg)
-  saturate(1.5);
+.Rain::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  backdrop-filter:
+  sepia(1) 
+  hue-rotate(200deg) 
+  opacity(50%) 
+  saturate(1.5) 
+  brightness(1.2) 
+  contrast(.8);
+  pointer-events: none;
 }
