@@ -743,16 +743,19 @@ function rangeReadout(range, out) {
 //Thermo Bar Functionality
 function thermoBarFunc() {
   var temp = parseFloat(document.getElementById("Temperature").getAttribute("temp"))/10;
+  var temp = parseFloat(document.getElementById("Temperature").getAttribute("wind"))* 10;
   var bar = document.getElementById("ThermBar");
   var fill = document.getElementById("ThermFill");
+  var ins = document.getElementById("InsRes");
+  var abs = document.getElementById("AbsRes");
 
   var effects = bar.parentNode.parentNode.children[0].children;
   var context = parseInt(
     document.getElementById("TempContextReadout").innerText
   );
   var barScale = 35 / (conFunc.innerText * 5);
-  var tempState = Math.abs(Math.round((temp + context) / conFunc.innerText));
-  var barHeight = (temp + context) * barScale + 35 / 2;
+  var tempState = Math.abs(Math.round((temp + context + ins + Math.max(0, wind-abs)) / conFunc.innerText));
+  var barHeight = (temp + context + ins - Math.max(0, wind-abs) ) * barScale + 35 / 2;
 
   fill.style.height = barHeight + "em";
 
@@ -2259,8 +2262,6 @@ function blankSheet(){
     }
   }) 
 }
-
-//World Temp
 
 //End of declarations
 
