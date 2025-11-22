@@ -106,7 +106,6 @@ input[type="range"]::-webkit-slider-thumb {
 
 input[type="checkbox"] {
   background-color: white;
-  -webkit-appearance: none;
   -moz-appeareance: none;
   width: 1em;
   height: 1em;
