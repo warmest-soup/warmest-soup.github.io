@@ -50,6 +50,7 @@ function initializeSheet() {
   dpCalc();
   moments();
 
+  forecast();
   thermoBarFunc();
 
   var i = 0;
@@ -744,18 +745,24 @@ function rangeReadout(range, out) {
 function thermoBarFunc() {
   var temp = parseFloat(document.getElementById("Temperature").getAttribute("temp"))/10;
   var wind = parseFloat(document.getElementById("Temperature").getAttribute("wind"))* 10;
+  var windBar = parseFloat(document.getElementById("Temperature").getAttribute("windBar"));
   var bar = document.getElementById("ThermBar");
   var fill = document.getElementById("ThermFill");
   var ins = parseInt(document.getElementById("InsRes").innerText);
   var abs = parseInt(document.getElementById("AbsRes").innerText);
-
+  
+  var windAdjust;
+  if(windBar>=wind){
+    windAdjust=Math.min(0, (wind-abs)*10);
+  } else windAdjust=0;
+  
   var effects = bar.parentNode.parentNode.children[0].children;
   var context = parseInt(
     document.getElementById("TempContextReadout").innerText
   );
   var barScale = 35 / (conFunc.innerText * 5);
-  var tempState = Math.abs(Math.round((temp + context + ins + Math.max(0, wind-abs)) / conFunc.innerText));
-  var barHeight = (temp + context + ins - Math.max(0, wind-abs) ) * barScale + 35 / 2;
+  var tempState = Math.abs(Math.round((temp + context + ins - windAdjust) / conFunc.innerText));
+  var barHeight = (temp + context + ins - windAdjust) * barScale + 35 / 2;
   console.log(barHeight);
 
   fill.style.height = barHeight + "em";
@@ -2406,6 +2413,7 @@ document
     weaponListUpdate();
     weaponSwitch();
     moneyCalc();
+    thermoBarFunc();
   });
 
 /*Drag & Drop Functions..*/ {
