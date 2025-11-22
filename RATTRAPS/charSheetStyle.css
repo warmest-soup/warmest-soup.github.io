@@ -1707,3 +1707,10 @@ textarea {
   filter:blur(.2em); 
   background:hsl(from var(--darkCol) h 10% 40%);
 }
+
+#Rain{
+  filter:
+  sepia(.4)
+  hue-rotate(160deg)
+  saturate(1.5);
+}

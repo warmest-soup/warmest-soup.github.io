@@ -34,7 +34,7 @@
         oninput="changeUserColor2(this.value)"><br><br>
 
     Motion Background:<br>
-  <input type="Checkbox" id="userBG" checked="true" onChange="userBG()"><br><br> 
+  <input type="Checkbox" id="userBG" checked="true" onChange="userBG()"><br><br>
   <button onclick="blankSheet()">Load Blank Sheet</button>
 
 </div>
@@ -42,7 +42,7 @@
 <div id="CharacterSheet">
   <div id="subSheet">
 
-    <div class="Row">
+  <div class="Row">
 
       <div class="dataSection divDataSection">
         <div hidden id="CustomColor" data-userhue="200" data-userbri="50%" data-useropa="80%" data-userhue2="200"
@@ -2175,89 +2175,6 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
 
 </div>
 </div>
-
-
-
-<!-- Beginning of Server functions!!! Only replace above to edit HTML -->
-<script>
-  //Save And Loading Functions.
-
-
-    var content = document.getElementById("subSheet");
-
-    function turnBlue(success) {
-        if (success) { document.getElementById("SaveIndicator").style.background = "cyan"; }
-        else { document.getElementById("SaveIndicator").style.background = "orange"; }
-    }
-
-    function jsSave() {
-        document.getElementById("SaveIndicator").style.background = "magenta";
-        var i = 0;
-        var KeyInputs = document.getElementsByClassName("SaveInput")
-        while (i < KeyInputs.length) {
-            KeyInputs[i].defaultValue = KeyInputs[i].value;
-            console.log(KeyInputs[i].value);
-            i++;
-        }
-        i = 0;
-        var Notes = document.getElementsByClassName("UserNote");
-        while (i < Notes.length) {
-            Notes[i].defaultValue = Notes[i].value;
-            i++;
-        }
-        var TempSlider = document.getElementById("TempAdjust");
-        TempSlider.setAttribute("value", TempSlider.value);
-
-        //Format data & Send it to GAS
-        var RawData = document.getElementsByClassName("dataSection");
-        var DataSects = Array.from(RawData).map((x) => x.outerHTML);
-        DataSects.splice(0, 0, "<div class='Row'>");
-        DataSects.splice(2, 0, "<div id='Abilities' class='Section'><div id='addAbilWindow'><div><input id='Atype' type='radio' name='Atype' value='Skill'>Skill<input type='radio' name='Atype' value='Insight'>Insight</div><div>Ability Name: <br><input id='Aname' type='Text' maxlength='10'></div><div>Description:<br><textarea id='Ades' rows='10' style='resize:none;'></textarea></div><button id='addAbil' onclick='addAbillity()'>Add To Slot</button></div><div id='abilTitle'> ~Abilities~<button id='AddAbility' onclick='openWinlette(addAbilWindow)'>Add</button><div id='RemoveAbil' class='removalBox' ondrop='removeAbility(event); remWarningReset(this)' ondragover='allowDrop(event); remWarning(this)' ondragleave='remWarningReset(this)'>Remove</div><button id='indexShortcut' onclick='openIndex()'>Tech Index</button></div><div id='AbilContainer'><div id='abilityColumns'>");
-        DataSects.splice(5, 0, "</div></div><div> </div></div>");
-        DataSects.splice(8, 0, "</div><div class='Row'>");
-        DataSects.splice(11, 0, "</div><div class='Row'><div class=' Inventory Section'>");
-        DataSects.splice(13, 0, "<div class='inventoryDisplay' id='invDisContents'>");
-        DataSects.splice(17, 0, "</div></div>");
-        DataSects.splice(19, 0, 
-        "<div id='ArmorGridSection' class='Section'> <div id='aGridTitle'>Armor Grids</div> <div id='ArmorGrids'>");
-        DataSects.splice(22, 0, "</div></div></div><div class='Row'><div id='Storage1' class='Inventory Section'>");
-        DataSects.splice(24, 0, "<div class='inventoryDisplay StoreDis'>");
-        DataSects.splice(28, 0, "</div></div><div id='Storage2' class='Inventory Section'>");
-        DataSects.splice(30, 0, "<div class='inventoryDisplay StoreDis'>");
-        DataSects.splice(34, 0, "</div></div><div id='Storage3' class='Inventory Section'>");
-        DataSects.splice(36, 0, "<div class='inventoryDisplay StoreDis'>");
-        DataSects.splice(40, 0, "</div></div></div>");
-
-        google.script.run.withSuccessHandler(turnBlue).Save(document.getElementById("User").value.toUpperCase(), document.getElementById("Key").value.toUpperCase(), DataSects);
-
-    }
-
-    function update(data) {
-        if (data) {
-          content.innerHTML = data;
-          initializeSheet();
-          document.getElementById("SaveIndicator").style.background = "cyan";
-          
-          //Cookie Log-in Save
-          var days = 3; //Days to save log in.
-          var date=new Date();
-          date.setTime(date.getTime() + (days * 25 * 60 * 60 * 1000));
-
-          document.cookie="lastLog=" + 
-          document.getElementById("User").value.toUpperCase() +"-"+ 
-          document.getElementById("Key").value.toUpperCase()  +";" + 
-          "expires="+ date.toUTCString() +";path=/;SameSite=None;Secure"
-
-
-        } else { document.getElementById("SaveIndicator").style.background = "orange"; }
-    }
-
-    function jsLoad() {
-        document.getElementById("SaveIndicator").style.background = "magenta";
-        google.script.run.withSuccessHandler(update).Load(document.getElementById("User").value.toUpperCase(), document.getElementById("Key").value.toUpperCase());
-    }
-</script>
-
 
 <!--Link to external CSS & JS-->
 <link href=".\charSheetStyle.css" rel="stylesheet">
