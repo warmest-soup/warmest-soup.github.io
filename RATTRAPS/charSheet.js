@@ -50,7 +50,7 @@ function initializeSheet() {
   dpCalc();
   moments();
 
-  forecast();
+  weather();
   thermoBarFunc();
 
   var i = 0;
@@ -748,7 +748,7 @@ function thermoBarFunc() {
   var windBar = parseFloat(document.getElementById("Temperature").getAttribute("windBar"));
   var bar = document.getElementById("ThermBar");
   var fill = document.getElementById("ThermFill");
-  var ins = parseInt(document.getElementById("InsRes").innerText)/10;
+  var ins = parseInt(document.getElementById("InsRes").innerText)/5;
   var abs = parseInt(document.getElementById("AbsRes").innerText);
   
   var windAdjust;
