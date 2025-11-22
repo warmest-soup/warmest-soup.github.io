@@ -1714,10 +1714,9 @@ textarea {
   top: 0; left: 0; right: 0; bottom: 0;
   backdrop-filter:
   sepia(1) 
-  hue-rotate(200deg) 
-  opacity(50%) 
-  saturate(1.5) 
-  brightness(1.2) 
-  contrast(.8);
+  hue-rotate(150deg) 
+  opacity(40%)  
+  brightness(.8) 
+  contrast(2);
   pointer-events: none;
 }
