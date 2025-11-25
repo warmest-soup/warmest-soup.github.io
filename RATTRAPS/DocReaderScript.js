@@ -40,6 +40,8 @@
     updateTerm("Techniques", "Technique");
     updateTerm("Toxicity", "Toxic");
     updateTerm("Round", "---");
+    updateTerm("Memory", "Memor");
+    updateTerm("Time", "Hour");
     
 
 

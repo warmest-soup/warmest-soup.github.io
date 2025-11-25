@@ -6,7 +6,7 @@ var abilities = document.getElementsByClassName("Ability");
 var Ranks = document.getElementsByClassName("Rank");
 var Exp = document.getElementsByClassName("EXPvalue");
 var TraitRanks = document.getElementsByClassName("realTrait");
-var worldTemp = 0;
+var worldTemp;
 var allPockets = document.getElementsByClassName("invContainer");
 var pktWeights = document.getElementsByClassName("INVconWGT");
 
@@ -2235,7 +2235,6 @@ function addMap(name, id){
     mapList.insertAdjacentHTML("beforeEnd",
                                "<option value='"+id.value+"'>"+name.value+"</option>"
                               );
-    console.log("Ran once!");
     id.value="";
     name.value="";
   }
@@ -2901,8 +2900,6 @@ function lastLog(){
   
     user.value=lastUser;
     key.value=lastKey;
-  
-    console.log(lastUser+" | "+lastKey);
     jsLoad();
   }
   

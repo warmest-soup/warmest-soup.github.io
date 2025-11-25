@@ -994,6 +994,7 @@ textarea {
   text-align: center;
   padding: 0em 0.5em 0.2em 0.5em;
   text-wrap: nowrap;
+  overflow:clip;
 }
 .Equipped {
   background: white;
