@@ -42,6 +42,11 @@
     updateTerm("Round", "---");
     updateTerm("Memory", "Memor");
     updateTerm("Time", "Hour");
+    updateTerm("Shape-Mod.", "Shape");
+    updateTerm("Entities", "Entit");
+    updateTerm("Power-Lvl", "Power"); 
+    updateTerm("Attacks", "Attack"); 
+    updateTerm("Battle-Ticket", "Ticket"); 
     
 
 
@@ -54,8 +59,8 @@
             "<a style='display:inline-block;' href=#" + keyTerms[termIndex - 1] + "><i>$3" + xl + "$4<sup>" + termIndex + "</sup></i></a>";
 
         var pattern = new RegExp(
-            `((?<!(\"|>|-))(${l1}|${l1.toLowerCase()})${xl}(y|ies|sets|s|'s|es|ed|ment|ity|ion|ing)?)(?!:|s:|=")`, "g"
-        );
+            `((?<!(\"|>|-|\\w))(${l1}|${l1.toLowerCase()})${xl}(y|ies|sets|s|'s|es|ed|ment|ity|ion|ing|al|d)?)(?!:|s:|=")`, "g"
+        ); 
 
 
         mainFormat = mainFormat.replace(
@@ -79,7 +84,7 @@
 /*Exectional Exceptions like Deaths/Dies*/{
     //Death
     mainText.innerHTML = mainText.innerHTML.replace(
-        /(?<!>)([Dd]ie|[Dd]eath)(s?)(?!\w)/g, "<a style='display:inline-block;' href='#Death'><i>$1$2<sup>" + keyTerms.indexOf("Death") + "</sup></i></a>"
+        /(?<!>)([Dd]ie|[Dd]eath)(s?)(?!\w|-)/g, "<a style='display:inline-block;' href='#Death'><i>$1$2<sup>" + keyTerms.indexOf("Death") + "</sup></i></a>"
     );
 
     //DP
@@ -90,7 +95,7 @@
     // Combat Round "Rounding"
     updateTerm("Round", "Round");
     mainText.innerHTML = mainText.innerHTML.replace(
-        /\b(R|r)ound(s)?\b/g, "<a style='display:inline-block;' href='#Round'><i>$1ound<sup>" + keyTerms.indexOf("Round") + "</sup></i></a>");    
+        /(?<!id=\"|\w|>)(R|r)ound(s)?\b/g, "<a style='display:inline-block;' href='#Round'><i>$1ound<sup>" + keyTerms.indexOf("Round") + "</sup></i></a>");    
         
 
 }
@@ -103,7 +108,6 @@
     function highlight() {
         var Hilights = Array.from(document.getElementsByClassName("Highlight"));
         Hilights.forEach((x) => x.classList.remove("Highlight"));
-
 
         document.getElementById(window.location.hash.substring(1)).classList.add("Highlight");
 
@@ -121,4 +125,4 @@
 }
 
 
-//console.log(mainText.innerHTML);
+//console.log(mainText.innerHTML); 

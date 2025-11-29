@@ -96,7 +96,7 @@ sup{
     font-weight: 900;
 }
 .Highlight, .Highlight *{
-    animation:breathe 2s infinite;
+    animation:breathe 3s infinite;
 }
 @keyframes breathe{
     0%{
