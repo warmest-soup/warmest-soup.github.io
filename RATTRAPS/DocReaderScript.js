@@ -95,7 +95,7 @@
     // Combat Round "Rounding"
     updateTerm("Round", "Round");
     mainText.innerHTML = mainText.innerHTML.replace(
-        /(?<!id=\"|\w|>)(R|r)ound(s)?\b/g, "<a style='display:inline-block;' href='#Round'><i>$1ound<sup>" + keyTerms.indexOf("Round") + "</sup></i></a>");    
+        /(?<!id=\"|\w|>)(R|r)ound(s)?(?!:)\b/g, "<a style='display:inline-block;' href='#Round'><i>$1ound<sup>" + keyTerms.indexOf("Round") + "</sup></i></a>");  
         
 
 }
