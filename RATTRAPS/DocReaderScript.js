@@ -47,6 +47,22 @@
     updateTerm("Power-Lvl", "Power"); 
     updateTerm("Attacks", "Attack"); 
     updateTerm("Battle-Ticket", "Ticket"); 
+    updateTerm("Spaces", "Space"); 
+    updateTerm("Climbing", "Climb"); 
+    updateTerm("Jumping", "Jump"); 
+    updateTerm("Movement", "Move"); 
+    updateTerm("Dashing", "Dash"); 
+    updateTerm("Destabilized", "Destabilize"); 
+    updateTerm("Injuries", "Injur"); 
+    updateTerm("Health-Points", "HP"); 
+    updateTerm("Bleeding", "Bleed"); 
+    updateTerm("Retirement", "Retire"); 
+    updateTerm("Mundanity", "Mundan"); 
+    updateTerm("Ethereality", "Ethereal"); 
+    updateTerm("Objects", "Object"); 
+    updateTerm("Potency", "Potenc");
+    updateTerm("Properties", "Propert");
+    updateTerm("Materials", "Material");
     
 
 
@@ -59,8 +75,8 @@
             "<a style='display:inline-block;' href=#" + keyTerms[termIndex - 1] + "><i>$3" + xl + "$4<sup>" + termIndex + "</sup></i></a>";
 
         var pattern = new RegExp(
-            `((?<!(\"|>|-|\\w))(${l1}|${l1.toLowerCase()})${xl}(y|ies|sets|s|'s|es|ed|ment|ity|ion|ing|al|d)?)(?!:|s:|=")`, "g"
-        ); 
+            `((?<!(\"|>|-|\\w))(${l1}|${l1.toLowerCase()})${xl}(y|ies|sets|s|'s|y's|es|ed|e|ful|ment|ity|led|ion|ing|al|d)?)(?!:|s:|ment:|=")`, "g"
+        );  
 
 
         mainFormat = mainFormat.replace(
@@ -84,13 +100,13 @@
 /*Exectional Exceptions like Deaths/Dies*/{
     //Death
     mainText.innerHTML = mainText.innerHTML.replace(
-        /(?<!>)([Dd]ie|[Dd]eath)(s?)(?!\w|-)/g, "<a style='display:inline-block;' href='#Death'><i>$1$2<sup>" + keyTerms.indexOf("Death") + "</sup></i></a>"
+        /(?<!>|")([Dd]ie|[Dd]eath)(s?)(?!\w|-|:)/g, "<a style='display:inline-block;' href='#Death'><i>$1$2<sup>" + keyTerms.indexOf("Death") + "</sup></i></a>"
     );
 
     //DP
     updateTerm("Death-Points", "DP");
     mainText.innerHTML = mainText.innerHTML.replace(
-        /(?<!>)DP(?!<)/g, "<a style='display:inline-block;' href='#Death'><i>DP<sup>" + keyTerms.indexOf("Death-Points") + "</sup></i></a>"
+        /(?<!>)DP(?!<)/g, "<a style='display:inline-block;' href='#Death-Points'><i>DP<sup>" + keyTerms.indexOf("Death-Points") + "</sup></i></a>"
     );
     // Combat Round "Rounding"
     updateTerm("Round", "Round");

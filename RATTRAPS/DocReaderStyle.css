@@ -42,6 +42,13 @@ sup{
     translateX(.3em)
     translateY(-.3em);
 }
+.Quote{
+    text-align:center;
+    font-Size:1.2em;
+}
+.Note{
+    transform:scale(.9);
+}
 #overlay {
     position: absolute;
     z-index: +2;
