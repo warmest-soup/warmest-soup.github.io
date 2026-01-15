@@ -1,0 +1,65 @@
+<div>
+    <div id="Current">₱ </div>
+    <div id="Spent">₱ </div>
+    <div id="Gained">₱ </div>
+</div>
+
+<div>
+<input type="radio" class="transaction-type" Name="transaction" id="Income" onChange="categoryUpdate()">More monies, yay! 😺</input>
+<input type="radio" class="transaction-type" Name="transaction" id="Expenditure" onChange="categoryUpdate()">Oh no! Money go, sad sad. 😿</input>
+</div>
+
+<div>
+    <input id="Amount" type="text" Value="$"/>
+</div>
+
+<div>
+    <select id="Category">
+      
+    </select>
+</div>
+
+<div>
+    <div>Note:</div>
+    <textarea id="Note" style="resize:none"></textarea>
+</div>
+
+<div>
+    <button onclick="packData()">Yiii! 😼</button>
+</div>
+
+<style>
+    * {
+      text-align:center;  
+    }
+    div {
+        padding:2em;
+    }
+    input {
+        text-align:left;
+    }
+    
+</style>
+
+<script> 
+function categoryUpdate(){
+    if(document.getElementById
+    ("Expenditure").checked){
+        document.getElementById("Category").innerHTML="<Option>Dine In/Takeout</option><Option>Groceries</option><Option>Gas</option><Option>Transpo</option><Option>House Supplies</option><Option>Utilities</option><Option>Prepaid Phone Bill</option><Option>Postpaid Phone Bill</option><Option>Miscellaneous</option><Option>Medical</option><Option>Cosmetic</option><Option>Clothing</option><Option>AccPayable</option><Option>Acc Receivable</option><Option>Services</option>"
+    } else { document.getElementById("Category").innerHTML="<Option>Last Month Carryover</option><Option>Allowance</option><Option>Misc.</option><Option>Acc Recievable</option><Option>Acc Payable</option>"
+    }
+}
+categoryUpdate();
+
+function packData(){
+  var type
+  if(document.getElementById("Income").checked){type="Income"} else type = "Expenditure";
+  var category = document.getElementById("Category").value;
+  var amount = document.getElementById("Amount").value;
+  var note = document.getElementById("Note").value;
+  
+  var data=[type, amount, category, note];
+  console.log(data);
+}
+      
+</script> 

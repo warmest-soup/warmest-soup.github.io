@@ -62,7 +62,10 @@
     updateTerm("Objects", "Object"); 
     updateTerm("Potency", "Potenc");
     updateTerm("Properties", "Propert");
-    updateTerm("Materials", "Material");
+    updateTerm("Materials", "Material"); 
+    updateTerm("Mutation", "Mutat");
+    updateTerm("Custom-Tech", "Custom");
+    updateTerm("Relevance", "Relevan");
     
 
 
@@ -75,7 +78,7 @@
             "<a style='display:inline-block;' href=#" + keyTerms[termIndex - 1] + "><i>$3" + xl + "$4<sup>" + termIndex + "</sup></i></a>";
 
         var pattern = new RegExp(
-            `((?<!(\"|>|-|\\w))(${l1}|${l1.toLowerCase()})${xl}(y|ies|sets|s|'s|y's|es|ed|e|ful|ment|ity|led|ion|ing|al|d)?)(?!:|s:|or|ment:|=")`, "g"
+            `((?<!(\"|>|-|\\w))(${l1}|${l1.toLowerCase()})${xl}(y|ies|sets|s|'s|y's|es|ed|e|t|ce|ful|ment|ity|led|ions|ion|ing|al|d)?)(?!:|s:|or|ment:|=")`, "g"
         );  
 
 
