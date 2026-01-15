@@ -1,0 +1,127 @@
+body{
+  height:100vh;
+  width:100vw;
+  display:flex;
+  flex-direction:column;
+  gap:.2em;
+  align-items:center;
+  justify-content:space-around;
+  padding:0em 0em 5em 0em;
+  box-sizing:border-box;
+  overflow:hidden;
+  background-image:url(https://thecatsite.com/c/wp-content/uploads/2022/12/cat-sleeping-under-blanket-1024x711-1.jpg);
+  background-size:cover;
+}
+
+#Current, #Spent, #Gained{
+  box-sizing:border-box;
+  margin:1em;
+  padding:.5em;
+  border-radius:1em;
+  font-size:1.4em;
+  font-weight:bolder;
+}
+#Current{
+  box-shadow:
+    inset -.4em -.4em 1em -.3em hsl(200deg, 100%, 20%),
+    inset -.3em -.2em .6em .6em hsl(150deg, 100%, 50%),
+    .7em .4em 1em -.4em green;
+  background-color:hsl(80deg, 100%, 85%);
+  text-shadow:.1em .1em hsl(80deg, 100%, 85%);
+  color:rgb(0 0 0 / 70%);
+}
+#Spent{
+  box-shadow:
+    inset -.4em -.4em 1em -.3em hsl(200deg, 100%, 20%),
+    inset -.3em -.2em .6em .6em hsl(0deg, 100%, 50%),
+    .7em .4em 1em -.4em Red;
+  background-color:hsl(20deg, 100%, 85%);
+  text-shadow:.1em .1em hsl(20deg, 100%, 85%);
+  color:rgb(0 0 0 / 70%);
+}
+#Gained{
+  box-shadow:
+    inset -.4em -.4em 1em -.3em hsl(200deg, 100%, 20%),
+    inset -.3em -.2em .6em .6em hsl(200deg, 100%, 50%),
+    .7em .4em 1em -.4em Blue;
+  background-color:hsl(190deg, 100%, 85%);
+  text-shadow:.1em .1em hsl(190deg, 100%, 85%);
+  color:rgb(0 0 0 / 70%);
+}
+
+body > div:nth-child(3){
+  font-size:1.3em;
+  box-shadow:
+    0em 0em 0em .05em black,
+    0em 0em 0em .3em White,
+    0em 0em 0em .35em black;
+  padding:1em 0em 1em 0em;
+  border-radius:1em;
+  background-image:url(https://www.catster.com/wp-content/uploads/2023/11/Indoor-life-of-a-Japanese-Bobtail-Cat-Algorithm-images-Shutterstock.jpg);
+  background-size:cover;
+  background-position:center;
+  text-shadow:
+    0em 0em .2em white,
+    0em 0em .2em white,
+    0em 0em .2em white,
+    0em 0em .2em white,
+    0em 0em .2em white;
+  font-weight:bolder;
+}
+
+body > div:nth-child(4){
+  font-size:2em;
+  background:
+  linear-gradient( 90deg,
+    transparent, white 25%, white 75%, transparent
+  );
+  box-shadow:
+    0em -.05em 0em 0em black,
+    0em .05em 0em 0em black;
+}
+#Amount{
+  width:5em;
+  font-size:.7em;
+  padding:.5em;
+  border:none;
+  text-align:center;
+  background-color:transparent;
+}
+
+select{
+  padding:1em;
+  border:none;
+  box-shadow:
+    inset -.3em -.4em .8em -.2em hsl(180deg, 50%, 20%),
+    0em 0em 0em .1em black;
+  border-radius:1em;
+  background-color:hsl(200deg, 100%, 95%);
+  text-align:center;
+}
+
+body > div:nth-of-type(5) {
+  width:70%;
+  font-size:1.4em;
+}
+textarea{
+  font-size:.9em;
+  width:100%;
+  height:6em;
+  border:none;
+  box-shadow:0em 0em 0em .05em black;
+  border-radius:.5em;
+  padding:.5em;
+      background:white;
+  background-size:f;
+}
+
+button{
+  border:none;
+  box-shadow:
+    inset -.3em -.4em .8em -.2em hsl(180deg, 50%, 20%),
+    0em 0em 0em .05em black;
+  border-radius:1em;
+  background-color:hsl(200deg, 100%, 95%);
+  padding:.5em;
+  font-size:1.4em;
+}
