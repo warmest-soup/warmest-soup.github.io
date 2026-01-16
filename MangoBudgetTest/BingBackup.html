@@ -17,8 +17,8 @@
 </script>
 
 <div>
-<input type="radio" class="transaction-type" Name="transaction" id="Income" onChange="categoryUpdate()">More monies, yay! 😺</input> <br><br>
-<input type="radio" class="transaction-type" Name="transaction" id="Expenditure" onChange="categoryUpdate()">Oh no! Money go, sad sad. 😿</input><br><br>
+<input type="radio" class="transaction-type" Name="transaction" id="Income" onChange="categoryUpdate()"> More monies, yay! 😺</input><br><br>
+<input type="radio" class="transaction-type" Name="transaction" id="Expenditure" onChange="categoryUpdate()"> Oh no! Money go, sad sad. 😿</input><br>
 </div>
 
 <div>
@@ -40,15 +40,33 @@
     <button onclick="packData()">Yiii! 😼</button>
 </div>
 
-<link href=".\Bingy.css" rel="stylesheet">
+<link href="https://warmest-soup.github.io\MangoBudgetTest\Bingy.css" rel="stylesheet">
 </link>
 
 <script> 
 function categoryUpdate(){
     if(document.getElementById
     ("Expenditure").checked){
-        document.getElementById("Category").innerHTML="<Option>Dine In / Takeout</option><Option>Groceries</option><Option>Gas</option><Option>Transpo</option><Option>House Supplies</option><Option>Utilities</option><Option>Prepaid Phone Bill</option><Option>Postpaid Phone Bill</option><Option>Miscellaneous</option><Option>Medical</option><Option>Cosmetic</option><Option>Clothing</option><Option>AccPayable</option><Option>Acc Receivable</option><Option>Services</option>"
-    } else { document.getElementById("Category").innerHTML="<Option>Last Month Carryover</option><Option>Allowance</option><Option>Misc.</option><Option>Acc Recievable</option><Option>Acc Payable</option>"
+        document.getElementById("Category").innerHTML="<Option>Dine In / Take-Out</option>"+ 
+        "<Option>Groceries</option>"+ 
+        "<Option>Gas</option>"+
+        "<Option>Transpo</option>"+
+        "<Option>House Supplies</option>"+
+        "<Option>Utilities</option>"+
+        "<Option>Prepaid Phone Bill</option>"+
+        "<Option>Postpaid Phone Bill</option>"+
+        "<Option>Miscellaneous</option>"+
+        "<Option>Medical</option>"+
+        "<Option>Cosmetic</option>"+
+        "<Option>Clothing</option>"+
+        "<Option>AccPayable</option>"+
+        "<Option>Acc Receivable</option>"+
+        "<Option>Services</option>";
+    } else { document.getElementById("Category").innerHTML="<Option>Last Month Carryover</option>"+
+    "<Option>Allowance</option>"+
+    "<Option>Miscellaneous</option>"+
+    "<Option>Acc Recievable</option>"+
+    "<Option>Acc Payable</option>";
     }
 }
 categoryUpdate();
