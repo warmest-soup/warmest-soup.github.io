@@ -1,10 +1,10 @@
-*{font-size:2vh;}
+*{font-size:max(2vh,2vw);}
 body{
   height:100vh;
   width:100vw;
   display:flex;
   flex-direction:column;
-  gap:.2em;
+  gap:.3em;
   align-items:center;
   justify-content:space-around;
   padding:0em 0em 5em 0em;
@@ -24,27 +24,27 @@ body{
 }
 #Current{
   box-shadow:
-    inset -.4em -.4em 1em -.3em hsl(200deg, 100%, 20%),
-    inset -.3em -.2em .6em .6em hsl(150deg, 100%, 50%),
-    .7em .4em 1em -.4em green;
+    inset -.4em -.4em 1em -.3em hsl(200deg 78.95% 48.06%),
+    inset -.3em -.2em .6em .6em hsl(147.04deg 100% 45.33%),
+    .7em .4em 1em -.4em #1aff81;
   background-color:hsl(80deg, 100%, 85%);
   text-shadow:.1em .1em hsl(80deg, 100%, 85%);
   color:rgb(0 0 0 / 70%);
 }
 #Spent{
   box-shadow:
-    inset -.4em -.4em 1em -.3em hsl(200deg, 100%, 20%),
-    inset -.3em -.2em .6em .6em hsl(0deg, 100%, 50%),
-    .7em .4em 1em -.4em Red;
-  background-color:hsl(20deg, 100%, 85%);
+    inset -.4em -.4em 1em -.3em hsl(277.95deg 78.95% 21.41%),
+    inset -.3em -.2em .6em .6em hsl(0deg 100% 62.54%),
+    .7em .4em 1em -.4em #ff2626;
+  background-color:hsl(333.33deg 100% 85%);
   text-shadow:.1em .1em hsl(20deg, 100%, 85%);
   color:rgb(0 0 0 / 70%);
 }
 #Gained{
   box-shadow:
-    inset -.4em -.4em 1em -.3em hsl(200deg, 100%, 20%),
+    inset -.4em -.4em 1em -.3em hsl(262.84deg 75.87% 33.73%),
     inset -.3em -.2em .6em .6em hsl(200deg, 100%, 50%),
-    .7em .4em 1em -.4em Blue;
+    .7em .4em 1em -.4em #0055ff;
   background-color:hsl(190deg, 100%, 85%);
   text-shadow:.1em .1em hsl(190deg, 100%, 85%);
   color:rgb(0 0 0 / 70%);
@@ -74,11 +74,12 @@ body > div:nth-child(4){
   font-size:2em;
   background:
   linear-gradient( 90deg,
-    transparent, white 25%, white 75%, transparent
+    transparent, white 20%, white 80%, transparent
   );
   box-shadow:
     0em -.05em 0em 0em black,
     0em .05em 0em 0em black;
+  margin:1em;
 }
 #Amount{
   width:5em;
