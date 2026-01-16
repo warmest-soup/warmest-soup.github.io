@@ -4,13 +4,25 @@
     <div id="Gained">₱ </div>
 </div>
 
+<script>
+  function setTotals(data){
+    console.log(data)
+    document.getElementById("Current").innerText="₱"+data[0].toFixed(2);
+    document.getElementById("Spent").innerText="₱"+data[1].toFixed(2);
+    document.getElementById("Gained").innerText="₱"+data[2].toFixed(2);
+  }
+
+  google.script.run.withSuccessHandler(setTotals).loadValues();   
+
+</script>
+
 <div>
-<input type="radio" class="transaction-type" Name="transaction" id="Income" onChange="categoryUpdate()">More monies, yay! 😺</input>
-<input type="radio" class="transaction-type" Name="transaction" id="Expenditure" onChange="categoryUpdate()">Oh no! Money go, sad sad. 😿</input>
+<input type="radio" class="transaction-type" Name="transaction" id="Income" onChange="categoryUpdate()">More monies, yay! 😺</input> <br><br>
+<input type="radio" class="transaction-type" Name="transaction" id="Expenditure" onChange="categoryUpdate()">Oh no! Money go, sad sad. 😿</input><br><br>
 </div>
 
 <div>
-    <input id="Amount" type="text" Value="$"/>
+    ₱<input id="Amount" type="text" placeholder="0.00"/>
 </div>
 
 <div>
@@ -28,24 +40,14 @@
     <button onclick="packData()">Yiii! 😼</button>
 </div>
 
-<style>
-    * {
-      text-align:center;  
-    }
-    div {
-        padding:2em;
-    }
-    input {
-        text-align:left;
-    }
-    
-</style>
+<link href=".\Bingy.css" rel="stylesheet">
+</link>
 
 <script> 
 function categoryUpdate(){
     if(document.getElementById
     ("Expenditure").checked){
-        document.getElementById("Category").innerHTML="<Option>Dine In/Takeout</option><Option>Groceries</option><Option>Gas</option><Option>Transpo</option><Option>House Supplies</option><Option>Utilities</option><Option>Prepaid Phone Bill</option><Option>Postpaid Phone Bill</option><Option>Miscellaneous</option><Option>Medical</option><Option>Cosmetic</option><Option>Clothing</option><Option>AccPayable</option><Option>Acc Receivable</option><Option>Services</option>"
+        document.getElementById("Category").innerHTML="<Option>Dine In / Takeout</option><Option>Groceries</option><Option>Gas</option><Option>Transpo</option><Option>House Supplies</option><Option>Utilities</option><Option>Prepaid Phone Bill</option><Option>Postpaid Phone Bill</option><Option>Miscellaneous</option><Option>Medical</option><Option>Cosmetic</option><Option>Clothing</option><Option>AccPayable</option><Option>Acc Receivable</option><Option>Services</option>"
     } else { document.getElementById("Category").innerHTML="<Option>Last Month Carryover</option><Option>Allowance</option><Option>Misc.</option><Option>Acc Recievable</option><Option>Acc Payable</option>"
     }
 }
@@ -55,11 +57,16 @@ function packData(){
   var type
   if(document.getElementById("Income").checked){type="Income"} else type = "Expenditure";
   var category = document.getElementById("Category").value;
-  var amount = document.getElementById("Amount").value;
+  var amount = parseInt( document.getElementById("Amount").value);
   var note = document.getElementById("Note").value;
   
+  document.getElementById("Amount").value="";
+  document.getElementById("Note").value="";
+ 
   var data=[type, amount, category, note];
   console.log(data);
+
+  google.script.run.addRecord(data);
 }
       
-</script> 
+</script>
