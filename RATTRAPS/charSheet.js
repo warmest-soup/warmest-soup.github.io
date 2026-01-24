@@ -129,6 +129,16 @@ function expGoalCalc(real, exp, goal) {
       real.parentNode.parentNode.parentNode.parentNode.classList.add(
         "technique"
       );
+      
+      //5-Star Tag
+      if(traitTable.parentNode.id == "TraitTable"){
+        traitTable.children[tagIndex].classList.remove("five-star");
+        traitTable.children[tagIndex+1].classList.remove("five-star"); 
+        goal.style.display="inline"   
+        goal.style.transform="scale(1)"      
+      } else {
+        traitTable.children[tagIndex].classList.remove("five-star");
+      }
     } else
       real.parentNode.parentNode.parentNode.parentNode.classList.remove(
         "technique"
