@@ -2338,7 +2338,6 @@ function setTime(){
   newTime=parseInt(newTime);
   if(!newTime){newTime=time.innerText;} 
   time.innerText=String(newTime).padStart(2,"0");
-  forecast();
   weather(document.getElementById("CurrentHour")); 
 }
 function setDay(){
@@ -2348,7 +2347,6 @@ function setDay(){
   newDay=parseInt(newDay);
   if(!newDay){newDay=day.innerText;}
   day.innerText=String(newDay).padStart(4,"0");
-  forecast();
   weather(document.getElementById("CurrentHour"));
 }
 
