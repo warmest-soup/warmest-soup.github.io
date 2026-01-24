@@ -212,9 +212,12 @@ input::placeholder, textarea::placeholder{
   border:none;
   box-shadow:0em 0em 0em .05em black;
 }
-#DayCount {
+#DayCount > span{
   font-size: 1em;
   font-weight: bold;
+}
+#DayCount > button{
+  transform:scale(.5);
 }
 td {
   text-align: center;
@@ -333,8 +336,15 @@ textarea {
   font-size: 2.5em;
   padding: 0em;
 }
-#Clock > * {
+.timeAdjust{
+  background-color:hsl(from var(--userColor) h 60% 90%/ 20%)
+}
+#Clock > span {
   font-size: 1.2em;
+  
+}
+#Clock > button{
+  transform:translate(-1em, -.5em); 
 }
 #ProgressTime{
   transform:translatey(-.5em);
@@ -1728,4 +1738,27 @@ textarea {
 @keyframes fade{
   0%{opacity:0;}
   100%{opacity:1;}
+}
+
+.five-star {
+  box-shadow:
+    inset 1.5em 0em 1em -1em hsl(0, 50%, 50%),
+    -.4em 0em 0em 0em hsl(0, 50%, 50%),
+    -.8em 0em 0em 0em hsl(0, 70%, 30%),
+    inset 5em 0em 1em -2em hsl(42.09deg 100% 50% / 93%), 
+    inset 6em 0em .5em -2em white;
+
+  color:hsl(20deg 100% 30%);
+  text-shadow:
+    .02em -.02em 0em black, 
+    -.02em .02em 0em yellow,
+    -.1em .02em .2em white;
+    transition:
+    box-shadow .2s ease-out,   
+    color 2s ease-out,
+    text-shadow 2s ease-out;   
+}
+
+#ComTitle > input{
+  transform:translate(2em,1em) scale(2.5); 
 }

@@ -79,7 +79,7 @@
           <div id="Status" class="CharInfo"> Status:
             <Input type="Text" class="SaveInput" autocapitalize="words" PlaceHolder="Fine"></Input>
           </div> <br>
-          <div id="DayCount" style="text-align:center;">Day <Span id="currentDay">0000</Span></div>
+          <div id="DayCount" style="text-align:center;"><button class="timeAdjust" onclick="setDay()">⚙</button>Day <Span id="currentDay">0000</Span></div>
         </div>
 
         <div id="Traits" class="Section"> <span>~Traits~  
@@ -102,7 +102,7 @@
               </td>
               <td colspan="3"> Dexterity </td>
               <td><input maxLength="3" id="dexReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                    value="3" onFocus="this.select()" />
+                                    value="0" onFocus="this.select()" />
               </td>
               <td><input maxLength="3" id="dexBonus" type="text"
                                     class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
@@ -127,7 +127,7 @@
               </td>
               <td colspan="3"> Speed </td>
               <td><input maxLength="3" id="spdReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                    value="3" onFocus="this.select()" />
+                                    value="0" onFocus="this.select()" />
               </td>
               <td><input maxLength="3" id="spdBonus" type="text"
                                     class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
@@ -151,14 +151,14 @@
                 <span id="strGoal"></span>
               </td>
               <td colspan="3"> Strength </td>
-              <td><input maxLength="3" id="strReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                    value="3" onFocus="this.select()" />
+              <td><input maxLength="3" id="strReal" type="text" class="SingleInputNUM SaveInput realTrait" 
+                                    value="0" onFocus="this.select()" />
               </td>
               <td><input maxLength="3" id="strBonus" type="text"
                                     class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
                                     onFocus="this.select()" />
               </td>
-              <td id="strFunc" class="traitFunc" /> x </td>
+              <td id="strFunc" class="traitFunc"> x </td>
             </tr>
             <tr class="incumbentRows">
               <td colspan="8" class="incumbent"><input type="text" onfocus="select(this)" maxlength="1"
@@ -186,7 +186,7 @@
               </td>
               <td colspan="3"> Perception </td>
               <td><input maxLength="3" id="perReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                    value="3" onFocus="this.select()" />
+                                    value="0" onFocus="this.select()" />
               </td>
               <td><input maxLength="3" id="perBonus" type="text"
                                     class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
@@ -212,7 +212,7 @@
               </td>
               <td colspan="3"> Charisma </td>
               <td><input maxLength="3" id="chaReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                    value="3" onFocus="this.select()" />
+                                    value="0" onFocus="this.select()" />
               </td>
               <td><input maxLength="3" id="chaBonus" type="text"
                                     class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
@@ -237,7 +237,7 @@
               </td>
               <td colspan="3"> Navigation </td>
               <td><input maxLength="3" id="navReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                    value="3" onFocus="this.select()" />
+                                    value="0" onFocus="this.select()" />
               </td>
               <td><input maxLength="3" id="navBonus" type="text"
                                     class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
@@ -272,7 +272,7 @@
               </td>
               <td colspan="3"> Constitution </td>
               <td><input maxLength="3" id="conReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                    value="3" onFocus="this.select()" />
+                                    value="0" onFocus="this.select()" />
               </td>
               <td><input maxLength="3" id="conBonus" type="text"
                                     class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
@@ -297,7 +297,7 @@
               </td>
               <td colspan="3"> Endurance </td>
               <td><input maxLength="3" id="endReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                    value="3" onFocus="this.select()" />
+                                    value="0" onFocus="this.select()" />
               </td>
               <td><input maxLength="3" id="endBonus" type="text"
                                     class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
@@ -322,7 +322,7 @@
               </td>
               <td colspan="3"> Stamina </td>
               <td><input maxLength="3" id="staReal" type="text"
-                                    class="SingleInputNUM  SaveInput realTrait" value="3" onFocus="this.select()" />
+                                    class="SingleInputNUM  SaveInput realTrait" value="0" onFocus="this.select()" />
               </td>
               <td><input maxLength="3" id="staBonus" type="text"
                                     class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
@@ -356,7 +356,7 @@
               </td>
               <td colspan="3"> Intelligence </td>
               <td><input maxLength="3" id="intReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                    value="3" onFocus="this.select()" />
+                                    value="0" onFocus="this.select()" />
               </td>
               <td><input maxLength="3" id="intBonus" type="text"
                                     class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
@@ -381,7 +381,7 @@
               </td>
               <td colspan="3"> Wisdom </td>
               <td><input maxLength="3" id="wisReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                    value="3" onFocus="this.select()" />
+                                    value="0" onFocus="this.select()" />
               </td>
               <td><input maxLength="3" id="wisBonus" type="text"
                                     class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
@@ -406,7 +406,7 @@
               </td>
               <td colspan="3"> Knowledge </td>
               <td><input maxLength="3" id="knoReal" type="text" class="SingleInputNUM SaveInput realTrait"
-                                    value="3" onFocus="this.select()" />
+                                    value="0" onFocus="this.select()" />
               </td>
               <td><input maxLength="3" id="knoBonus" type="text"
                                     class="traitBonus SingleInputNUM SaveInput PlusMinusInput" value="+0"
@@ -773,8 +773,8 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
     <div class="dataSection divDataSection">
       <div id="Satiety" class="Section">
 
-        <div id="SatBottom">
-          <div id="Clock"><span id="CurrentHour">00</span>:00</div>
+        <div id="SatBottom"> 
+          <div id="Clock"><button class="timeAdjust" onclick="setTime()">⚙</button><span id="CurrentHour">00</span>:00</div>
           <div id="ProgressTime">
             <Button id="PassTime" onClick="passHour(); weather(0);">Pass Time</button>
             <Button id="Sleep" onClick="sleep()">Sleep</button>
@@ -952,7 +952,7 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
       </div>
       <div id="Combat" class="Section">
 
-        <div id="ComTitle">⚔ ~Battle Ticket~ ⚔</div>
+        <div id="ComTitle">⚔ ~Battle Ticket~ ⚔ <input type="text" class="SingleInputNUM" id="roundCount"/></div>
         <div id="ComBody">
 
           <div id="comMeasure">

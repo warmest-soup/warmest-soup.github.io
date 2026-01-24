@@ -72,6 +72,12 @@ function initializeSheet() {
 //Declarations
 //Calculate EXP goal for next level of trait
 function expGoalCalc(real, exp, goal) {
+  //Declarations for five-star tags
+  var traitTable = goal.parentNode.parentNode.parentNode;
+      var tableRow = goal.parentNode.parentNode
+      var tagIndex=Array.from(tableRow.parentNode.children).indexOf(tableRow);
+  
+  
   if (real.value) {
     let numbers = real.value.match(/\d+/g) || 0;
     let parsedNumbers = Array.from(numbers).map((num) =>
@@ -83,11 +89,35 @@ function expGoalCalc(real, exp, goal) {
       var outputTxt = "/" + expGoal;
       exp.style.display = "inline";
       goal.innerText = outputTxt;
+      
+      //5-Star Tag
+      if(traitTable.parentNode.id == "TraitTable"){
+        traitTable.children[tagIndex].classList.remove("five-star");
+        traitTable.children[tagIndex+1].classList.remove("five-star"); 
+        goal.style.display="inline"   
+        goal.style.transform="scale(1)"      
+      } else {
+        traitTable.children[tagIndex].classList.remove("five-star");
+      }
+      
+      
     }
     if ((traitLv || traitLv === 0) && traitLv >= 5) {
       var outputTxt = "★";
       exp.style.display = "none";
       goal.innerText = outputTxt;
+        
+       
+      //5-Star Tag
+      if(traitTable.parentNode.id == "TraitTable"){
+        traitTable.children[tagIndex].classList.add("five-star");
+        traitTable.children[tagIndex+1].classList.add("five-star"); 
+        goal.style.display="inline-block"  
+        goal.style.transform="scale(1.3)"      
+      } else {
+        traitTable.children[tagIndex].classList.add("five-star");
+      }
+      
     }
     if (
       real.value.toLowerCase().includes("c") ||
@@ -256,7 +286,7 @@ function weightGoalCalc() {
 
   //FunctionalTraits
   var bonus = document.getElementById("wgtBonus");
-  var func = document.getElementById("wgtFunc");
+  var func = document.getElementById("wgtFunc"); 
   var invBonus = "";
   var adjFunc = parseInt(real.value) + parseInt(bonus.value);
 
@@ -1123,12 +1153,11 @@ function invBonus(){
     document.getElementById("wgtFunc").style.color="black";
     weight.innerText=(
       parseInt(document.getElementById("wgtReal").value) +
-      parseInt(document.getElementById("wgtBonus").value) +
-      encumberance   );
+      parseInt(document.getElementById("wgtBonus").value));
   }
   
 }
-//Populate Resistancesy
+//Populate Resistances
 function addRes(item) {
   var resistances = document.getElementById("ResColumn").children[0]
     .children[0];
@@ -2204,8 +2233,14 @@ function nextRound(){
     }
     if(x.value==0)(x.value="");
   })
-  }
   
+  //Iterate Round Count
+  var round = document.getElementById("roundCount");
+  if(round.value){
+    round.value = parseInt(round.value)+1;     
+  } 
+  }
+
 }
 function hitMoment(){
   var hitMarks=Array.from(document.getElementsByClassName("hitMom"));
@@ -2218,11 +2253,27 @@ function hitMoment(){
   
 }
 function turnInTicket(){
-  //get all moment info (likely from an array)
-    //only need action fields and hit moment
+  var round = document.getElementById("roundCount").value;
+  var actions = Array.from(document.getElementsByClassName("action"));
+  var hits = Array.from(document.getElementsByClassName("hitMom"), (x)=> {if(x.checked){return "X"}return "" } ) 
+  console.log(hits); 
+  var name = document.getElementById("Name").children[0].value; 
+  name = name.match(/^\w+/)[0];
+  var speed=actions.length;
   
-  //pack data into array
-  //send to GS for GM interperatation
+  //pack data.
+  var ticketData = [round, name, speed];
+  
+  var i=0
+  while(i < speed){
+    ticketData.push(actions[i].value + " " + hits[i]);
+    i++
+  }
+  
+  //Then send that array to GS  
+  console.log(ticketData);
+  ticketUpload(ticketData);
+  
 }
 //maps
 function updateMap(map){
@@ -2242,7 +2293,7 @@ function addMap(name, id){
 // files
 function useFile(file){
   file.children[1].toggleAttribute("Hidden")
-}
+} 
 // Trait Color display
 function colorTrait(){
   var traits = Array.from(document.getElementsByClassName("traitFunc"));
@@ -2269,6 +2320,29 @@ function blankSheet(){
     }
   }) 
 }
+//set time & day
+function setTime(){
+  var time = document.getElementById("CurrentHour");
+  
+  var newTime = prompt("(The GM will be notified of this change) \n Change hour to:");
+  newTime=parseInt(newTime);
+  if(!newTime){newTime=time.innerText;} 
+  time.innerText=String(newTime).padStart(2,"0");
+  forecast();
+  weather(document.getElementById("CurrentHour")); 
+}
+function setDay(){
+  var day = document.getElementById("currentDay");
+  
+  var newDay = prompt("(The GM will be notified of this change) \n Change Day count to:");
+  newDay=parseInt(newDay);
+  if(!newDay){newDay=day.innerText;}
+  day.innerText=String(newDay).padStart(4,"0");
+  forecast();
+  weather(document.getElementById("CurrentHour"));
+}
+
+
 
 //End of declarations
 
