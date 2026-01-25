@@ -2262,29 +2262,7 @@ function hitMoment(){
   })
   
 }
-function turnInTicket(){
-  var round = document.getElementById("roundCount").value;
-  var actions = Array.from(document.getElementsByClassName("action"));
-  var hits = Array.from(document.getElementsByClassName("hitMom"), (x)=> {if(x.checked){return "X"}return "" } ) 
-  console.log(hits); 
-  var name = document.getElementById("Name").children[0].value; 
-  name = name.match(/^\w+/)[0];
-  var speed=actions.length;
-  
-  //pack data.
-  var ticketData = [round, name, speed];
-  
-  var i=0
-  while(i < speed){
-    ticketData.push(actions[i].value + " " + hits[i]);
-    i++
-  }
-  
-  //Then send that array to GS  
-  console.log(ticketData);
-  ticketUpload(ticketData);
-  
-}
+
 //maps
 function updateMap(map){
   var currentMap=document.getElementById("currentMap").value;
