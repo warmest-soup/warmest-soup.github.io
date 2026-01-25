@@ -2170,9 +2170,14 @@ function actIndicator(){
   //set based on event contents.
   var i=0;
   while(i<momentField.length){
-    if(momentField[i].value){
+    if(momentField[i].value && momentField[i].value!="-"){  
       indicator[i].innerText="⬤";
     } else indicator[i].innerText="〇";
+    
+    if(momentField[i].value=="-"){
+      momentField[i].parentNode.style.filter="brightness(50%)"
+    } else momentField[i].parentNode.removeAttribute("style");
+    
     i++;
   }
   actionCounter();
@@ -2262,7 +2267,6 @@ function hitMoment(){
   })
   
 }
-
 //maps
 function updateMap(map){
   var currentMap=document.getElementById("currentMap").value;
