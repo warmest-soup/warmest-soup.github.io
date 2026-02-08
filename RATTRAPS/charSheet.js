@@ -2133,7 +2133,7 @@ function moments(){
     document.getElementById("ComMoments").insertAdjacentHTML("beforeEnd",
             "<div class='moment'>"+
             "<div class='actionCounter'>〇</div>"+
-            "<input class='action' type='text' value='"+actions[i]+"'>"+
+            "<input class='action SaveInput' type='text' value='"+actions[i]+"'>"+
             "<input class='hitMom' type='checkbox' onChange='toggleCheck(this)'>"+
             "</div>");
     if(hitMom[i]){
