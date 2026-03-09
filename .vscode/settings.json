@@ -7,5 +7,6 @@
     "outline.showTypeParameters": true,
     "html.autoClosingTags": false,
     "javascript.autoClosingTags": false,
-    "typescript.autoClosingTags": false
+    "typescript.autoClosingTags": false,
+    "editor.autoClosingBrackets": "never"
 }

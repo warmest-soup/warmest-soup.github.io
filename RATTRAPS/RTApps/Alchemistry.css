@@ -1,0 +1,49 @@
+body{
+    display:flex;
+    gap:1em;
+    flex-wrap:wrap;
+    align-content:start;
+}
+
+.Molecule{
+    width:7em;
+    height:7em;
+    background:black;
+    overflow:clip;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-around;
+    align-items:center;
+    border-radius:.5em;
+    margin-bottom:.5em;
+    
+}
+.Atom{
+    background:white;
+    width:2.5em;
+    height:1em;
+    text-align:center;
+    font-size:.85em;
+    border-radius:.3em;
+    padding:.75em 0em .75em 0em;
+}
+.substanceCard{
+    padding:.5em;
+    background:hsl(50deg 15% 80%);
+    border-radius:.5em;
+    box-shadow:0em 0em 0em 0.1em black;
+}
+.properties{
+    display:flex;
+    flex-direction:column;
+    gap:.5em;
+    margin-top:.5em;
+}
+.pro{
+    background:hsl(50deg 30% 95%);
+    border-radius:.5em;
+    box-shadow:0em 0em 0em 0.1em black;
+    text-align:center;
+    padding:.2em 0em .2em 0em;
+    font-size:.8em;
+}
