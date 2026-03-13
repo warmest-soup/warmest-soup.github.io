@@ -1,0 +1,93 @@
+body{
+    display:flex;
+    gap:1em;
+    flex-direction:column;
+    align-items:center;
+    justify-content: space-around;
+    width:100%;
+    height:100%;
+    overflow:clip;
+}
+.Section{
+    background:linear-gradient(hsl(250deg 100% 10%), hsl(250deg 100% 20%));  
+    height:25%;
+    width:70%;
+    box-shadow:
+    0em 0em .2em 0em black,
+    0em 0em 0em .5em gray;
+    border-radius:1em;
+    font-weight:bolder;
+    color:white;
+    text-shadow:
+    .05em .05em .1em black,
+    .05em .05em .1em black,
+    .05em .05em .1em black,
+    .05em .05em .1em black;
+}
+#ingredients{
+    display:flex;
+    flex-direction:column;
+    gap:1em;
+    text-align:center;
+    padding:1em 0em 1em 0em;
+    overflow-x:clip;
+    overflow-y:auto;
+}
+.item{
+    width:100%;
+    background:linear-gradient(90deg,transparent,cyan,transparent);
+    box-shadow:0em 0em .2em .1em hsl(250deg 100% 10%);
+    font-size:1.8em;
+    font-weight:bolder;
+    color:white;
+    text-shadow:
+    .05em .05em .1em black,
+    .05em .05em .1em black,
+    .05em .05em .1em black,
+    .05em .05em .1em black;
+    
+}
+#workspace{
+    padding:1em;
+    box-sizing:border-box;
+    display:flex;
+    justify-content:space-around;
+    padding-bottom:2em;
+    overflow:auto; 
+}
+#IngList,#Effects,#Causes{
+  display:flex;
+  flex-direction:column;
+  gap:.4em;
+}
+.mixedItem,.mixedEffect,.mixedCause{
+  background:linear-gradient(transparent, cyan, transparent);
+  border-radius:1em;
+  padding:.2em;
+  width:100%;
+  text-align:center;
+  box-shadow:0em 0em 0em .1em black; 
+}
+
+
+/*Scroll bar adjustments*/
+::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.5em;
+  display: overlay;
+}
+::-webkit-scrollbar-thumb {
+  background: blue; 
+  border-radius: 1em;
+}
+::-webkit-scrollbar-corner {
+  display: visible;
+  background: white;  
+}
+::-webkit-scrollbar-track {
+  background: gray;
+  box-Shadow:inset 0em 0em .05em .02em black ;
+}
+html > * ::-webkit-scrollbar-track {
+  border-radius: 1em;
+} 

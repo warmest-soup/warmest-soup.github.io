@@ -1,0 +1,89 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=Cinzel+Decorative:wght@400;700;900&display=swap"
+    rel="stylesheet">
+
+<Div id="newIngredient" class="Section"></div>
+<Div id="ingredients" class="Section">
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Strength+1, Speed+1, Skill Cards-1"
+        data-causes="Sweating, Hyperventilation, fainting" flavor="Oily, stinging">Burn Vine</div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Dexterity+1, Sleep-1"
+        data-causes="Stress Relief, Calm" flavor="Fine, Earthy, Slight Spice">Tabit</div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Perception+1,Wisdom+1,Navigation-1" data-causes="Visions,Hallucinations,Paranoia" flavor="Delicious, Sweet, Fruity">Leery
+        Belle</div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Satiety-1, Toxic-1, Constitution-1" data-causes="Vomiting" flavor="Vile, repulsive">Vomit
+        Green</div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="All Effects Doubled" data-causes="All Effects Doubled" flavor="Sweet, Fresh">Red
+        Setter</div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Charisma+1, Wisdom+1, Sleep-1, Food-1, Navigation+1, Perception-1, Intelligence-1" data-causes="Drowsiness, Friendliness, Snack cravings" flavor="">Lautu
+    </div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Endurance+1, Mind-1, Constitution-1, Athleticism-1, Sleep-1" data-causes="Numbness, Sleep" flavor="">Dead
+        Carma</div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="SkillCards+1, Water+1, Food-1" data-causes="Hydration, Refreshment" flavor="Electric Tingle, Bitter">Polly
+        Shoots</div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Satiety+1, Constitution+1, Healing+1" data-causes="" flavor="Heavy, Gross, Stinks">Kulu
+    </div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Sleep+1, Intelligence+1, Perception+1, Skill Cards-1" data-causes="Alertness" flavor="Earthy, Bitter, Pleasant, Thick">Corey
+        Seeds</div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Constitution+1, itToxic-1" data-causes="Effects Reduced" flavor="Milky, Chewy, Citrus">Mercy
+        Blue</div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Healing+1, Constitution-1" data-causes="Coughing, Vomiting" flavor="Bitter+2, Disgusting, Chemical Scent">Sting
+        Moss</div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Healing+1, Food+1, Water+1, Constitution-1, Perception-1, Sleep-1" data-causes="Drowsy" flavor="Spicy, Wet, Fruity">Blood
+        Gourd</div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="" data-causes="Itching" flavor="Oily, Bitter, Sweet">Scratch
+        Weed</div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Constitution+1, Healing+1, Intelligence+1, Toxic-1" data-causes="Purification" flavor="Light, Airy, Magnificent">Bright
+        Lily</div> 
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Toxic+1, Healing-1, HP-5, Constitution-1, Endurance-1" data-causes="Illness" flavor="Death, Rotten">Devil Rot
+    </div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Entity+1" data-causes="Entity Activity" flavor="Powerful">Sprite
+        Flower</div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Constitution+1, Entity-1, Food-1" data-causes="Entity Torpor" flavor="">Tuirin
+    </div>
+
+    <div class="item" draggable="true" ondragstart="itemReady(event)" data-effects="Food+1, Water+1, Toxic+5, Satiety-1, Constitution-1, Endurance-1, Healing-1, HP-5" data-causes="Cramps" flavor="Sweet+2, Juicy, Fruity, Fresh">Merry
+        Apple</div>
+
+
+</div>
+<div id="Workspace" class="Section" ondrop="itemCombine(event)" ondragover="allowDrop(event)">
+
+    <div id="IngList" ondragover="allowDrop(event)">
+        Ingredients:
+    </div>
+    <div id="Effects" ondragover="allowDrop(event)"> 
+        Effects:
+    </div>
+
+    <div id="Causes" ondragover="allowDrop(event)">
+        Causes:
+    </div>
+
+</div>
+
+
+
+
+
+<link href=".\itemCombination.css" rel="stylesheet">
+</link>
+<script src=".\itemCombination.js"></script>

@@ -15,18 +15,20 @@ html {
   width: 100%;
   overflow-x: clip;
   
-  background-image:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true");
+  background-image:url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/SheetABGg.gif");
   background-repeat:no-repeat;
   background-position:center;
   background-attachment:fixed;
   background-size:100% 100%;
-  
+   
 }
 body{
   width:200vw;
   margin:0;
   padding:1em;
   position:sticky;
+  transition:
+    backdrop-filter 1s ease-out; 
 }
 * {
   font-family: "caudex";
@@ -469,16 +471,16 @@ textarea {
   height:2em;
 }
 #shIcon{
-  background:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SatIcons/h.png?raw=true")center 0%/ cover no-repeat;
+  background:url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/SatIcons/h.png")center 0%/ cover no-repeat;
 }
 #swIcon{
-  background:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SatIcons/w.png?raw=true")center 0%/ cover no-repeat;
+  background:url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/SatIcons/w.png")center 0%/ cover no-repeat;
 }
 #szIcon{
-  background:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SatIcons/z.png?raw=true")center 0%/ cover no-repeat;
+  background:url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/SatIcons/z.png")center 0%/ cover no-repeat;
 }
 #stIcon{
-  background:url("https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SatIcons/t.png?raw=true")center 0%/ cover no-repeat;
+  background:url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/SatIcons/t.png")center 0%/ cover no-repeat;
 }
 .wgtIn {
   border: none;
