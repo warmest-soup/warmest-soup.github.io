@@ -2022,7 +2022,7 @@ function changeUserColor2(hue){
 }
 function setBG(){
   var moving=document.getElementById("CustomColor").dataset.bg;
-  if(moving=="true"){ document.documentElement.style.backgroundImage="url('https://github.com/warmest-soup/warmest-soup.github.io/blob/main/Assets/Images/SheetGBG.png?raw=true')";
+  if(moving=="true"){ document.documentElement.style.backgroundImage="url('https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/SheetABGg.gif')";
 } else {
     document.documentElement.style.backgroundImage="url('https://warmest-soup.github.io/Assets/Images/Sheet%20Grand%20BG.png')";
   };
