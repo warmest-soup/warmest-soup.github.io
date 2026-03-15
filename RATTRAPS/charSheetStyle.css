@@ -166,8 +166,9 @@ input::placeholder, textarea::placeholder{
 .Section {
   background:linear-gradient(
     var(--userColor),
-    rgb(245 235 230 / 80%)
+    rgb(245 235 230 / 80%) 
   );
+   
   box-shadow: 
     -0.25em 0.3em 0.3em 0em rgb(0 0 0 / 50%), 
     inset 0em 0em 0em .1em black,

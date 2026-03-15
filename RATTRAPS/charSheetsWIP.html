@@ -7,12 +7,12 @@
 <div id="SheetManager">
   <button onclick="jsSave()">Save</button>
   <span>
-    <button id="Customize" onclick="openWinlette(customMenu)">⚙</button>
-    <Input id="User" class="logIn longNumIn" style="text-transform:uppercase;" placeholder="User" maxLength="3"
-      onclick="select(this)" />
-    <Input type="password" id="Key" class="logIn longNumIn" style="text-transform:uppercase;" placeholder="Key" maxLength="3" />
-    <div id="SaveIndicator"></div>
-  </span>
+        <button id="Customize" onclick="openWinlette(customMenu)">⚙</button>
+        <Input id="User" class="logIn longNumIn" style="text-transform:uppercase;" placeholder="User" maxLength="3" onclick="select(this)"/>
+        <Input id="Key" class="logIn longNumIn" style="text-transform:uppercase;" placeholder="Key" maxLength="3" />
+        <div id="SaveIndicator"></div> 
+        <button id="Customize" onclick="hideLogin(this,User,Key)" data-value="1">◉</button>
+    </span>
   <button onclick="jsLoad()">Load</button>
 
 </div>
@@ -20,21 +20,21 @@
 <div hidden id="customMenu">
   Section Color:<br>
   <input type="range" class="UserSlider" id="userHueSet" min="0" max="360" value="200"
-    oninput="changeUserColor(this.value, userBriSet.value, userOpaSet.value)"><br><br>
+        oninput="changeUserColor(this.value, userBriSet.value, userOpaSet.value)"><br><br>
 
-  Section Brightness:<br>
+    Section Brightness:<br>
   <input type="range" class="UserSlider" id="userBriSet" min="50" max="100" value="50"
-    oninput="changeUserColor(userHueSet.value, this.value, userOpaSet.value)"><br><br>
+        oninput="changeUserColor(userHueSet.value, this.value, userOpaSet.value)"><br><br>
 
-  Section Opacity:<br>
+    Section Opacity:<br>
   <input type="range" class="UserSlider" id="userOpaSet" min="50" max="100" value="80"
-    oninput="changeUserColor(userHueSet.value, userBriSet.value, this.value)"><br><br>
+        oninput="changeUserColor(userHueSet.value, userBriSet.value, this.value)"><br><br>
 
-  Second Color:<br>
+    Second Color:<br>
   <input type="range" class="UserSlider" id="user2Set" min="0" max="360" value="200"
-    oninput="changeUserColor2(this.value)"><br><br>
+        oninput="changeUserColor2(this.value)"><br><br>
 
-  Motion Background:<br>
+    Motion Background:<br>
   <input type="Checkbox" id="userBG" checked="true" onChange="userBG()"><br><br>
   <button onclick="blankSheet()">Load Blank Sheet</button>
 
@@ -2167,9 +2167,11 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
   </div>
 </div>
 
+
+
 <!--Link to external CSS & JS-->
-<link href=".\charSheetStyle.css" rel="stylesheet">
+<link href="./charSheetStyle.css" rel="stylesheet">
 </link>
-<script src=".\charSheet.js"></script>
+<script src="./charSheet.js"></script>
 
 <!--Version 0.00-->

@@ -2331,7 +2331,23 @@ function setDay(){
   day.innerText=String(newDay).padStart(4,"0");
   weather(document.getElementById("CurrentHour"));
 }
-
+//Hide Login
+function hideLogin(button,user,key){
+  console.log(key) 
+  console.log(user) 
+  if(button.dataset.value=="1"){
+    button.innerText="◠";
+    button.dataset.value="0";
+    user.setAttribute("Type","Password");
+    key.setAttribute("Type","Password");
+  } else{
+    button.innerText="◉";
+    button.dataset.value="1";
+    user.removeAttribute("Type"); 
+    key.removeAttribute("Type");
+  }
+  
+}
 
 
 //End of declarations
