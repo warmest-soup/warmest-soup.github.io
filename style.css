@@ -584,7 +584,7 @@ textarea {
 }
 .Inventory {
   padding: 1em;
-  
+  user-select: none;
   min-width: 26em;
   max-width: 26em;
   min-height:35em;
