@@ -2497,9 +2497,9 @@ document
   });
 
 /*Drag & Drop Functions..*/ {
-  function allowDrop(event) {
+  /*function allowDrop(event) {
     event.preventDefault();
-  }
+  }*/
 
   //variables
   var leftBehind = "";
@@ -2509,7 +2509,7 @@ document
     event.dataTransfer.setData("Text", event.target.id);
     
   }
-  /*
+  
   function abilDrop(event) {
     event.preventDefault();
 
@@ -2964,7 +2964,7 @@ document
       itemPickUp = "";
     }
     event.target.dispatchEvent(invChange);
-  } */
+  } 
 } //End of Declarations
 
 //Initialize
