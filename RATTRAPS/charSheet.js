@@ -2318,7 +2318,7 @@ function setTime(){
   
   var newTime = prompt("(The GM will be notified of this change) \n Change hour to:");
   newTime=parseInt(newTime);
-  if(!newTime){newTime=time.innerText;} 
+  if(!newTime && newTime!="0"){newTime=time.innerText;} 
   time.innerText=String(newTime).padStart(2,"0");
   weather(document.getElementById("CurrentHour")); 
 }
@@ -2505,10 +2505,11 @@ document
   var leftBehind = "";
   //Abilities D&Dd
   function abilDragStart(event) {
-    //leftBehind = event.target.parentNode;
+    leftBehind = event.target.parentNode;
     event.dataTransfer.setData("Text", event.target.id);
     
   }
+  /*
   function abilDrop(event) {
     event.preventDefault();
 
@@ -2963,7 +2964,7 @@ document
       itemPickUp = "";
     }
     event.target.dispatchEvent(invChange);
-  }
+  } */
 } //End of Declarations
 
 //Initialize
