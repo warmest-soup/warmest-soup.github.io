@@ -2497,9 +2497,9 @@ document
   });
 
 /*Drag & Drop Functions..*/ {
-  /*function allowDrop(event) {
+  function allowDrop(event) {
     event.preventDefault();
-  }*/
+  }
 
   //variables
   var leftBehind = "";
