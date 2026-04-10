@@ -2505,7 +2505,7 @@ document
   var leftBehind = "";
   //Abilities D&Dd
   function abilDragStart(event) {
-    leftBehind = event.target.parentNode;
+    //leftBehind = event.target.parentNode;
     event.dataTransfer.setData("Text", event.target.id);
     
   }
