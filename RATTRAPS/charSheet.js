@@ -2506,7 +2506,8 @@ document
   //Abilities D&Dd
   function abilDragStart(event) {
     leftBehind = event.target.parentNode;
-    event.dataTransfer.setData("Text", event.target.id);
+    //event.dataTransfer.setData("Text", event.target.id);
+    
   }
   function abilDrop(event) {
     event.preventDefault();
