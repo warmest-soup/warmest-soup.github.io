@@ -2498,7 +2498,7 @@ document
 
 /*Drag & Drop Functions..*/ {
   function allowDrop(event) {
-    event.preventDefault();
+    //event.preventDefault();
   }
 
   //variables
@@ -2511,7 +2511,7 @@ document
   }
   
   function abilDrop(event) {
-    event.preventDefault();
+    //event.preventDefault();
 
     tClasses = event.target.className;
     if (tClasses.includes("openAbil")) {
@@ -2582,7 +2582,7 @@ document
   function INVDrop(event) {
     //console.log("INVDrop Function ran.");
 
-    event.preventDefault();
+    //event.preventDefault();
 
     //Validate Target
     if (
@@ -2671,7 +2671,7 @@ document
 
   //Equipping Items
   function equipDrop(event) {
-    event.preventDefault();
+    //event.preventDefault();
 
     if (
       (INVdropType !== "QI") &
