@@ -2496,7 +2496,7 @@ document
     thermoBarFunc();
   });
 
-/*Drag & Drop Functions..*/ {
+/*Drag & Drop Functions..*/ {/*
   function allowDrop(event) {
     event.preventDefault();
   }
@@ -2965,7 +2965,7 @@ document
     }
     event.target.dispatchEvent(invChange);
   } 
-} //End of Declarations
+*/} //End of Declarations
 
 //Initialize
 initializeSheet();
