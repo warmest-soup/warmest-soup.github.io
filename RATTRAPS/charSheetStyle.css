@@ -1681,18 +1681,33 @@ textarea {
   display:flex;
   flex-direction:column;
   gap:.5em;
+  overflow:clip;
 }
 .file>div:nth-child(1){
   background:white;
   box-shadow:
     0em .15em 0em 0em rgb(from hsl(from var(--userColor) h s 50%/100%) r 255 b),
     0em -.15em 0em 0em rgb(from hsl(from var(--userColor) h s 50%/100%) r 255 b);;
+  z-index:+1;
 }
 .file>div:nth-child(2){
   background:white;
   box-shadow:inset 0em .5em 2em -.5em black;
-  
+  font-size:.8em;
+  padding:1em;
+  animation: openFile .2s ease-out forwards;
 }
+@keyframes openFile{
+  0% {
+    opacity:0;
+    transform: translatey(-50%) scaley(0);
+  }
+  100% {
+    opacity:1;
+    transform: translatey(0%) scaley(1);
+  }
+}
+
 .traitFunc{
   color:
   rgb(0 0 0 /80%);
