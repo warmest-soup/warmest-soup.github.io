@@ -1,6 +1,243 @@
-<div>
-    
+<div class="ClassContainer">
+
+
+    <div Class='Skill' data-category='Misc.' data-Genre='Combat'>
+        <div class='ClassName' onclick=" Combatant.toggleAttribute('hidden') ">Combatant</div>
+        <div id='Combatant'>
+            <div Id='ClassCard'>
+                <div class='Geneology'>
+                    <div class='Generation'>1st G</div>
+                    <div class='Parent isTrait'>Wisdom</div>
+                    <div class='Parent isTrait'>Dexterity</div>
+                    <div class='Parent isTrait'>Speed</div>
+                </div>
+                <div class='ClassInfo'>
+                    <div class='ClassDescription' onclick='loadInfo(this)'>     A person's familiarity with the
+                        application of violence. A necessary class for any aspiring fighter.</div>
+                    <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> This class' Rank can be added to
+                        Grapple checks, and used for advantage when beginning combat under special conditions.</div>
+                    <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Survive Battles. </i></div>
+                    <div>
+                        <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Jab</div>
+                        <div class='TechDescription' onclick='loadTech(this)'>Access to power level 1 attacks, which
+                            deal half of standard damage, and require no recovery moments.</div>
+                        <div class='CardCost'>:: Cost: 1 SKL</div>
+                        <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Guard</div>
+                        <div class='TechDescription' onclick='loadTech(this)'>Protect yourself by placing an object or
+                            limb ahead of your vulnerabilities. Guard differs from block in that it can be focused.
+                        </div>
+                        <div class='CardCost'>:: Cost: 1 SKL</div>
+                        <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Feignt</div>
+                        <div class='TechDescription' onclick='loadTech(this)'>A false attack that triggers any stances
+                            currently active on the target without commiting to an attack. Leaving you free to counter
+                            the destabilized opponent.</div>
+                        <div class='CardCost'>:: Cost: P</div>
+                        <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Fletch</div>
+                        <div class='TechDescription' onclick='loadTech(this)'>A dashing attack that covers as many
+                            spaces as the character has Speed. The attack may be swapped for any action.</div>
+                        <div class='CardCost'>:: Cost: 1 SKL</div>
+                        <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Riposte</div>
+                        <div class='TechDescription' onclick='loadTech(this)'>An action taken in the recovery moments
+                            after another attack action. If the prior attack parries, this technique is triggered,
+                            imediately launching into another attack and canceling the previous attack's recovery.</div>
+                        <div class='CardCost'>:: Cost: 1 SKL</div>
+                        <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Haymaker</div>
+                        <div class='TechDescription' onclick='loadTech(this)'>grants access to level 5 attacks, which
+                            deal double standard damage, and require 4 recovery moments.</div>
+                        <div class='CardCost'>:: Cost: 1 SKL</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div Class='Skill' data-category='Misc.' data-Genre='Combat'>
+        <div class='ClassName' onclick=" Commander.toggleAttribute('hidden') ">Commander</div>
+        <div id='Commander'>
+            <div Id='ClassCard'>
+                <div class='Geneology'>
+                    <div class='Generation'>3rd G</div>
+                    <div class='Parent'>Combatant</div>
+                    <div class='Parent isTrait'>Charisma</div>
+                    <div class='Parent'>Tactician</div>
+                </div>
+                <div class='ClassInfo'>
+                    <div class='ClassDescription' onclick='loadInfo(this)'>     A leader of subordinates. One who can
+                        affectively communicate in the heat of chaos, to coordinate groups into more effective tactics.
+                    </div>
+                    <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> A Commander check may be performed
+                        to gain a summary of the current enemy force's next moves. </div>
+                    <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Give successful orders in combat.
+                        </i></div>
+                    <div>
+                        <div class='Tech'><span style='font-size:1.2em;'>⤷❶.</span> Call-out</div>
+                        <div class='TechDescription' onclick='loadTech(this)'>Communicate without consuming an action.
+                        </div>
+                        <div class='CardCost'>:: Cost: 1 SKL</div>
+                        <div class='Tech'><span style='font-size:1.2em;'>⤷❷.</span>Coordinate</div>
+                        <div class='TechDescription' onclick='loadTech(this)'>Speaking for the round no longer consumes
+                            actions.</div>
+                        <div class='CardCost'>:: Cost: 1 SKL</div>
+                        <div class='Tech'><span style='font-size:1.2em;'>⤷❸.</span>Order</div>
+                        <div class='TechDescription' onclick='loadTech(this)'>Communication has no cost in battle, and
+                            other characters gain advantage when acting on your instruction.</div>
+                        <div class='CardCost'>:: Cost: P</div>
+                        <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Inspire</div>
+                        <div class='TechDescription' onclick='loadTech(this)'>All friendly characters able to hear your
+                            your order, gain +1 Spd for the round.</div>
+                        <div class='CardCost'>:: Cost: 1 SKL</div>
+                        <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Command</div>
+                        <div class='TechDescription' onclick='loadTech(this)'>All friendly characters able to hear your
+                            your order, gain +1 Dex for the round.</div>
+                        <div class='CardCost'>:: Cost: 1 SKL</div>
+                        <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Rouse</div>
+                        <div class='TechDescription' onclick='loadTech(this)'>All friendly characters able to hear your
+                            order will have their next strike deal double damage. (Does not affect range damage, but
+                            will double the potential draw weight usable by archers.)</div>
+                        <div class='CardCost'>:: Cost: 1 SKL</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 </div>
 
+<style>
+    .ClassContainer {
+        display: flex;
+        gap: 1em;
+    }
 
-<button onclick="text.toggleAttribute('hidden')">Toggle</button>
+    .Skill {
+        background: hsl(360deg, 50%, 60%);
+    }
+
+    .Insight {
+        background: hsl(180deg, 50%, 60%);
+    }
+
+    .Skill,
+    .Insight {
+        box-shadow: 0em 0em 0em .1em black;
+        min-width: 20.2em;
+        max-width: 20.2em;
+        height: fit-content;
+        border-radius: 1em;
+        padding: 1em;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ClassName {
+        box-shadow: 0em 0em 0em .1em black;
+        border-radius: 1em;
+        min-width: 10em;
+        max-width: 10em;
+        padding: .1em;
+        text-align: center;
+        font-size: 1.3em;
+        font-weight: bold;
+        margin: 0em 0em 1em 0em;
+        box-sizing: border-box;
+        background: white;
+    }
+
+    #ClassCard {
+        display: flex;
+        justify-content: end;
+        transform: translatex(-1.3em);
+    }
+
+    .Geneology {
+        writing-mode: sideways-lr;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        margin: 2em 0em 0em 0em;
+        font-weight: bold;
+    }
+
+    .Parent {
+        box-shadow: -.1em 0em 0em .1em black;
+        border-radius: .3em 0em 0em .3em;
+        padding: .5em 0em .5em .2em;
+        margin: 0em .1em 2em 0em;
+        max-width: 1.3em;
+        background: hsl(270deg 50% 80%);
+    }
+
+    .isTrait {
+        color: maroon;
+        background: linear-gradient(90deg, white, yellow, orange);
+    }
+
+    .Generation {
+        position: relative;
+        transform:
+            translatey(.7em) translatex(2.5em);
+        writing-mode: horizontal-tb;
+        background: white;
+        box-shadow: 0em 0em 0em .1em black;
+        border-radius: 1em;
+        padding: .5em;
+        max-width: 3em;
+        min-width: 3em;
+        text-align: center;
+    }
+
+    .ClassInfo {
+        box-shadow: 0em 0em 0em .1em black;
+        min-width: 18em;
+        max-width: 18em;
+        border-radius: 1em;
+        padding: 1em;
+        box-sizing: border-box;
+        background: white;
+    }
+
+    .ClassDescription {
+        margin: 1em 0em 1em 0em;
+    }
+
+    .Bonus {
+        font-size: .8em;
+        margin: 1em 0em 1em 0em;
+    }
+
+    .Exp {
+        font-size: .8em;
+        margin: 1em 0em 1em 0em;
+    }
+
+    .Tech {}
+
+    .TechDescription {
+        font-size: .8em;
+    }
+
+    .CardCost {
+        text-align: right;
+    }
+</style>
+
+<script>
+    function loadInfo(target) {
+        var description = target.parentNode.children[0].innerText;
+        var bonus = target.parentNode.children[1].innerText;
+        var exp = target.parentNode.children[2].innerText;
+
+        navigator.clipboard.writeText(description + "\n\n" + bonus + "\n\n" + exp);
+    }
+
+    function loadTech(target) {
+        navigator.clipboard.writeText(target.innerText);
+
+    }
+
+</script>
