@@ -125,7 +125,7 @@
           <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Give successful orders in combat.
             </i></div>
           <div>
-            <div class='Tech'><span style='font-size:1.2em;'>⤷❶.</span> Call-out</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Call-out</div>
             <div class='TechDescription' onclick='loadTech(this)'>Communicate without consuming an action.
             </div>
             <div class='CardCost'>:: Cost: 1</div>
@@ -174,13 +174,13 @@
           <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Survive nights in the wilderness.
             </i></div>
           <div>
-            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Feign Death</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Feign Death (Stance)</div>
             <div class='TechDescription' onclick='loadTech(this)'>Play dead, a convincing act that causes
               non-predatory animals to roll a single dice that determines the number of moments they can
               remain hostile towards you before losing interest. Humans will need to perform a perception
               check to continue combat. During Feign Death, the acting character is unable to perform any
               actions. This stance will also convince allies of your death.</div>
-            <div class='CardCost'>:: Cost: 1 (Stance)</div>
+            <div class='CardCost'>:: Cost: 1</div>
             <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Pressure Tested</div>
             <div class='TechDescription' onclick='loadTech(this)'>The acting character is able to remain
               calm during combat. This prevents poisons and illnesses from iterating, and also halves the
@@ -312,7 +312,7 @@
     </div>
   </div>
 
-  <div Class='Skill' data-category='Misc.' data-Genre='Utility'>
+  <div Class='Skill' data-category='Misc.' data-Genre='Other'>
     <div class='ClassName' onclick=" Acrobat.toggleAttribute('hidden') ">Acrobat</div>
     <div id='Acrobat'>
       <div Id='ClassCard'>
@@ -363,7 +363,153 @@
     </div>
   </div>
 
+  <div Class='Skill' data-category='Misc.' data-Genre='Other'>
+    <div class='ClassName' onclick=" Thief.toggleAttribute('hidden') ">Thief</div>
+    <div id='Thief'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>3rd G</div>
+          <div class='Parent isTrait'>Dexterity</div>
+          <div class='Parent'>Socialite</div>
+          <div class='Parent'>Merchant</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     The unquenchable lust for more, earned or not, and
+            a refusal to be kept out. Locks were invented to prevent thieves, both are undeniable marks of civilization.
+          </div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> Thief Rank will be added as penalties to any
+            checks intended to detect them.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Engage in crime or espionage while
+              undetected. </i></div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Lockpick</div>
+            <div class='TechDescription' onclick='loadTech(this)'>With access to any form or pick & torque wrench, and a
+              succesful Thief Check, locks may be opened with no key.</div>
+            <div class='CardCost'>:: Cost: Free</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Forgery</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Analyze a person's handwriting for one hour, and it
+              may be replicated for as long as it is remembered. </div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Pickpocket</div>
+            <div class='TechDescription' onclick='loadTech(this)'>With a successful thief check, the acting character
+              may peer into another's inventory to a depth of their thief rank. This action will not be noticed unless
+              the check fails.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Distract</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Perform a thief check that will force a character's
+              attention elsewhere for a single moment. This effect cannot be resisted. During combat, affected
+              characters will be granted a chance to update their Battle Ticket starting from the first moment after the
+              distraction.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Sleight</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character may perform small dex relavant
+              tasks with no chance to be noticed.</div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Nobody</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Through careful acting and self control, the
+              performing character may blend into crowds or their surroundings, further penalizing perception checks
+              that may cause notice.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <div Class='Skill' data-category='Misc.' data-Genre='Other'>
+    <div class='ClassName' onclick=" Musician.toggleAttribute('hidden') ">Musician</div>
+    <div id='Musician'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>2nd G</div>
+          <div class='Parent'>Artist</div>
+          <div class='Parent isTrait'>Charisma</div>
+          <div class='Parent isTrait'>Dexterity</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     The sonic arts of rhythm & melody, used to pass on
+            legends and history, To explore oneself, or aid the mood of others. Each Musician class must be dedicated to
+            a specific instrument. Musicians are able to compose and play Songs which themselves grant special effects.
+          </div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> The acting character gains additional Musician
+            Exp. equal to their highest rank Musician class when learning additional instruments.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Apreciate Music </i></div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Soloist</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The ability to play technical or complex sequences on
+              the dedicated instrument.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Perfect Pitch</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character is able to copy and mimic notes
+              or sequences on their dedicated instrument after hearing them only once.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Improv</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The dedicated instrument may be played freely, without
+              end, allowing for the use of Musician techniques with no song.</div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Calm</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The ability to play calming sequences that clear
+              non-physical debuffs from listeners. Debuffs are removed one rank at a time, per song.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Blues</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The ability to play heartfelt sequences that clear
+              non-physical debuffs from the performing character. Debuffs are removed one rank at a time, per song.
+            </div>
+            <div class='CardCost'>:: Cost: Free</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Revelry</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The ability to play rousing sequences that gives
+              advantages to the actions of your allies.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div Class='Insight' data-category='Misc.' data-Genre='Other'>
+    <div class='ClassName' onclick=" Student.toggleAttribute('hidden') ">Student</div>
+    <div id='Student'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>1st G</div>
+          <div class='Parent isTrait'>Wisdom</div>
+          <div class='Parent isTrait'>Intelligence</div>
+          <div class='Parent isTrait'>Knowledge</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     The act of learning. A skill that lets one learn
+            from even the worst teachers. Ignorance is a choice made by the helpless.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> Every rank in Student is added to exp gained
+            from passing insight checks by rolling a pair (Criticals)</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Engage in formal study methods. </i></div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Clear Mind</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Regain a single Insight Card after use.</div>
+            <div class='CardCost'>:: Cost: Free</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Cram</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Sleep sat may be used in place of Insight Cards.</div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Hypothesis</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Costs one card to perform along with another insight
+              Technique. if the Technique is successful all cards spent are refunded, with the exception of the one
+              spent to use this technique. </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Deep Thought</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Immediately reroll failed Insight checks before
+              recieving the consequences of failure. This can be repeated as many times as the character has ranks in
+              Student, with each reroll costing an additional card.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Acuity</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Gain an advantage on all insight checks.</div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Dilligence</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Failed insight checks still earn exp.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 </div>
@@ -372,6 +518,11 @@
   .ClassContainer {
     display: flex;
     gap: 1em;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: start;
+    max-height: 200em;
+    max-width: fit-content;
   }
 
   .Skill {
@@ -394,6 +545,31 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .selected {
+    animation: flash .2s ease-out;
+  }
+
+  @keyframes flash {
+    0% {
+      color: black;
+      filter: blur(0em);
+      transform: scalex(1) scaley(1);
+    }
+
+    25% {
+      color: white;
+      filter: blur(.5em);
+      transform: scalex(1.4) scaley(.9);
+    }
+
+
+    100% {
+      color: black;
+      filter: blur(0em);
+      transform: scalex(1) scaley(1);
+    }
   }
 
   .ClassName {
@@ -490,16 +666,32 @@
 
 <script>
   function loadInfo(target) {
-    var description = target.parentNode.children[0].innerText;
-    var bonus = target.parentNode.children[1].innerText;
-    var exp = target.parentNode.children[2].innerText;
+    var description = target.parentNode.children[0];
+    var bonus = target.parentNode.children[1];
+    var exp = target.parentNode.children[2];
 
-    navigator.clipboard.writeText(description + "\n\n" + bonus + "\n\n" + exp);
+    navigator.clipboard.writeText(description.innerText + "\n\n" + bonus.innerText + "\n\n" + exp.innerText);
+    playFlash(description, bonus, exp)
   }
 
   function loadTech(target) {
     navigator.clipboard.writeText(target.innerText);
-
+    playFlash(target, 0, 0)
   }
 
+  function playFlash(flashTarget1, flashTarget2, flashTarget3) {
+    Array.from(document.getElementsByClassName("selected")).forEach((x) => {
+      x.classList.remove("selected")
+    })
+
+    flashTarget1.classList.add("selected");
+    if (flashTarget2) {
+      flashTarget2.classList.add("selected");
+    }
+    if (flashTarget3) {
+      flashTarget3.classList.add("selected");
+    }
+
+    console.log("Flashed!")
+  }
 </script>
