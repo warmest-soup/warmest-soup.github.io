@@ -384,7 +384,7 @@ function passHour() {
     if (cold.innerText > 0 && cold.dataset.usecold=="True") {
       coldModded = cold.innerText;
       
-    } else if (hot.innerText > 0 && cold.dataset.usehot=="True") {
+    } else if (hot.innerText > 0 && hot.dataset.usehot=="True") {
       hotModded = hot.innerText;
     }
     Hunger.value = Hunger.value - coldModded;
