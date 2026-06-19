@@ -381,10 +381,10 @@ function passHour() {
     var cold = document.getElementById("coldMultiplier");
     var hot = document.getElementById("hotMultiplier");
     
-    if (cold.innerText > 0 && cold.data.usecold=="True") {
+    if (cold.innerText > 0 && cold.dataset.usecold=="True") {
       coldModded = cold.innerText;
       
-    } else if (hot.innerText > 0 && cold.data.usehot=="True") {
+    } else if (hot.innerText > 0 && cold.dataset.usehot=="True") {
       hotModded = hot.innerText;
     }
     Hunger.value = Hunger.value - coldModded;
