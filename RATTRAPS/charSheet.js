@@ -21,7 +21,7 @@ function initializeSheet() {
   SatBars = document.getElementsByClassName("satBar");
   barDups = SatBars.length - 4;
   worldTemp = document.getElementById("Temperature").getAttribute("temp") || 0;
-  console.log(worldTemp); 
+  console.log(worldTemp);
 
   Slots = document.getElementsByClassName("AbilSlot");
   abilities = document.getElementsByClassName("Ability");
@@ -74,10 +74,10 @@ function initializeSheet() {
 function expGoalCalc(real, exp, goal) {
   //Declarations for five-star tags
   var traitTable = goal.parentNode.parentNode.parentNode;
-      var tableRow = goal.parentNode.parentNode
-      var tagIndex=Array.from(tableRow.parentNode.children).indexOf(tableRow);
-  
-  
+  var tableRow = goal.parentNode.parentNode
+  var tagIndex = Array.from(tableRow.parentNode.children).indexOf(tableRow);
+
+
   if (real.value) {
     let numbers = real.value.match(/\d+/g) || 0;
     let parsedNumbers = Array.from(numbers).map((num) =>
@@ -89,35 +89,35 @@ function expGoalCalc(real, exp, goal) {
       var outputTxt = "/" + expGoal;
       exp.style.display = "inline";
       goal.innerText = outputTxt;
-      
+
       //5-Star Tag
-      if(traitTable.parentNode.id == "TraitTable"){
+      if (traitTable.parentNode.id == "TraitTable") {
         traitTable.children[tagIndex].classList.remove("five-star");
-        traitTable.children[tagIndex+1].classList.remove("five-star"); 
-        goal.style.display="inline"   
-        goal.style.transform="scale(1)"      
+        traitTable.children[tagIndex + 1].classList.remove("five-star");
+        goal.style.display = "inline"
+        goal.style.transform = "scale(1)"
       } else {
         traitTable.children[tagIndex].classList.remove("five-star");
       }
-      
-      
+
+
     }
     if ((traitLv || traitLv === 0) && traitLv >= 5) {
       var outputTxt = "★";
       exp.style.display = "none";
       goal.innerText = outputTxt;
-        
-       
+
+
       //5-Star Tag
-      if(traitTable.parentNode.id == "TraitTable"){
+      if (traitTable.parentNode.id == "TraitTable") {
         traitTable.children[tagIndex].classList.add("five-star");
-        traitTable.children[tagIndex+1].classList.add("five-star"); 
-        goal.style.display="inline-block"  
-        goal.style.transform="scale(1.3)"      
+        traitTable.children[tagIndex + 1].classList.add("five-star");
+        goal.style.display = "inline-block"
+        goal.style.transform = "scale(1.3)"
       } else {
         traitTable.children[tagIndex].classList.add("five-star");
       }
-      
+
     }
     if (
       real.value.toLowerCase().includes("c") ||
@@ -129,13 +129,13 @@ function expGoalCalc(real, exp, goal) {
       real.parentNode.parentNode.parentNode.parentNode.classList.add(
         "technique"
       );
-      
+
       //5-Star Tag
-      if(traitTable.parentNode.id == "TraitTable"){
+      if (traitTable.parentNode.id == "TraitTable") {
         traitTable.children[tagIndex].classList.remove("five-star");
-        traitTable.children[tagIndex+1].classList.remove("five-star"); 
-        goal.style.display="inline"   
-        goal.style.transform="scale(1)"      
+        traitTable.children[tagIndex + 1].classList.remove("five-star");
+        goal.style.display = "inline"
+        goal.style.transform = "scale(1)"
       } else {
         traitTable.children[tagIndex].classList.remove("five-star");
       }
@@ -193,7 +193,7 @@ function funcTraits() {
       parseInt(reals[i].value) +
       parseInt(traitBonuses[i].value) +
       parseInt(catBonuses[Math.floor(j)].value);
-    if (adjFunc | adjFunc==0) {
+    if (adjFunc | adjFunc == 0) {
       traitFuncs[i].innerText = adjFunc;
     }
     if (parseInt(traitFuncs[i].innerText) >= 6) {
@@ -296,7 +296,7 @@ function weightGoalCalc() {
 
   //FunctionalTraits
   var bonus = document.getElementById("wgtBonus");
-  var func = document.getElementById("wgtFunc"); 
+  var func = document.getElementById("wgtFunc");
   var invBonus = "";
   var adjFunc = parseInt(real.value) + parseInt(bonus.value);
 
@@ -436,9 +436,9 @@ function passHour() {
 
   timeBG();
   //rust traits
-  var decayables=document.getElementsByClassName("decayTarget");
-  var i=0;
-  while(i<decayables.length){
+  var decayables = document.getElementsByClassName("decayTarget");
+  var i = 0;
+  while (i < decayables.length) {
     rustify(decayables[i]);
     i++;
   }
@@ -508,8 +508,8 @@ function sleep() {
   if (
     confirm(
       "CAREFUL!\nAre you sure you want to sleep for " +
-        sleepHours +
-        " Hours?\nYou should only proceed if you've already woken up."
+      sleepHours +
+      " Hours?\nYou should only proceed if you've already woken up."
     )
   ) {
     /*Sat Decay*/ {
@@ -592,9 +592,9 @@ function sleep() {
 
   timeBG();
   //rust traits
-  var decayables=document.getElementsByClassName("decayTarget");
-  var i=0;
-  while(i<decayables.length){
+  var decayables = document.getElementsByClassName("decayTarget");
+  var i = 0;
+  while (i < decayables.length) {
     rustify(decayables[i]);
     i++;
   }
@@ -783,22 +783,19 @@ function rangeReadout(range, out) {
 }
 //Thermo Bar Functionality
 function thermoBarFunc() {
-  var temp = parseFloat(document.getElementById("Temperature").getAttribute("temp"))/10;
+  var temp = parseFloat(document.getElementById("Temperature").getAttribute("temp")) / 10;
   var wind = parseFloat(document.getElementById("Temperature").getAttribute("wind"));
   var windBar = parseFloat(document.getElementById("Temperature").getAttribute("windBar"));
   var bar = document.getElementById("ThermBar");
   var fill = document.getElementById("ThermFill");
-  var ins = 0;
-  if(document.getElementById("InsRes").innerText) {
-    var ins = parseInt(document.getElementById("InsRes").innerText)/10;
-  }
+  var ins = parseInt(document.getElementById("InsRes").innerText) / 10;
   var abs = parseInt(document.getElementById("AbsRes").innerText);
-  
+
   var windAdjust;
-  if(windBar>=wind){
-    windAdjust=Math.max(0, (wind-abs)*5);
-  } else windAdjust=0;
-  
+  if (windBar >= wind) {
+    windAdjust = Math.max(0, (wind - abs) * 5);
+  } else windAdjust = 0;
+
   var effects = bar.parentNode.parentNode.children[0].children;
   var context = parseInt(
     document.getElementById("TempContextReadout").innerText
@@ -922,14 +919,14 @@ function createItem() {
     .insertAdjacentHTML(
       "beforeend",
       "<div id='" +
-        itemName.trim() +
-        "' class='INV item' data-size='" +
-        itemStats[0].value +
-        "' data-weight='" +
-        itemStats[1].value +
-        "' draggable='true' ondragstart='INVDragStart(event)'>" +
-        itemName +
-        "</div>"
+      itemName.trim() +
+      "' class='INV item' data-size='" +
+      itemStats[0].value +
+      "' data-weight='" +
+      itemStats[1].value +
+      "' draggable='true' ondragstart='INVDragStart(event)'>" +
+      itemName +
+      "</div>"
     );
   var newItem = document.getElementById("INVcolumn3").lastChild;
 
@@ -1046,8 +1043,8 @@ function createItem() {
       }
       pockets[p].push(
         "<div class='invContainerBot'> <span class='INVconWGT'>0 /</span><span class='INVconLimit'>" +
-          invStats[2 + p * 3] +
-          "</span></div>"
+        invStats[2 + p * 3] +
+        "</span></div>"
       );
 
       p++;
@@ -1116,7 +1113,7 @@ function PKTweight() {
     var pktLoad;
     var pktLimit;
     var pktReadout;
-    
+
 
     while (j < allPockets[i].children.length - 1) {
       var slot = allPockets[i].children[j];
@@ -1137,38 +1134,38 @@ function PKTweight() {
           pktLoad.reduce((acc, x) => acc + x) + " / ";
     } else
       allPockets[i].getElementsByClassName("INVconWGT")[0].innerText = "0 /";
-    
-    pktLoad=parseInt(allPockets[i].getElementsByClassName("INVconWGT")[0].innerText);
-    pktLimit=parseInt(allPockets[i].getElementsByClassName("INVconLimit")[0].innerText);
-    
-    if(pktLoad<pktLimit){
-      allPockets[i].getElementsByClassName("INVconLimit")[0].parentNode.style.color="black";
-    }else allPockets[i].getElementsByClassName("INVconLimit")[0].parentNode.style.color="red";
+
+    pktLoad = parseInt(allPockets[i].getElementsByClassName("INVconWGT")[0].innerText);
+    pktLimit = parseInt(allPockets[i].getElementsByClassName("INVconLimit")[0].innerText);
+
+    if (pktLoad < pktLimit) {
+      allPockets[i].getElementsByClassName("INVconLimit")[0].parentNode.style.color = "black";
+    } else allPockets[i].getElementsByClassName("INVconLimit")[0].parentNode.style.color = "red";
 
     i++;
   }
 }
 //INV Bonus
-function invBonus(){
+function invBonus() {
   var load = parseFloat(document.getElementById("LoadWeight").innerText);
   var limit = parseFloat(document.getElementById("CarryWeight").innerText);
-  var weight=document.getElementById("wgtFunc");
-  
-  var encumberance=Math.floor(load/limit);
-  
-  if(encumberance){
-    document.getElementById("wgtFunc").style.color="red";
-    weight.innerText=(
+  var weight = document.getElementById("wgtFunc");
+
+  var encumberance = Math.floor(load / limit);
+
+  if (encumberance) {
+    document.getElementById("wgtFunc").style.color = "red";
+    weight.innerText = (
       parseInt(document.getElementById("wgtReal").value) +
       parseInt(document.getElementById("wgtBonus").value) +
-      encumberance   );
-  } else{
-    document.getElementById("wgtFunc").style.color="black";
-    weight.innerText=(
+      encumberance);
+  } else {
+    document.getElementById("wgtFunc").style.color = "black";
+    weight.innerText = (
       parseInt(document.getElementById("wgtReal").value) +
       parseInt(document.getElementById("wgtBonus").value));
   }
-  
+
 }
 //Populate Resistances
 function addRes(item) {
@@ -1190,14 +1187,14 @@ function addRes(item) {
     resistances.insertAdjacentHTML(
       "beforeEnd",
       "<tr><td class='ins'>" +
-        armor[3] +
-        "</td><td class='abs'>" +
-        armor[4] +
-        "</td><td class='cnd'>" +
-        armor[5] +
-        "</td><td class='bri'>" +
-        armor[6] +
-        "</td></tr>"
+      armor[3] +
+      "</td><td class='abs'>" +
+      armor[4] +
+      "</td><td class='cnd'>" +
+      armor[5] +
+      "</td><td class='bri'>" +
+      armor[6] +
+      "</td></tr>"
     );
   } else {
     //add Spacer
@@ -1238,19 +1235,19 @@ function removeRes(item) {
 }
 //SetINV Carryweight
 function carryWeight() {
-  var weight=document.getElementById("InvStats");
-  var limit=parseInt(document.getElementById("CarryWeight").innerText);
+  var weight = document.getElementById("InvStats");
+  var limit = parseInt(document.getElementById("CarryWeight").innerText);
   var load = Array.from(pktWeights).map((x) => parseInt(x.innerText));
-  var loadTotal=load.reduce(
+  var loadTotal = load.reduce(
     (acc, x) => acc + x,
     0
   );
   document.getElementById("LoadWeight").innerText = loadTotal;
-  if(limit>=loadTotal){
-    weight.style.color="black";
+  if (limit >= loadTotal) {
+    weight.style.color = "black";
     invBonus();
-  }else{
-    weight.style.color="red";
+  } else {
+    weight.style.color = "red";
     invBonus();
   }
 }
@@ -1291,11 +1288,19 @@ function resCalc() {
   if (!bri) {
     bri = 0;
   }
-
-  document.getElementById("InsRes").innerText = ins;
-  document.getElementById("AbsRes").innerText = abs;
-  document.getElementById("CndRes").innerText = cnd;
-  document.getElementById("BriRes").innerText = bri;
+  var res = document.getElementById("InsRes")
+  if (res.dataset.useins == "true") {
+    document.getElementById("InsRes").innerText = ins;
+  } else document.getElementById("InsRes").innerText = 0;
+  if (res.dataset.useabs == "true") {
+    document.getElementById("AbsRes").innerText = abs;
+  } else document.getElementById("AbsRes").innerText = 0;
+  if (res.dataset.usecnd == "true") {
+    document.getElementById("CndRes").innerText = cnd;
+  } else document.getElementById("CndRes").innerText = 0;
+  if (res.dataset.usebri == "true") {
+    document.getElementById("BriRes").innerText = bri;
+  } else document.getElementById("BriRes").innerText = 0;
 }
 //Unequipping
 function unequip() {
@@ -1541,7 +1546,7 @@ function weaponDamage() {
 
   swingDam.innerText = Math.round(
     ((spd * (lng + wgt) * (dex + edg) * (power * power + 7)) / 16) *
-      (1 + 0.5 * swg)
+    (1 + 0.5 * swg)
   );
   thrustDam.innerText = Math.round(
     (((spd + dex) * (dex + pnt) * (power * power + 7)) / 16) * (1 + 0.5 * thr)
@@ -1583,10 +1588,10 @@ function weaponListUpdate() {
       .insertAdjacentHTML(
         "beforeEnd",
         "<option value='" +
-          tackedWeapons[i].id +
-          "'>" +
-          tackedWeapons[i].id +
-          "</option>"
+        tackedWeapons[i].id +
+        "'>" +
+        tackedWeapons[i].id +
+        "</option>"
       );
 
     if (tackedWeapons[i].id == currentEquip) {
@@ -1714,15 +1719,15 @@ function saveChips() {
   chips.join(", ");
   weapon.dataset.chips = chips;
 }
-function saveSharp(){
-  var equipped=document.getElementById("WeaponList").value;
-  var weapon=document.getElementById(equipped);
-  var current=document.getElementsByClassName("shpIn");
+function saveSharp() {
+  var equipped = document.getElementById("WeaponList").value;
+  var weapon = document.getElementById(equipped);
+  var current = document.getElementsByClassName("shpIn");
   //3=e 4=p
-  var stats=weapon.dataset.weaponstats.split(", ");
-  stats[3]=current[0].value;
-  stats[4]=current[1].value;
-  weapon.dataset.weaponstats=stats.join(", ");
+  var stats = weapon.dataset.weaponstats.split(", ");
+  stats[3] = current[0].value;
+  stats[4] = current[1].value;
+  weapon.dataset.weaponstats = stats.join(", ");
 }
 //Damage
 function damageCalc() {
@@ -1926,25 +1931,25 @@ function permanantBleed() {
     num.removeAttribute("style");
   }
 }
-function injuryStatus(){
-  var limbs=document.getElementsByClassName("InjuryDisplay");
-  var selects=Array.from(document.getElementsByClassName("agInjuryStatus"));
-  var injury = [selects[0], selects[2],selects[1],selects[4],selects[3],selects[5]];
-  
-  var i=0;
-  while(i<limbs.length){
-      if(injury[i].value=="Fine"){
-        limbs[i].removeAttribute("style");
-        limbs[i].style.textDecoration="none";
-        limbs[i].style.color="black";
-      } else if(injury[i].value=="INJ"){
-        limbs[i].removeAttribute("style");
-        limbs[i].style.textDecoration="line-through";
-        limbs[i].style.color="red";
-      } else if(injury[i].value=="CRP"){
-        limbs[i].style.textDecoration="line-through";
-        limbs[i].style.color="black";
-        limbs[i].style.background="red";
+function injuryStatus() {
+  var limbs = document.getElementsByClassName("InjuryDisplay");
+  var selects = Array.from(document.getElementsByClassName("agInjuryStatus"));
+  var injury = [selects[0], selects[2], selects[1], selects[4], selects[3], selects[5]];
+
+  var i = 0;
+  while (i < limbs.length) {
+    if (injury[i].value == "Fine") {
+      limbs[i].removeAttribute("style");
+      limbs[i].style.textDecoration = "none";
+      limbs[i].style.color = "black";
+    } else if (injury[i].value == "INJ") {
+      limbs[i].removeAttribute("style");
+      limbs[i].style.textDecoration = "line-through";
+      limbs[i].style.color = "red";
+    } else if (injury[i].value == "CRP") {
+      limbs[i].style.textDecoration = "line-through";
+      limbs[i].style.color = "black";
+      limbs[i].style.background = "red";
     }
     i++
   }
@@ -1958,8 +1963,8 @@ function timeBG() {
   var hue = 0;
 
   if (5 < hour && hour < 18) {
-      invert = 0;
-    } else invert = 100;
+    invert = 0;
+  } else invert = 100;
   if (-1 < hour && hour < 13) {
     //get brighter start from darkest
     // DAY
@@ -1977,7 +1982,7 @@ function timeBG() {
       "%) hue-rotate(" +
       hue +
       "deg)";
-    
+
   } else {
     //NIGHT
     hour = 12 - (hour - 12);
@@ -1995,361 +2000,362 @@ function timeBG() {
       "%) hue-rotate(" +
       hue +
       "deg)";
-    
+
   }
-  
+
   document.body.style.backdropFilter = setting;
 }
 //customcolors
-function setSheetColor(){
-  var userHue=document.getElementById("CustomColor").dataset.userhue;
-  var userBri=document.getElementById("CustomColor").dataset.userbri;
-  var userOpa=document.getElementById("CustomColor").dataset.useropa;
-  var color="hsl("+userHue+" 30% "+userBri+" / "+userOpa+")"
-  
-  var userHue2=document.getElementById("CustomColor").dataset.userhue2;
-  var color2="hsl("+userHue2+"deg 15% 60%)"
-  
+function setSheetColor() {
+  var userHue = document.getElementById("CustomColor").dataset.userhue;
+  var userBri = document.getElementById("CustomColor").dataset.userbri;
+  var userOpa = document.getElementById("CustomColor").dataset.useropa;
+  var color = "hsl(" + userHue + " 30% " + userBri + " / " + userOpa + ")"
+
+  var userHue2 = document.getElementById("CustomColor").dataset.userhue2;
+  var color2 = "hsl(" + userHue2 + "deg 15% 60%)"
+
   document.documentElement.style.setProperty("--userColor", color);
   document.documentElement.style.setProperty("--darkCol", color2);
 }
-function changeUserColor(hue,bri,opa){
-  document.getElementById("CustomColor").dataset.userhue=hue+"deg";
-  document.getElementById("CustomColor").dataset.userbri=bri+"%";
-  document.getElementById("CustomColor").dataset.useropa=opa+"%";
+function changeUserColor(hue, bri, opa) {
+  document.getElementById("CustomColor").dataset.userhue = hue + "deg";
+  document.getElementById("CustomColor").dataset.userbri = bri + "%";
+  document.getElementById("CustomColor").dataset.useropa = opa + "%";
   setSheetColor();
 }
-function changeUserColor2(hue){
-  document.getElementById("CustomColor").dataset.userhue2=hue;
+function changeUserColor2(hue) {
+  document.getElementById("CustomColor").dataset.userhue2 = hue;
   setSheetColor();
 }
-function setBG(){
-  var moving=document.getElementById("CustomColor").dataset.bg;
-  if(moving=="true"){ document.documentElement.style.backgroundImage="url('https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/SheetABGg.gif')";
-} else {
-    document.documentElement.style.backgroundImage="url('https://warmest-soup.github.io/Assets/Images/Sheet%20Grand%20BG.png')";
+function setBG() {
+  var moving = document.getElementById("CustomColor").dataset.bg;
+  if (moving == "true") {
+    document.documentElement.style.backgroundImage = "url('https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/SheetABGg.gif')";
+  } else {
+    document.documentElement.style.backgroundImage = "url('https://warmest-soup.github.io/Assets/Images/Sheet%20Grand%20BG.png')";
   };
 }
-function userBG(){
-  var BG=document.getElementById("userBG").checked;
-  
-  if(BG){
-    document.getElementById("CustomColor").dataset.bg="true";
-  } else document.getElementById("CustomColor").dataset.bg="false";
-  
+function userBG() {
+  var BG = document.getElementById("userBG").checked;
+
+  if (BG) {
+    document.getElementById("CustomColor").dataset.bg = "true";
+  } else document.getElementById("CustomColor").dataset.bg = "false";
+
   setBG();
 }
 //Money Total
-function moneyCalc(){
-  var moneyDisplay=document.getElementById("moneyTracker");
-  var invContents=document.getElementById("invDisContents").innerHTML;
-  
-  var moneyVals=invContents.match(/\$\d+\.?\d{0,2}|\d{0,2}¢/g)||["0"];
-  moneyVals=moneyVals.map((x)=> {
-    if(x.includes("¢")){
-      return parseFloat(x)/100;
-    } else return parseFloat(x.replace("$",""));
+function moneyCalc() {
+  var moneyDisplay = document.getElementById("moneyTracker");
+  var invContents = document.getElementById("invDisContents").innerHTML;
+
+  var moneyVals = invContents.match(/\$\d+\.?\d{0,2}|\d{0,2}¢/g) || ["0"];
+  moneyVals = moneyVals.map((x) => {
+    if (x.includes("¢")) {
+      return parseFloat(x) / 100;
+    } else return parseFloat(x.replace("$", ""));
   })
-  var moneyTotal=moneyVals.reduce((acc, x)=>acc+(x || 0) ,0);
-  
-  moneyDisplay.placeholder="$"+moneyTotal.toFixed(2)+"¢";
-  
+  var moneyTotal = moneyVals.reduce((acc, x) => acc + (x || 0), 0);
+
+  moneyDisplay.placeholder = "$" + moneyTotal.toFixed(2) + "¢";
+
 }
 //quirks
-function quirkColor(){
-  var inc=event.target;
-  if(inc.value.toUpperCase()=="A"){
+function quirkColor() {
+  var inc = event.target;
+  if (inc.value.toUpperCase() == "A") {
     inc.classList.add("advantage");
     inc.classList.remove("quirk");
     inc.classList.remove("penalty");
-  } else if(inc.value.toUpperCase()=="P"){
+  } else if (inc.value.toUpperCase() == "P") {
     inc.classList.add("penalty");
     inc.classList.remove("quirk");
     inc.classList.remove("advantage");
-  } else if(inc.value.toUpperCase()=="Q"){
+  } else if (inc.value.toUpperCase() == "Q") {
     inc.classList.add("quirk");
     inc.classList.remove("advantage");
     inc.classList.remove("penalty");
   } else {
-    inc.value="";
+    inc.value = "";
     inc.classList.remove("advantage");
     inc.classList.remove("quirk");
     inc.classList.remove("penalty");
   }
 }
 //Trait Coloring.
-function rustify(rusty){
-  var leadRow=rusty.parentNode.parentNode;
-  var header=leadRow.parentNode;
-  var targetIndex=Array.from(header.children).indexOf(leadRow);
-  if(rusty.value==-1){
+function rustify(rusty) {
+  var leadRow = rusty.parentNode.parentNode;
+  var header = leadRow.parentNode;
+  var targetIndex = Array.from(header.children).indexOf(leadRow);
+  if (rusty.value == -1) {
     header.children[targetIndex].classList.add("Rusty");
-    header.children[targetIndex+1].classList.add("Rusty");
+    header.children[targetIndex + 1].classList.add("Rusty");
   } else {
     header.children[targetIndex].classList.remove("Rusty");
-    header.children[targetIndex+1].classList.remove("Rusty");
+    header.children[targetIndex + 1].classList.remove("Rusty");
   }
 }
 //DP assignment
-function dpCalc(){
-  var con=document.getElementById("conFunc").innerText;
-  document.getElementById("DPTotal").innerText="/"+con;
+function dpCalc() {
+  var con = document.getElementById("conFunc").innerText;
+  document.getElementById("DPTotal").innerText = "/" + con;
 }
 //greater Bleed Light
-function greaterBleed(){
-  var greatBleed=document.getElementById("FatalBleedCounter");
-  if(greatBleed.value>0){
+function greaterBleed() {
+  var greatBleed = document.getElementById("FatalBleedCounter");
+  if (greatBleed.value > 0) {
     greatBleed.parentNode.classList.add("Bleeding");
   } else greatBleed.parentNode.classList.remove("Bleeding");
 }
 //save checkbox
-function toggleCheck(box){
-  if(box.checked==true){
-    box.setAttribute("checked","true");
-  } else box.setAttribute("checked","false");
+function toggleCheck(box) {
+  if (box.checked == true) {
+    box.setAttribute("checked", "true");
+  } else box.setAttribute("checked", "false");
 }
 //moments handling
-function moments(){
+function moments() {
   //get combat moments, speed func, and combat speed modifier
-  var moments=Array.from(document.getElementsByClassName("moment"));
-  var actions=moments.map((x)=> x.children[1].value);
-  var hitMom=moments.map((x)=> x.children[2].checked);
-  var spd=parseInt(document.getElementById("spdFunc").innerText);
-  var roundBonus=parseInt(document.getElementById("spdComBonus").value);
-  
+  var moments = Array.from(document.getElementsByClassName("moment"));
+  var actions = moments.map((x) => x.children[1].value);
+  var hitMom = moments.map((x) => x.children[2].checked);
+  var spd = parseInt(document.getElementById("spdFunc").innerText);
+  var roundBonus = parseInt(document.getElementById("spdComBonus").value);
+
   //total speed
-  var spdTotal=spd+roundBonus;
+  var spdTotal = spd + roundBonus;
   //clear combat moments
-  moments.forEach((x)=> x.remove());
-  
-  if(spdTotal>actions.length){
-    var j=0;
-    while(j<spdTotal){
+  moments.forEach((x) => x.remove());
+
+  if (spdTotal > actions.length) {
+    var j = 0;
+    while (j < spdTotal) {
       actions.push("");
       j++;
     }
   }
-  
+
   //loop to create new moments, with logged actions preserved.
-  var i=0;
-  while(i<spdTotal){
+  var i = 0;
+  while (i < spdTotal) {
     document.getElementById("ComMoments").insertAdjacentHTML("beforeEnd",
-            "<div class='moment'>"+
-            "<div class='actionCounter'>〇</div>"+
-            "<input class='action SaveInput' type='text' value='"+actions[i]+"'>"+
-            "<input class='hitMom' type='checkbox' onChange='toggleCheck(this)'>"+
-            "</div>");
-    if(hitMom[i]){
+      "<div class='moment'>" +
+      "<div class='actionCounter'>〇</div>" +
+      "<input class='action SaveInput' type='text' value='" + actions[i] + "'>" +
+      "<input class='hitMom' type='checkbox' onChange='toggleCheck(this)'>" +
+      "</div>");
+    if (hitMom[i]) {
       document.getElementById("ComMoments").children[i]
-        .children[2].setAttribute("checked","checked");
+        .children[2].setAttribute("checked", "checked");
     }
-    
+
     i++;
   }
   momentAwareness();
   actIndicator();
   hitMoment();
 }
-function momentAwareness(){
-  var per=parseInt(document.getElementById("perFunc").innerText);
-  var perBonus=parseInt(document.getElementById("perComBonus").value);
-  var moments=Array.from(document.getElementsByClassName("moment"));
-  var perTotal=per+perBonus;
-  if(perTotal>5){perTotal=5;} else if(perTotal<1){perTotal=1}
-  var missingPer=6-perTotal;
-  
-  moments.forEach((x)=>{
-    if((Math.floor((moments.indexOf(x)+1)/missingPer))%2==0){
+function momentAwareness() {
+  var per = parseInt(document.getElementById("perFunc").innerText);
+  var perBonus = parseInt(document.getElementById("perComBonus").value);
+  var moments = Array.from(document.getElementsByClassName("moment"));
+  var perTotal = per + perBonus;
+  if (perTotal > 5) { perTotal = 5; } else if (perTotal < 1) { perTotal = 1 }
+  var missingPer = 6 - perTotal;
+
+  moments.forEach((x) => {
+    if ((Math.floor((moments.indexOf(x) + 1) / missingPer)) % 2 == 0) {
       x.classList.add("perChunk");
-    } else {x.classList.remove("perChunk");}
+    } else { x.classList.remove("perChunk"); }
   });
-  
+
 }
-function actIndicator(){
+function actIndicator() {
   //if event is in an action field
-  var momentField=document.getElementsByClassName("action");
+  var momentField = document.getElementsByClassName("action");
   //navigate nodes to indicator
-  var indicator=document.getElementsByClassName("actionCounter");
+  var indicator = document.getElementsByClassName("actionCounter");
   //set based on event contents.
-  var i=0;
-  while(i<momentField.length){
-    if(momentField[i].value && momentField[i].value!="-"){  
-      indicator[i].innerText="⬤";
-    } else indicator[i].innerText="〇";
-    
-    if(momentField[i].value=="-"){
-      momentField[i].parentNode.style.filter="brightness(50%)"
+  var i = 0;
+  while (i < momentField.length) {
+    if (momentField[i].value && momentField[i].value != "-") {
+      indicator[i].innerText = "⬤";
+    } else indicator[i].innerText = "〇";
+
+    if (momentField[i].value == "-") {
+      momentField[i].parentNode.style.filter = "brightness(50%)"
     } else momentField[i].parentNode.removeAttribute("style");
-    
+
     i++;
   }
   actionCounter();
 }
-function actionCounter(){
+function actionCounter() {
   //get both sides of the action counter
-  var taken=document.getElementById("aTaken");
-  var limit=document.getElementById("aMax");
-  var dex=parseInt(document.getElementById("dexFunc").innerText);
-  var dexBonus=parseInt(document.getElementById("dexComBonus").value);
-  
-  var dexTotal=dex+dexBonus;
-  
-  limit.innerText=dexTotal;
-  limit=parseInt(limit.innerText);
-  
+  var taken = document.getElementById("aTaken");
+  var limit = document.getElementById("aMax");
+  var dex = parseInt(document.getElementById("dexFunc").innerText);
+  var dexBonus = parseInt(document.getElementById("dexComBonus").value);
+
+  var dexTotal = dex + dexBonus;
+
+  limit.innerText = dexTotal;
+  limit = parseInt(limit.innerText);
+
   //get all moment values
-  var indicators=Array.from(document.getElementsByClassName("actionCounter"));
-  
+  var indicators = Array.from(document.getElementsByClassName("actionCounter"));
+
   //count used moments.
-  var takenTally=indicators.filter(x => x.innerText=="⬤");
-  
-  taken.innerText=takenTally.length;
-  taken=parseInt(taken.innerText);
+  var takenTally = indicators.filter(x => x.innerText == "⬤");
+
+  taken.innerText = takenTally.length;
+  taken = parseInt(taken.innerText);
   //compare used actions to limit, and turn red if over.
-  if(taken>limit){
-    document.getElementById("actionCounter").style.background="red";
-    document.getElementById("actionCounter").style.color="white";
-    takenTally.forEach((x)=> x.parentNode.classList.add("tooManyAct"));
+  if (taken > limit) {
+    document.getElementById("actionCounter").style.background = "red";
+    document.getElementById("actionCounter").style.color = "white";
+    takenTally.forEach((x) => x.parentNode.classList.add("tooManyAct"));
   } else {
     document.getElementById("actionCounter").removeAttribute("style");
-    indicators.forEach((x)=> x.parentNode.classList.remove("tooManyAct"));
-  } 
+    indicators.forEach((x) => x.parentNode.classList.remove("tooManyAct"));
+  }
 }
-function nextRound(){
-  if(confirm("Are you sure you want to proceed to the next round, and recieve damage from Lesser Bleeds?")){
+function nextRound() {
+  if (confirm("Are you sure you want to proceed to the next round, and recieve damage from Lesser Bleeds?")) {
     //Put up a warning to confirm they meant to hit next..
-  //clear all ticket spaces, including temporary buffs.l
-  Array.from(document.getElementsByClassName("action"))
-    .forEach((x)=>x.value="");
-    
+    //clear all ticket spaces, including temporary buffs.l
+    Array.from(document.getElementsByClassName("action"))
+      .forEach((x) => x.value = "");
+
     Array.from(document.getElementsByClassName("hitMom"))
-    .forEach((x)=>x.checked=false);
-  
-  
-  document.getElementById("dexComBonus").value="+0";
-  saveDropdown(document.getElementById("dexComBonus"));
-  document.getElementById("spdComBonus").value="+0";
-  saveDropdown(document.getElementById("spdComBonus"));
-  document.getElementById("perComBonus").value="+0";
-  saveDropdown(document.getElementById("perComBonus"));
-  //iterate lesser bleeds and reduce them if they aren't permanant.
-  actIndicator();
-  actionCounter();
-  moments();
-  momentAwareness();
-  
-  //Lesser Bleeds
-  var bleeds=Array.from(document.getElementsByClassName("LesserBleed"));
-  var hp=document.getElementById("HP");
-  
-  var bloodLoss=bleeds.filter((x)=> x.value !="");
-  
-  hp.value=hp.value-bloodLoss.length;
-  bleeds.forEach((x)=>{
-    if(!x.parentNode.children[0].checked && x.value){
-      x.value--;
+      .forEach((x) => x.checked = false);
+
+
+    document.getElementById("dexComBonus").value = "+0";
+    saveDropdown(document.getElementById("dexComBonus"));
+    document.getElementById("spdComBonus").value = "+0";
+    saveDropdown(document.getElementById("spdComBonus"));
+    document.getElementById("perComBonus").value = "+0";
+    saveDropdown(document.getElementById("perComBonus"));
+    //iterate lesser bleeds and reduce them if they aren't permanant.
+    actIndicator();
+    actionCounter();
+    moments();
+    momentAwareness();
+
+    //Lesser Bleeds
+    var bleeds = Array.from(document.getElementsByClassName("LesserBleed"));
+    var hp = document.getElementById("HP");
+
+    var bloodLoss = bleeds.filter((x) => x.value != "");
+
+    hp.value = hp.value - bloodLoss.length;
+    bleeds.forEach((x) => {
+      if (!x.parentNode.children[0].checked && x.value) {
+        x.value--;
+      }
+      if (x.value == 0) (x.value = "");
+    })
+
+    //Iterate Round Count
+    var round = document.getElementById("roundCount");
+    if (round.value) {
+      round.value = parseInt(round.value) + 1;
     }
-    if(x.value==0)(x.value="");
-  })
-  
-  //Iterate Round Count
-  var round = document.getElementById("roundCount");
-  if(round.value){
-    round.value = parseInt(round.value)+1;     
-  } 
   }
 
 }
-function hitMoment(){
-  var hitMarks=Array.from(document.getElementsByClassName("hitMom"));
-  
-  hitMarks.forEach((x)=>{
-    if(x.checked){
+function hitMoment() {
+  var hitMarks = Array.from(document.getElementsByClassName("hitMom"));
+
+  hitMarks.forEach((x) => {
+    if (x.checked) {
       x.parentNode.classList.add("hitMoment");
-    }else x.parentNode.classList.remove("hitMoment");
+    } else x.parentNode.classList.remove("hitMoment");
   })
-  
+
 }
 //maps
-function updateMap(map){
-  var currentMap=document.getElementById("currentMap").value;
-  map.outerHTML="<iframe id='map' src='https://docs.google.com/spreadsheets/d/1HgNWlmeqJEn36UjhSAx_NUbUqYozAYtUztbsXuJC21Q/htmlembed/sheet?gid="+currentMap+"'></iframe></div>"
+function updateMap(map) {
+  var currentMap = document.getElementById("currentMap").value;
+  map.outerHTML = "<iframe id='map' src='https://docs.google.com/spreadsheets/d/1HgNWlmeqJEn36UjhSAx_NUbUqYozAYtUztbsXuJC21Q/htmlembed/sheet?gid=" + currentMap + "'></iframe></div>"
 }
-function addMap(name, id){
-  if(id.value && name.value){
-    var mapList=document.getElementById("currentMap");
+function addMap(name, id) {
+  if (id.value && name.value) {
+    var mapList = document.getElementById("currentMap");
     mapList.insertAdjacentHTML("beforeEnd",
-                               "<option value='"+id.value+"'>"+name.value+"</option>"
-                              );
-    id.value="";
-    name.value="";
+      "<option value='" + id.value + "'>" + name.value + "</option>"
+    );
+    id.value = "";
+    name.value = "";
   }
 }
 // files
-function useFile(file){
+function useFile(file) {
   file.children[1].toggleAttribute("Hidden")
-} 
+}
 // Trait Color display
-function colorTrait(){
+function colorTrait() {
   var traits = Array.from(document.getElementsByClassName("traitFunc"));
-  
-  traits.forEach((x)=>{
-    var value= parseInt(x.innerText);
-    
-    x.style.background="hsl(from var(--darkCol) h s "+
-    ((100/6 * value)+10)
-    +"% /100%)";
-    
+
+  traits.forEach((x) => {
+    var value = parseInt(x.innerText);
+
+    x.style.background = "hsl(from var(--darkCol) h s " +
+      ((100 / 6 * value) + 10)
+      + "% /100%)";
+
   });
-  
+
 }
 //Load empty sheet
-function blankSheet(){
+function blankSheet() {
   fetch("https://warmest-soup.github.io/RATTRAPS/BlankSheet.txt")
-  .then(x => x.text())
-  .then(x => {
-    if(confirm("Loading a new sheet will discard all unsaved changes to the currently loaded sheet. \n\nAre you sure you'd like to load a blank sheet?")){
-      var content = document.getElementById("subSheet");
-      content.innerHTML=x;
-      initializeSheet();
-    }
-  }) 
+    .then(x => x.text())
+    .then(x => {
+      if (confirm("Loading a new sheet will discard all unsaved changes to the currently loaded sheet. \n\nAre you sure you'd like to load a blank sheet?")) {
+        var content = document.getElementById("subSheet");
+        content.innerHTML = x;
+        initializeSheet();
+      }
+    })
 }
 //set time & day
-function setTime(){
+function setTime() {
   var time = document.getElementById("CurrentHour");
-  
+
   var newTime = prompt("(The GM will be notified of this change) \n Change hour to:");
-  newTime=parseInt(newTime);
-  if(!newTime && newTime!="0"){newTime=time.innerText;} 
-  time.innerText=String(newTime).padStart(2,"0");
-  weather(document.getElementById("CurrentHour")); 
+  newTime = parseInt(newTime);
+  if (!newTime && newTime != "0") { newTime = time.innerText; }
+  time.innerText = String(newTime).padStart(2, "0");
+  weather(document.getElementById("CurrentHour"));
 }
-function setDay(){
+function setDay() {
   var day = document.getElementById("currentDay");
-  
+
   var newDay = prompt("(The GM will be notified of this change) \n Change Day count to:");
-  newDay=parseInt(newDay);
-  if(!newDay){newDay=day.innerText;}
-  day.innerText=String(newDay).padStart(4,"0");
+  newDay = parseInt(newDay);
+  if (!newDay) { newDay = day.innerText; }
+  day.innerText = String(newDay).padStart(4, "0");
   weather(document.getElementById("CurrentHour"));
 }
 //Hide Login
-function hideLogin(button,user,key){
-  console.log(key) 
-  console.log(user) 
-  if(button.dataset.value=="1"){
-    button.innerText="◠";
-    button.dataset.value="0";
-    user.setAttribute("Type","Password");
-    key.setAttribute("Type","Password");
-  } else{
-    button.innerText="◉";
-    button.dataset.value="1";
-    user.removeAttribute("Type"); 
+function hideLogin(button, user, key) {
+  console.log(key)
+  console.log(user)
+  if (button.dataset.value == "1") {
+    button.innerText = "◠";
+    button.dataset.value = "0";
+    user.setAttribute("Type", "Password");
+    key.setAttribute("Type", "Password");
+  } else {
+    button.innerText = "◉";
+    button.dataset.value = "1";
+    user.removeAttribute("Type");
     key.removeAttribute("Type");
   }
-  
+
 }
 
 
@@ -2444,43 +2450,43 @@ document
     }
     if (
       event.target.parentNode.parentNode
-      .parentNode.parentNode.classList =="armorGrid") {
+        .parentNode.parentNode.classList == "armorGrid") {
       updateArmorBreaks();
     }
     if (event.target.classList.contains("BleedState")) {
       permanantBleed();
     }
-    if(event.target.classList.contains("agInjuryStatus")){
+    if (event.target.classList.contains("agInjuryStatus")) {
       injuryStatus();
     }
-    if(event.target.classList.contains("shpIn")){
+    if (event.target.classList.contains("shpIn")) {
       saveSharp();
     }
-    if(event.target.classList.contains("incSpot")){
+    if (event.target.classList.contains("incSpot")) {
       quirkColor();
     }
-    if(event.target.id.includes("Exp")){
+    if (event.target.id.includes("Exp")) {
       rustify(event.target);
     }
-    if(event.target.id.includes("FatalBleedCounter")){
+    if (event.target.id.includes("FatalBleedCounter")) {
       greaterBleed();
     }
-    if(event.target.id.includes("spd") ||
-      event.target.id=="athBonus"){
+    if (event.target.id.includes("spd") ||
+      event.target.id == "athBonus") {
       moments();
     }
-    if(event.target.id.includes("per") ||
-       event.target.id=="aweBonus"){
+    if (event.target.id.includes("per") ||
+      event.target.id == "aweBonus") {
       momentAwareness();
     }
-    if(event.target.classList.contains("action")){
+    if (event.target.classList.contains("action")) {
       actIndicator();
     }
-    if(event.target.id.includes("dex") ||
-      event.target.id=="athBonus"){
-        actionCounter();
-      }
-    if(event.target.classList.contains("hitMom")){
+    if (event.target.id.includes("dex") ||
+      event.target.id == "athBonus") {
+      actionCounter();
+    }
+    if (event.target.classList.contains("hitMom")) {
       hitMoment();
     }
 
@@ -2510,9 +2516,9 @@ document
   function abilDragStart(event) {
     leftBehind = event.target.parentNode;
     event.dataTransfer.setData("Text", event.target.id);
-    
+
   }
-  
+
   function abilDrop(event) {
     event.preventDefault();
 
@@ -2591,10 +2597,10 @@ document
     if (
       (INVdropType == "QI") & event.target.classList.contains("INVopen") ||
       event.target.classList.contains("INVopen") &
-        !(
-          itemPickUp.classList.contains("invContainer") &
-          !event.target.classList.contains("INVcols")
-        )
+      !(
+        itemPickUp.classList.contains("invContainer") &
+        !event.target.classList.contains("INVcols")
+      )
     ) {
       //Quick Item Drop Function
       if (INVdropType == "QI") {
@@ -2701,10 +2707,10 @@ document
             .insertAdjacentHTML(
               "beforeend",
               "<div id='" +
-                pkt[0] +
-                "' class='INV invContainer' draggable='true' ondragstart='INVDragStart(event)'> <div class='invContainerTop'> " +
-                pkt[0].replaceAll("-", " ") +
-                " </div>"
+              pkt[0] +
+              "' class='INV invContainer' draggable='true' ondragstart='INVDragStart(event)'> <div class='invContainerTop'> " +
+              pkt[0].replaceAll("-", " ") +
+              " </div>"
             );
           //Drawing slots
           var i = 1;
@@ -2712,8 +2718,8 @@ document
             document
               .getElementById(pkt[0])
               .children[
-                document.getElementById(pkt[0]).children.length - 1
-              ].insertAdjacentHTML("afterend", pkt[i].replace(/•/g, "○"));
+              document.getElementById(pkt[0]).children.length - 1
+            ].insertAdjacentHTML("afterend", pkt[i].replace(/•/g, "○"));
             i++;
           }
           j++;
@@ -2735,11 +2741,11 @@ document
           tCol.insertAdjacentHTML(
             "beforeEnd",
             "<div class=' tech " +
-              itemPickUp.id +
-              "Tech" +
-              "'>" +
-              techs[i] +
-              "</div>"
+            itemPickUp.id +
+            "Tech" +
+            "'>" +
+            techs[i] +
+            "</div>"
           );
           i++;
         }
@@ -2967,27 +2973,27 @@ document
       itemPickUp = "";
     }
     event.target.dispatchEvent(invChange);
-  } 
+  }
 } //End of Declarations
 
 //Initialize
 initializeSheet();
 
 //cookie Log-in
-function lastLog(){
-  if(document.cookie.includes("lastLog")){
-    var user=document.getElementById("User");
-    var key=document.getElementById("Key");
-    
+function lastLog() {
+  if (document.cookie.includes("lastLog")) {
+    var user = document.getElementById("User");
+    var key = document.getElementById("Key");
+
     //Substring must be the number of letters of the Cookie name and the = sign.
-    var lastUser=document.cookie.split("-")[0].substring(8);
-    var lastKey=document.cookie.split("-")[1];
-  
-    user.value=lastUser;
-    key.value=lastKey;
+    var lastUser = document.cookie.split("-")[0].substring(8);
+    var lastKey = document.cookie.split("-")[1];
+
+    user.value = lastUser;
+    key.value = lastKey;
     jsLoad();
   }
-  
+
 }
 lastLog();
 /*notes
