@@ -377,10 +377,15 @@ function passHour() {
     //Temp Modification
     var coldModded = 1;
     var hotModded = 1;
-    if (document.getElementById("coldMultiplier").innerText > 0) {
-      coldModded = document.getElementById("coldMultiplier").innerText;
-    } else if (document.getElementById("hotMultiplier").innerText > 0) {
-      hotModded = document.getElementById("hotMultiplier").innerText;
+    
+    var cold = document.getElementById("coldMultiplier");
+    var hot = document.getElementById("hotMultiplier");
+    
+    if (cold.innerText > 0 && cold.data.usecold=="True") {
+      coldModded = cold.innerText;
+      
+    } else if (hot.innerText > 0 && cold.data.usehot=="True") {
+      hotModded = hot.innerText;
     }
     Hunger.value = Hunger.value - coldModded;
     if (Hunger.value < 0) {
