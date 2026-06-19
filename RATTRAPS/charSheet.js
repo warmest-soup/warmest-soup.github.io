@@ -788,6 +788,7 @@ function thermoBarFunc() {
   var windBar = parseFloat(document.getElementById("Temperature").getAttribute("windBar"));
   var bar = document.getElementById("ThermBar");
   var fill = document.getElementById("ThermFill");
+  var ins = 0;
   if(document.getElementById("InsRes").innerText) {
     var ins = parseInt(document.getElementById("InsRes").innerText)/10;
   }
