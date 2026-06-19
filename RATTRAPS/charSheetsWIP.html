@@ -837,11 +837,14 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
             <div id="TempEffects">
               <div id="Burning">BURN!<br>-<span class="burnFx">1</span> MND -<span class="burnFx">1</span>
                 AWE</div>
-              <div id="Hot">Hot!<br>Water Loss • <span id="hotMultiplier" data-usehot="True">1</span><br>-<span id="hotFx">1</span> WIS
+              <div id="Hot">Hot!<br>Water Loss •
+                <span id="hotMultiplier" data-usehot="True">1</span><br>-<span id="hotFx">1</span> WIS
               </div>
               <div id="Fine">Fine</div>
-              <div id="Cold">Cold!<br>Hunger loss • <span id="coldMultiplier" data-usecold="True">1</span><br>-<span id="coldFx">1</span>
-                DEX</div>
+              <div id="Cold">Cold!<br>Hunger loss •
+                <span id="coldMultiplier" data-usecold="True">1</span><br>-<span id="coldFx">1</span>
+                DEX
+              </div>
               <div id="Freezing">FREEZE!<br>-<span class="freezeFx">1</span> BOD -<span class="freezeFx">1</span> ATH
               </div>
             </div>
@@ -1036,7 +1039,24 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
           </div>
 
         </div>
-       
+        <div id="Maps" class="Section">
+          <div id="MapContainer">
+            <iframe id="map"
+              src="https://docs.google.com/spreadsheets/d/1HgNWlmeqJEn36UjhSAx_NUbUqYozAYtUztbsXuJC21Q/htmlembed/sheet?gid=936065367"></iframe>
+          </div>
+          <div id="mapConsole">
+            <select id="currentMap" onchange="saveDropdown(this); updateMap(map)">
+              <option value="936065367">None</option>
+            </select>
+            <button onclick="updateMap(map)">Reload</button>
+            <button id="newMapButton" onclick="addMap(newMapName,newMapId)">Add Map</button>
+            <div id="addAMap">
+              <input type="text" id="newMapName" placeholder="Map Name"><br>
+              <input type="text" id="newMapId" placeholder="ID Number">
+            </div>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -2154,14 +2174,3 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
 
   </div>
 </div>
-
-
-
-
-
-<!--Link to external CSS & JS-->
-<link href="./charSheetStyle.css" rel="stylesheet">
-</link>
-<script src="./charSheet.js"></script>
-
-<!--Version 0.00-->
