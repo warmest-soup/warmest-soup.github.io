@@ -1292,12 +1292,18 @@ function resCalc() {
   if (res.dataset.useins == "true") {
     document.getElementById("InsRes").innerText = ins;
   } else document.getElementById("InsRes").innerText = 0;
+  
+  res = document.getElementById("AbsRes")
   if (res.dataset.useabs == "true") {
     document.getElementById("AbsRes").innerText = abs;
   } else document.getElementById("AbsRes").innerText = 0;
+  
+  res = document.getElementById("CndRes")
   if (res.dataset.usecnd == "true") {
     document.getElementById("CndRes").innerText = cnd;
   } else document.getElementById("CndRes").innerText = 0;
+  
+  res = document.getElementById("BriRes")
   if (res.dataset.usebri == "true") {
     document.getElementById("BriRes").innerText = bri;
   } else document.getElementById("BriRes").innerText = 0;
