@@ -1289,22 +1289,23 @@ function resCalc() {
     bri = 0;
   }
   var res = document.getElementById("InsRes")
-  if (res.dataset.useins == "true") {
+  if (res.dataset.useins == "True") {
     document.getElementById("InsRes").innerText = ins;
+    console.log("working")
   } else document.getElementById("InsRes").innerText = 0;
   
   res = document.getElementById("AbsRes")
-  if (res.dataset.useabs == "true") {
+  if (res.dataset.useabs == "True") {
     document.getElementById("AbsRes").innerText = abs;
   } else document.getElementById("AbsRes").innerText = 0;
   
   res = document.getElementById("CndRes")
-  if (res.dataset.usecnd == "true") {
+  if (res.dataset.usecnd == "True") {
     document.getElementById("CndRes").innerText = cnd;
   } else document.getElementById("CndRes").innerText = 0;
   
   res = document.getElementById("BriRes")
-  if (res.dataset.usebri == "true") {
+  if (res.dataset.usebri == "True") {
     document.getElementById("BriRes").innerText = bri;
   } else document.getElementById("BriRes").innerText = 0;
 }
