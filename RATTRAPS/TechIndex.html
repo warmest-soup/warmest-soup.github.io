@@ -525,7 +525,8 @@
           <div class='ClassDescription' onclick='loadInfo(this)'>     The act of empowering the next generation. A skill
             that lets one breakthrough to even the worst students. To abide ignorance only perpetuates the folly of man,
             and grants evil foothold in the hearts of the uneducated.</div>
-          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> Every rank in Teacher is added to the Insight exp
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> Every rank in Teacher is added to the Insight
+            exp
             gained by other characters under your instruction.</div>
           <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Foster growth in others. </i></div>
           <div>
@@ -623,7 +624,8 @@
           <div class='ClassDescription' onclick='loadInfo(this)'>     The act of empowering the next generation. A skill
             that lets one breakthrough to even the most dense Athletes. Natural talent is wasted if not honed by
             experience. Sadly that experience only comes once one's prime is past.</div>
-          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> Every rank in Coach is added to the Skill exp gained
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> Every rank in Coach is added to the Skill exp
+            gained
             by other characters under your instruction.</div>
           <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Foster growth in others. </i></div>
           <div>
@@ -653,6 +655,172 @@
             <div class='TechDescription' onclick='loadTech(this)'>Allows the acting character to focus the Skill checks
               of other characters attempting to learn from them. Rolls may be focused using Coach Rank.</div>
             <div class='CardCost'>:: Cost: 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div Class='Skill' data-category='Magic' data-Genre='Combat'>
+    <div class='ClassName' onclick=" Exorcisor.toggleAttribute('hidden') ">Exorcisor</div>
+    <div id='Exorcisor'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>4th G</div>
+          <div class='Parent isTrait'>Stamina</div>
+          <div class='Parent'>Summoner</div>
+          <div class='Parent'>Channeler</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     Dedicated Antimages, while not inherently magic
+            users, Exorcisors employ special techniques to counter magicians and their strange entities.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> Being in the presence of Ethereal entities, or
+            magic users causes a passive Exocisor check to detect them, and the spatial location of the entity.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Enter combat with, or attack entities. </i>
+          </div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Exorcise</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Seek(Ethereal) → Release (Potency) <br><br> Force
+              ethereal entities to exit objects, mundane creatures, or the curtain itself. This technique may also
+              weaken or disable the magic of castors tied to the entity. <br><br> Excorsisors may use this spell without
+              an entity, instead rolling Stamina, or Exorcisor to cast.</div>
+            <div class='CardCost'>:: Cost: 2</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Defiance</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Remain unphased in the oppresive presence of powerful
+              entities.</div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Violent Discharge</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Amplify( Invert( Seal ) ) <br><br> Destroy
+              enchantments
+              outright, with a chance to destroy the enchantment aswell.</div>
+            <div class='CardCost'>:: Cost: 6</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Earthen Riposte</div>
+            <div class='TechDescription' onclick='loadTech(this)'>When destabilized or after a succesful parry, and in
+              the presence of loose dirt or mud, the acting character may cover a limb of the target in filth,
+              weakening, and potentially silencing their magic, with a chance to blind. <br> Additionally, gathering
+              filth for this purpose does not cost an action.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Cast Aware</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Each time the acting character sees a magic user cast
+              a spell, they learn an aspect of the target's Casting method. This knowledge will then trigger a warning
+              everytime that casting style is used.</div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Devil Sense</div>
+            <div class='TechDescription' onclick='loadTech(this)'>When threatened by an entity, the acting character is
+              granted a chance to abandon their current action, and re-submit their Battle Ticket.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div Class='Insight' data-category='Magic' data-Genre='Combat'>
+    <div class='ClassName' onclick=" Summoner.toggleAttribute('hidden') ">Summoner</div>
+    <div id='Summoner'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>2nd G</div>
+          <div class='Parent isTrait'>Knowledge</div>
+          <div class='Parent'>Entity</div>
+          <div class='Parent'>-</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     Arcane mages who call on strange and mysterious
+            supernatural entities to manifest their power in the mundane world on their behalf, or to access their vast
+            collection of items and entities collected over their lifetime, or passed down from generations past.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> The character may create as many Ritual Stocks
+            as they have rank in this class.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Meet, and enter contracts with entities.
+            </i></div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Summon Sign</div>
+            <div class='TechDescription' onclick='loadTech(this)'>A sign placed on an item or entity to form a permanent
+              connection to that target, Allowing it to always be summoned. The summon sign must be created with a part
+              of the acting character's own body, blood, hair, etc. <br><br> *Summon Signs may also be created
+              nonphysically, and kept in memory slots.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Summon</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Generate(Force) → Designate( Direction ) → Breach
+              <br><br>The act of pulling or pushing an object or entity through space. Summon must be cast at a higher
+              Potency relative to the physical size of the object summoned. <br><br> Cost is equal to 1 + 2 • The size
+              class of the summon target.
+            </div>
+            <div class='CardCost'>:: Cost: 3+</div>
+            <div class='Tech'><span style='font-size:1.2em;'>⤷❸.</span>Defensive Summon</div>
+            <div class='TechDescription' onclick='loadTech(this)'>When threatened, the acting character gains the chance
+              to cast summon. The summoned item will appear in the same moment, and will become the target of attack
+              rather than the acting character.</div>
+            <div class='CardCost'>:: Cost: 3+</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Compel Entity</div>
+            <div class='TechDescription' onclick='loadTech(this)'>If the true name of entity is known, the summoner can
+              compel them to manifest in mundane form. <br><br> Cost is equal to the target entity's highest dominion
+              rank.</div>
+            <div class='CardCost'>:: Cost: 1+</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Summoner's Vault</div>
+            <div class='TechDescription' onclick='loadTech(this)'>A hidden vault where summoners keep their mundane
+              summons safe until called on. These vaults are sometimes under the care of an assistant or institution,
+              like a college or a bank.</div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Summon Familiar</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Summon a personal ethereal entity bound to the acting
+              character. This entity's appearance is determined by the acting character's personality, and the entity
+              used to summon it.<br><br> Cost to summon is determined by the power and size of the familiar.</div>
+            <div class='CardCost'>:: Cost: ?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div Class='Insight' data-category='Magic' data-Genre='Combat'>
+    <div class='ClassName' onclick=" Zealot.toggleAttribute('hidden') ">Zealot</div>
+    <div id='Zealot'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>2nd G</div>
+          <div class='Parent isTrait'>Knowledge</div>
+          <div class='Parent'>Entity</div>
+          <div class='Parent'>-</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     Religously devoted to their spirits and schools
+            with unwavering faith, resulting in powerful, reliable magic, and strict limitations and rules of conduct.
+          </div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> Passive Zealot checks will be performed to
+            provide guidance and omens to the acting character in times of confusion. </div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Swear loyalty to, and apease Entities. </i>
+          </div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Accept Fate</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character surrenders their fate when in
+              dire circumstances. A favor check is rolled to determine their dieties actions, and whether they intervene
+              directly. </div>
+            <div class='CardCost'>:: Cost: Free</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Consultation</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Spend an hour in prayer to manifest your Diety
+              directly, and engage in conversation with them.<br><br>Ritual requirements differ for every entity.</div>
+            <div class='CardCost'>:: Cost: Free</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Invocation</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character may speak in the name of their
+              diety, and use it's power to threaten and intimidate lesser entities. This act has a chance to silence the
+              magic of other mage characters.<br><br>Effectivness is determined by the relative strength of the involved
+              entities.</div>
+            <div class='CardCost'>:: Cost: Free</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Miracle Cast</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Cast spells for free by leaving it up to the acting
+              character's favor and deity to determine the Potency and specifics.</div>
+            <div class='CardCost'>:: Cost: Free</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Sacrifice</div>
+            <div class='TechDescription' onclick='loadTech(this)'>A standard attack that if it kills, or bleeds a
+              mundane entity, will dedicate the target's life to the acting character's diety, granting a large boon to
+              the acting character's favor, and a temporary buff to their magic potency.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Bless</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character performs a Zealot check to apply
+              their deity's protection onto a target. The Potency of this act is determined by the acting character's
+              favor with their deity.</div>
+            <div class='CardCost'>:: Cost: Free</div>
           </div>
         </div>
       </div>

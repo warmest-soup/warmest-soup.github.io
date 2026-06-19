@@ -48,7 +48,7 @@ html>* ::-webkit-scrollbar-track {
 }
 
 sup {
-    font-size: .6em;
+    font-size: .55em;
     display: inline-block;
     transform:
         translateX(.3em) translateY(-.3em);
