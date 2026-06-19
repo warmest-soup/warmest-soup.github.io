@@ -1,304 +1,214 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-  href="https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=Zen+Old+Mincho&display=swap"
-  rel="stylesheet">
+<div id="Abilities" class="Section">
+    
+    <div id="AbilContainer">
+        <div id="abilityColumns">
+            <div id="Skills" class="abilityColumns">
+                Dragon Form <div class="aScrollColumns">
 
+                    <div class="AbilSlot" id="S1" ondrop="abilDrop(event)" ondragover="allowDrop(event)"><span
+                            id="Skill1" class="Ability" draggable="true" ondragstart="abilDragStart(event)">
+                            <div class="five-star"><span><input class="SingleInputNUM EXPvalue SaveInput aexp"
+                                        placeholder="0" value="" style="display: none;"><span
+                                        class="abilGoal">★</span>|</span><button
+                                    onclick="openWinlette(Skill1Info)">Fishing</button><span>|<input
+                                        class="SingleInputNUM SaveInput Rank" placeholder="0" value="5"></span></div>
+                            <pre id="Skill1Info"
+                                class="AbilityInfo">Skill
+The art of capturing fish. Fish are alien creatures, that hide in foreign aquatic ecosystems difficult to encroach upon. By understanding both the behavior of water, and it's inhabitants, one is able to make a reliable food source of any wild water body.</pre>
+                        </span></div>
+                    <div class="AbilSlot" id="S2" ondrop="abilDrop(event)" ondragover="allowDrop(event)"><span
+                            id="Skill2" class="Ability" draggable="true" ondragstart="abilDragStart(event)">
+                            <div><span><input class="SingleInputNUM EXPvalue SaveInput aexp" placeholder="0" value=""
+                                        style="display: inline;"><span class="abilGoal">/50</span>|</span><button
+                                    onclick="openWinlette(Skill2Info)">Weaving</button><span>|<input
+                                        class="SingleInputNUM SaveInput Rank" placeholder="0" value="4"></span></div>
+                            <pre id="Skill2Info" class="AbilityInfo">Skill
+Tension based knotting and braiding techniques to create fabric and materials from fibers or thread. 
 
-<img id="overlay" src="https://warmest-soup.github.io/Assets/Images/Card%20Texture.jpg"></img>
-
-
-
-
-
-<div id="reader">
-  <div class="header">
-    <div id="Title">RATTRAPS</div>
-    <div id="Subtitle">
-      <span>R</span>ealism in
-      <span>A</span>ction, &
-      <span>T</span>actics,
-      <span>T</span>he
-      <span>R</span>adical
-      <span>A</span>dventure
-      <span>P</span>rogression
-      <span>S</span>ystem
-    </div>
-    <div style="text-align:center;">Created by W.S.</div>
-    <div id="Title" style="transform:scale(70%)">~TECH Index~</div>
-  </div>
-
-  <div class="header" style="text-align:center;">
-    Techniques and classes are what define a character's abilities beyond their generic traits. Techniques are gained
-    from a character's Classes. A character gains one Technique for every rank they have in a Tech Class.<br> All tech
-    classes currently available are detailed below.<br> ~
-  </div>
-  <img id="logo" src="https://warmest-soup.github.io/Assets/Images/IMG_20250415_131403.ico">
-  <div class="header">
-    <br><br>
-    All Classes colored blue are considered <b>Skills</b>, while those colored purple are considered <b>Insights</b>.
-  </div>
-
-  <div class="header" id="mainText" style="width:100%">
-
-    <div class="ClassContainer">
-
-
-    <div Class='Skill' data-category='Misc.' data-Genre='Combat'>
-        <div class='ClassName' onclick=" Combatant.toggleAttribute('hidden') ">Combatant</div>
-        <div id='Combatant'>
-            <div Id='ClassCard'>
-                <div class='Geneology'>
-                    <div class='Generation'>1st G</div>
-                    <div class='Parent isTrait'>Wisdom</div>
-                    <div class='Parent isTrait'>Dexterity</div>
-                    <div class='Parent isTrait'>Speed</div>
-                </div>
-                <div class='ClassInfo'>
-                    <div class='ClassDescription' onclick='loadInfo(this)'>     A person's familiarity with the
-                        application of violence. A necessary class for any aspiring fighter.</div>
-                    <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> This class' Rank can be added to
-                        Grapple checks, and used for advantage when beginning combat under special conditions.</div>
-                    <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Survive Battles. </i></div>
-                    <div>
-                        <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Jab</div>
-                        <div class='TechDescription' onclick='loadTech(this)'>Access to power level 1 attacks, which
-                            deal half of standard damage, and require no recovery moments.</div>
-                        <div class='CardCost'>:: Cost: 1 SKL</div>
-                        <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Guard</div>
-                        <div class='TechDescription' onclick='loadTech(this)'>Protect yourself by placing an object or
-                            limb ahead of your vulnerabilities. Guard differs from block in that it can be focused.
-                        </div>
-                        <div class='CardCost'>:: Cost: 1 SKL</div>
-                        <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Feignt</div>
-                        <div class='TechDescription' onclick='loadTech(this)'>A false attack that triggers any stances
-                            currently active on the target without commiting to an attack. Leaving you free to counter
-                            the destabilized opponent.</div>
-                        <div class='CardCost'>:: Cost: P</div>
-                        <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Fletch</div>
-                        <div class='TechDescription' onclick='loadTech(this)'>A dashing attack that covers as many
-                            spaces as the character has Speed. The attack may be swapped for any action.</div>
-                        <div class='CardCost'>:: Cost: 1 SKL</div>
-                        <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Riposte</div>
-                        <div class='TechDescription' onclick='loadTech(this)'>An action taken in the recovery moments
-                            after another attack action. If the prior attack parries, this technique is triggered,
-                            imediately launching into another attack and canceling the previous attack's recovery.</div>
-                        <div class='CardCost'>:: Cost: 1 SKL</div>
-                        <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Haymaker</div>
-                        <div class='TechDescription' onclick='loadTech(this)'>grants access to level 5 attacks, which
-                            deal double standard damage, and require 4 recovery moments.</div>
-                        <div class='CardCost'>:: Cost: 1 SKL</div>
+Used, most often to create baskets, hats, and clothing.</pre>
+                        </span></div>
+                    <div class="AbilSlot openAbil" id="S3" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+                    <div class="AbilSlot openAbil" id="S4" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+                    <div class="AbilSlot openAbil" id="S5" ondrop="abilDrop(event)" ondragover="allowDrop(event)"></div>
+                    <div class="AbilSlot openAbil Hazed" id="S6" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
                     </div>
+                    <div class="AbilSlot openAbil Hazed" id="S7" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+                    </div>
+                    <div class="AbilSlot openAbil Hazed" id="S8" ondrop="abilDrop(event)" ondragover="allowDrop(event)">
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S9" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)"></div>
+                    <div class="AbilSlot openAbil Forgotten" id="S10" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)"></div>
+                    <div class="AbilSlot openAbil Forgotten" id="S11" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)"></div>
+                    <div class="AbilSlot openAbil Forgotten" id="S12" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)"> </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S13" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S14" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S15" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S16" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S17" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S18" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S19" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S20" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S21" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S22" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S23" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S24" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S25" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S26" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S27" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S28" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S29" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S30" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S31" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S32" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S33" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S34" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S35" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S36" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S37" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S38" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S39" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S40" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S41" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S42" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S43" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S44" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S45" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S46" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S47" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S48" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S49" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+                    <div class="AbilSlot openAbil Forgotten" id="S50" ondrop="abilDrop(event)"
+                        ondragover="allowDrop(event)">
+
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-
-    <div Class='Skill' data-category='Misc.' data-Genre='Combat'>
-        <div class='ClassName' onclick=" Commander.toggleAttribute('hidden') ">Commander</div>
-        <div id='Commander'>
-            <div Id='ClassCard'>
-                <div class='Geneology'>
-                    <div class='Generation'>3rd G</div>
-                    <div class='Parent'>Combatant</div>
-                    <div class='Parent isTrait'>Charisma</div>
-                    <div class='Parent'>Tactician</div>
-                </div>
-                <div class='ClassInfo'>
-                    <div class='ClassDescription' onclick='loadInfo(this)'>     A leader of subordinates. One who can
-                        affectively communicate in the heat of chaos, to coordinate groups into more effective tactics.
-                    </div>
-                    <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> A Commander check may be performed
-                        to gain a summary of the current enemy force's next moves. </div>
-                    <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Give successful orders in combat.
-                        </i></div>
-                    <div>
-                        <div class='Tech'><span style='font-size:1.2em;'>⤷❶.</span> Call-out</div>
-                        <div class='TechDescription' onclick='loadTech(this)'>Communicate without consuming an action.
-                        </div>
-                        <div class='CardCost'>:: Cost: 1 SKL</div>
-                        <div class='Tech'><span style='font-size:1.2em;'>⤷❷.</span>Coordinate</div>
-                        <div class='TechDescription' onclick='loadTech(this)'>Speaking for the round no longer consumes
-                            actions.</div>
-                        <div class='CardCost'>:: Cost: 1 SKL</div>
-                        <div class='Tech'><span style='font-size:1.2em;'>⤷❸.</span>Order</div>
-                        <div class='TechDescription' onclick='loadTech(this)'>Communication has no cost in battle, and
-                            other characters gain advantage when acting on your instruction.</div>
-                        <div class='CardCost'>:: Cost: P</div>
-                        <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Inspire</div>
-                        <div class='TechDescription' onclick='loadTech(this)'>All friendly characters able to hear your
-                            your order, gain +1 Spd for the round.</div>
-                        <div class='CardCost'>:: Cost: 1 SKL</div>
-                        <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Command</div>
-                        <div class='TechDescription' onclick='loadTech(this)'>All friendly characters able to hear your
-                            your order, gain +1 Dex for the round.</div>
-                        <div class='CardCost'>:: Cost: 1 SKL</div>
-                        <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Rouse</div>
-                        <div class='TechDescription' onclick='loadTech(this)'>All friendly characters able to hear your
-                            order will have their next strike deal double damage. (Does not affect range damage, but
-                            will double the potential draw weight usable by archers.)</div>
-                        <div class='CardCost'>:: Cost: 1 SKL</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
+    <div>&nbsp;</div>
 </div>
 
-<style>
-    .ClassContainer {
-        display: flex;
-        gap: 1em;
-    }
-
-    .Skill {
-        background: hsl(360deg, 50%, 60%);
-    }
-
-    .Insight {
-        background: hsl(180deg, 50%, 60%);
-    }
-
-    .Skill,
-    .Insight {
-        box-shadow: 0em 0em 0em .1em black;
-        min-width: 20.2em;
-        max-width: 20.2em;
-        height: fit-content;
-        border-radius: 1em;
-        padding: 1em;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .ClassName {
-        box-shadow: 0em 0em 0em .1em black;
-        border-radius: 1em;
-        min-width: 10em;
-        max-width: 10em;
-        padding: .1em;
-        text-align: center;
-        font-size: 1.3em;
-        font-weight: bold;
-        margin: 0em 0em 1em 0em;
-        box-sizing: border-box;
-        background: white;
-    }
-
-    #ClassCard {
-        display: flex;
-        justify-content: end;
-        transform: translatex(-1.3em);
-    }
-
-    .Geneology {
-        writing-mode: sideways-lr;
-        display: flex;
-        justify-content: space-between;
-        align-items: end;
-        margin: 2em 0em 0em 0em;
-        font-weight: bold;
-    }
-
-    .Parent {
-        box-shadow: -.1em 0em 0em .1em black;
-        border-radius: .3em 0em 0em .3em;
-        padding: .5em 0em .5em .2em;
-        margin: 0em .1em 2em 0em;
-        max-width: 1.3em;
-        background: hsl(270deg 50% 80%);
-    }
-
-    .isTrait {
-        color: maroon;
-        background: linear-gradient(90deg, white, yellow, orange);
-    }
-
-    .Generation {
-        position: relative;
-        transform:
-            translatey(.7em) translatex(2.5em);
-        writing-mode: horizontal-tb;
-        background: white;
-        box-shadow: 0em 0em 0em .1em black;
-        border-radius: 1em;
-        padding: .5em;
-        max-width: 3em;
-        min-width: 3em;
-        text-align: center;
-    }
-
-    .ClassInfo {
-        box-shadow: 0em 0em 0em .1em black;
-        min-width: 18em;
-        max-width: 18em;
-        border-radius: 1em;
-        padding: 1em;
-        box-sizing: border-box;
-        background: white;
-    }
-
-    .ClassDescription {
-        margin: 1em 0em 1em 0em;
-    }
-
-    .Bonus {
-        font-size: .8em;
-        margin: 1em 0em 1em 0em;
-    }
-
-    .Exp {
-        font-size: .8em;
-        margin: 1em 0em 1em 0em;
-    }
-
-    .Tech {}
-
-    .TechDescription {
-        font-size: .8em;
-    }
-
-    .CardCost {
-        text-align: right;
-    }
-</style>
-
-<script>
-    function loadInfo(target) {
-        var description = target.parentNode.children[0].innerText;
-        var bonus = target.parentNode.children[1].innerText;
-        var exp = target.parentNode.children[2].innerText;
-
-        navigator.clipboard.writeText(description + "\n\n" + bonus + "\n\n" + exp);
-    }
-
-    function loadTech(target) {
-        navigator.clipboard.writeText(target.innerText);
-
-    }
-
-</script>
-
-
-  </div>
-</div>
-
-<div id="techNavigator">
-  <div>Classes:</div>
-  <div id="Glossary">
-    Under-Construction 
 
 
 
-  </div>
-</div>
 
-<link href=".\DocReaderStyle.css" rel="stylesheet">
+<!--Link to external CSS & JS-->
+<link href="./charSheetStyle.css" rel="stylesheet">
 </link>
-<script src=".\DocReaderScript.js"></script>
+<script src="./charSheet.js"></script>
