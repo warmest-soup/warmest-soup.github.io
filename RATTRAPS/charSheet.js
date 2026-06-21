@@ -791,7 +791,7 @@ function thermoBarFunc() {
   var temp = parseFloat(document.getElementById("Temperature").getAttribute("temp")) / 10;
   var wind = parseFloat(document.getElementById("Temperature").getAttribute("wind"));
   var windBar = parseFloat(document.getElementById("Temperature").getAttribute("windBar"));
-  var useWind =document.getElementById("Temperature");
+  var useWind =document.getElementById("windReadout").dataset.useWind;
   
   var tempRead=document.getElementById("tempReadout");
   var windRead=document.getElementById("windReadout");
@@ -804,7 +804,7 @@ function thermoBarFunc() {
   tempRead.innerText="Temp. " + (temp * 10) + "°"
   
   var windAdjust;
-  if (windBar >= wind && useWind && useWind=="True") {
+  if (windBar >= wind && useWind=="True") {
     windAdjust = Math.max(0, (wind - abs) * 5);
     windRead.innerText="Wind." + (wind * 5) + "mph"
   } else { 
