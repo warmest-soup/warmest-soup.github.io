@@ -1780,3 +1780,8 @@ textarea {
 #ComTitle > input{
   transform:translate(2em,1em) scale(2.5); 
 }
+
+#weatherReport{
+  display:flex;
+  Justify-content:space-between;
+}

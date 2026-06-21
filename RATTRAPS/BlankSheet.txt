@@ -782,36 +782,40 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
         </div>
 
         <div id="Temperature" class="Section" temp="0">
-          <div id="TempBot">
-            <div id="TempContextReadout">0</div>
-            <div id="TempContextAdjust">
-              <input type="range" class="UserSlider SaveInputSP" id="TempAdjust" min="-5" max="5" value="0"
+        <div id="TempBot">
+          <div id="WeatherReport">
+            <div id="tempReadout">-</div>
+            <div id="windReadout">-</div>
+          </div>
+          <div id="TempContextReadout">0</div>
+          <div id="TempContextAdjust">
+            <input type="range" class="UserSlider SaveInputSP" id="TempAdjust" min="-5" max="5" value="0"
                 oninput="rangeReadout(this,TempContextReadout)">
-            </div>
           </div>
-          <div id=TempTop>
-            <div id="TempEffects">
-              <div id="Burning">BURN!<br>-<span class="burnFx">1</span> MND -<span class="burnFx">1</span>
-                AWE</div>
-              <div id="Hot">Hot!<br>Water Loss •
-                <span id="hotMultiplier" data-usehot="True">1</span><br>-<span id="hotFx">1</span> WIS
-              </div>
-              <div id="Fine">Fine</div>
-              <div id="Cold">Cold!<br>Hunger loss •
-                <span id="coldMultiplier" data-usecold="True">1</span><br>-<span id="coldFx">1</span>
-                DEX
-              </div>
-              <div id="Freezing">FREEZE!<br>-<span class="freezeFx">1</span> BOD -<span class="freezeFx">1</span> ATH
-              </div>
-            </div>
-            <div id="thermometer">
-              <div id="ThermBar">
-                <div id="ThermFill"></div>
-              </div>
-            </div>
-          </div>
-
         </div>
+        <div id=TempTop>
+          <div id="TempEffects">
+            <div id="Burning">BURN!<br>-<span class="burnFx">1</span> MND -<span class="burnFx">1</span>
+              AWE</div>
+            <div id="Hot">Hot!<br>Water Loss •
+              <span id="hotMultiplier" data-usehot="True">1</span><br>-<span id="hotFx">1</span> WIS
+            </div>
+            <div id="Fine">Fine</div>
+            <div id="Cold">Cold!<br>Hunger loss •
+              <span id="coldMultiplier" data-usecold="True">1</span><br>-<span id="coldFx">1</span>
+              DEX
+            </div>
+            <div id="Freezing">FREEZE!<br>-<span class="freezeFx">1</span> BOD -<span class="freezeFx">1</span> ATH
+            </div>
+          </div>
+          <div id="thermometer">
+            <div id="ThermBar">
+              <div id="ThermFill"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
         <script>
           function forecast() {
             var hour = parseInt(document.getElementById("CurrentHour").innerText);
