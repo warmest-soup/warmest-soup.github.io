@@ -802,7 +802,7 @@ function thermoBarFunc() {
   var ins = parseInt(document.getElementById("InsRes").innerText) / 10;
   var abs = parseInt(document.getElementById("AbsRes").innerText);
 
-  tempRead.innerText="Temp. " + (temp * 10) + "°"
+  tempRead.innerText="Temp. " + (temp * 10).toFixed(2) + "°"
   
   var windAdjust;
   if (windBar >= wind && useWind=="True") {
