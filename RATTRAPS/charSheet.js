@@ -791,6 +791,7 @@ function thermoBarFunc() {
   var temp = parseFloat(document.getElementById("Temperature").getAttribute("temp")) / 10;
   var wind = parseFloat(document.getElementById("Temperature").getAttribute("wind"));
   var windBar = parseFloat(document.getElementById("Temperature").getAttribute("windBar"));
+  
   var useWind =document.getElementById("windReadout").dataset.usewind;
   
   var tempRead=document.getElementById("tempReadout");
