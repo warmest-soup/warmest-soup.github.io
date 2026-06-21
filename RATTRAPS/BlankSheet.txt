@@ -781,36 +781,38 @@ The form of speech most common among your countrymen &amp; peers.. with no uniqu
           </div>
         </div>
 
-        <div id="Temperature" class="Section" temp="0">
+       <div id="Temperature" class="Section" temp="-" windbar="-" wind="-"
+        weather="">
         <div id="TempBot">
           <div id="WeatherReport">
-            <div id="tempReadout">-</div>
-            <div id="windReadout">-</div>
+            <div id="tempReadout">Temp. -2°</div>
+            <div id="windReadout">Wind.0mph</div>
           </div>
           <div id="TempContextReadout">0</div>
           <div id="TempContextAdjust">
-            <input type="range" class="UserSlider SaveInputSP" id="TempAdjust" min="-5" max="5" value="0"
-                oninput="rangeReadout(this,TempContextReadout)">
+            <input type="range" class="UserSlider SaveInputSP" id="TempAdjust" min="-5" max="5" value="0" oninput="rangeReadout(this,TempContextReadout)">
           </div>
         </div>
-        <div id=TempTop>
+        <div id="TempTop">
           <div id="TempEffects">
-            <div id="Burning">BURN!<br>-<span class="burnFx">1</span> MND -<span class="burnFx">1</span>
+            <div id="Burning" style="color: black;">BURN!<br>-<span class="burnFx">0</span> MND
+              -<span class="burnFx">0</span>
               AWE</div>
-            <div id="Hot">Hot!<br>Water Loss •
-              <span id="hotMultiplier" data-usehot="True">1</span><br>-<span id="hotFx">1</span> WIS
+            <div id="Hot" style="color: black;">Hot!<br>Water Loss •
+              <span id="hotMultiplier" data-usehot="True">0</span><br>-<span id="hotFx">0</span> WIS
             </div>
             <div id="Fine">Fine</div>
-            <div id="Cold">Cold!<br>Hunger loss •
-              <span id="coldMultiplier" data-usecold="True">1</span><br>-<span id="coldFx">1</span>
+            <div id="Cold" style="color: blue;">Cold!<br>Hunger loss •
+              <span id="coldMultiplier" data-usecold="True">Infinity</span><br>-<span id="coldFx">Infinity</span>
               DEX
             </div>
-            <div id="Freezing">FREEZE!<br>-<span class="freezeFx">1</span> BOD -<span class="freezeFx">1</span> ATH
+            <div id="Freezing" style="color: blue;">FREEZE!<br>-<span class="freezeFx">Infinity</span> BOD
+              -<span class="freezeFx">Infinity</span> ATH
             </div>
           </div>
           <div id="thermometer">
-            <div id="ThermBar">
-              <div id="ThermFill"></div>
+            <div id="ThermBar" style="border-color: blue;">
+              <div id="ThermFill" style="height: 0em;"></div>
             </div>
           </div>
         </div>

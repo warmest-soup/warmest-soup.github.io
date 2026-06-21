@@ -558,7 +558,6 @@ textarea {
   min-width: 13em;
   max-width: 18em;
   padding:0em .5em 0em 1em;
-  
 }
 #TempTop {
   display: flex;
@@ -616,7 +615,7 @@ textarea {
 #TempBot {
   padding: .5em 0em .5em 0em;
   text-align: center;
-  font-size: 2em;
+  font-size: 1.7em;
   font-weight: 700;
 }
 #TempBot > * {
@@ -1781,7 +1780,14 @@ textarea {
   transform:translate(2em,1em) scale(2.5); 
 }
 
-#weatherReport{
+#WeatherReport{
   display:flex;
-  Justify-content:space-between;
+  Justify-content:space-around;
+}
+#tempReadout, #windReadout{
+  font-size:.5em;
+  background:linear-gradient(90deg,
+    transparent 0%, rgb(255 255 255/40%) 50%, transparent 100%
+  );
+  padding:.2em;
 }
