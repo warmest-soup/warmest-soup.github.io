@@ -2360,7 +2360,7 @@ function setDay() {
 
   var newDay = prompt("(The GM will be notified of this change) \n Change Day count to:");
   newDay = parseInt(newDay);
-  if (!newDay) { newDay = day.innerText; }
+  if (!newDay && newDay != 0) { newDay = day.innerText; }
   day.innerText = String(newDay).padStart(4, "0");
   weather(document.getElementById("CurrentHour"));
 }
