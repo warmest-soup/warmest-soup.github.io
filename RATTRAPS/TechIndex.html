@@ -930,6 +930,60 @@
   </div>
 
   <div Class='Insight' data-category='Magic' data-Genre='Other'>
+    <div class='ClassName' onclick=" Mystic.toggleAttribute('hidden') ">Mystic</div>
+    <div id='Mystic'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>3rd G</div>
+          <div class='Parent isTrait'>Perception</div>
+          <div class='Parent isTrait'>Constitution</div>
+          <div class='Parent'>Soothsayer</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     Esoteric wisemen engaged in a deep relationship
+            with the unreal, often through the use of hallucinogenics. Mystics also maintain a more intimate connection
+            with their otherworldy companions due to their wealth of first hand experience.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> The character may create as many Ritual Stocks
+            as they have rank in this class.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Experience otherworldly hallucinations. </i>
+          </div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Astral projection</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Before falling asleep, the acting character may choose
+              to leave their body in ethereal form. They may travel freely from their anchor point out to a distance of
+              their Mystic class rank • 10. <br><br>Anchor point is the acting character's sleeping body, but this can
+              be changed by forming a magical connection when forst using the technique.<br><br></div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Dream walking</div>
+            <div class='TechDescription' onclick='loadTech(this)'>When A connection is formed with a sleeping mundane
+              entity, the acting character may enter their dreams to explore their psyche, and communicate with the
+              target. During the use of this technique the acting character's body will be asleep, unable to wake up
+              until the technique is ended. </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Vision Quest</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Throught the ingestion of hallucinigenic substances,
+              the acting character may travel beyond the curtain, and communicate directly with ethereal entities.
+              During this process the acting character's body will wander about in a fugue state.</div>
+            <div class='CardCost'>:: Cost: Free</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Judgement</div>
+            <div class='TechDescription' onclick='loadTech(this)'>When extremely close to an entity or another
+              character, the acting character may recieve information regarding their Traits, and Dominions.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Gyromancy</div>
+            <div class='TechDescription' onclick='loadTech(this)'>A strange form of divination that involves becoming
+              dizzy, and interpereting the visual distortions. This may also occur when losing conciousness.</div>
+            <div class='CardCost'>:: Cost: Free</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Att. Pure Heart</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Grants access to the special Attribute "Pure Hearted"
+              that is a direct representation of a character or creature's honesty and courage.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div Class='Insight' data-category='Magic' data-Genre='Other'>
     <div class='ClassName' onclick=" Soothsayer.toggleAttribute('hidden') ">Soothsayer</div>
     <div id='Soothsayer'>
       <div Id='ClassCard'>
@@ -981,9 +1035,111 @@
       </div>
     </div>
   </div>
-  
-  
 
+
+  <div Class='Skill' data-category='Magic' data-Genre='Combat'>
+    <div class='ClassName' onclick=" Monk.toggleAttribute('hidden') ">Monk</div>
+    <div id='Monk'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>2nd G</div>
+          <div class='Parent isTrait'>Stamina</div>
+          <div class='Parent'>Combatant</div>
+          <div class='Parent'>Channeler</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     Strong willed warriors, who gain powerful
+            supernatural abilities through intense physical training, and discipline.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> Allows for spells to be cast using SKL cards
+            regardless of their type.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Meditate, or train. </i></div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Waking Strike</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Cast a spell during an attack, both actions will occur
+              on the same moment. This technique may be used with any attacking action, including other Techniques.
+              <br><br>This technique does not end Dragon Stance.
+            </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Still Mind (Stance)</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Intensive focus prevents others from connection to the
+              acting character, and resists any attempt to alter their mental state. As a side effect, use of this
+              technique makes the detecting the acting character more difficult for Ethereal Entities.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Dragon Stance (Stance)</div>
+            <div class='TechDescription' onclick='loadTech(this)'>A stationary meditative stance that doubles wisdom and
+              raises Athleticism by as many points as the acting character has Monk ranks. This Stance ends when any
+              non-magic action is performed.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Ethereal Hands</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Allows the acting character to physically engage with
+              Ethereal Entities.<br><br>This technique does not end Dragon Stance. </div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Weightless Soul</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Lightens the acting character's body weight, allowing
+              for slower falling speed, doubled jump height, and half damage from slams, throws, and impact damage.
+              <br><br>This technique does not end Dragon Stance.
+            </div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Piercing Palms</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Monk Rank may be added as sharpness to unarmed
+              strikes.<br><Br>Cost is 1 card per added sharpness.<br><br>This technique does not end Dragon Stance.
+            </div>
+            <div class='CardCost'>:: Cost: 1+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div Class='Insight' data-category='Magic' data-Genre='Combat'>
+    <div class='ClassName' onclick=" Talismanist.toggleAttribute('hidden') ">Talismanist</div>
+    <div id='Talismanist'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>3rd G</div>
+          <div class='Parent'>Caligraphy</div>
+          <div class='Parent'>Monk</div>
+          <div class='Parent isTrait'>Wisdom</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     Talismanists are shrewd mages, who prepare
+            themselves well in advanced by preparing special items. These "Talismans" have no innate magical ability,
+            but are used by the Talismanist as a medium to facilitate the quick use of powerful spells, that would
+            otherwise be impractical to use.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> Talismanists may, for the cost of a single
+            card, activate any talisman they're able to read.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Create, use, and study Talismans. </i></div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Talismanic Creation</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Create talismans through unique and strange processes.
+              A Talisman must contain a written transcription of the spell it casts. </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Flash Set</div>
+            <div class='TechDescription' onclick='loadTech(this)'>activating a Talisman does not consume an action.
+            </div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Flock</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Activate multiple Talismans at once, with each
+              additional talisman costing an additional card.</div>
+            <div class='CardCost'>:: Cost: 1+</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Ethereal Litmus</div>
+            <div class='TechDescription' onclick='loadTech(this)'>A small spell may be cast on a talisman to determine
+              the current effectiveness of magic, including a character's current ability, as well as the disposition of
+              any involved entities.</div>
+            <div class='CardCost'>:: Cost: Free</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Guided Toss</div>
+            <div class='TechDescription' onclick='loadTech(this)'>A thrown Talisman is garunteed to hit it's mark.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Talismanic Riposte</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Talismans may be set and activated following a
+              successful parry.<br><br> This Technique does not allow acting characters free access of locked or closed
+              inventory containers.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 
