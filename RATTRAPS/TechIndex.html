@@ -1141,6 +1141,171 @@
     </div>
   </div>
 
+  <div Class='Skill' data-category='Magic' data-Genre='Combat'>
+    <div class='ClassName' onclick=" Channeler.toggleAttribute('hidden') ">Channeler</div>
+    <div id='Channeler'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>1st G</div>
+          <div class='Parent isTrait'>Stamina</div>
+          <div class='Parent isTrait'>Perception</div>
+          <div class='Parent isTrait'>Constitution</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     One who is able to let external powers flow
+            through them, to directly harness the powers of the unreal.<br>By harmonizing with ethereal forces, the
+            acting character becomes a conduit for their magic.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> Channeler checks may be performed to detect
+            entities and ethereal forces active in the area. These forces can also be used to a potency of the acting
+            character's Channeler Rank for casting relavant magic.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Experience Hauntings </i></div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Blast React</div>
+            <div class='TechDescription' onclick='loadTech(this)'>When destabilized, or following a succesful parry,
+              this Technique allows the instant casting of a spell costing no Cards, with the exception of the single
+              card used to perform this technique.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Allow Possession</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character Channels a nearby entity, and
+              compels them to take direct control of the acting character's body. The acting character loses control of
+              themselves, but the entity may bear it's full power.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>⤷❸.</span>Force Possession</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character performs a Channeler Check, if
+              successful, they comandeer the power of an entity, by forcing them into a possesion. The acting character
+              retains their will, and gains access to the entity's full power and dominions.<br><br>The cost of this
+              technique raises for every penalty the entity adds to the attempt.</div>
+            <div class='CardCost'>:: Cost: 1+</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Subjective Gravity</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Interact with Gravity as entities do. The acting
+              character becomes able to walk on walls and ceilings for as many moments as the character has Ranks in
+              Channeler. This technique is able to be performed longer when in the presence of relavant ethereal forces.
+            </div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Conduit Cast</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Cast spells through your own body, forgoing Casting
+              checks entirely, and removing the chance for failure.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Spirit Leech (Stance)</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Drain the cards of a mundane or ethereal entity, and
+              use them to restore your own.<br><br>Cards are stolen at a rate of the acting character's Channeler Rank
+              per moment.<br><br>Excess stolen cards are kept as Ritual Stock.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div Class='Insight' data-category='Magic' data-Genre='Other'>
+    <div class='ClassName' onclick=" Enchanter.toggleAttribute('hidden') ">Enchanter</div>
+    <div id='Enchanter'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>3rd G</div>
+          <div class='Parent'>Engineering</div>
+          <div class='Parent'>Academic</div>
+          <div class='Parent isTrait'>Wisdom</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     One who is able to bind entities to objects
+            through the use of magical seals that force the entity to provide desirable effects.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> Enchanter checks may be performed to learn the
+            specifics of an enchantment, as well as detailed information regarding the entity used to facilitate it.
+          </div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Create and Study enchanted objects. </i>
+          </div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Lesser Enchantment</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Seal(X)<br><br>The terminal spell neccesary to place
+              enchantments on objects. <br>Lesser enchantments allow the entity to exersize it's own free will in it's
+              application of it's binding spell. This can be useful for spells that require intelligent judgment, but
+              can also lead to unreliable results.</div>
+            <div class='CardCost'>:: Cost: 1+</div>
+            <div class='Tech'><span style='font-size:1.2em;'>⤷❷.</span>Greater Enchantment</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Seal<br><br>The terminal spell neccesary to place
+              enchantments on objects. <br>Greater Enchantments behave autonomously, and force their entities to obey
+              their binding spells to the letter.</div>
+            <div class='CardCost'>:: Cost: 1+</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Faithful Discharge</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Amplify(X) → Release <br><br>Remove enchantments from
+              an item, and release the bound entity. This spell must be cast at a higher potency than was used to create
+              the seal that binds the Entity.</div>
+            <div class='CardCost'>:: Cost: 1+</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Elevate</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Raise the potency of an enchantment to be placed. For
+              every level raised, this technique requires half an hour or preparation</div>
+            <div class='CardCost'>:: Cost: Free</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Plagarize</div>
+            <div class='TechDescription' onclick='loadTech(this)'>An enchanted object may be studied to learn it's
+              enchantment as a Compound Spell. this act takes half an hour.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Binding Trap</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Set → Detect (Entity) → Seal (X) <Br><br>Preemptively
+              set an enchantment that awaits contact by an entity. When the object detects that entity, it will be
+              automatically captured and bound to the item, setting the enchantment.<br><br>The cost of this spell is 3
+              cards + Sealing power.</div>
+            <div class='CardCost'>:: Cost: 3+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div Class='Skill' data-category='Magic' data-Genre='Other'>
+    <div class='ClassName' onclick=" Libraneist.toggleAttribute('hidden') ">Libraneist</div>
+    <div id='Libraneist'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>3rd G</div>
+          <div class='Parent'>Monk</div>
+          <div class='Parent isTrait'>Stamina</div>
+          <div class='Parent'>Channeler</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     One who has harnessed their own spiritual power to
+            establish their own lesser dominion over the natural elements.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> Attuned elements may be freely manipulated for
+            the cost of a single Card.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Engage in one's own spiritual power. </i>
+          </div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Attune Element</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting Character may attune one of their traits to
+              one of the natural elements. This trait will then act as their Dominion of the element.<br><br>•
+              Permeability <br>• Heat<br>• Electricity<br>• Time<br>• Space<br>• Force<br>• Substance<br>•
+              Information<br></div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>⤷❷.</span>Attune Element II</div>
+            <div class='TechDescription' onclick='loadTech(this)'>An aditional element may be attuned, The same element
+              may be attuned to an additional Trait, or the same element may be attuned to the same trait, raising
+              Dominion by 1.</div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>⤷❸.</span>Attune Element III</div>
+            <div class='TechDescription' onclick='loadTech(this)'>An aditional element may be attuned, The same element
+              may be attuned to an additional Trait, or the same element may be attuned to the same trait, raising
+              Dominion by 1.</div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>⤷❹.</span>Attune Element IV</div>
+            <div class='TechDescription' onclick='loadTech(this)'>An aditional element may be attuned, The same element
+              may be attuned to an additional Trait, or the same element may be attuned to the same trait, raising
+              Dominion by 1.</div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>⤷❺.</span>Attune Element V</div>
+            <div class='TechDescription' onclick='loadTech(this)'>An aditional element may be attuned, The same element
+              may be attuned to an additional Trait, or the same element may be attuned to the same trait, raising
+              Dominion by 1.</div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Lifeforce</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Dominion can be temporarily raised by 1 in exchange
+              for 5HP or by 2 in exchange for 1DP. </div>
+            <div class='CardCost'>:: Cost: Free</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <style>
