@@ -539,18 +539,22 @@ textarea {
 .AbilityInfo {
   display: none;
   position: relative;
-  width: 7.9em;
-  min-height: 1em;
-  max-height: 8em;
+  max-width: 12em;
+  min-width: 12em;
+  min-height: 5em;
+  max-height: fit-content;
   overflow: auto;
   background-color: white;
-  box-Shadow: 0em 0em 0em .1em black;
+  box-Shadow: 
+    0em 0em 0em .1em black,
+    0em .5em 1em .4em rgb(0 0 0 /60%);
   border-width: 0em 0.2em 0.3em 0.2em;
   border-radius: 0em 0em 1em 1em;
   top: 1em;
-  transform: translatey(-1.5em) translatex(0.2em);
+  transform: translatey(-1.5em) translatex(5%);
   padding: 1em;
   text-wrap: wrap;
+  font-size:.6em;
 }
 #Temperature {
   display: flex;

@@ -1036,7 +1036,6 @@
     </div>
   </div>
 
-
   <div Class='Skill' data-category='Magic' data-Genre='Combat'>
     <div class='ClassName' onclick=" Monk.toggleAttribute('hidden') ">Monk</div>
     <div id='Monk'>
@@ -1300,6 +1299,53 @@
             <div class='TechDescription' onclick='loadTech(this)'>Dominion can be temporarily raised by 1 in exchange
               for 5HP or by 2 in exchange for 1DP. </div>
             <div class='CardCost'>:: Cost: Free</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div Class='Skill' data-category='Shields' data-Genre='Combat'>
+    <div class='ClassName' onclick="ShieldBearer.toggleAttribute('hidden') ">Shield Bearer</div>
+    <div id='ShieldBearer'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>2nd G</div>
+          <div class='Parent isTrait'>Strength</div>
+          <div class='Parent isTrait'>Charisma</div>
+          <div class='Parent'>Combatant</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     A cooperative soldier, who works together with
+            their allies to ensure their defensive frontline is not breached.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> This class' rank may be used to freely focus
+            guards.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Defend allies in combat. </i></div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Gaurd Aid</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character is able to guard allies, or share
+              their shield coverage freely.</div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Rush Aid</div>
+            <div class='TechDescription' onclick='loadTech(this)'>If a threatened ally is within four spaces, the acting
+              character may rush to their side to perform a guard action.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Shield March</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character may move and guard at the same
+              time. Use of this technique does not end Shield stances. </div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Bash</div>
+            <div class='TechDescription' onclick='loadTech(this)'>A concussive attack with the shield which, if it
+              lands, will destabilize the target, and will always parry incoming attacks.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Poke</div>
+            <div class='TechDescription' onclick='loadTech(this)'>An attack may be performed without lowering the acting
+              character's Guard.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Bunker (Stance)</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Brace yourself, resisting all knockdown and
+              destabilizaing effects.</div>
+            <div class='CardCost'>:: Cost: 1</div>
           </div>
         </div>
       </div>
