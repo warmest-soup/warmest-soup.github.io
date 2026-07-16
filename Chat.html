@@ -91,6 +91,12 @@
     window.loadUser = function (){
         var lastName = document.cookie.split(", ")[0]; 
         var lastColor = document.cookie.split(", ")[1];
+        if(lastName == "undefined"){
+            lastName = "Anonymous";
+        }
+        if(lastColor == "undefined"){
+            lastColor = "White";
+        }
         document.getElementById("Author").value = lastName; 
         document.getElementById("Color").value = lastColor;  
     }
