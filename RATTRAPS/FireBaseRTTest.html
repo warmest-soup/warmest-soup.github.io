@@ -3,9 +3,10 @@
 
 <div id="messages"></div>
 
-<input id="data" placeholder="Enter message">
-<button onclick="send()">Send</button>
-
+<div id="UserInput">
+<input id="data" placeholder="Enter message" onkeydown="if(event.key==='Enter')send()">
+<button onclick="send()" >Send</button> 
+</div>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
@@ -27,6 +28,8 @@ window.send = function(){
       time: Date.now()
     });
     document.getElementById("data").value = "";
+    
+    document.getElementById("messages").scrollTop = document.getElementById("messages").scrollHeight;
   }
 };
 
@@ -42,3 +45,27 @@ onValue(messagesRef, snapshot => {
   document.getElementById("messages").innerHTML = html;
 });
 </script>
+
+<style>
+    #messages{
+        height:80%;
+        width:80%;
+        border:solid black .2em;
+        border-radius:.5em;
+        padding:1em;
+        margin:1em;
+        overflow:auto;
+    }
+    #UserInput{
+      display:flex;
+      justify-content:space-around;
+      height:10%;  
+    }
+    input{
+        width:80%;
+        height:100%;
+    }
+    button{
+        width:10%;
+    }
+</style>
