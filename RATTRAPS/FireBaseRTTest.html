@@ -1,71 +1,198 @@
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+ 
+<div id="Page">
 
+    <div id="messages"></div>
 
+    <div id="UserInput">
 
-<div id="messages"></div>
+        <div id="AuthorLine">
+            <input id="Author" placeholder="Anonymous" onChange="setUser(this)">
+        </div>
 
-<div id="UserInput">
-<input id="data" placeholder="Enter message" onkeydown="if(event.key==='Enter')send()">
-<button onclick="send()" >Send</button> 
+        <div id="MessageBody">
+            <Textarea id="Message" placeholder="Enter message" onkeydown="if(event.key==='Enter')hotSend(event)"></textarea>  
+
+            <button id="SendButton" onclick="send()">Send</button> 
+
+        </div>
+
+    </div>
 </div>
+
+
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    //Load Firebase DB.
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-const firebaseConfig = {
-  databaseURL: "https://rattraps-3rd-edition-default-rtdb.firebaseio.com"
-};
+    //Get RATTRAPS Log
+    const firebaseConfig = {
+        databaseURL: "https://rattraps-3rd-edition-default-rtdb.firebaseio.com"
+    };
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+    const db = getDatabase(initializeApp(firebaseConfig));
+    const messagesRef = ref(db, "MessageLog");
 
-const messagesRef = ref(db, "data");
+    var messageLog = document.getElementById("messages")
+    window.send = function () {
+        var text = document.getElementById("Message").value;
+        var author = document.getElementById("Author").value;
+        if(!author){ 
+            author="Anonymous";
+        }
+        if (text) {
+            push(messagesRef, {
+                author: author,
+                message: text,
+                time: new Date().toString()
+            });
+            document.getElementById("Message").value = "";
 
-window.send = function(){
-  const text = document.getElementById("data").value;
-  if(text){
-    push(messagesRef, {
-      value: text,
-      time: Date.now()
+            messageLog.scrollTop = messageLog.scrollHeight;
+        }
+    };
+
+    // Live listener: fires immediately + whenever data changes
+    onValue(messagesRef, snapshot => {
+        const data = snapshot.val();
+        let html = "";
+
+        for (let id in data || {}) {
+            html += `<div class="SentMessages"><div class="PrevAuthors" >${data[id].author}:</div>   ${data[id].message}</div>`;
+        }
+
+        document.getElementById("messages").innerHTML = html;
+        
+        messageLog.scrollTop = messageLog.scrollHeight;
     });
-    document.getElementById("data").value = "";
     
-    document.getElementById("messages").scrollTop = document.getElementById("messages").scrollHeight;
-  }
-};
-
-// Live listener: fires immediately + whenever data changes
-onValue(messagesRef, snapshot => {
-  const data = snapshot.val();
-  let html = "";
-
-  for(let id in data || {}){
-    html += `<p>${data[id].value}</p>`;
-  }
-
-  document.getElementById("messages").innerHTML = html;
-});
+    window.hotSend = function (e) {
+        e.preventDefault()
+        send();
+    }
+    
+    window.setUser = function (userName){
+        document.cookie = "User: " + userName.value;  
+        
+        console.log(document.cookie);
+    }
+    
+    window.loadUser = function (){
+        var lastName = document.cookie.split(": ")[1];
+        document.getElementById("Author").value = lastName;  
+    }
+    loadUser() 
 </script>
 
+
 <style>
-    #messages{
-        height:80%;
-        width:80%;
-        border:solid black .2em;
-        border-radius:.5em;
-        padding:1em;
-        margin:1em;
+    input {
+        border: none;
+    }
+
+    button {
+        border: none;
+    }
+
+    * {
+        margin: 0em;
+    }
+
+    #Page {
+        background: rgb(56, 51, 77);
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        gap:0em;
+    }
+
+    #messages {
+        box-shadow:
+            0em 0em 0em .1em black,
+            -.5em -.5em 1em .1em rgb(0, 0, 0),
+            .5em .5em 1em .1em rgba(209, 180, 255, 0.5);
+        border-radius: 1em;
+
+        padding: 2em;
+        width: 80%;
+        height: 70%;
+
+        background-image: url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/SheetABGg.gif");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        
         overflow:auto;
+        
+        display:flex;
+        flex-direction:column;
+        gap:.7em;
     }
     #UserInput{
-      display:flex;
-      justify-content:space-around;
-      height:10%;  
+        height:16%;
+        width:90%;
     }
     input{
-        width:80%;
+        margin:.5em;
+        background:rgb(255 255 255 /20%);
+        border-radius:1em;
+        height:1.5em;
+        font-size:.9em;
+        font-weight:bold;
+        text-align:center;
+    }
+    input::placeholder{
+        color:rgba(0, 0, 0, 0.486);
+    }
+    #MessageBody{
+        height:70%;
+        margin:.5em;
+        display:flex;
+        justify-content:space-between;
+        align-items:end;
+    }
+    #Message{
+        width:85%;
         height:100%;
     }
-    button{
-        width:10%;
+    #SendButton{
+        background-color:rgb(154, 191, 221);
+        border-radius:1em;
+        height:40%;
+        width:13%;
     }
+    textarea{
+        resize:none;
+        border-radius:1em;
+        background:rgb(255 255 255 /20%);
+        padding:.7em;
+    }
+    textarea::placeholder{
+        color:rgba(0, 0, 0, 0.486);
+    }
+    .SentMessages{
+        background:rgba(17, 31, 26, 0.664);
+        border-radius:1em;
+        padding:.7em;
+        width:fit-content;
+        color:white;
+        
+        box-shadow:
+        0em 0em 0em .15em black,
+        inset -.1em .1em .1em 0em rgb(200, 255, 203),
+        inset .2em -.2em .5em .3em black;
+    }
+    .PrevAuthors{
+        color:#409dc9;
+        text-shadow:-.1em .1em .2em black;
+    }
+    
 </style>
