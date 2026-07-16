@@ -1352,6 +1352,117 @@
     </div>
   </div>
 
+  <div Class='Skill' data-category='Shields' data-Genre='Combat'>
+    <div class='ClassName' onclick=" Buckler.toggleAttribute('hidden') ">Buckler</div>
+    <div id='Buckler'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>3rd G</div>
+          <div class='Parent isTrait'>Dexterity</div>
+          <div class='Parent'>Duelist</div>
+          <div class='Parent'>Combatant</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     A duelist who supplements their offense with a
+            small shield.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> This class' rank may be used to increase the
+            acting character's shield coverage by 1 for every Rank held.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Defeat humans with a shield equipped. </i>
+          </div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Shield Intercept</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character is able to launch a full strength
+              attack with the shield extended. Incoming attacks will land on the shield, nullifying any potential clash,
+              and allowing the acting character's attack to land. <br><br> This attack's target roll cannot be focused.
+            </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Defensive Offense</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character is able to launch full strength
+              attacks while keeping their guard up.</div>
+            <div class='CardCost'>:: Cost: 2</div>
+            <div class='Tech'><span style='font-size:1.2em;'>⤷❸.</span>Bully Crowd</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character shoves their shield into the
+              opponent's space, causing them difficulty when attempting attacks.<br><br>This technique, if successful,
+              allows for movement into occupied spaces, by pushing enemies back. This technique will also apply
+              penalties to a character's To-Hit roll. The number of penalties adding is equal to the acting chracter's
+              Buckler Class Rank.<br><br>This technique has a range of 1.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Counter Guard</div>
+            <div class='TechDescription' onclick='loadTech(this)'>When parried and destabilized, the acting character
+              gains an oppurtunity to guard any incoming ripostes.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Redirect</div>
+            <div class='TechDescription' onclick='loadTech(this)'>When an opponeent's attack lands on the guard of the
+              acting character, they may choose to deflect it in a specific direction, potentially causing the opponent
+              to strike a nearby ally, or turning them away from the acting character.<br><br>If successful, the acting
+              character may then shove the target a number of spaces equal to, or less than their Buckler Class Rank.
+            </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>On Guard II (Stance)</div>
+            <div class='TechDescription' onclick='loadTech(this)'>This stance may be entered along with any other Trap
+              Stance, should the acting character's Stance be triggered by a feignt, they may still guard while
+              destabilized.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div Class='Skill' data-category='Shields' data-Genre='Combat'>
+    <div class='ClassName' onclick=" Defender.toggleAttribute('hidden') ">Defender</div>
+    <div id='Defender'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>3rd G</div>
+          <div class='Parent isTrait'>Dexterity</div>
+          <div class='Parent'>Duelist</div>
+          <div class='Parent'>Combatant</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     A protector. The shield is a symbol of defense,
+            and a weapon against harm.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> The acting character's stability when guarding
+            is raised their Defender Class Rank.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Defend attacks with non-weapon objects. </i>
+          </div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Full Guard (Stance)</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Hide yourself entirely behind your shield, regardless
+              of it's coverage.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Disk Toss</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character hurls their shield like a disc,
+              garunteed to strike a target if they are within a number of spaces equal to their Defender Class Rank • 2.
+            </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>⤷❸.</span>Rebound</div>
+            <div class='TechDescription' onclick='loadTech(this)'>After the the initial hit of Disc Toss, for as many
+              repetitions as the acting character has Ranks in their Defender Class, the shield may ricochet to strike
+              another target.<br><br> Each subsquent hit will incur one additional target penalty.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Shield Lariat</div>
+            <div class='TechDescription' onclick='loadTech(this)'>A powerful striking attack performed with a shield's
+              edge (Sharpness 2) that, if it lands, will knock the target prone.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Shield Tackle</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character, during a dash (Which may be
+              begun on the same moment this technique is used for no additional cost.) crashes into the target, dealing
+              impact damage to a random limb. <br><br>The targeted limb is determined by a target roll, in which the
+              lesser of the dice is used.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Guard Bounce</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character meets incoming blows with their
+              shield. <br>Guarding against attacks will repel double damage into the attacking weapon. Potentially
+              causing the attacker to drop their weapon, or even break it.<br><br>Guarding against certain projectiles
+              will cause them to ricochet. This effect may be targeted with a relavant accuracy roll.</div>
+            <div class='CardCost'>:: Cost: P</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <style>

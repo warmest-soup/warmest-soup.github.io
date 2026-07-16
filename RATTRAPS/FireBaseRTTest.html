@@ -1,0 +1,44 @@
+
+
+
+<div id="messages"></div>
+
+<input id="data" placeholder="Enter message">
+<button onclick="send()">Send</button>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const firebaseConfig = {
+  databaseURL: "https://rattraps-3rd-edition-default-rtdb.firebaseio.com"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const messagesRef = ref(db, "data");
+
+window.send = function(){
+  const text = document.getElementById("data").value;
+  if(text){
+    push(messagesRef, {
+      value: text,
+      time: Date.now()
+    });
+    document.getElementById("data").value = "";
+  }
+};
+
+// Live listener: fires immediately + whenever data changes
+onValue(messagesRef, snapshot => {
+  const data = snapshot.val();
+  let html = "";
+
+  for(let id in data || {}){
+    html += `<p>${data[id].value}</p>`;
+  }
+
+  document.getElementById("messages").innerHTML = html;
+});
+</script>
