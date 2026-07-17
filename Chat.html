@@ -10,7 +10,7 @@
 
         <div id="AuthorLine">
             <input id="Author" placeholder="Anonymous" onChange="setUser(this, Color)">
-            <input id="Color" placeholder="Color Definition" onChange="setUser(Author, this)">
+            <input id="Color" placeholder="Color Definition" onChange="setUser(Author, this); setColorTest()">
         </div>
 
         <div id="MessageBody">
@@ -80,6 +80,12 @@
     window.hotSend = function (e) {
         e.preventDefault()
         send();
+    }
+    
+    window.setColorTest = function () {
+        var color = document.getElementById("Color")
+        
+        color.style.backgroundColor=color.value; 
     }
     
     window.setUser = function (userName, userColor){
