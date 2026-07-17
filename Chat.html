@@ -38,6 +38,8 @@
     const messagesRef = ref(db, "MessageLog");
 
     var messageLog = document.getElementById("messages")
+    
+    
     window.send = function () {
         var text = document.getElementById("Message").value
         var author = document.getElementById("Author").value 
@@ -67,6 +69,10 @@
     onValue(messagesRef, snapshot => {
         const data = snapshot.val();
         let html = "";
+        var jump;
+        if(messageLog.scrollTop + messageLog.clientHeight >= messageLog.scrollHeight - 1){
+            jump = true;
+        } else jump = false;
 
         for (let id in data || {}) {
             html += `<div class='SentMessages'><div class='PrevAuthors' style='color:${data[id].color};'> ${data[id].author}: </div>     ${data[id].message}</div>`;
@@ -74,7 +80,10 @@
 
         document.getElementById("messages").innerHTML = html;
         new Audio('https://github.com/warmest-soup/warmest-soup.github.io/raw/refs/heads/main/Assets/Audio/ButtonClick.mp3').play() 
-        messageLog.scrollTop = messageLog.scrollHeight; 
+        if(jump){
+            messageLog.scrollTop = messageLog.scrollHeight; 
+        }
+        
     });
     
     window.hotSend = function (e) {
@@ -106,6 +115,8 @@
         document.getElementById("Author").value = lastName; 
         document.getElementById("Color").value = lastColor;  
     }
+    
+    messageLog.scrollTop = messageLog.scrollHeight; 
     loadUser() 
 </script>
 
