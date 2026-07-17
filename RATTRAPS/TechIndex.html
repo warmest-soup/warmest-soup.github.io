@@ -610,6 +610,56 @@
     </div>
   </div>
 
+  <div Class='Skill' data-category='Misc.' data-Genre='Other'>
+    <div class='ClassName' onclick=" Athlete.toggleAttribute('hidden') ">Athlete</div>
+    <div id='Athlete'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>1st G</div>
+          <div class='Parent isTrait'>Strength</div>
+          <div class='Parent isTrait'>Speed</div>
+          <div class='Parent isTrait'>Dexterity</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     The pursuit of mastering one's physical
+            capabilities. A skill that lets one accel in their physical pursuits. Champions aren’t made in gyms.
+            Champions are made from something they have deep inside of them; a desire, a dream, a vision.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> Every rank in Athlete is added to exp gained
+            from passing skill checks by rolling a pair (Criticals)</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Engage in formal training methods. </i>
+          </div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Recovery Breath</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Regain a single Skill Card after use.</div>
+            <div class='CardCost'>:: Cost: Free</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Marathoner</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Food and Water sat may be used in place of Skill
+              Cards.</div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Hail Mary</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Costs one card to perform along with another Skill
+              Technique. if the Technique is successful all cards spent are refunded, with the exception of the one
+              spent to use this technique. <br><br>When used in combat, this technique will refund all cards spent in a
+              moment.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Finish Strong</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Immediately reroll failed Skill checks before
+              recieving the consequences of failure. This can be repeated as many times as the character has ranks in
+              Athlete, with each reroll costing an additional card.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Tenacity</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Gain an advantage on all Skill checks, including
+              special hit conditions, such as Tripping, KO, and Drop Checks.</div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Persistence</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Failed Skill checks still earn exp.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div Class='Insight' data-category='Misc.' data-Genre='Other'>
     <div class='ClassName' onclick=" Coach.toggleAttribute('hidden') ">Coach</div>
     <div id='Coach'>
@@ -1463,6 +1513,158 @@
     </div>
   </div>
 
+  <div Class='Skill' data-category='Firearms' data-Genre='Combat'>
+    <div class='ClassName' onclick=" Shootist.toggleAttribute('hidden') ">Shootist</div>
+    <div id='Shootist'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>3rd G</div>
+          <div class='Parent'>Firearms</div>
+          <div class='Parent isTrait'>Constitution</div>
+          <div class='Parent isTrait'>Perception</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     The art of gunfighting. Gunslingers well versed in
+            the unforgiving nature of firefights, and shootouts, where movement, positions, and a steady hand determine
+            life and death.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> When using this class for accuracy, the acting
+            character ignores all movement related target penalties.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Land shots on enemies in combat. </i></div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Panic Shot</div>
+            <div class='TechDescription' onclick='loadTech(this)'>When another character enters their melee range, and
+              the acting character has a firearm drawn & loaded, they gain the chance to fire on a random spot on the
+              character. This technique will be triggered even whtn the attacker is unnoticed. <br><br><i>If the
+                attacker is unnnoticed, the acting character <b>must</b> deciede whether or not to activate this
+                technique <b>before </b> seeking more information.</i></div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Warning Shot</div>
+            <div class='TechDescription' onclick='loadTech(this)'>If a gun has not yet been fired in the currenct
+              encounter, the acting character may fire a warning shot which will destabilize <i>all other involved
+                characters</i> with a chance to paralyze them. </div>
+            <div class='CardCost'>:: Cost: Free</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Quick Draw</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character is able to draw and fire a gun in
+              a single moment. </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Rush Load</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character may speed through the reloading
+              process, completing as many steps per moment as the acting character has ranks in Shootist.. This lasts
+              until the weapon is fully reloaded, or canceled by another action.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Hammer Fan I</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character is able to fire a repeating
+              pistol as many times as the roll of a single dice, at a single target in a single moment, Each attack will
+              target a random spot, and can be focused. Each attack <b>beyond</b> the number of Class Ranks in Shootist
+              will gain a target penalty.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>⤷❻.</span>Hammer Fan II</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Each subsequent shot may target a different object or
+              entity. Each additional target raises the cost of this skill by 1.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div Class='Skill' data-category='Firearms' data-Genre='Combat'>
+    <div class='ClassName' onclick=" TrickShot.toggleAttribute('hidden') ">TrickShot</div>
+    <div id='TrickShot'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>3rd G</div>
+          <div class='Parent'>Firearms</div>
+          <div class='Parent isTrait'>Dexterity</div>
+          <div class='Parent isTrait'>Speed</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     An artist with their weapon, and a showman.
+            Perhaps the truest master of their craft, as a talented trick shot can make possible the strangest and most
+            difficult shots one could imagine. </div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> When this class is rolled for accuracy, it
+            halves the number of target penalties on any non-standard shot. </div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Land shots with active penalites </i></div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Single Action</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Allows for the use of two handed firearms to be used
+              and operated one handed. </div>
+            <div class='CardCost'>:: Cost: p</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Ill Intent</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character is able to use the aim technique
+              in preparation of shot while their weapon is holstered, or they are otherwise occupied.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Follow-up</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character retains target advantages for
+              consecutive shots. Each subsequent shot will lose one advantage. Subsequent shots MUST be taken on the
+              next actionable moment to retain advantages. </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Hip-Shot</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Halves the target penalties when firing without
+              aiming. </div>
+            <div class='CardCost'>:: Cost: P</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Hat Trick </div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character gains a target penalty, and the
+              shot will deal no damage to the target, but if it lands, it will remove the top layer of armor that it
+              hits. </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Smooth Operator</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Remove as many penalties as the acting character has
+              Class Ranks in Trick Shot. This technique is used when firing. </div>
+            <div class='CardCost'>:: Cost: 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div Class='Skill' data-category='Firearms' data-Genre='Combat'>
+    <div class='ClassName' onclick=" Sharpshooter.toggleAttribute('hidden') ">Sharpshooter</div>
+    <div id='Sharpshooter'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>3rd G</div>
+          <div class='Parent'>Firearms</div>
+          <div class='Parent isTrait'>Dexterity</div>
+          <div class='Parent isTrait'>Perception</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     A marksmen that rarely misses their mark.
+            Intelligent shooters in tune with their weapon. </div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> When this class is used for accuracy, ignore
+            as many range penalties as the acting character has Class Ranks in Sharpshooter.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Land hits on targets beyond weapon range.
+            </i></div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Steady Hands</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Double the accumulated advantages from aiming. </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Empty Lungs</div>
+            <div class='TechDescription' onclick='loadTech(this)'>On the moment the acting character fires their weapon,
+              they gain an extra target advantgae. </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Field Strip</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character is able to quickly address their
+              firearm's condition, reducing the chance to misfire by 1 each use. </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>⤷❹.</span>Action Run</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting Character is able to quickly inspect their
+              firearm to determine the chance of a misfire on their next shot. </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Range Survey</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Gain a target advantage on the acting character's next
+              shot, without consuming an action. </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Bullet Drop</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Double the effective Rance of equipped firearms.
+            </div>
+            <div class='CardCost'>:: Cost: P</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <style>
@@ -1474,6 +1676,14 @@
     align-items: start;
     max-height: 200em;
     max-width: fit-content;
+  }
+
+  html {
+    background-image: url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/SheetABGg.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 100% 100%;
   }
 
   .Skill {
