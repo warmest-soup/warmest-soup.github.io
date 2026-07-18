@@ -1,7 +1,5 @@
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
- 
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
 <div id="Page">
 
     <div id="messages"></div>
@@ -14,9 +12,10 @@
         </div>
 
         <div id="MessageBody">
-            <Textarea id="Message" placeholder="Enter message" onkeydown="if(event.key==='Enter')hotSend(event)"></textarea>  
+            <Textarea id="Message" placeholder="Enter message"
+                onkeydown="if(event.key==='Enter')hotSend(event)"></textarea>
 
-            <button id="SendButton" onclick="send()">Send</button> 
+            <button id="SendButton" onclick="send()">Send</button>
 
         </div>
 
@@ -35,29 +34,67 @@
     };
 
     const db = getDatabase(initializeApp(firebaseConfig));
-    const messagesRef = ref(db, "MessageLog");
+    const messagesLog = ref(db, "MessageLog");
 
     var messageLog = document.getElementById("messages")
-    
-    
+
+
+    window.formatReply = function () {
+        var replyTargets = Array.from(document.getElementsByClassName("reply2This"));
+
+        var formattedReply;
+
+        if (replyTargets[0]) {
+            //console.log("This!: " + replyTargets[0].outerHTML ) 
+
+            var replyAuthors = replyTargets.map(x => x.children[0].outerHTML);
+            var replyTexts = replyTargets.map(x => x.children[1].innerText);
+
+            //console.log("A: " + replyAuthors)
+            //console.log("T" + replyTexts)
+
+            var i = 0;
+            formattedReply = "";
+            while (i < replyAuthors.length) {
+                formattedReply += "<div class='quote'><div>\"" + replyTexts[i] + "\"</div>" +
+                    "<div>     - " + replyAuthors[i] + "</div></div>" 
+
+                console.log(i)
+                i++;
+            }
+            formattedReply = "<div class='quotedMessages'>" + formattedReply + "</div>"
+
+        } else formattedReply = "";
+
+        console.log(formattedReply);
+        return formattedReply
+
+    }
+
+
     window.send = function () {
+
+        formatReply();
+
         var text = document.getElementById("Message").value
-        var author = document.getElementById("Author").value 
-        var colorID = document.getElementById("Color").value 
+        var author = document.getElementById("Author").value
+        var colorID = document.getElementById("Color").value
         var colorCheck = colorID.substring(0, 3).toLowerCase();
-        
-        if(!author){ 
-            author="Anonymous";
+
+
+        if (!author) {
+            author = "Anonymous";
         }
-        if(!colorCheck){
-            colorID="White"
+        if (!colorCheck) {
+            colorID = "White"
         }
         if (text) {
-            push(messagesRef, {
+            push(messagesLog, {
                 author: author,
+                reply: formatReply(),
                 message: text,
                 color: colorID,
-                time: new Date().toString()
+                time: new Date().toUTCString()
             });
             document.getElementById("Message").value = "";
 
@@ -65,58 +102,68 @@
         }
     };
 
-    // Live listener: fires immediately + whenever data changes
-    onValue(messagesRef, snapshot => {
-        const data = snapshot.val();
-        let html = "";
+    // Live listener: fires immediately + whenever messageHistorychanges
+    onValue(messagesLog, snapshot => {
+        const messageHistory = snapshot.val();
+        var formattedHistory = "";
         var jump;
-        if(messageLog.scrollTop + messageLog.clientHeight >= messageLog.scrollHeight - 1){
+        if (messageLog.scrollTop + messageLog.clientHeight >= messageLog.scrollHeight - 1) {
             jump = true;
         } else jump = false;
 
-        for (let id in data || {}) {
-            html += `<div class='SentMessages'><div class='PrevAuthors' style='color:${data[id].color};'> ${data[id].author}: </div>     ${data[id].message}</div>`;
+        var spacer;
+        for (let id in messageHistory || {}) {
+            
+            if(messageHistory[id].reply){
+                spacer = "  ⤷  ";
+            } else spacer = "     "
+            
+            formattedHistory += `${messageHistory[id].reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${messageHistory[id].color};'> ${messageHistory[id].author}: </div> <div>${spacer}${messageHistory[id].message}</div> <div class="timestamp"> ${messageHistory[id].time} </div> </div>`;
         }
 
-        document.getElementById("messages").innerHTML = html;
-        new Audio('https://github.com/warmest-soup/warmest-soup.github.io/raw/refs/heads/main/Assets/Audio/ButtonClick.mp3').play() 
-        if(jump){
-            messageLog.scrollTop = messageLog.scrollHeight; 
+        document.getElementById("messages").innerHTML = formattedHistory;
+        new Audio('https://github.com/warmest-soup/warmest-soup.github.io/raw/refs/heads/main/Assets/Audio/ButtonClick.mp3').play()
+        if (jump) {
+            messageLog.scrollTop = messageLog.scrollHeight;
         }
-        
+
     });
-    
+
     window.hotSend = function (e) {
         e.preventDefault()
         send();
     }
-    
+
     window.setColorTest = function () {
         var color = document.getElementById("Color")
-        
-        color.style.backgroundColor=color.value; 
+
+        color.style.backgroundColor = color.value;
     }
-    
-    window.setUser = function (userName, userColor){
-        document.cookie = userName.value + ", " + userColor.value;  
-        
+
+    window.setUser = function (userName, userColor) {
+        document.cookie = userName.value + ", " + userColor.value;
+
         console.log(document.cookie);
     }
-    
-    window.loadUser = function (){
-        var lastName = document.cookie.split(", ")[0]; 
+
+    window.loadUser = function () {
+        var lastName = document.cookie.split(", ")[0];
         var lastColor = document.cookie.split(", ")[1];
-        if(lastName == "undefined"){
+        if (lastName == "undefined") {
             lastName = "Anonymous";
         }
-        if(lastColor == "undefined"){
+        if (lastColor == "undefined") {
             lastColor = "White";
         }
-        document.getElementById("Author").value = lastName; 
-        document.getElementById("Color").value = lastColor;  
+        document.getElementById("Author").value = lastName;
+        document.getElementById("Color").value = lastColor;
     }
-    
-    messageLog.scrollTop = messageLog.scrollHeight; 
+
+    window.replyTarget = function (target) {
+        target.classList.toggle("reply2This")
+    }
+
+    messageLog.scrollTop = messageLog.scrollHeight;
     loadUser() 
 </script>
 
@@ -143,15 +190,15 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
-        gap:0em;
-        
+        gap: 0em;
+
         background-image: url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomForeground.jpg");
         background-repeat: no-repeat;
         background-position: center;
         background-attachment: fixed;
         background-size: 100% 100%;
     }
- 
+
     #messages {
         box-shadow:
             0em 0em 0em .1em black,
@@ -168,71 +215,142 @@
         background-position: center;
         background-attachment: fixed;
         background-size: 100% 100%;
+
+        overflow: auto;
+
+        display: flex;
+        flex-direction: column;
+        gap: .7em;
+    }
+
+    #UserInput {
+        height: 16%;
+        width: 90%;
+    }
+
+    input {
+        margin: .5em;
+        background: rgb(255 255 255 /20%);
+        border-radius: 1em;
+        height: 1.5em;
+        width: 30%;
+        font-size: .9em;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    input::placeholder {
+        color: rgba(0, 0, 0, 0.486);
+    }
+
+    #MessageBody {
+        height: 70%;
+        margin: .5em;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+    }
+
+    #Message {
+        width: 85%;
+        height: 100%;
+    }
+
+    #SendButton {
+        background-color: rgb(154, 191, 221);
+        border-radius: 1em;
+        height: 40%;
+        width: 13%;
+    }
+
+    textarea {
+        resize: none;
+        border-radius: 1em;
+        background: rgb(255 255 255 /20%);
+        padding: .7em;
+    }
+
+    textarea::placeholder {
+        color: rgba(0, 0, 0, 0.486);
+    }
+
+    .SentMessages {
+        background: rgba(17, 31, 26, 0.664);
+        border-radius: 1em;
+        padding: .7em;
+        width: fit-content;
+        color: white;
+        z-index:+1;
+        transform:translatex(1em);
+
+        box-shadow:
+            0em 0em 0em .15em black,
+            inset -.1em .1em .1em 0em rgb(200, 255, 203),
+            inset .2em -.2em .5em .3em black;
+    }
+
+    .quotedMessages {
+        background: rgba(81, 138, 95, 0.664);
+        border-radius: 2em 2em 2em 4em;
+        padding: 1em 1em 2em 1em;
+        width: fit-content;
+        color: white;
+        font-size:.9em;
         
-        overflow:auto;
+        transform: translatey(2.2em);
         
+
+        box-shadow:
+            0em 0em 0em .15em black,
+            inset -.1em .1em .1em 0em rgb(255, 255, 255),
+            inset .2em -.2em .5em .3em rgb(22, 26, 53);
+            
         display:flex;
         flex-direction:column;
-        gap:.7em;
-    }
-    #UserInput{
-        height:16%;
-        width:90%;
-    }
-    input{
-        margin:.5em;
-        background:rgb(255 255 255 /20%);
-        border-radius:1em;
-        height:1.5em;
-        width:30%;
-        font-size:.9em;
-        font-weight:bold;
-        text-align:center;
-    }
-    input::placeholder{
-        color:rgba(0, 0, 0, 0.486);
-    }
-    #MessageBody{
-        height:70%;
-        margin:.5em;
-        display:flex;
-        justify-content:space-between;
-        align-items:end;
-    }
-    #Message{
-        width:85%;
-        height:100%;
-    }
-    #SendButton{
-        background-color:rgb(154, 191, 221);
-        border-radius:1em;
-        height:40%;
-        width:13%;
-    }
-    textarea{
-        resize:none;
-        border-radius:1em;
-        background:rgb(255 255 255 /20%);
-        padding:.7em;
-    }
-    textarea::placeholder{
-        color:rgba(0, 0, 0, 0.486);
-    }
-    .SentMessages{
-        background:rgba(17, 31, 26, 0.664);
-        border-radius:1em;
-        padding:.7em;
-        width:fit-content;
-        color:white;
-        
-        box-shadow:
-        0em 0em 0em .15em black,
-        inset -.1em .1em .1em 0em rgb(200, 255, 203),
-        inset .2em -.2em .5em .3em black;
-    }
-    .PrevAuthors{
-        color:#409dc9;
-        text-shadow:-.1em .1em .2em black;
+        gap:.5em;
     }
     
+    .quote{
+        color:rgb(231, 222, 223);
+        padding:.5em;
+        border-radius:1em;
+        box-shadow:
+        0em 0em 1em 0em rgba(255, 255, 255, 0.493),
+        inset 0em 0em 1em 0em rgba(255, 255, 255, 0.301),
+        inset 0em 0em 1em 0em rgb(10, 60, 80);
+    }
+
+    .quotedMessages>* .PrevAuthors {
+        display: inline;
+    }
+
+    .PrevAuthors {
+        color: #409dc9;
+        text-shadow: -.1em .1em .2em black;
+    }
+    
+    .reply2This{
+        animation:replyGlow 1s infinite;
+    }
+    @keyframes replyGlow {
+        0%{}
+        50%{
+            box-shadow:
+            0em 0em 0em .15em black,
+            inset -.1em .1em .1em 0em rgb(200, 255, 203),
+            inset .2em -.2em .5em .3em black,
+            0em 0em 1em .5em white;
+            
+            filter:brightness(200%); 
+            
+            background:cyan;
+        } 
+        100%{}
+    }
+    
+    .timestamp{
+        color:rgb(105, 145, 190);
+        font-size:.9em;
+        padding-top:1em;
+    }
 </style>
