@@ -237,7 +237,7 @@
 
         padding: 2em;
         width: 80%;
-        height: 70%;
+        height:70%;
 
         background-image: url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/Chatroom.gif");
         background-repeat: no-repeat;
@@ -251,6 +251,11 @@
         display: flex;
         flex-direction: column;
         gap: .7em;
+    }
+    @media (max-aspect-ratio: 12/16){ 
+        #messages{
+            height:60%;
+        }
     }
 
     #UserInput {
