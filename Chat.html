@@ -84,9 +84,10 @@
 
     }
 
-
+    var alertSound = new Audio("https://warmest-soup.github.io/Assets/Audio/ButtonClick.mp3");
+    var playAlert = false;
     window.send = function () {
-
+        playAlert = true;
         var text = document.getElementById("Message").value
         text = text.replace(/\n/g, "</p>") + "</p>";
         var author = document.getElementById("Author").value
@@ -110,17 +111,12 @@
                 stamp: Date.now()
             });
             document.getElementById("Message").value = "";
-            
-            replyTargets.forEach((x) => x.classList.toggle("reply2This")) 
+
+            replyTargets.forEach((x) => x.classList.toggle("reply2This"))
 
             messageLog.scrollTop = messageLog.scrollHeight;
         }
     };
-
-    var findLastEntry = query(
-        messagesLog,
-        orderByChild("stamp")
-    );
 
     onChildAdded(messagesLog, async snapshot => {
         var messageBox = document.getElementById("messages");
@@ -138,11 +134,13 @@
         } else spacer = "<p>     "
 
         messageBox.insertAdjacentHTML("beforeEnd", `${newMessage.reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${newMessage.color};'> ${newMessage.author}: </div> <div>${spacer}${newMessage.message}</div> <div class="timestamp"> ${newMessage.time} </div> </div>`);
-        
-        var alertSound = new Audio("https://warmest-soup.github.io/Assets/Audio/ButtonClick.mp3");
-        alertSound.play();
-        
-        if(jump=true){
+
+        if (playAlert) {
+            alertSound.play();
+        }
+
+
+        if (jump = true) {
             messageLog.scrollTop = messageLog.scrollHeight;
         }
 
@@ -226,8 +224,8 @@
         background-position: center;
         background-attachment: fixed;
         background-size: 100% 100%;
-        
-        overflow:clip;
+
+        overflow: clip;
     }
 
     #messages {
@@ -294,7 +292,7 @@
         height: 40%;
         width: 90%;
         font-size: 80%;
-        line-height:1em;
+        line-height: 1em;
         text-shadow:
             0em 0em .1em black,
             0em 0em .1em black,
@@ -406,14 +404,14 @@
                 2em 0em 2em -2em white,
                 2em 0em 4em -2em white,
                 -2em 0em 2em -2em white,
-                -2em 0em 4em -2em white; 
+                -2em 0em 4em -2em white;
 
             filter: brightness(200%) blur(.1em);
 
             background: cyan;
         }
-        
-        75%{
+
+        75% {
             box-shadow:
                 0em 0em 0em .15em black,
                 inset -.1em .1em .1em 0em rgb(200, 255, 203),
@@ -421,15 +419,15 @@
                 5em 0em 10em -2em rgba(255, 255, 255, 0),
                 5em 0em 10em -2em rgba(255, 255, 255, 0),
                 -5em 0em 10em -2em rgba(255, 255, 255, 0),
-                -5em 0em 10em -2em rgba(255, 255, 255, 0); 
+                -5em 0em 10em -2em rgba(255, 255, 255, 0);
         }
-        
+
 
         100% {
             background: rgba(96, 179, 151, 0.664);
         }
-            
-            
+
+
     }
 
     .timestamp {
@@ -457,6 +455,6 @@
 
     #AuthorLine {
         display: flex;
-        flex-wrap:wrap;
+        flex-wrap: wrap;
     }
 </style>
