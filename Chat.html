@@ -139,6 +139,9 @@
 
         messageBox.insertAdjacentHTML("beforeEnd", `${newMessage.reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${newMessage.color};'> ${newMessage.author}: </div> <div>${spacer}${newMessage.message}</div> <div class="timestamp"> ${newMessage.time} </div> </div>`);
         
+        var alertSound = new Audio("https://warmest-soup.github.io/Assets/Audio/ButtonClick.mp3");
+        alertSound.play();
+        
         if(jump=true){
             messageLog.scrollTop = messageLog.scrollHeight;
         }
