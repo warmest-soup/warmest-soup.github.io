@@ -12,9 +12,9 @@
     <div id="UserInput">
 
         <div id="AuthorLine">
-            <input id="Author" placeholder="Anonymous"
+            <span class="inputLabel">AUTHOR: </span><input id="Author" placeholder="Anonymous"
                 onChange="setUser(this, Color)">
-            <input id="Color" placeholder="Color Definition"
+            <span class="inputLabel">COLOR: </span><input id="Color" placeholder="Color Definition"
                 onChange="setUser(Author, this); setColorTest()">
             <span class="inputLabel" id="Clock">--:--</span>
             <script>
@@ -259,7 +259,6 @@
         background: rgb(255 255 255 /20%);
         border-radius: 1em;
         height: 1.5em;
-        width: 30%;
         font-size: .9em;
         font-weight: bold;
         text-align: center;
@@ -288,7 +287,8 @@
         border-radius: 1em;
         height: 40%;
         width: 90%;
-        font-size: 110%;
+        font-size: 80%;
+        line-height:1em;
         text-shadow:
             0em 0em .1em black,
             0em 0em .1em black,
@@ -417,10 +417,11 @@
                 -5em 0em 10em -2em rgba(255, 255, 255, 0),
                 -5em 0em 10em -2em rgba(255, 255, 255, 0); 
         }
-        }
+        
 
         100% {
             background: rgba(96, 179, 151, 0.664);
+        }
             
             
     }
@@ -433,7 +434,7 @@
 
     #Author,
     #Color {
-        width: fit-content;
+        width: 8em;
     }
 
     .inputLabel {
@@ -450,5 +451,6 @@
 
     #AuthorLine {
         display: flex;
+        flex-wrap:wrap;
     }
 </style>
