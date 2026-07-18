@@ -1,4 +1,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=Zen+Old+Mincho&display=swap"
+    rel="stylesheet">
 
 <div id="Page">
 
@@ -7,15 +12,25 @@
     <div id="UserInput">
 
         <div id="AuthorLine">
-            <input id="Author" placeholder="Anonymous" onChange="setUser(this, Color)">
-            <input id="Color" placeholder="Color Definition" onChange="setUser(Author, this); setColorTest()">
+            <span class="inputLabel">AUTHOR: </span><input id="Author" placeholder="Anonymous"
+                onChange="setUser(this, Color)">
+            <span class="inputLabel">COLOR: </span><input id="Color" placeholder="Color Definition"
+                onChange="setUser(Author, this); setColorTest()">
+            <span class="inputLabel" id="Clock">--:--</span>
+            <script>
+                setInterval(() => document.getElementById("Clock").textContent = new Date().toUTCString(), 1000)
+            </script>
         </div>
 
         <div id="MessageBody">
             <Textarea id="Message" placeholder="Enter message"
-                onkeydown="if(event.key==='Enter')hotSend(event)"></textarea>
+                onkeydown="if(event.key==='Enter' && event.shiftKey){addNewLine()} else if (event.key==='Enter')hotSend(event);"></textarea>
 
-            <button id="SendButton" onclick="send()">Send</button>
+            <div id="buttonControls">
+                <button id="LineBreakButton" class="TextButtons" onclick="addNewLine()">Line Break</button>
+                <button id="SendButton" class="TextButtons" onclick="send()">Send</button>
+            </div>
+
 
         </div>
 
@@ -26,7 +41,7 @@
 <script type="module">
     //Load Firebase DB.
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getDatabase, ref, push, onValue, query, limitToLast, onChildAdded, orderByChild, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
     //Get RATTRAPS Log
     const firebaseConfig = {
@@ -38,35 +53,33 @@
 
     var messageLog = document.getElementById("messages")
 
-
+    var replyTargets
     window.formatReply = function () {
-        var replyTargets = Array.from(document.getElementsByClassName("reply2This"));
+        replyTargets = Array.from(document.getElementsByClassName("reply2This"));
 
         var formattedReply;
 
         if (replyTargets[0]) {
-            //console.log("This!: " + replyTargets[0].outerHTML ) 
 
-            var replyAuthors = replyTargets.map(x => x.children[0].outerHTML);
+            replyTargets.forEach((x) => {
+                x.children[0].innerText = x.children[0].innerText.slice(0, -1)
+            });
+
+            var replyAuthors = replyTargets.map((x) => x.children[0].outerHTML);
+
             var replyTexts = replyTargets.map(x => x.children[1].innerText);
-
-            //console.log("A: " + replyAuthors)
-            //console.log("T" + replyTexts)
 
             var i = 0;
             formattedReply = "";
             while (i < replyAuthors.length) {
                 formattedReply += "<div class='quote'><div>\"" + replyTexts[i] + "\"</div>" +
-                    "<div>     - " + replyAuthors[i] + "</div></div>" 
-
-                console.log(i)
+                    "<div>     - " + replyAuthors[i] + "</div></div>"
                 i++;
             }
             formattedReply = "<div class='quotedMessages'>" + formattedReply + "</div>"
 
         } else formattedReply = "";
 
-        console.log(formattedReply);
         return formattedReply
 
     }
@@ -74,9 +87,8 @@
 
     window.send = function () {
 
-        formatReply();
-
         var text = document.getElementById("Message").value
+        text = text.replace(/\n/g, "</p>") + "</p>";
         var author = document.getElementById("Author").value
         var colorID = document.getElementById("Color").value
         var colorCheck = colorID.substring(0, 3).toLowerCase();
@@ -94,40 +106,45 @@
                 reply: formatReply(),
                 message: text,
                 color: colorID,
-                time: new Date().toUTCString()
+                time: new Date().toUTCString(),
+                stamp: Date.now()
             });
             document.getElementById("Message").value = "";
+            
+            replyTargets.forEach((x) => x.classList.toggle("reply2This")) 
 
             messageLog.scrollTop = messageLog.scrollHeight;
         }
     };
 
-    // Live listener: fires immediately + whenever messageHistorychanges
-    onValue(messagesLog, snapshot => {
-        const messageHistory = snapshot.val();
-        var formattedHistory = "";
+    var findLastEntry = query(
+        messagesLog,
+        orderByChild("stamp")
+    );
+
+    onChildAdded(messagesLog, async snapshot => {
+        var messageBox = document.getElementById("messages");
+
+        var newMessage = snapshot.val()
+
         var jump;
         if (messageLog.scrollTop + messageLog.clientHeight >= messageLog.scrollHeight - 1) {
             jump = true;
         } else jump = false;
 
         var spacer;
-        for (let id in messageHistory || {}) {
-            
-            if(messageHistory[id].reply){
-                spacer = "  ⤷  ";
-            } else spacer = "     "
-            
-            formattedHistory += `${messageHistory[id].reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${messageHistory[id].color};'> ${messageHistory[id].author}: </div> <div>${spacer}${messageHistory[id].message}</div> <div class="timestamp"> ${messageHistory[id].time} </div> </div>`;
-        }
+        if (newMessage.reply) {
+            spacer = "  ⤷  ";
+        } else spacer = "<p>     "
 
-        document.getElementById("messages").innerHTML = formattedHistory;
-        new Audio('https://github.com/warmest-soup/warmest-soup.github.io/raw/refs/heads/main/Assets/Audio/ButtonClick.mp3').play()
-        if (jump) {
+        messageBox.insertAdjacentHTML("beforeEnd", `${newMessage.reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${newMessage.color};'> ${newMessage.author}: </div> <div>${spacer}${newMessage.message}</div> <div class="timestamp"> ${newMessage.time} </div> </div>`);
+        
+        if(jump=true){
             messageLog.scrollTop = messageLog.scrollHeight;
         }
 
-    });
+
+    })
 
     window.hotSend = function (e) {
         e.preventDefault()
@@ -136,14 +153,15 @@
 
     window.setColorTest = function () {
         var color = document.getElementById("Color")
+        var author = document.getElementById("Author")
 
+        author.style.color = color.value;
         color.style.backgroundColor = color.value;
     }
 
+
     window.setUser = function (userName, userColor) {
         document.cookie = userName.value + ", " + userColor.value;
-
-        console.log(document.cookie);
     }
 
     window.loadUser = function () {
@@ -163,8 +181,15 @@
         target.classList.toggle("reply2This")
     }
 
+    window.addNewLine = function () {
+        var textArea = document.getElementById("Message");
+        textArea.value += "\n";
+        textArea.focus();
+    }
+
     messageLog.scrollTop = messageLog.scrollHeight;
-    loadUser() 
+    loadUser()
+    setColorTest()
 </script>
 
 
@@ -179,6 +204,7 @@
 
     * {
         margin: 0em;
+        font-family: "Zen Old Mincho", serif;
     }
 
     #Page {
@@ -188,9 +214,9 @@
 
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
-        gap: 0em;
+        gap: 1em;
 
         background-image: url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomForeground.jpg");
         background-repeat: no-repeat;
@@ -254,13 +280,38 @@
     #Message {
         width: 85%;
         height: 100%;
+        white-space: pre-wrap;
     }
 
-    #SendButton {
+    .TextButtons {
         background-color: rgb(154, 191, 221);
         border-radius: 1em;
         height: 40%;
-        width: 13%;
+        width: 90%;
+        font-size: 110%;
+        text-shadow:
+            0em 0em .1em black,
+            0em 0em .1em black,
+            0em 0em .1em black,
+            0em 0em .1em black,
+            0em 0em .1em black;
+
+        box-shadow:
+            0em 0em .5em .2em black,
+            inset 0em -.4em .5em 0em rgb(11, 24, 51),
+            inset 0em .2em .3em .1em white,
+            inset 0em .2em .3em .2em rgb(142, 71, 209);
+    }
+
+    #buttonControls {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 20%;
+        align-items: center;
+        justify-content: center;
+        gap: 1em;
+        font-weight: bold;
     }
 
     textarea {
@@ -268,6 +319,7 @@
         border-radius: 1em;
         background: rgb(255 255 255 /20%);
         padding: .7em;
+        Line-height: 1em;
     }
 
     textarea::placeholder {
@@ -280,8 +332,10 @@
         padding: .7em;
         width: fit-content;
         color: white;
-        z-index:+1;
-        transform:translatex(1em);
+        z-index: +1;
+        transform: translatex(1em);
+        line-height: 1.4em;
+        font-size: .9em;
 
         box-shadow:
             0em 0em 0em .15em black,
@@ -291,33 +345,33 @@
 
     .quotedMessages {
         background: rgba(81, 138, 95, 0.664);
-        border-radius: 2em 2em 2em 4em;
+        border-radius: 2em 2em 1em 4em;
         padding: 1em 1em 2em 1em;
         width: fit-content;
         color: white;
-        font-size:.9em;
-        
+        font-size: .9em;
+
         transform: translatey(2.2em);
-        
+
 
         box-shadow:
             0em 0em 0em .15em black,
             inset -.1em .1em .1em 0em rgb(255, 255, 255),
             inset .2em -.2em .5em .3em rgb(22, 26, 53);
-            
-        display:flex;
-        flex-direction:column;
-        gap:.5em;
+
+        display: flex;
+        flex-direction: column;
+        gap: .5em;
     }
-    
-    .quote{
-        color:rgb(231, 222, 223);
-        padding:.5em;
-        border-radius:1em;
+
+    .quote {
+        color: rgb(231, 222, 223);
+        padding: .5em;
+        border-radius: 1em 1em 1em 3em;
         box-shadow:
-        0em 0em 1em 0em rgba(255, 255, 255, 0.493),
-        inset 0em 0em 1em 0em rgba(255, 255, 255, 0.301),
-        inset 0em 0em 1em 0em rgb(10, 60, 80);
+            0em 0em 1em 0em rgba(255, 255, 255, 0.493),
+            inset 0em 0em 1em 0em rgba(255, 255, 255, 0.301),
+            inset 0em 0em 1em 0em rgb(10, 60, 80);
     }
 
     .quotedMessages>* .PrevAuthors {
@@ -328,29 +382,73 @@
         color: #409dc9;
         text-shadow: -.1em .1em .2em black;
     }
-    
-    .reply2This{
-        animation:replyGlow 1s infinite;
+
+    .reply2This {
+        animation: replyGlow 1s infinite;
     }
+
     @keyframes replyGlow {
-        0%{}
-        50%{
+        0% {
+            background: rgba(96, 179, 151, 0.664);
+        }
+
+        50% {
             box-shadow:
-            0em 0em 0em .15em black,
-            inset -.1em .1em .1em 0em rgb(200, 255, 203),
-            inset .2em -.2em .5em .3em black,
-            0em 0em 1em .5em white;
+                0em 0em 0em .15em black,
+                inset -.1em .1em .1em 0em rgb(200, 255, 203),
+                inset .2em -.2em .5em .3em black,
+                2em 0em 2em -2em white,
+                2em 0em 4em -2em white,
+                -2em 0em 2em -2em white,
+                -2em 0em 4em -2em white; 
+
+            filter: brightness(200%) blur(.1em);
+
+            background: cyan;
+        }
+        
+        75%{
+            box-shadow:
+                0em 0em 0em .15em black,
+                inset -.1em .1em .1em 0em rgb(200, 255, 203),
+                inset .2em -.2em .5em .3em black,
+                5em 0em 10em -2em rgba(255, 255, 255, 0),
+                5em 0em 10em -2em rgba(255, 255, 255, 0),
+                -5em 0em 10em -2em rgba(255, 255, 255, 0),
+                -5em 0em 10em -2em rgba(255, 255, 255, 0); 
+        }
+        }
+
+        100% {
+            background: rgba(96, 179, 151, 0.664);
             
-            filter:brightness(200%); 
             
-            background:cyan;
-        } 
-        100%{}
     }
-    
-    .timestamp{
-        color:rgb(105, 145, 190);
-        font-size:.9em;
-        padding-top:1em;
+
+    .timestamp {
+        color: rgb(105, 145, 190);
+        font-size: .8em;
+        padding-top: 1em;
+    }
+
+    #Author,
+    #Color {
+        width: fit-content;
+    }
+
+    .inputLabel {
+        color: white;
+        font-weight: bold;
+        font-size: 1em;
+    }
+
+    #clock {
+        margin-left: auto;
+        margin-right: 3em;
+        text-align: right;
+    }
+
+    #AuthorLine {
+        display: flex;
     }
 </style>
