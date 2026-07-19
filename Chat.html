@@ -559,9 +559,9 @@
 <script>
 var bgOptions=3;
 
-var url = "https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/";
+var url = "https://warmest-soup.github.io/Assets/Images/ChatroomBGs/"; 
+ 
+var randBG= url + Math.floor(Math.random() * bgOptions);
 
-var randBG= "url('" +url+ (Math.floor(Math.random()*bgOptions)) + ".gif')";
-
-document.getElementById("Messages").style.backgroundImage=randBG;
+document.getElementById("messages").style.backgroundImage="url('"+ randBG + ".gif')";
 </script> 
