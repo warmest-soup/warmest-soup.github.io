@@ -89,7 +89,9 @@
     window.send = function () {
         playAlert = true;
         var text = document.getElementById("Message").value
+
         text = text.replace(/\n/g, "</p>") + "</p>";
+
         var author = document.getElementById("Author").value
         var colorID = document.getElementById("Color").value
         var colorCheck = colorID.substring(0, 3).toLowerCase();
@@ -133,7 +135,11 @@
             spacer = "  ⤷  ";
         } else spacer = "<p>     "
 
-        messageBox.insertAdjacentHTML("beforeEnd", `${newMessage.reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${newMessage.color};'> ${newMessage.author}: </div> <div>${spacer}${newMessage.message}</div> <div class="timestamp"> ${newMessage.time} </div> </div>`);
+        var atFormattedMessage = atUser(newMessage.message);
+        
+        newMessage.Reply
+
+        messageBox.insertAdjacentHTML("beforeEnd", `${newMessage.reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${newMessage.color};'> ${newMessage.author}: </div> <div>${spacer}${atFormattedMessage}</div> <div class="timestamp"> ${newMessage.time} </div> </div>`);
 
         if (playAlert) {
             alertSound.play();
@@ -188,6 +194,26 @@
         textArea.focus();
     }
 
+    window.atUser = function (text) {
+        
+        var userNames=Array.from(document.getElementsByClassName("PrevAuthors"));
+        userNames = [...new Set(userNames)] 
+        
+        userNames.forEach((x)=> {
+            var color=x.getAttribute("style"); 
+            console.log(color ) 
+            text = text.replace(new RegExp(`@(${x.innerText.slice(0,-1)})`, "gi"), "<span class='namedAt' style='"+ color +"'>$1</span>")
+            
+            text = text.replace(new RegExp(`(@\\w*)`, "gi"), "<span class='genericAt'>$1</span>")
+            
+            
+        })
+        
+        
+        return text;
+
+    }
+
     messageLog.scrollTop = messageLog.scrollHeight;
     loadUser()
     setColorTest()
@@ -237,7 +263,7 @@
 
         padding: 2em;
         width: 80%;
-        height:70%;
+        height: 70%;
 
         background-image: url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/Chatroom.gif");
         background-repeat: no-repeat;
@@ -252,9 +278,10 @@
         flex-direction: column;
         gap: .7em;
     }
-    @media (max-aspect-ratio: 12/16){ 
-        #messages{
-            height:60%;
+
+    @media (max-aspect-ratio: 12/16) {
+        #messages {
+            height: 60%;
         }
     }
 
@@ -462,4 +489,37 @@
         display: flex;
         flex-wrap: wrap;
     }
+    .genericAt{
+        color:yellow;
+        font-weight:bold;
+        animation: Glow 2s infinite;
+    }
+    .namedAt{
+        font-weight:bold;
+        animation: Glow 2s infinite;
+    }
+    @keyframes Glow {
+    0% {
+        text-shadow:
+            0em 0em 0em black;
+    }
+    
+    10%{color:white;}
+
+    50% {color:inherit;
+        text-shadow: 
+            1em 0em .2em hsl(200deg 50% 50%),
+            -.7em -.2em .2em hsl(200deg 50% 50%),
+            0em .2em .2em hsl(200deg 50% 50%),
+            .7em -.7em .2em hsl(200deg 50% 50%);
+    }
+
+    100% {
+        text-shadow:
+            1em 0em .2em transparent,
+            -.7em -.2em .2em transparent,
+            0em .2em .2em transparent,
+            .7em -.7em .2em transparent;
+    }
+}
 </style>
