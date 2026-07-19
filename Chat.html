@@ -15,7 +15,7 @@
             <span class="inputLabel">AUTHOR: </span><input id="Author" placeholder="Anonymous"
                 onChange="setUser(this, Color)">
             <span class="inputLabel">COLOR: </span><input id="Color" placeholder="Color Definition"
-                onChange="setUser(Author, this); setColorTest()">
+                onChange="setUser(Author, this); setColorTest()" onclick="this.select()">
             <span class="inputLabel" id="Clock">--:--</span>
             <script>
                 setInterval(() => document.getElementById("Clock").textContent = new Date().toUTCString(), 1000)
@@ -217,6 +217,12 @@
         border: none;
     }
 
+    ::selection {
+
+        background: rgba(174, 134, 238, 0.486);
+
+    }
+
     * {
         margin: 0em;
         font-family: "Zen Old Mincho", serif;
@@ -279,14 +285,15 @@
     }
 
     input {
-        margin: .5em;border-radius: 1em;
+        margin: .5em;
+        border-radius: 1em;
         height: 1.5em;
         font-weight: bold;
         text-align: center;
-        
+
         background: rgba(17, 31, 26, 0.664);
         border-radius: 1em;
-        
+
         width: fit-content;
         color: white;
 
@@ -308,11 +315,12 @@
     }
 
     #Message {
+        color: white;
         width: 85%;
         height: 100%;
         background: rgba(143, 197, 207, 0.13);
         white-space: pre-wrap;
-        border:none;
+        border: none;
         box-shadow:
             0em 0em 0em .15em black,
             inset .1em -.1em .5em 0em rgb(200, 253, 255),
@@ -557,11 +565,11 @@
 </style>
 
 <script>
-var bgOptions=3;
+    var bgOptions = 4;
 
-var url = "https://warmest-soup.github.io/Assets/Images/ChatroomBGs/"; 
- 
-var randBG= url + Math.floor(Math.random() * bgOptions);
- 
-document.getElementById("messages").style.backgroundImage="url('"+ randBG + ".gif')";
-</script> 
+    var url = "https://warmest-soup.github.io/Assets/Images/ChatroomBGs/";
+
+    var randBG = url + Math.floor(Math.random() * bgOptions);
+
+    document.getElementById("messages").style.backgroundImage = "url('" + randBG + ".gif')";
+</script>
