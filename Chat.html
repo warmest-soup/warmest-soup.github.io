@@ -103,7 +103,8 @@
         if (!colorCheck) {
             colorID = "White"
         }
-        if (text) {
+        
+        if (text != "</p>") { 
             push(messagesLog, {
                 author: author,
                 reply: formatReply(),
