@@ -144,7 +144,7 @@
         }
 
 
-        if (jump = true) {
+        if (jump == true) {
             messageLog.scrollTop = messageLog.scrollHeight;
         }
 
@@ -195,7 +195,7 @@
     window.atUser = function (text) {
         var usernames = Array.from(document.getElementsByClassName("PrevAuthors"));
         usernames.forEach((x) => {
-            text = text.replace(new RegExp(`(@${x.innerText})`, "gi"), "<span class='namedAt' style='" + x.getAttribute("style") + "'>$1</span>")
+            text = text.replace(new RegExp(`(@${x.innerText}\\b)`, "gi"), "<span class='namedAt' style='" + x.getAttribute("style") + "'>$1</span>")
         })
 
         return text;
