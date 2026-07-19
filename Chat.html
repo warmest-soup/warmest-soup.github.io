@@ -254,7 +254,6 @@
         width: 80%;
         height: 70%;
 
-        background-image: url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/Chatroom.gif");
         background-repeat: no-repeat;
         background-position: center;
         background-attachment: fixed;
@@ -556,3 +555,13 @@
         /*Display might be important for when background images appear*/
     }
 </style>
+
+<script>
+var bgOptions=3;
+
+var url = "https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/";
+
+var randBG= "url('" +url+ (Math.floor(Math.random()*bgOptions)) + ".gif')";
+
+document.getElementById("Messages").style.backgroundImage=randBG;
+</script> 
