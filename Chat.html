@@ -136,8 +136,6 @@
         } else spacer = "<p>     "
 
         var atFormattedMessage = atUser(newMessage.message);
-        
-        newMessage.Reply
 
         messageBox.insertAdjacentHTML("beforeEnd", `${newMessage.reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${newMessage.color};'> ${newMessage.author}: </div> <div>${spacer}${atFormattedMessage}</div> <div class="timestamp"> ${newMessage.time} </div> </div>`);
 
@@ -195,23 +193,12 @@
     }
 
     window.atUser = function (text) {
-        
-        var userNames=Array.from(document.getElementsByClassName("PrevAuthors"));
-        userNames = [...new Set(userNames)] 
-        
-        userNames.forEach((x)=> {
-            var color=x.getAttribute("style"); 
-            console.log(color ) 
-            text = text.replace(new RegExp(`@(${x.innerText.slice(0,-1)})`, "gi"), "<span class='namedAt' style='"+ color +"'>$1</span>")
-            
-            text = text.replace(new RegExp(`(@\\w*)`, "gi"), "<span class='genericAt'>$1</span>")
-            
-            
+        var usernames = Array.from(document.getElementsByClassName("PrevAuthors"));
+        usernames.forEach((x) => {
+            text = text.replace(new RegExp(`(@${x.innerText})`, "gi"), "<span class='namedAt' style='" + x.getAttribute("style") + "'>$1</span>")
         })
-        
-        
-        return text;
 
+        return text;
     }
 
     messageLog.scrollTop = messageLog.scrollHeight;
@@ -232,6 +219,7 @@
     * {
         margin: 0em;
         font-family: "Zen Old Mincho", serif;
+        font-size:min(3vw, 1em);
     }
 
     #Page {
@@ -295,7 +283,6 @@
         background: rgb(255 255 255 /20%);
         border-radius: 1em;
         height: 1.5em;
-        font-size: .9em;
         font-weight: bold;
         text-align: center;
     }
@@ -323,7 +310,6 @@
         border-radius: 1em;
         height: 40%;
         width: 90%;
-        font-size: 80%;
         line-height: 1em;
         text-shadow:
             0em 0em .1em black,
@@ -371,7 +357,6 @@
         z-index: +1;
         transform: translatex(1em);
         line-height: 1.4em;
-        font-size: .9em;
 
         box-shadow:
             0em 0em 0em .15em black,
@@ -385,7 +370,6 @@
         padding: 1em 1em 2em 1em;
         width: fit-content;
         color: white;
-        font-size: .9em;
 
         transform: translatey(2.2em);
 
@@ -443,17 +427,6 @@
             background: cyan;
         }
 
-        75% {
-            box-shadow:
-                0em 0em 0em .15em black,
-                inset -.1em .1em .1em 0em rgb(200, 255, 203),
-                inset .2em -.2em .5em .3em black,
-                5em 0em 10em -2em rgba(255, 255, 255, 0),
-                5em 0em 10em -2em rgba(255, 255, 255, 0),
-                -5em 0em 10em -2em rgba(255, 255, 255, 0),
-                -5em 0em 10em -2em rgba(255, 255, 255, 0);
-        }
-
 
         100% {
             background: rgba(96, 179, 151, 0.664);
@@ -464,7 +437,6 @@
 
     .timestamp {
         color: rgb(105, 145, 190);
-        font-size: .8em;
         padding-top: 1em;
     }
 
@@ -476,7 +448,6 @@
     .inputLabel {
         color: white;
         font-weight: bold;
-        font-size: .8em;
     }
 
     #clock {
@@ -489,37 +460,49 @@
         display: flex;
         flex-wrap: wrap;
     }
-    .genericAt{
-        color:yellow;
-        font-weight:bold;
+
+    .genericAt {
+        color: yellow;
+        font-weight: bold;
         animation: Glow 2s infinite;
     }
-    .namedAt{
-        font-weight:bold;
+
+    .namedAt {
+        font-weight: bold;
         animation: Glow 2s infinite;
     }
+
     @keyframes Glow {
-    0% {
-        text-shadow:
-            0em 0em 0em black;
-    }
-    
-    10%{color:white;}
+        0% {
+            text-shadow:
+                0em 0em 0em black;
+        }
 
-    50% {color:inherit;
-        text-shadow: 
-            1em 0em .2em hsl(200deg 50% 50%),
-            -.7em -.2em .2em hsl(200deg 50% 50%),
-            0em .2em .2em hsl(200deg 50% 50%),
-            .7em -.7em .2em hsl(200deg 50% 50%);
-    }
+        10% {
+            color: white;
+            filter: blur(.1em);
+        }
 
-    100% {
-        text-shadow:
-            1em 0em .2em transparent,
-            -.7em -.2em .2em transparent,
-            0em .2em .2em transparent,
-            .7em -.7em .2em transparent;
+        30% {
+            filter: none;
+            color: inherit;
+        }
+
+        50% {
+
+            text-shadow:
+                1em 0em .2em hsl(200deg 50% 50%),
+                -.7em -.2em .2em hsl(200deg 50% 50%),
+                .3em .4em .2em hsl(200deg 50% 50%),
+                .7em -.7em .2em hsl(200deg 50% 50%);
+        }
+
+        100% {
+            text-shadow:
+                1em 0em .2em transparent,
+                -.7em -.2em .2em transparent,
+                0em .2em .2em transparent,
+                .7em -.7em .2em transparent;
+        }
     }
-}
 </style>
