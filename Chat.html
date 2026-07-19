@@ -103,8 +103,8 @@
         if (!colorCheck) {
             colorID = "White"
         }
-        
-        if (text != "</p>") { 
+
+        if (text != "</p>") {
             push(messagesLog, {
                 author: author,
                 reply: formatReply(),
@@ -220,7 +220,7 @@
     * {
         margin: 0em;
         font-family: "Zen Old Mincho", serif;
-        font-size:min(3vw, 1em);
+        font-size: min(3vw, 1em);
     }
 
     #Page {
@@ -268,7 +268,7 @@
         gap: .7em;
     }
 
-    @media (max-aspect-ratio: 12/16) {
+    @media (max-aspect-ratio: 13/16) {
         #messages {
             height: 60%;
         }
@@ -280,16 +280,24 @@
     }
 
     input {
-        margin: .5em;
-        background: rgb(255 255 255 /20%);
-        border-radius: 1em;
+        margin: .5em;border-radius: 1em;
         height: 1.5em;
         font-weight: bold;
         text-align: center;
+        
+        background: rgba(17, 31, 26, 0.664);
+        border-radius: 1em;
+        
+        width: fit-content;
+        color: white;
+
+        box-shadow:
+            0em 0em 0em .15em black,
+            inset -.1em .1em .1em 0em rgb(200, 255, 203);
     }
 
     input::placeholder {
-        color: rgba(0, 0, 0, 0.486);
+        color: #b1c8f37c;
     }
 
     #MessageBody {
@@ -303,7 +311,19 @@
     #Message {
         width: 85%;
         height: 100%;
+        background: rgba(143, 197, 207, 0.13);
         white-space: pre-wrap;
+        border:none;
+        box-shadow:
+            0em 0em 0em .15em black,
+            inset .1em -.1em .5em 0em rgb(200, 253, 255),
+            inset -.1em .1em .5em 0em rgb(17, 4, 73);
+    }
+
+    #Message::placeholder {
+        color: rgb(137, 145, 185);
+
+
     }
 
     .TextButtons {
@@ -389,6 +409,7 @@
         color: rgb(231, 222, 223);
         padding: .5em;
         border-radius: 1em 1em 1em 3em;
+        font-size: .7em;
         box-shadow:
             0em 0em 1em 0em rgba(255, 255, 255, 0.493),
             inset 0em 0em 1em 0em rgba(255, 255, 255, 0.301),
@@ -439,6 +460,7 @@
     .timestamp {
         color: rgb(105, 145, 190);
         padding-top: 1em;
+        font-size: .7em;
     }
 
     #Author,
@@ -449,6 +471,7 @@
     .inputLabel {
         color: white;
         font-weight: bold;
+        font-size: .8em;
     }
 
     #clock {
@@ -505,5 +528,31 @@
                 0em .2em .2em transparent,
                 .7em -.7em .2em transparent;
         }
+    }
+
+    /*Scroll bar adjustments*/
+    ::-webkit-scrollbar {
+        width: .7em;
+        display: overlay;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #ffe573;
+        border-radius: 1em;
+        box-shadow:
+            inset -.05em .05em .2em .1em white,
+            inset -.2em .2em .3em 0em #8f3846,
+            inset .25em -.25em .1em 0em #151842;
+    }
+
+    ::-webkit-scrollbar-corner {
+        display: none;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: lightGray;
+        box-Shadow: inset 0em 0em 0em .1em darkgray;
+        display: none;
+        /*Display might be important for when background images appear*/
     }
 </style>
