@@ -1,7 +1,8 @@
 <script>
 if (Notification.permission === "granted") {
   new Notification("Hello World", {body: "Sent!"});
-} else if (Notification.permission === "default") {
-  Notification.requestPermission().then(p => p === "granted" && new Notification("Hello World", {body: "Sent!"}));
+  
+} if (Notification.permission === "default") {
+  Notification.requestPermission().then(p => p === "granted");
 }
 </script>

@@ -92,6 +92,8 @@
 
     var alertSound = new Audio("https://warmest-soup.github.io/Assets/Audio/ButtonClick.mp3");
     var playAlert = false;
+    var notifState = false;
+    
     window.send = function () {
         playAlert = true;
         var text = document.getElementById("Message").value
@@ -144,10 +146,16 @@
 
         var atFormattedMessage = atUser(newMessage.message);
 
+
+
         messageBox.insertAdjacentHTML("beforeEnd", `${newMessage.reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${newMessage.color};'>${newMessage.author}:</div> <div>${spacer}${atFormattedMessage}</p></div> <div class="timestamp"> ${newMessage.time} </div> </div>`);
 
+        console.log(notifState)
         if (playAlert) {
             alertSound.play();
+            if (Notification.permission === "granted" && notifState) {
+                new Notification(newMessage.author, { body: newMessage.message });
+            }
         }
 
 
@@ -202,10 +210,10 @@
 
     window.atUser = function (text) {
         var usernames = Array.from(document.getElementsByClassName("PrevAuthors"));
-        
+
         usernames.forEach((x) => {
-            
-            text = text.replace(new RegExp(`(@${x.innerText.slice(0,-1)})`, "gi"), "<span class='namedAt' style='" + x.getAttribute("style") + "'>$1</span>")
+
+            text = text.replace(new RegExp(`(@${x.innerText.slice(0, -1)})`, "gi"), "<span class='namedAt' style='" + x.getAttribute("style") + "'>$1</span>")
         })
 
         return text;
@@ -214,6 +222,20 @@
     messageLog.scrollTop = messageLog.scrollHeight;
     loadUser()
     setColorTest()
+    
+    
+    document.addEventListener("visibilitychange", () => {
+        console.log("visibility triggered!")
+        if(document.hidden){
+            notifState=true;
+            console.log("Hidden! " + notifState)
+        } else {
+            
+            notifState=false;
+            console.log("Visible! " + notifState)
+        }
+        
+    })
 </script>
 
 
@@ -391,14 +413,14 @@
         border-radius: 1em;
         padding: .7em;
         width: fit-content;
-        max-width:100%;
-        box-sizing:border-box;
+        max-width: 100%;
+        box-sizing: border-box;
         color: white;
         z-index: +1;
         transform: translatex(1em);
         line-height: 1.4em;
-        overflow-wrap:break-word;
-        
+        overflow-wrap: break-word;
+
         box-shadow:
             0em 0em 0em .15em black,
             inset -.1em .1em .1em 0em rgb(200, 255, 203),
@@ -485,9 +507,9 @@
 
     P {
         max-height: fit-content;
-        min-height:1em;
+        min-height: 1em;
         line-height: 1em;
-        
+
     }
 
     #Author,
@@ -596,4 +618,9 @@
     var randBG = url + Math.floor(Math.random() * bgOptions);
 
     document.getElementById("messages").style.backgroundImage = "url('" + randBG + ".gif')";
+
+    if (Notification.permission === "default") {
+        Notification.requestPermission().then(p => p === "granted");
+    }
+    
 </script>
