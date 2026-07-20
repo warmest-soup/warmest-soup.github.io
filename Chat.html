@@ -68,7 +68,7 @@
 
             replyTargets.forEach((x) => {
 
-                x.children[0].innerText = x.children[0].innerText.slice(0, -2)
+                x.children[0].innerText = x.children[0].innerText.slice(0, -1)
             });
 
             var replyAuthors = replyTargets.map((x) => x.children[0].outerHTML);
@@ -97,7 +97,7 @@
         var text = document.getElementById("Message").value
 
         text = text.replace(/\n/g, "</p><p>");
-        console.log(text)
+
         var author = document.getElementById("Author").value
         var colorID = document.getElementById("Color").value
         var colorCheck = colorID.substring(0, 3).toLowerCase();
@@ -144,7 +144,7 @@
 
         var atFormattedMessage = atUser(newMessage.message);
 
-        messageBox.insertAdjacentHTML("beforeEnd", `${newMessage.reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${newMessage.color};'> ${newMessage.author}: </div> <div>${spacer}${atFormattedMessage}</p></div> <div class="timestamp"> ${newMessage.time} </div> </div>`);
+        messageBox.insertAdjacentHTML("beforeEnd", `${newMessage.reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${newMessage.color};'>${newMessage.author}:</div> <div>${spacer}${atFormattedMessage}</p></div> <div class="timestamp"> ${newMessage.time} </div> </div>`);
 
         if (playAlert) {
             alertSound.play();
@@ -202,8 +202,10 @@
 
     window.atUser = function (text) {
         var usernames = Array.from(document.getElementsByClassName("PrevAuthors"));
+        
         usernames.forEach((x) => {
-            text = text.replace(new RegExp(`(@${x.innerText}\\b)`, "gi"), "<span class='namedAt' style='" + x.getAttribute("style") + "'>$1</span>")
+            
+            text = text.replace(new RegExp(`(@${x.innerText.slice(0,-1)})`, "gi"), "<span class='namedAt' style='" + x.getAttribute("style") + "'>$1</span>")
         })
 
         return text;
@@ -389,11 +391,14 @@
         border-radius: 1em;
         padding: .7em;
         width: fit-content;
+        max-width:100%;
+        box-sizing:border-box;
         color: white;
         z-index: +1;
         transform: translatex(1em);
         line-height: 1.4em;
-
+        overflow-wrap:break-word;
+        
         box-shadow:
             0em 0em 0em .15em black,
             inset -.1em .1em .1em 0em rgb(200, 255, 203),
@@ -479,8 +484,10 @@
     }
 
     P {
-        height: 1em;
+        max-height: fit-content;
+        min-height:1em;
         line-height: 1em;
+        
     }
 
     #Author,
