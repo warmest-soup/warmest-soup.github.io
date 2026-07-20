@@ -54,11 +54,11 @@
     var messageLog = document.getElementById("messages")
 
     var replySelection
-    
+
     window.formatReply = function () {
         replySelection = Array.from(document.getElementsByClassName("reply2This"));
         var replyTargets = replySelection.map((x) => x.cloneNode(true));
-        
+
         replySelection.forEach((x) => x.classList.toggle("reply2This"))
 
 
@@ -121,7 +121,7 @@
             });
             document.getElementById("Message").value = "";
 
-            
+
 
             messageLog.scrollTop = messageLog.scrollHeight;
         }
@@ -479,6 +479,7 @@
 
     P {
         height: 1em;
+        line-height: 1em;
     }
 
     #Author,
