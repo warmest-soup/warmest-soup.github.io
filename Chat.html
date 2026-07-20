@@ -194,6 +194,7 @@
     }
 
     window.addNewLine = function () {
+        event.preventDefault();
         var textArea = document.getElementById("Message");
         textArea.value += "\n";
         textArea.focus();
