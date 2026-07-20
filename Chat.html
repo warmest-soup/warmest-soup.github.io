@@ -68,7 +68,7 @@
 
             replyTargets.forEach((x) => {
 
-                x.children[0].innerText = x.children[0].innerText.slice(0, -1)
+                x.children[0].innerText = x.children[0].innerText.slice(0, -2)
             });
 
             var replyAuthors = replyTargets.map((x) => x.children[0].outerHTML);
