@@ -93,7 +93,7 @@
     var alertSound = new Audio("https://warmest-soup.github.io/Assets/Audio/ButtonClick.mp3");
     var playAlert = false;
     var notifState = false;
-    
+
     window.send = function () {
         playAlert = true;
         var text = document.getElementById("Message").value
@@ -212,8 +212,10 @@
         var usernames = Array.from(document.getElementsByClassName("PrevAuthors"));
 
         usernames.forEach((x) => {
+            if (x.innerText.includes(":")) {
+                text = text.replace(new RegExp(`(@${x.innerText.slice(0, -1)})`, "gi"), "<span class='namedAt' style='" + x.getAttribute("style") + "'>$1</span>")
+            }
 
-            text = text.replace(new RegExp(`(@${x.innerText.slice(0, -1)})`, "gi"), "<span class='namedAt' style='" + x.getAttribute("style") + "'>$1</span>")
         })
 
         return text;
@@ -222,19 +224,19 @@
     messageLog.scrollTop = messageLog.scrollHeight;
     loadUser()
     setColorTest()
-    
-    
+
+
     document.addEventListener("visibilitychange", () => {
         console.log("visibility triggered!")
-        if(document.hidden){
-            notifState=true;
+        if (document.hidden) {
+            notifState = true;
             console.log("Hidden! " + notifState)
         } else {
-            
-            notifState=false;
+
+            notifState = false;
             console.log("Visible! " + notifState)
         }
-        
+
     })
 </script>
 
@@ -622,5 +624,5 @@
     if (Notification.permission === "default") {
         Notification.requestPermission().then(p => p === "granted");
     }
-    
+
 </script>
