@@ -245,11 +245,11 @@
     input {
         border: none;
     }
-    
+
     a {
-        color:rgb(154, 245, 248);
-    }    
-    
+        color: rgb(154, 245, 248);
+    }
+
     button {
         border: none;
     }
@@ -431,6 +431,29 @@
             0em 0em 0em .15em black,
             inset -.1em .1em .1em 0em rgb(200, 255, 203),
             inset .2em -.2em .5em .3em black;
+
+        animation: Enter .2s ;
+    }
+
+    @keyframes Enter {
+        0% {
+            transform: scale(0);
+            
+            Background: rgb(101, 219, 255);
+            
+        }
+        
+        60% {
+            transform:
+                scale(1.2) translatex(2em);}
+
+        100% {
+            transform:
+                scale(1) translatex(1em);
+            
+            background: rgba(17, 31, 26, 0.664);
+            
+        }
     }
 
     .quotedMessages {
@@ -451,6 +474,24 @@
         display: flex;
         flex-direction: column;
         gap: .5em;
+        
+        animation: quoteEnter .2s ease-out;
+    }
+    @keyframes quoteEnter {
+        0% { 
+            transform: scale(0) translatey(300%); 
+            
+            Background: rgb(101, 219, 255);
+            
+        }
+        
+        100% {
+            transform:
+                scale(1)  translatey(2.2em);
+            
+            background: rgba(81, 138, 95, 0.664);
+            
+        }
     }
 
     .quote {
@@ -504,6 +545,7 @@
 
 
     }
+    
 
     .timestamp {
         color: rgb(105, 145, 190);
