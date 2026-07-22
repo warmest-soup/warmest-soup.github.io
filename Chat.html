@@ -663,7 +663,7 @@
 
     var url = "https://warmest-soup.github.io/Assets/Images/ChatroomBGs/";
 
-    var randBG = url + Math.floor(Math.random() * bgOptions);
+    var randBG = url + Math.round(Math.random() * bgOptions);
 
     document.getElementById("messages").style.backgroundImage = "url('" + randBG + ".gif')";
 
