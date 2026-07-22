@@ -711,6 +711,59 @@
     </div>
   </div>
 
+  <div Class='Insight' data-category='Misc.' data-Genre='Other'>
+    <div class='ClassName' onclick=" Gambler.toggleAttribute('hidden') ">Gambler</div>
+    <div id='Gambler'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>3rd G</div>
+          <div class='Parent'>Statistician</div>
+          <div class='Parent isTrait'>Constitution</div>
+          <div class='Parent'>Luck</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     Gamblers live on the rush of not knowing. Random
+            chance is the ultimate opponent, and it's defeat is far sweater than victory in any real battle. For one to
+            conquer games of chance is to conquer fate itself.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> A Gambler check may be performed that provides
+            the acting character with a vague, yet accurate approximation of their hidden Luck trait.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Win games of chance, or succeed in risky
+              plays. </i></div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Bust</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Opposed characters will have a penalty on their next
+              luck roll.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Jackpot</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character gains a single advantage on their
+              next luck roll.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Playing Fate</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character draws a Tarot card to keep. That
+              Tarot is removed from the deck while it's in their hand, preventing it from being drawn for them.
+              <Br><br>At any point, the acting character may choose to replace their currently drawn Tarot with the one
+              in their hand. <br><br>This technique may only be used if the acting character holds NO cards in their
+              hand. </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>⤷❹.</span>Playing Fate II</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character is able to draw a second Tarot
+              card to their hand.<br><br>The acting character is now able to play their entire hand to replace their
+              next consecutive Tarots.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>⤷❺.</span>Playing Fate III</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character is able to draw a third Tarot
+              card to their hand.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>⤷❻.</span>Playing Fate IV</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character is able to draw a second Tarot
+              card to their hand.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div Class='Skill' data-category='Magic' data-Genre='Combat'>
     <div class='ClassName' onclick=" Exorcisor.toggleAttribute('hidden') ">Exorcisor</div>
     <div id='Exorcisor'>
@@ -1659,6 +1712,163 @@
             <div class='TechDescription' onclick='loadTech(this)'>Double the effective Rance of equipped firearms.
             </div>
             <div class='CardCost'>:: Cost: P</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div Class='Skill' data-category='Fighting' data-Genre='Combat'>
+    <div class='ClassName' onclick=" Brawler.toggleAttribute('hidden') ">Brawler</div>
+    <div id='Brawler'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>2nd G</div>
+          <div class='Parent isTrait'>Strength</div>
+          <div class='Parent isTrait'>Endurance</div>
+          <div class='Parent'>Combatant</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     A barroom brawler, a bull in a china shop. The
+            world is their weapon.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> Damage from blunt sources (sharpness less than
+            3) is reduced by 10 • Brawler Class Rank.</div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Land attacks with non-weapon items. </i>
+          </div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Tavern Toss</div>
+            <div class='TechDescription' onclick='loadTech(this)'>A liftable object can be lifted and thrown in the same
+              moment. Hitting a character will always result in them being destabilized, and will deal impact damage.
+            </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Break Bash</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Attacking with an object with such force that it
+              breaks will add it's DT to the damage dealt.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Door Jam</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Large objects (At least one space in size.) can be
+              used to pin targets against walls or obstacles. Escape from this state will require a successful Str/Dex
+              check, and will always leave the target character destabilized on the moment after the escape is made.
+              <br><br>The acting character's Brawler class ranks will be added as penalties to escape checks.
+            </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Table Set</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Performing any throw or slam near a table, will give
+              the acting character the choice of putting the target through the character, and breaking the table,
+              doubling impact damage, and adding the table's DT to it.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Clatter Toss</div>
+            <div class='TechDescription' onclick='loadTech(this)'>If furniture is within a number of spaces less than or
+              equal to a character's Strength Rank, Grapples can be ended instead of rolling for Dominance, by throwing
+              the involved character over and past the furniture.</div>
+            <div class='CardCost'>:: Cost: </div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Chair Shot</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Damage dealt using non weapon items, such as furniture
+              is multiplied by the acting character's Brawler Class Rank</div>
+            <div class='CardCost'>:: Cost: P</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div Class='Skill' data-category='Fighting' data-Genre='Combat'>
+    <div class='ClassName' onclick=" Improvisor.toggleAttribute('hidden') ">Improvisor</div>
+    <div id='Improvisor'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>2nd G</div>
+          <div class='Parent isTrait'>Speed</div>
+          <div class='Parent isTrait'>Dexterity</div>
+          <div class='Parent'>Combatant</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     A barroom brawler, a bull in a china shop. The
+            world is their weapon.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> When armed with a non-weapon item, the acting
+            character may perform an Improvisor check, to temporarily gain a random Weapon-specific tech that can be
+            freely used for as long as the item is equipped. </div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Interact with objects, or successfuly flee
+              from combat. </i></div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Panic Block</div>
+            <div class='TechDescription' onclick='loadTech(this)'>When near liftable objects, and threatened, the acting
+              character may delay their current action, to block the incoming attack with the object. </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Panic Dodge</div>
+            <div class='TechDescription' onclick='loadTech(this)'>When threatened, the acting character may choose to
+              spend a card to delay their action, and dodge the attack remaining in their current space.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Kitchen Sink</div>
+            <div class='TechDescription' onclick='loadTech(this)'>when near a liftable object, the acting character will
+              attack with it imediately. <br><br> This technique may be used even when destabilized or in recovery.
+            </div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Cloth Catch</div>
+            <div class='TechDescription' onclick='loadTech(this)'>When armed with any thick cloth, the acting character
+              may freely parry any bladed weapon attack. <br><br>Once caught, the acting character is able to perform
+              any single action on that moment. </div>
+            <div class='CardCost'>:: Cost: Free</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Catch Feint</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Small items (Size under 2) may be thrown towards a
+              target's face, instantly destabilizing them, and leaving the acting character free to act.<br><br>This
+              Technique does not consume an action.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Rollover</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character is able to vault or scramble over
+              and under obstacles and enemies. <br><br>When moving through an occupied space the acting character may
+              move an additional space for free in the same moment.</div>
+            <div class='CardCost'>:: Cost: 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div Class='Skill' data-category='Fighting' data-Genre='Combat'>
+    <div class='ClassName' onclick=" Intoxicant.toggleAttribute('hidden') ">Intoxicant</div>
+    <div id='Intoxicant'>
+      <div Id='ClassCard'>
+        <div class='Geneology'>
+          <div class='Generation'>2nd G</div>
+          <div class='Parent isTrait'>Speed</div>
+          <div class='Parent isTrait'>Constitution</div>
+          <div class='Parent'>Combatant</div>
+        </div>
+        <div class='ClassInfo'>
+          <div class='ClassDescription' onclick='loadInfo(this)'>     A combatant reliant on the use of intoxicants.
+            These substances allow them to awaken or subdue parts of themselves to allow for them to act uninhibited,
+            and more powerfully than when sober.</div>
+          <div class='Bonus' onclick='loadInfo(this)'><b>Class Bonus:</b> While intoxicated, the acting character may
+            raise or lower their Constitution by their Class Rank in Intoxicant. </div>
+          <div class='Exp' onclick='loadInfo(this)'><b>Special EXP:</b> <i> Engage in combat while intoxicated. </i>
+          </div>
+          <div>
+            <div class='Tech'><span style='font-size:1.2em;'>❶.</span> Beligerance</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Intoxicant class rank is added to the acting
+              Character's Strength for the next Action or Round.</div>
+            <div class='CardCost'>:: Cost: 1 Toxic per point raised.</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❷.</span>Wobbly</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Intoxicant class rank is added to the acting
+              Character's Speed for the next Action or Round.</div>
+            <div class='CardCost'>:: Cost: 1 Toxic per point raised.</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❸.</span>Wazzat</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Intoxicant class rank is added to the acting
+              Character's Perception for the next Action or Round.</div>
+            <div class='CardCost'>:: Cost: 1 Toxic per point raised.</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❹.</span>Touchy</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Intoxicant class rank is added to the acting
+              Character's Strength for the next Action or Round.</div>
+            <div class='CardCost'>:: Cost: 1 Toxic per point raised.</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❺.</span>Feely</div>
+            <div class='TechDescription' onclick='loadTech(this)'>Intoxicant class rank is added to the acting
+              Character's Grapple checks for the next Action or Round.</div>
+            <div class='CardCost'>:: Cost: 1 Toxic per point raised.</div>
+            <div class='Tech'><span style='font-size:1.2em;'>❻.</span>Swig</div>
+            <div class='TechDescription' onclick='loadTech(this)'>The acting character is able to drink from any held
+              container without consuming an action.<br>The amount of sat gained is equal to the result of a single dic.
+            </div>
+            <div class='CardCost'>:: Cost: Free</div>
           </div>
         </div>
       </div>

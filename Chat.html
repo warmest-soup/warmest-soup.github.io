@@ -150,7 +150,7 @@
 
         messageBox.insertAdjacentHTML("beforeEnd", `${newMessage.reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${newMessage.color};'>${newMessage.author}:</div> <div>${spacer}${atFormattedMessage}</p></div> <div class="timestamp"> ${newMessage.time} </div> </div>`);
 
-        console.log(notifState)
+        
         if (playAlert) {
             alertSound.play();
             if (Notification.permission === "granted" && notifState) {
@@ -227,14 +227,14 @@
 
 
     document.addEventListener("visibilitychange", () => {
-        console.log("visibility triggered!")
+        
         if (document.hidden) {
             notifState = true;
-            console.log("Hidden! " + notifState)
+            
         } else {
 
             notifState = false;
-            console.log("Visible! " + notifState)
+            
         }
 
     })
