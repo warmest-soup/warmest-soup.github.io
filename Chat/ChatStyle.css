@@ -1,0 +1,444 @@
+input {
+    border: none;
+}
+
+a {
+    color: rgb(154, 245, 248);
+}
+
+button {
+    border: none;
+}
+
+::selection {
+
+    background: rgba(174, 134, 238, 0.486);
+
+}
+
+* {
+    margin: 0em;
+    font-family: "Zen Old Mincho", serif;
+    font-size: min(3vw, 1em);
+}
+
+#Page {
+    background: rgb(56, 51, 77);
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+
+    background-image: url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomForeground.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+
+    overflow: clip;
+}
+
+#messages {
+    box-shadow:
+        0em 0em 0em .1em black,
+        -.5em -.5em 1em .1em rgb(0, 0, 0),
+        .5em .5em 1em .1em rgba(209, 180, 255, 0.5);
+    border-radius: 1em;
+
+    box-sizing:border-box;
+    padding: 2em;
+    width: 90%;
+    height: 75%;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+
+    overflow-y: auto;
+    overflow-x: clip;
+
+    display: flex;
+    flex-direction: column;
+    gap: .7em;
+}
+
+@media (max-aspect-ratio: 13/16) {
+    #messages {
+        height: 70%;
+    }
+}
+
+#UserInput {
+    height: 16%;
+    width: 90%;
+}
+
+input {
+    margin: .5em;
+    border-radius: 1em;
+    height: 1.5em;
+    font-weight: bold;
+    text-align: center;
+
+    background: rgba(17, 31, 26, 0.664);
+    border-radius: 1em;
+
+    width: fit-content;
+    color: white;
+
+    box-shadow:
+        0em 0em 0em .15em black,
+        inset -.1em .1em .1em 0em rgb(200, 255, 203);
+}
+
+input::placeholder {
+    color: #b1c8f37c;
+}
+
+#MessageBody {
+    height: 70%;
+    margin: .5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: .7em;
+}
+
+#Message {
+    color: white;
+    width: 85%;
+    height: 100%;
+    background: rgba(143, 197, 207, 0.13);
+    white-space: pre-wrap;
+    border: none;
+    box-shadow:
+        0em 0em 0em .15em black,
+        inset .1em -.1em .5em 0em rgb(200, 253, 255),
+        inset -.1em .1em .5em 0em rgb(17, 4, 73);
+}
+
+#Message::placeholder {
+    color: rgb(137, 145, 185);
+
+
+}
+
+.TextButtons {
+    background-color: rgb(154, 191, 221);
+    border-radius: 1em;
+    height: 40%;
+    width: 90%;
+    line-height: 1em;
+    text-shadow:
+        0em 0em .1em black,
+        0em 0em .1em black,
+        0em 0em .1em black,
+        0em 0em .1em black,
+        0em 0em .1em black;
+
+    box-shadow:
+        0em 0em .5em .2em black,
+        inset 0em -.4em .5em 0em rgb(11, 24, 51),
+        inset 0em .2em .3em .1em white,
+        inset 0em .2em .3em .2em rgb(142, 71, 209);
+}
+#ToBottom{
+    position:absolute;
+    left:50%;
+    bottom:25%;
+    backdrop-filter:blur(2px);
+
+    font-size:1.3em;
+    
+    background-color: rgb(42 157 193 / 50%);
+    color:white;
+    border-radius: 2em;
+    padding:.5em;
+    line-height: 1em;
+    text-shadow:
+        0em 0em .1em #ffffff,
+        0em 0em .1em #ffffff,
+        0em 0em .1em #ffffff,
+        0em 0em .1em #ffffff,
+        0em 0em .1em #ffffff;
+
+    box-shadow:
+        0em .2em .5em .2em #050d5ba3,
+        inset 0em -.4em .5em 0em rgb(0 13 18),
+        inset 0em .1em .1em .2em white,
+        inset 0em .1em .1em .2em rgb(71 209 169);
+}
+
+#buttonControls {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 20%;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    font-weight: bold;
+}
+
+textarea {
+    resize: none;
+    border-radius: 1em;
+    background: rgb(255 255 255 /20%);
+    padding: .7em;
+    Line-height: 1em;
+}
+
+textarea::placeholder {
+    color: rgba(0, 0, 0, 0.486);
+}
+
+.SentMessages {
+    background: rgba(17, 31, 26, 0.664);
+    border-radius: 1em;
+    padding: .7em;
+    width: fit-content;
+    max-width: 100%;
+    box-sizing: border-box;
+    color: white;
+    z-index: +1;
+    transform: translatex(1em);
+    line-height: 1.4em;
+    overflow-wrap: break-word;
+
+    box-shadow:
+        0em 0em 0em .15em black,
+        inset -.1em .1em .1em 0em rgb(200, 255, 203),
+        inset .2em -.2em .5em .3em black;
+
+    animation: Enter .2s;
+}
+
+@keyframes Enter {
+    0% {
+        transform: scale(0);
+
+        Background: rgb(101, 219, 255);
+
+    }
+
+    60% {
+        transform:
+            scale(1.2) translatex(2em);
+    }
+
+    100% {
+        transform:
+            scale(1) translatex(1em);
+
+        background: rgba(17, 31, 26, 0.664);
+
+    }
+}
+
+.quotedMessages {
+    background: rgba(81, 138, 95, 0.664);
+    border-radius: 2em 2em 1em 4em;
+    padding: 1em 1em 1.2em 1em;
+    margin-top:-.8em;
+    width: fit-content;
+    color: white;
+
+    transform: translatey(.7em) translatex(-1em);
+
+
+    box-shadow:
+        0em 0em 0em .15em black,
+        inset -.1em .1em .1em 0em rgb(255, 255, 255),
+        inset .2em -.2em .5em .3em rgb(22, 26, 53);
+
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+
+    animation: quoteEnter .2s ease-out;
+}
+
+@keyframes quoteEnter {
+    0% {
+        transform: scale(0) translatey(200%) translatex(-1em);
+
+        Background: rgb(101, 219, 255);
+
+    }
+
+    100% {
+        transform:
+            scale(1) translatey(.7em) translatex(-1em);
+
+        background: rgba(81, 138, 95, 0.664);
+
+    }
+}
+
+.quote {
+    color: rgb(231, 222, 223);
+    padding: .5em;
+    border-radius: 1em 1em 1em 3em;
+    font-size: .7em;
+    box-shadow:
+        0em 0em 1em 0em rgba(255, 255, 255, 0.493),
+        inset 0em 0em 1em 0em rgba(255, 255, 255, 0.301),
+        inset 0em 0em 1em 0em rgb(10, 60, 80);
+}
+
+.quotedMessages>* .PrevAuthors {
+    display: inline;
+}
+
+.PrevAuthors {
+    color: #409dc9;
+    text-shadow: -.1em .1em .2em black;
+}
+
+.reply2This {
+    animation: replyGlow 1s infinite;
+}
+
+@keyframes replyGlow {
+    0% {
+        background: rgba(96, 179, 151, 0.664);
+    }
+
+    50% {
+        box-shadow:
+            0em 0em 0em .15em black,
+            inset -.1em .1em .1em 0em rgb(200, 255, 203),
+            inset .2em -.2em .5em .3em black,
+            2em 0em 2em -2em white,
+            2em 0em 4em -2em white,
+            -2em 0em 2em -2em white,
+            -2em 0em 4em -2em white;
+
+        filter: brightness(200%) blur(.1em);
+
+        background: cyan;
+    }
+
+
+    100% {
+        background: rgba(96, 179, 151, 0.664);
+    }
+
+
+}
+
+
+.timestamp {
+    color: rgb(105, 145, 190);
+    padding-top: 1em;
+    font-size: .7em;
+}
+
+P {
+    max-height: fit-content;
+    min-height: 1em;
+    line-height: 1em;
+
+}
+
+#Author,
+#Color {
+    width: 8em;
+}
+
+.inputLabel {
+    color: white;
+    font-weight: bold;
+    font-size: .8em;
+}
+
+#clock {
+    margin-left: auto;
+    margin-right: 3em;
+    text-align: right;
+}
+
+#AuthorLine {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.genericAt {
+    color: yellow;
+    font-weight: bold;
+    animation: Glow 2s infinite;
+}
+
+.namedAt {
+    font-weight: bold;
+    animation: Glow 2s infinite;
+}
+
+@keyframes Glow {
+    0% {
+        text-shadow:
+            0em 0em 0em black;
+    }
+
+    10% {
+        color: white;
+        text-shadow:
+            0em 0em .4em hsl(0, 0%, 100%),
+            0em 0em .1em hsl(0, 0%, 100%),
+            0em .1em .2em hsl(0, 0%, 100%),
+            0em -.1em .2em hsl(0, 0%, 100%);
+    }
+
+    30% {
+        filter: none;
+        color: inherit;
+    }
+
+    50% {
+
+        text-shadow:
+            1em 0em .2em hsl(200deg 50% 50%),
+            -.7em -.2em .2em hsl(200deg 50% 50%),
+            .3em .4em .2em hsl(200deg 50% 50%),
+            .7em -.7em .2em hsl(200deg 50% 50%);
+    }
+
+    100% {
+        text-shadow:
+            1em 0em .2em transparent,
+            -.7em -.2em .2em transparent,
+            0em .2em .2em transparent,
+            .7em -.7em .2em transparent;
+    }
+}
+
+/*Scroll bar adjustments*/
+::-webkit-scrollbar {
+    width: .7em;
+    display: overlay;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffe573;
+    border-radius: 1em;
+    box-shadow:
+        inset -.05em .05em .2em .1em white,
+        inset -.2em .2em .3em 0em #8f3846,
+        inset .25em -.25em .1em 0em #151842;
+}
+
+::-webkit-scrollbar-corner {
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    background: lightGray;
+    box-Shadow: inset 0em 0em 0em .1em darkgray;
+    display: none;
+    /*Display might be important for when background images appear*/
+}

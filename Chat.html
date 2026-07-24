@@ -4,10 +4,15 @@
 <link
     href="https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=Zen+Old+Mincho&display=swap"
     rel="stylesheet">
+<link href="./Chat/ChatStyle.css" rel="stylesheet">
+</link>
 
 <div id="Page">
 
-    <div id="messages"></div>
+    <div id="messages">
+        <button id="ToBottom" onclick="messageLog.scrollTop = messageLog.scrollHeight;">⮟</button>
+    </div>
+
 
     <div id="UserInput">
 
@@ -41,7 +46,7 @@
 <script type="module">
     //Load Firebase DB.
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getDatabase, ref, push, onValue, query, limitToLast, onChildAdded, orderByChild, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getDatabase, ref, push, onValue, query, limitToLast, onChildAdded, orderByChild, get, onChildRemoved } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
     //Get RATTRAPS Log
     const firebaseConfig = {
@@ -96,6 +101,7 @@
 
     window.send = function () {
         playAlert = true;
+
         var text = document.getElementById("Message").value
 
         text = text.replace(/\n/g, "</p><p>");
@@ -129,15 +135,22 @@
         }
     };
 
+    var clearHistory = true;
+    
     onChildAdded(messagesLog, async snapshot => {
         var messageBox = document.getElementById("messages");
 
         var newMessage = snapshot.val()
-
+        var bottomButton = document.getElementById("ToBottom");
+        
         var jump;
-        if (messageLog.scrollTop + messageLog.clientHeight >= messageLog.scrollHeight - 1) {
+        if (messageLog.scrollTop >= messageLog.scrollHeight - messageLog.clientHeight * 1.5) {
             jump = true;
-        } else jump = false;
+            clearHistory = true;
+        } else {
+            jump = false;
+            clearHistory = false;
+        }
 
         var spacer;
         if (newMessage.reply) {
@@ -148,9 +161,9 @@
 
 
 
-        messageBox.insertAdjacentHTML("beforeEnd", `${newMessage.reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${newMessage.color};'>${newMessage.author}:</div> <div>${spacer}${atFormattedMessage}</p></div> <div class="timestamp"> ${newMessage.time} </div> </div>`);
+        messageBox.lastElementChild.insertAdjacentHTML("beforeBegin", `<div>${newMessage.reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${newMessage.color};'>${newMessage.author}:</div> <div>${spacer}${atFormattedMessage}</p></div> <div class="timestamp"> ${newMessage.time} </div> </div></div>`);
 
-        
+
         if (playAlert) {
             alertSound.play();
             if (Notification.permission === "granted" && notifState) {
@@ -158,8 +171,14 @@
             }
         }
 
+        console.log(messageBox.children.length)
 
         if (jump == true) {
+
+            while (messageBox.children.length > 99) {
+                messageBox.children[0].remove()
+            }
+
             messageLog.scrollTop = messageLog.scrollHeight;
         }
 
@@ -227,436 +246,18 @@
 
 
     document.addEventListener("visibilitychange", () => {
-        
+
         if (document.hidden) {
             notifState = true;
-            
+
         } else {
 
             notifState = false;
-            
+
         }
 
     })
 </script>
-
-
-<style>
-    input {
-        border: none;
-    }
-
-    a {
-        color: rgb(154, 245, 248);
-    }
-
-    button {
-        border: none;
-    }
-
-    ::selection {
-
-        background: rgba(174, 134, 238, 0.486);
-
-    }
-
-    * {
-        margin: 0em;
-        font-family: "Zen Old Mincho", serif;
-        font-size: min(3vw, 1em);
-    }
-
-    #Page {
-        background: rgb(56, 51, 77);
-        width: 100%;
-        height: 100%;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 1em;
-
-        background-image: url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomForeground.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-attachment: fixed;
-        background-size: 100% 100%;
-
-        overflow: clip;
-    }
-
-    #messages {
-        box-shadow:
-            0em 0em 0em .1em black,
-            -.5em -.5em 1em .1em rgb(0, 0, 0),
-            .5em .5em 1em .1em rgba(209, 180, 255, 0.5);
-        border-radius: 1em;
-
-        padding: 2em;
-        width: 80%;
-        height: 70%;
-
-        background-repeat: no-repeat;
-        background-position: center;
-        background-attachment: fixed;
-        background-size: 100% 100%;
-
-        overflow-y: auto;
-        overflow-x: clip;
-
-        display: flex;
-        flex-direction: column;
-        gap: .7em;
-    }
-
-    @media (max-aspect-ratio: 13/16) {
-        #messages {
-            height: 60%;
-        }
-    }
-
-    #UserInput {
-        height: 16%;
-        width: 90%;
-    }
-
-    input {
-        margin: .5em;
-        border-radius: 1em;
-        height: 1.5em;
-        font-weight: bold;
-        text-align: center;
-
-        background: rgba(17, 31, 26, 0.664);
-        border-radius: 1em;
-
-        width: fit-content;
-        color: white;
-
-        box-shadow:
-            0em 0em 0em .15em black,
-            inset -.1em .1em .1em 0em rgb(200, 255, 203);
-    }
-
-    input::placeholder {
-        color: #b1c8f37c;
-    }
-
-    #MessageBody {
-        height: 70%;
-        margin: .5em;
-        display: flex;
-        justify-content: space-between;
-        align-items: end;
-        gap: .7em;
-    }
-
-    #Message {
-        color: white;
-        width: 85%;
-        height: 100%;
-        background: rgba(143, 197, 207, 0.13);
-        white-space: pre-wrap;
-        border: none;
-        box-shadow:
-            0em 0em 0em .15em black,
-            inset .1em -.1em .5em 0em rgb(200, 253, 255),
-            inset -.1em .1em .5em 0em rgb(17, 4, 73);
-    }
-
-    #Message::placeholder {
-        color: rgb(137, 145, 185);
-
-
-    }
-
-    .TextButtons {
-        background-color: rgb(154, 191, 221);
-        border-radius: 1em;
-        height: 40%;
-        width: 90%;
-        line-height: 1em;
-        text-shadow:
-            0em 0em .1em black,
-            0em 0em .1em black,
-            0em 0em .1em black,
-            0em 0em .1em black,
-            0em 0em .1em black;
-
-        box-shadow:
-            0em 0em .5em .2em black,
-            inset 0em -.4em .5em 0em rgb(11, 24, 51),
-            inset 0em .2em .3em .1em white,
-            inset 0em .2em .3em .2em rgb(142, 71, 209);
-    }
-
-    #buttonControls {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        width: 20%;
-        align-items: center;
-        justify-content: center;
-        gap: 1em;
-        font-weight: bold;
-    }
-
-    textarea {
-        resize: none;
-        border-radius: 1em;
-        background: rgb(255 255 255 /20%);
-        padding: .7em;
-        Line-height: 1em;
-    }
-
-    textarea::placeholder {
-        color: rgba(0, 0, 0, 0.486);
-    }
-
-    .SentMessages {
-        background: rgba(17, 31, 26, 0.664);
-        border-radius: 1em;
-        padding: .7em;
-        width: fit-content;
-        max-width: 100%;
-        box-sizing: border-box;
-        color: white;
-        z-index: +1;
-        transform: translatex(1em);
-        line-height: 1.4em;
-        overflow-wrap: break-word;
-
-        box-shadow:
-            0em 0em 0em .15em black,
-            inset -.1em .1em .1em 0em rgb(200, 255, 203),
-            inset .2em -.2em .5em .3em black;
-
-        animation: Enter .2s ;
-    }
-
-    @keyframes Enter {
-        0% {
-            transform: scale(0);
-            
-            Background: rgb(101, 219, 255);
-            
-        }
-        
-        60% {
-            transform:
-                scale(1.2) translatex(2em);}
-
-        100% {
-            transform:
-                scale(1) translatex(1em);
-            
-            background: rgba(17, 31, 26, 0.664);
-            
-        }
-    }
-
-    .quotedMessages {
-        background: rgba(81, 138, 95, 0.664);
-        border-radius: 2em 2em 1em 4em;
-        padding: 1em 1em 2em 1em;
-        width: fit-content;
-        color: white;
-
-        transform: translatey(2.2em);
-
-
-        box-shadow:
-            0em 0em 0em .15em black,
-            inset -.1em .1em .1em 0em rgb(255, 255, 255),
-            inset .2em -.2em .5em .3em rgb(22, 26, 53);
-
-        display: flex;
-        flex-direction: column;
-        gap: .5em;
-        
-        animation: quoteEnter .2s ease-out;
-    }
-    @keyframes quoteEnter {
-        0% { 
-            transform: scale(0) translatey(300%); 
-            
-            Background: rgb(101, 219, 255);
-            
-        }
-        
-        100% {
-            transform:
-                scale(1)  translatey(2.2em);
-            
-            background: rgba(81, 138, 95, 0.664);
-            
-        }
-    }
-
-    .quote {
-        color: rgb(231, 222, 223);
-        padding: .5em;
-        border-radius: 1em 1em 1em 3em;
-        font-size: .7em;
-        box-shadow:
-            0em 0em 1em 0em rgba(255, 255, 255, 0.493),
-            inset 0em 0em 1em 0em rgba(255, 255, 255, 0.301),
-            inset 0em 0em 1em 0em rgb(10, 60, 80);
-    }
-
-    .quotedMessages>* .PrevAuthors {
-        display: inline;
-    }
-
-    .PrevAuthors {
-        color: #409dc9;
-        text-shadow: -.1em .1em .2em black;
-    }
-
-    .reply2This {
-        animation: replyGlow 1s infinite;
-    }
-
-    @keyframes replyGlow {
-        0% {
-            background: rgba(96, 179, 151, 0.664);
-        }
-
-        50% {
-            box-shadow:
-                0em 0em 0em .15em black,
-                inset -.1em .1em .1em 0em rgb(200, 255, 203),
-                inset .2em -.2em .5em .3em black,
-                2em 0em 2em -2em white,
-                2em 0em 4em -2em white,
-                -2em 0em 2em -2em white,
-                -2em 0em 4em -2em white;
-
-            filter: brightness(200%) blur(.1em);
-
-            background: cyan;
-        }
-
-
-        100% {
-            background: rgba(96, 179, 151, 0.664);
-        }
-
-
-    }
-    
-
-    .timestamp {
-        color: rgb(105, 145, 190);
-        padding-top: 1em;
-        font-size: .7em;
-    }
-
-    P {
-        max-height: fit-content;
-        min-height: 1em;
-        line-height: 1em;
-
-    }
-
-    #Author,
-    #Color {
-        width: 8em;
-    }
-
-    .inputLabel {
-        color: white;
-        font-weight: bold;
-        font-size: .8em;
-    }
-
-    #clock {
-        margin-left: auto;
-        margin-right: 3em;
-        text-align: right;
-    }
-
-    #AuthorLine {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .genericAt {
-        color: yellow;
-        font-weight: bold;
-        animation: Glow 2s infinite;
-    }
-
-    .namedAt {
-        font-weight: bold;
-        animation: Glow 2s infinite;
-    }
-
-    @keyframes Glow {
-        0% {
-            text-shadow:
-                0em 0em 0em black;
-        }
-
-        10% {
-            color: white;
-            text-shadow:
-                0em 0em .4em hsl(0, 0%, 100%),
-                0em 0em .1em hsl(0, 0%, 100%),
-                0em .1em .2em hsl(0, 0%, 100%),
-                0em -.1em .2em hsl(0, 0%, 100%);
-        }
-
-        30% {
-            filter: none;
-            color: inherit;
-        }
-
-        50% {
-
-            text-shadow:
-                1em 0em .2em hsl(200deg 50% 50%),
-                -.7em -.2em .2em hsl(200deg 50% 50%),
-                .3em .4em .2em hsl(200deg 50% 50%),
-                .7em -.7em .2em hsl(200deg 50% 50%);
-        }
-
-        100% {
-            text-shadow:
-                1em 0em .2em transparent,
-                -.7em -.2em .2em transparent,
-                0em .2em .2em transparent,
-                .7em -.7em .2em transparent;
-        }
-    }
-
-    /*Scroll bar adjustments*/
-    ::-webkit-scrollbar {
-        width: .7em;
-        display: overlay;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: #ffe573;
-        border-radius: 1em;
-        box-shadow:
-            inset -.05em .05em .2em .1em white,
-            inset -.2em .2em .3em 0em #8f3846,
-            inset .25em -.25em .1em 0em #151842;
-    }
-
-    ::-webkit-scrollbar-corner {
-        display: none;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: lightGray;
-        box-Shadow: inset 0em 0em 0em .1em darkgray;
-        display: none;
-        /*Display might be important for when background images appear*/
-    }
-</style>
 
 <script>
     var bgOptions = 16.4;
@@ -670,5 +271,21 @@
     if (Notification.permission === "default") {
         Notification.requestPermission().then(p => p === "granted");
     }
+    
+    var messageLog = document.getElementById("messages");
+    
+    messageLog.addEventListener("scroll", function(){
+        
+        var bottomButton = document.getElementById("ToBottom");
+        
+        
+        console.log(messageLog.scrollTop) 
+        
+        if (messageLog.scrollTop >= messageLog.scrollHeight - messageLog.clientHeight * 1.5) {
+            bottomButton.setAttribute("style", "display:none;"); 
+        } else {
+            bottomButton.setAttribute("style", "display:block;");
+        }
+    })
 
 </script>
