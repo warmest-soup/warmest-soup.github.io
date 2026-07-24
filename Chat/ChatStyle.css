@@ -154,7 +154,7 @@ input::placeholder {
 }
 #ToBottom{
     position:absolute;
-    left:50%;
+    left:45%;
     bottom:25%;
     backdrop-filter:blur(2px);
 
