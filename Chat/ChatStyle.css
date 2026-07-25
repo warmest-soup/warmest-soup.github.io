@@ -328,7 +328,7 @@ textarea::placeholder {
 
         filter: brightness(200%) blur(.1em);
 
-        background: cyan;
+        background: #54a0a0;
     }
 
 
