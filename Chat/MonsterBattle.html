@@ -1,33 +1,37 @@
-<div id="playerWindow">Meow
-    
-    <div id="statusWindow">
-        <div id="playerHP" class="hpBar">
-            <div class="hpBarFill"></div>
-            <div class="hpBarOutline"></div>
-        </div>
-        <div id="playerEnergy" class="energyBar">
-            <div class="eBarFill"></div>
-            <div class="eBarOutline"></div>
-        </div>
-    </div>
-    <div id="playerMonster" class="charArt">
-        <img src=".\Monsters\1.png"/>
-    </div>
-</div>
+<div id="playPanel">
+    <div id="playerWindow">Meow
 
-<div id="enemyWindow">Meow
-    
-    <div id="statusWindow">
-        <div id="enemyHP" class="hpBar">
-            <div class="hpBarFill"></div>
-            <div class="hpBarOutline"></div>
+        <div id="statusWindow">
+            <div id="playerHP" class="hpBar">
+                <div class="hpBarFill"></div>
+                <div class="hpBarOutline"></div>
+            </div>
+            <div id="playerEnergy" class="energyBar">
+                <div class="eBarFill"></div>
+                <div class="eBarOutline"></div>
+            </div>
         </div>
-        <div id="enemyEnergy" class="energyBar">
-            <div class="eBarFill"></div>
-            <div class="eBarOutline"></div>
+        <div id="playerMonster" class="charArt">
+            <img src=".\Monsters\1.png" />
         </div>
     </div>
-    <div id="enemyMonster" class="charArt"></div>
+
+    <div id="enemyWindow">Meow
+
+        <div id="statusWindow">
+            <div id="enemyHP" class="hpBar">
+                <div class="hpBarFill"></div>
+                <div class="hpBarOutline"></div>
+            </div>
+            <div id="enemyEnergy" class="energyBar">
+                <div class="eBarFill"></div>
+                <div class="eBarOutline"></div>
+            </div>
+        </div>
+        <div id="enemyMonster" class="charArt">
+            <img src=".\Monsters\2.png" />
+        </div>
+    </div>
 </div>
 
 <div id="controlPanel">
@@ -41,5 +45,11 @@
     </div>
     <div id=""></div>
     <div id=""></div>
-    
+
 </div>
+
+<style>
+    img {
+        transform: scalex(-1);
+    }
+</style>
