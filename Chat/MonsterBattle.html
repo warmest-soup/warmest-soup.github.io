@@ -1,55 +1,159 @@
-<div id="playPanel">
-    <div id="playerWindow">Meow
+<div id="page">
+    <div id="playPanel">
+        <div id="playerWindow" class="monsterWindow">
 
-        <div id="statusWindow">
-            <div id="playerHP" class="hpBar">
-                <div class="hpBarFill"></div>
-                <div class="hpBarOutline"></div>
+            <div class="statusWindow">
+                <div class="monsterID">
+                    <div id="playerMonsterName" class="monsterName">Spark-O</div>
+                    <div id="playerLevel" class="level">Lv.15</div>
+                </div>
+                <div id="playerHP" class="hpBar">
+                    <div class="hpBarFill">
+
+                        <div class="hpBarOutline"></div>
+                    </div>
+                </div>
+                <div id="playerEnergy" class="energyBar">
+                    <div class="eBarFill">
+                        <div class="eBarOutline"></div>
+                    </div>
+
+                </div>
             </div>
-            <div id="playerEnergy" class="energyBar">
-                <div class="eBarFill"></div>
-                <div class="eBarOutline"></div>
+            <div id="playerMonster" class="charArt">
+                <img src=".\Monsters\1.png" />
             </div>
         </div>
-        <div id="playerMonster" class="charArt">
-            <img src=".\Monsters\1.png" />
+
+        <div id="enemyWindow" class="monsterWindow">
+
+            <div class="statusWindow">
+                <div class="monsterID">
+                    <div id="enemyMonsterName" class="monsterName">Hubert</div>
+                    <div id="enemyLevel" class="level">Lv.3</div>
+                </div>
+
+                <div id="enemyHP" class="hpBar">
+
+                    <div class="hpBarOutline">
+                        <div class="hpBarFill"></div>
+                    </div>
+                </div>
+
+
+                <div id="enemyEnergy" class="energyBar">
+                    <div class="eBarOutline">
+                        <div class="eBarFill"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="enemyMonster" class="charArt">
+                <img src=".\Monsters\2.png" />
+            </div>
         </div>
     </div>
 
-    <div id="enemyWindow">Meow
+    <div id="controlPanel">
 
-        <div id="statusWindow">
-            <div id="enemyHP" class="hpBar">
-                <div class="hpBarFill"></div>
-                <div class="hpBarOutline"></div>
+        <div id="cpButtons">
+            <div id="intDisplay">Int: 5</div>
+            <div id="ToChatButton">Chat</div>
+            <div id="StatsButton">Stats</div>
+            <div id="invButton">INV</div>
+        </div>
+
+        <div id="cpBody">
+            <div id="ActionsPanel">
+                <div id="ActionButtons">
+                    <div id="undoButton">Undo</div>
+                    <div id="PassButton">Pass</div>
+                </div>
+                <div Class="ActionSlot">
+
+                    <div class="Ability" draggable="true">
+                    
+                        <button class="AbilityName"  onclick="setAction(this)">Tackle</button>
+
+                        <div class="EnergyCost">E:1</div>
+                    </div>
+                    
+                </div>
+                <div Class="ActionSlot">
+                    Heat Spray
+                </div>
+                <div Class="ActionSlot">
+                    Fireball
+                </div>
+                <div Class="ActionSlot">
+                    Counter Stance
+                </div>
             </div>
-            <div id="enemyEnergy" class="energyBar">
-                <div class="eBarFill"></div>
-                <div class="eBarOutline"></div>
+            <div id="TicketPanel">
+
+                <div id="TicketButtons">
+                    <div id="SpdDisplay">Spd: <span id="Spd">5</span></div>
+                    <div id="DexDisplay">Dex: <span id="Dex">4</span></div>
+                </div>
+
+                <div id="MomentPanel">
+                    <div Class="MomentSlot">-</div>
+                    <div Class="MomentSlot">-</div>
+                    <div Class="MomentSlot">-</div>
+                    <div Class="MomentSlot">-</div>
+                    <div Class="MomentSlot">-</div>
+                </div>
+
+                <button id="CommitButton">Commit!</button>
+
             </div>
         </div>
-        <div id="enemyMonster" class="charArt">
-            <img src=".\Monsters\2.png" />
-        </div>
+
+
     </div>
 </div>
 
-<div id="controlPanel">
-    <div id="movesList">
-        <div id="">
-            <div id=""></div>
-            <div id=""></div>
-            <div id=""></div>
-            <div id=""></div>
-        </div>
-    </div>
-    <div id=""></div>
-    <div id=""></div>
+<script>
+    
+    
+    function setAction(attack) {
+        var moments = Array.from(document.getElementsByClassName("MomentSlot"));
 
-</div>
-
-<style>
-    img {
-        transform: scalex(-1);
+        for (var i of moments) {
+            console.log(i)
+            if (i.innerText == "-") {
+                console.log("1")
+                i.innerText = attack.textContent;
+                break
+            }
+        }
     }
-</style>
+
+</script>
+
+
+
+<link href="./MonsterBattleStyle.css" rel="stylesheet">
+</link>
+
+Inteligence - how many memory slots are usable
+Speed - how many moments are available.
+Dex - how many actions are available.
+Con - how much HP
+Sta - how much Energy
+
+Hapiness - Evolution path
+Care Mistakes - Evolution path
+
+Clan Affinity - Evolution path, moves learned
+pretty
+punk
+hero
+villain
+ghoul
+animal
+
+Element Affinity - Evolution path, and moves learned
+Heat
+Electricity
+Saturation
+Brilliance

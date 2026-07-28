@@ -172,8 +172,6 @@
             }
         }
 
-        console.log(messageBox.children.length)
-
         if (jump == true) {
 
             while (messageBox.children.length > 99) {
@@ -281,8 +279,6 @@
         
         var bottomButton = document.getElementById("ToBottom");
         
-        
-        console.log(messageLog.scrollTop) 
         
         if (messageLog.scrollTop >= messageLog.scrollHeight - messageLog.clientHeight * 1.5) {
             bottomButton.setAttribute("style", "display:none;"); 
