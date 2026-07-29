@@ -8,19 +8,21 @@
                     <div id="playerLevel" class="level">Lv.15</div>
                 </div>
                 <div id="playerHP" class="hpBar">
-                    <div class="hpBarFill">
 
-                        <div class="hpBarOutline"></div>
+                    <div class="hpBarOutline">
+                        <div class="hpBarFill"></div>
                     </div>
+
                 </div>
                 <div id="playerEnergy" class="energyBar">
-                    <div class="eBarFill">
-                        <div class="eBarOutline"></div>
+
+                    <div class="eBarOutline">
+                        <div class="eBarFill"></div>
                     </div>
 
                 </div>
             </div>
-            <div id="playerMonster" class="charArt">
+            <div id="playerMonster" class="charArt" data-monsterstats="6,5,4,2">
                 <img src=".\Monsters\1.png" />
             </div>
         </div>
@@ -65,27 +67,58 @@
         <div id="cpBody">
             <div id="ActionsPanel">
                 <div id="ActionButtons">
-                    <div id="undoButton">Undo</div>
-                    <div id="PassButton">Pass</div>
+                    <button id="undoButton" onclick="undoMoment()">Undo</button>
+                    <button id="PassButton" onclick="passMoment()">Pass</button>
                 </div>
                 <div Class="ActionSlot">
 
-                    <div class="Ability" draggable="true">
-                    
-                        <button class="AbilityName"  onclick="setAction(this)">Tackle</button>
+                    <div class="AbilityContainer" draggable="true">
+
+                        <button class="Ability" onclick="setAction(this)" data-properties="">Tackle</button>
 
                         <div class="EnergyCost">E:1</div>
                     </div>
-                    
+
                 </div>
                 <div Class="ActionSlot">
-                    Heat Spray
+
+                    <div class="AbilityContainer" draggable="true">
+
+                        <button class="Ability" onclick="setAction(this)" data-properties="">Charge Attack</button>
+
+                        <div class="EnergyCost">E:2</div>
+                    </div>
+
                 </div>
                 <div Class="ActionSlot">
-                    Fireball
+
+                    <div class="AbilityContainer" draggable="true">
+
+                        <button class="Ability" onclick="setAction(this)" data-properties="">HeatSpray</button>
+
+                        <div class="EnergyCost">E:2</div>
+                    </div>
+
                 </div>
                 <div Class="ActionSlot">
-                    Counter Stance
+
+                    <div class="AbilityContainer" draggable="true">
+
+                        <button class="Ability" onclick="setAction(this)" data-properties="">CounterStance</button>
+
+                        <div class="EnergyCost">E:4</div>
+                    </div>
+
+                </div>
+                <div Class="ActionSlot">
+
+                    <div class="AbilityContainer" draggable="true">
+
+                        <button class="Ability" onclick="setAction(this)" data-properties="">Fireball</button>
+
+                        <div class="EnergyCost">E:1</div>
+                    </div>
+
                 </div>
             </div>
             <div id="TicketPanel">
@@ -103,7 +136,7 @@
                     <div Class="MomentSlot">-</div>
                 </div>
 
-                <button id="CommitButton">Commit!</button>
+                <button id="CommitButton" onclick="commitActions()">Commit!</button>
 
             </div>
         </div>
@@ -113,21 +146,128 @@
 </div>
 
 <script>
-    
-    
-    function setAction(attack) {
-        var moments = Array.from(document.getElementsByClassName("MomentSlot"));
 
-        for (var i of moments) {
-            console.log(i)
-            if (i.innerText == "-") {
-                console.log("1")
-                i.innerText = attack.textContent;
+    var moments = Array.from(document.getElementsByClassName("MomentSlot"));
+    function setAction(attack) {
+
+        var i = 0;
+        while (i < moments.length) {
+            if (moments[i].innerText == "-") {
+                moments[i].innerText = attack.textContent;
+
+                packRoundAction(i, attack)
                 break
             }
+            i++
         }
+
     }
 
+    var playerRoundActions = []
+    function formatRoundData() {
+        moments.forEach((x) => {
+            playerRoundActions.push("")
+        })
+    }
+    formatRoundData();
+    var roundECost = playerRoundActions;
+
+    function packRoundAction(momentIndex, attack) {
+        playerRoundActions[momentIndex] = attack.textContent;
+
+        var momentECost = parseInt(attack.parentNode.children[1].innerText.substring(2))
+
+        roundECost[momentIndex] = "-" + momentECost;
+
+
+    }
+
+    function passMoment() {
+        var i = 0;
+        while (i < moments.length) {
+            if (moments[i].innerText == "-") {
+                moments[i].innerText = "▼"
+                roundECost[i] = "+1"
+                break
+            }
+            i++;
+        }
+    }
+    function undoMoment() {
+        var i = 0;
+        while (i < moments.length) {
+            if (moments[i].innerText == "-") {
+                moments[i - 1].innerText = "-"
+                break
+            }
+            i++;
+        }
+        moments[i - 1].innerText = "-"
+
+    }
+
+    var energy = 10;
+    function commitActions() {
+
+
+        var spd = parseInt(document.getElementById("Spd").textContent)
+        var eBar = document.getElementById("playerEnergy").children[0].children[0];
+        var animSpd = 2000 / spd;
+
+        console.log(roundECost)
+        var i = 0;
+        var j = 0;
+        while (i < spd) {
+
+
+            setTimeout(() => {
+                energy = energy + parseInt(roundECost[j]);
+
+                eBar.style.width = (energy * 10) + "%";
+
+                roundECost[j] = "";
+                j++;
+
+                console.log(eBar)
+                console.log(roundECost)
+
+
+            }, animSpd * i * 2)
+
+            i++;
+
+        }
+
+
+        moments.forEach((x) => {
+            x.innerText = "-"
+        })
+        playerRoundActions.forEach((x) => {
+            x = ""
+        })
+    }
+
+
+</script>
+
+<script type="module">
+    //Load Firebase DB.
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, push, onValue, query, limitToLast, onChildAdded, orderByChild, get, onChildRemoved } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    
+    //Get RATTRAPS Log
+    const firebaseConfig = {
+        databaseURL: "https://rattraps-3rd-edition-default-rtdb.firebaseio.com"
+    };
+    
+    const db = getDatabase(initializeApp(firebaseConfig));
+    const grandMovesList = get(ref(db, "MovesList")).then((snapshot)=>{
+        console.log(snapshot.val().Tackle.Element)
+    });
+    
+      
+    
+    console.log(grandMovesList) 
 </script>
 
 

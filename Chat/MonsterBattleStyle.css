@@ -67,14 +67,12 @@
     0em 0em 0em .1em black;
     height:.25em;
     border-radius:1em;
-    z-index:1;
 }
 .hpBarFill{
     height:100%;
     width:100%;
     border-radius:1em;
     background:limegreen;
-    
 }
 .eBarFill{
     height:100%;
@@ -82,6 +80,9 @@
     border-radius:1em;
     background:rgb(0, 255, 255);
     
+}
+.eBarFill, .hpBarFill{
+    transition:width .4s ease;
 }
 
 #controlPanel{
@@ -108,11 +109,16 @@
 }
 
 #ActionsPanel,
-#TicketPanel, 
-#MomentPanel{
+#TicketPanel{
     background:white;
     padding:1em;
     height:90%;
+    width:25%;
+    display:flex;
+    flex-direction:column;
+    gap:.7em;
+}
+#MomentPanel{
     display:flex;
     flex-direction:column;
     gap:.7em;
@@ -126,9 +132,9 @@
 }
 
 /*Flex Rows*/
-.Ability{
+.AbilityContainer{
     display:flex;
-    justify-content:space-between;
+    justify-content:space-around;
 }
 
 .ActionSlot, .MomentSlot{
@@ -136,6 +142,7 @@
     border-radius:1em;
     text-align:center;
     width:100%;
+    overflow:clip;
 }
 
 button, .ActionSlot, .MomentSlot{
@@ -144,19 +151,20 @@ button, .ActionSlot, .MomentSlot{
     0em 0em 0em .1em;
 }
 button{
+    padding:.3em;
     transition:background .2s ease-out;
 }
 button:active{
     background:gray;
 }
 
-.Ability{
+.AbilityContainer{
     background:white;
     width:100%;
     height:100%;
 }
-.AbilityName{
-    width:70%;
+.Ability{
+    padding:.2em;
 }
 .EnergyCost{
     padding:.2em;
@@ -165,8 +173,7 @@ button:active{
     border-radius:1em;
     position:absolute;
     transform:
-    translatex(6em)
-    translatey(-.4em);
+    translatex(250%);
     font-size:.8em;
     background:white;
 }
