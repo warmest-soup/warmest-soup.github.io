@@ -103,6 +103,7 @@
     }
 
     var alertSound = new Audio("https://warmest-soup.github.io/Assets/Audio/ButtonClick.mp3");
+    alertSound.volume=1;
     var playAlert = false;
     var notifState = false;
 
@@ -301,16 +302,6 @@
         time: new Date().toUTCString(),
         stamp: Date.now()
     })
-
-    /*window.addEventListener("beforeunload", () => {
-        push(messagesLog, {
-            entranceMessage: "Has wandered off :c",
-            author: author,
-            color: colorID,
-            time: new Date().toUTCString(),
-            stamp: Date.now()
-        });
-    });*/
 
 
     var userCount = document.getElementById("userCount")
