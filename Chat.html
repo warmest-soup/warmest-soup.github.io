@@ -50,7 +50,7 @@
 <script type="module">
     //Load Firebase DB.
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getDatabase, ref, push, onValue, query, limitToLast, onChildAdded, orderByChild, get, onChildRemoved, set, onDisconnect, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getDatabase, ref, push, onValue, query, limitToLast, onChildAdded, orderByChild, get, onChildRemoved, set, onDisconnect, increment, child } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
     //Get RATTRAPS Log
     const firebaseConfig = {
@@ -145,7 +145,9 @@
 
     onChildAdded(query(
         messagesLog,
+        orderByChild("stamp"),
         limitToLast(100)
+        
 
     ), async snapshot => {
         var messageBox = document.getElementById("messages");
@@ -167,14 +169,14 @@
             spacer = "<p>  ⤷  ";
         } else spacer = "<p>     "
 
-        
+
 
 
         if (newMessage.entranceMessage) {
             messageBox.lastElementChild.insertAdjacentHTML("beforeBegin", `<div class='entranceMessage'"><span class='PrevAuthors' style='color:${newMessage.color};'>${newMessage.author}</span> ${newMessage.entranceMessage}<div class="timestamp"> ${newMessage.time} </div> </div></div>`);
         } else {
             var atFormattedMessage = atUser(newMessage.message);
-            
+
             messageBox.lastElementChild.insertAdjacentHTML("beforeBegin", `<div>${newMessage.reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${newMessage.color};'>${newMessage.author}:</div> <div>${spacer}${atFormattedMessage}</p></div> <div class="timestamp"> ${newMessage.time} </div> </div></div>`);
         }
 
@@ -287,7 +289,20 @@
         stamp: Date.now()
     });
 
-    onDisconnect(ref(db, "ChatroomUsers/Count")).set(increment(-1)).then((x) => {
+
+    //ExitFunctions
+    onDisconnect(ref(db, "ChatroomUsers/Count")).set(increment(-1))
+
+
+    onDisconnect(ref(db, "MessageLog/Exit" + Date.now())).set({
+        entranceMessage: "Has wandered off :c",
+        author: author,
+        color: colorID,
+        time: new Date().toUTCString(),
+        stamp: Date.now()
+    })
+
+    /*window.addEventListener("beforeunload", () => {
         push(messagesLog, {
             entranceMessage: "Has wandered off :c",
             author: author,
@@ -295,9 +310,9 @@
             time: new Date().toUTCString(),
             stamp: Date.now()
         });
-    })
+    });*/
 
-    //ExitFunctions
+
     var userCount = document.getElementById("userCount")
     onValue(ref(db, "ChatroomUsers"), (x) => {
         console.log(x.val().Count)
