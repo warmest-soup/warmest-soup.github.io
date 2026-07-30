@@ -449,6 +449,11 @@ P {
     font-size:1em;
 }
 
+#userDisplay{
+    line-height:0em;
+    transform:translatey(-.5em);
+}
+
 /*Scroll bar adjustments*/
 ::-webkit-scrollbar {
     width: .7em;
