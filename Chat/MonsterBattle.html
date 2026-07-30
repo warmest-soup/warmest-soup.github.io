@@ -250,25 +250,7 @@
 
 </script>
 
-<script type="module">
-    //Load Firebase DB.
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getDatabase, ref, push, onValue, query, limitToLast, onChildAdded, orderByChild, get, onChildRemoved } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-    
-    //Get RATTRAPS Log
-    const firebaseConfig = {
-        databaseURL: "https://rattraps-3rd-edition-default-rtdb.firebaseio.com"
-    };
-    
-    const db = getDatabase(initializeApp(firebaseConfig));
-    const grandMovesList = get(ref(db, "MovesList")).then((snapshot)=>{
-        console.log(snapshot.val().Tackle.Element)
-    });
-    
-      
-    
-    console.log(grandMovesList) 
-</script>
+
 
 
 

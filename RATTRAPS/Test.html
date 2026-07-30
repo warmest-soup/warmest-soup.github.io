@@ -1,7 +1,36 @@
-<button>Guard</button>
-<button>Parry Stance</button>
-<button>Power Attack</button>
+<div id="pageDisplay"></div>
+
+<script type="module">
+    //Load Firebase DB.
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+    //Firebase Functions
+    import {
+        getDatabase,
+        ref,
+        get,
+        set
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    //Get RATTRAPS Log
+    const fbAddress = {
+        databaseURL: "https://rattraps-3rd-edition-default-rtdb.firebaseio.com"
+    };
+    const db = getDatabase(initializeApp(fbAddress));
+
+    var refTest = ref(db, "MessageLog")
+
+    var meowVolume = get(refTest, "Meow").then((x)=>{
+        testOut(x.val().Meow)
+    })
+    
+    set(refTest, {Test3: "Full", Meow: "Loudly"})
+    
+
+</script>
 
 <script>
-  
+    function testOut(result) {
+        document.getElementById("pageDisplay").innerText = result
+    }
 </script>

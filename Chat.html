@@ -6,7 +6,7 @@
     rel="stylesheet">
 <link href="./Chat/ChatStyle.css" rel="stylesheet">
 </link>
-<meta name="theme-color" content="black"/>
+<meta name="theme-color" content="black" />
 
 <div id="Page">
 
@@ -137,13 +137,17 @@
     };
 
     var clearHistory = true;
-    
-    onChildAdded(messagesLog, async snapshot => {
+
+    onChildAdded(query(
+        messagesLog,
+        limitToLast(100)
+
+    ), async snapshot => {
         var messageBox = document.getElementById("messages");
 
         var newMessage = snapshot.val()
         var bottomButton = document.getElementById("ToBottom");
-        
+
         var jump;
         if (messageLog.scrollTop >= messageLog.scrollHeight - messageLog.clientHeight * 1.5) {
             jump = true;
@@ -272,16 +276,16 @@
     if (Notification.permission === "default") {
         Notification.requestPermission().then(p => p === "granted");
     }
-    
+
     var messageLog = document.getElementById("messages");
-    
-    messageLog.addEventListener("scroll", function(){
-        
+
+    messageLog.addEventListener("scroll", function () {
+
         var bottomButton = document.getElementById("ToBottom");
-        
-        
+
+
         if (messageLog.scrollTop >= messageLog.scrollHeight - messageLog.clientHeight * 1.5) {
-            bottomButton.setAttribute("style", "display:none;"); 
+            bottomButton.setAttribute("style", "display:none;");
         } else {
             bottomButton.setAttribute("style", "display:block;");
         }
