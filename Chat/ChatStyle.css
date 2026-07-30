@@ -424,6 +424,31 @@ P {
     }
 }
 
+.entranceMessage{
+    background: rgb(72 101 92 / 99%);
+    border-radius: 1em;
+    width: fit-content;
+    max-width: 100%;
+    box-sizing: border-box;
+    color: #82b19f;
+    transform: translatex(1em);
+    padding:.2em 1em .2em 1em;
+    font-size:.7em;
+    align-self:center;
+    
+    box-shadow:
+        0em 0em 0em .15em black,
+        inset -.1em .1em .1em 0em rgb(200 246 255 / 68%),
+        inset .2em -.2em .5em .3em #000000b3;
+
+    animation: Enter .2s;
+}
+.entranceMessage>:nth-child(2){
+    padding:0em;
+    text-align:center;
+    font-size:1em;
+}
+
 /*Scroll bar adjustments*/
 ::-webkit-scrollbar {
     width: .7em;

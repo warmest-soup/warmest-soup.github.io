@@ -9,7 +9,8 @@
         getDatabase,
         ref,
         get,
-        set
+        set,
+        increment
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
     //Get RATTRAPS Log
@@ -18,13 +19,15 @@
     };
     const db = getDatabase(initializeApp(fbAddress));
 
-    var refTest = ref(db, "MessageLog")
+    var refTest = ref(db, "TestCenter")
 
-    var meowVolume = get(refTest, "Meow").then((x)=>{
-        testOut(x.val().Meow)
-    })
+    //var meowVolume = get(refTest, "Meow").then((x)=>{
+      //  testOut(x.val().Meow)
+    //})
     
-    set(refTest, {Test3: "Full", Meow: "Loudly"})
+    testOut(refTest)
+    
+    set(ref(db, "TestCenter/Meow") , increment(-1))
     
 
 </script>

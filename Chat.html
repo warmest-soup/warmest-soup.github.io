@@ -9,6 +9,9 @@
 <meta name="theme-color" content="black" />
 
 <div id="Page">
+    <div id="userDisplay">
+        <span id="userCount">0</span> User<span id="userPluralization">s</span> Online
+    </div>
 
     <div id="messages">
         <button id="ToBottom" onclick="messageLog.scrollTop = messageLog.scrollHeight;">•••<br>▽</button>
@@ -47,7 +50,7 @@
 <script type="module">
     //Load Firebase DB.
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getDatabase, ref, push, onValue, query, limitToLast, onChildAdded, orderByChild, get, onChildRemoved } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getDatabase, ref, push, onValue, query, limitToLast, onChildAdded, orderByChild, get, onChildRemoved, set, onDisconnect, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
     //Get RATTRAPS Log
     const firebaseConfig = {
@@ -56,6 +59,9 @@
 
     const db = getDatabase(initializeApp(firebaseConfig));
     const messagesLog = ref(db, "MessageLog");
+
+
+
 
     var messageLog = document.getElementById("messages")
 
@@ -107,8 +113,7 @@
 
         text = text.replace(/\n/g, "</p><p>");
 
-        var author = document.getElementById("Author").value
-        var colorID = document.getElementById("Color").value
+
         var colorCheck = colorID.substring(0, 3).toLowerCase();
 
 
@@ -162,11 +167,17 @@
             spacer = "<p>  ⤷  ";
         } else spacer = "<p>     "
 
-        var atFormattedMessage = atUser(newMessage.message);
+        
 
 
+        if (newMessage.entranceMessage) {
+            messageBox.lastElementChild.insertAdjacentHTML("beforeBegin", `<div class='entranceMessage'"><span class='PrevAuthors' style='color:${newMessage.color};'>${newMessage.author}</span> ${newMessage.entranceMessage}<div class="timestamp"> ${newMessage.time} </div> </div></div>`);
+        } else {
+            var atFormattedMessage = atUser(newMessage.message);
+            
+            messageBox.lastElementChild.insertAdjacentHTML("beforeBegin", `<div>${newMessage.reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${newMessage.color};'>${newMessage.author}:</div> <div>${spacer}${atFormattedMessage}</p></div> <div class="timestamp"> ${newMessage.time} </div> </div></div>`);
+        }
 
-        messageBox.lastElementChild.insertAdjacentHTML("beforeBegin", `<div>${newMessage.reply}<div class='SentMessages' onclick="replyTarget(this)"><div class='PrevAuthors' style='color:${newMessage.color};'>${newMessage.author}:</div> <div>${spacer}${atFormattedMessage}</p></div> <div class="timestamp"> ${newMessage.time} </div> </div></div>`);
 
 
         if (playAlert) {
@@ -260,6 +271,43 @@
             notifState = false;
 
         }
+
+    })
+
+    //Entrance Functions
+    set(ref(db, "ChatroomUsers/Count"), increment(1))
+    var author = document.getElementById("Author").value
+    var colorID = document.getElementById("Color").value
+
+    push(messagesLog, {
+        entranceMessage: "Has appeared!",
+        author: author,
+        color: colorID,
+        time: new Date().toUTCString(),
+        stamp: Date.now()
+    });
+
+    onDisconnect(ref(db, "ChatroomUsers/Count")).set(increment(-1)).then((x) => {
+        push(messagesLog, {
+            entranceMessage: "Has wandered off :c",
+            author: author,
+            color: colorID,
+            time: new Date().toUTCString(),
+            stamp: Date.now()
+        });
+    })
+
+    //ExitFunctions
+    var userCount = document.getElementById("userCount")
+    onValue(ref(db, "ChatroomUsers"), (x) => {
+        console.log(x.val().Count)
+        userCount.innerText = x.val().Count
+
+        var pluralizeUsers = document.getElementById("userPluralization")
+
+        if (x.val().Count == "1") {
+            pluralizeUsers.innerText = "";
+        } else pluralizeUsers.innerText = "s";
 
     })
 </script>
