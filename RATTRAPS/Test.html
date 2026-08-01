@@ -1,4 +1,28 @@
 <div id="pageDisplay"></div>
+<div id="bar1" class="bar"></div>
+<div id="bar1Note"></div>
+<div id="bar2" class="bar"></div>
+<div id="bar2Note"></div>
+
+
+<script>
+    var note1 = document.getElementById("bar1Note")
+    var note2 = document.getElementById("bar2Note")
+    
+    function testOut(container, result) {
+        container.innerText = result
+    }
+    
+    function fillDivs(container, number) {
+        var i = 0;
+        while (i<number){
+            container.insertAdjacentHTML("beforEend", "<div class='autoDiv'></div>")
+            console.log(container.id + " " + i)
+            i++
+        }
+    }
+    
+</script>
 
 <script type="module">
     //Load Firebase DB.
@@ -20,20 +44,42 @@
     const db = getDatabase(initializeApp(fbAddress));
 
     var refTest = ref(db, "TestCenter")
+    
+    var spd1 = 5;
+    var spd2 = 3;
+    
+    fillDivs(bar1, spd1)
+    fillDivs(bar2, spd2)
 
-    //var meowVolume = get(refTest, "Meow").then((x)=>{
-      //  testOut(x.val().Meow)
-    //})
-    
-    testOut(refTest)
-    
-    set(ref(db, "TestCenter/Meow") , increment(-1))
-    
+
+
+
+    var stringCode = "var num = 2 +5; console.log(num)"
+    eval(stringcode)
 
 </script>
 
-<script>
-    function testOut(result) {
-        document.getElementById("pageDisplay").innerText = result
+<style>
+    .bar{
+        box-shadow:
+        0em 0em 0em .1em black;
+        border-radius:2em;
+        height:1em;
+        width:60%;
+        background:rgb(165, 212, 223);
+        display:flex;
+        overflow:clip;
     }
-</script>
+    
+    .bar > :nth-child(2n){
+        background:rgb(214, 155, 192);
+    }
+    
+    .autoDiv{
+        width:100%;
+        text-align:center;
+        color:rgb(0, 132, 255);
+        font-weight:bolder;
+    }
+    
+</style>
