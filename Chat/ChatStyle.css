@@ -7,6 +7,9 @@
 
     --AuthorColor: white;
 }
+::selection{
+    background:#aa7cb3ad;
+}
 *, input{
     margin:0em;
     padding:0em;
@@ -37,13 +40,13 @@ img{
 blockquote{
     margin:.5em;
     padding-left:1em;
-    color:gray;
     box-shadow:-.2em 0em 0em 0em gray;
 }
 /*FLEX COLUMNS!!!*/
 #messageBox,
 #UserInput,
-#Dashboard
+#Dashboard,
+.QuoteBlock
 {
     display:flex;
     flex-direction:column;
@@ -57,12 +60,21 @@ blockquote{
 #Color,
 .spoilerPrimer,
 .spoiler
-{border-radius:.5em;}
+{border-radius:1em;}
+
+/*Dark Text*/
+.BlockQuote,
+.Timestamp,
+.QuoteBlock > a
+{
+    color:#92c8ff;
+}
 
 #messageBox{
     gap:1em;
     box-shadow:
-    0em 0em 0em .1em white;
+    0em 4em 4em -2em #1c349bdb,
+    0em -1em 1em .2em #000000db;
     
     margin:1em;
     padding:1em 1.5em 4em 1.5em;
@@ -70,7 +82,10 @@ blockquote{
     width:95%;
     overflow-y:auto;
     overflow-x:clip;
+
+    background: url(https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/8.gif) center 15% / cover no-repeat;
 }
+
 /*Message Block*/
 .message, 
 #Author, 
@@ -78,12 +93,12 @@ blockquote{
 .QuoteBlock{
     padding:.4em 1em .3em 1.5em;
     width:fit-content;
-    background:#124152a1;
+    background:#123552a1;
     box-shadow:
     0em 0em 0em .2em black,
-    inset -.1em .2em .5em 0em #a7ffef,
-    inset .3em -.3em 1em .4em #072147,
-    inset 2em -1em 3em 0em #64bbb4;
+    inset .3em -.3em 1em .4em #08021e,
+    inset -.1em .2em .5em 0em #a7e7ff,
+    inset 2em -1em 3em 0em #7183a4;
     
 
     backdrop-filter:
@@ -101,21 +116,40 @@ blockquote{
 }
 .QuoteBlock{
     font-size:.9em;
-    padding:.3em 1em 2em 2em;
+    padding:.7em 1.2em 2em 2.2em;
     border-radius:2em 2em 1em 5em;
     transform:translatey(1.6em);
     margin-top:-1.6em;
+    background:#056a65c2;
+    gap:.3em;
+
+    box-shadow:
+    0em 0em 0em .2em black,
+    inset .3em -.3em 1em .4em #151c24,
+    inset -.1em .2em .5em 0em #a7e7ff,
+    inset 2em -1em 3em 0em #74c8d6;
 
     animation:quoteEnter .2s ease-out;
 }
-.QuoteBlock > a{
+.quoteblock > a {
     text-decoration:none;
-    color:gray;
+    
+    box-shadow:
+    inset 0em 0em 1em 0em #325c57,
+    0em 0em 1em 0em #73c4cc;
+    border-radius:1em;
+    padding:.5em 1em 0em 1em;
+    
+    width:100%;
+    display:block;
 }
 #Author{
     width:8em;
     color:var(--AuthorColor);
     font-weight:900;
+}
+#Color:active{
+    outline:none;
 }
 #UserInput{
     gap:6%;
@@ -130,9 +164,18 @@ blockquote{
 #DraftBox{
     width:90%;
     height:100%;
-    padding:.3em;
+    padding:.5em;
 
-    box-shadow:0em 0em 0em .1em white;
+    transition: box-shadow 1s ease;
+    
+}
+#DraftBox:focus{
+    outline:none;
+box-shadow:
+        0em -.3em 1em 0em #000000,
+        0em 1em 1em 0em #5555e0,
+        inset 0em 4em 8em -6em #5555e0;
+    
 }
 #Clock{
     font-size:.8em;
@@ -151,18 +194,22 @@ blockquote{
     transform:translatey(.6em);
 }
 .spoilerPrimer{
-    background:gray;
+    background:#000000a3;
     padding:0em .3em 0em .3em;
 }
 .spoiler{
-    background:white;
+    background:#111111;
+    color:#111111;
+    text-shadow:none;
 }
-.pastAuthors{font-style:bold;}
+.spoiler::selection{
+    background:white;
+    color:white;
+}
 .reply2This{
     animation:replyGlow 2s infinite;
 }
 .Timestamp{
-    color:gray;
     font-size:.7em;
 }
 .Entrance{
@@ -171,12 +218,31 @@ blockquote{
     line-height:1em;
     padding:.5em 3em .5em 3em;
     border-radius:3em;
-}
-.Entrance>:nth-child(2){
-    font-size:.8em;
+    box-shadow:none;
+    background:#232848a6;
 }
 .Highlight{
-    background:#4b594c;
+    background:#92c8c1;
+    filter:contrast(90%) brightness(115%);
+
+    box-shadow:
+    0em 0em 1em .2em #7cefff,
+    inset -.1em .2em .5em 0em #a7ffef,
+    inset .3em -.3em 1em .4em #072147,
+    inset 2em -1em 3em 0em #64bbb4;
+
+    animation:hilit 3s infinite;
+    
+}
+
+@keyframes hilit{
+    50%{
+        box-shadow:
+    0em 0em 0em .2em black,
+    inset .3em -.3em 1em .4em #151c24,
+    inset -.1em .2em .5em 0em #a7e7ff,
+    inset 2em -1em 3em 0em #74c8d6;
+    }
 }
 
 @keyframes Enter {
@@ -220,27 +286,24 @@ blockquote{
 
 @keyframes replyGlow {
     0% {
-        background: rgba(96, 179, 151, 0.664);
+        background:  rgb(175 198 233 / 66%);
     }
 
     50% {
         box-shadow:
-            0em 0em 0em .15em black,
-            inset -.1em .1em .1em 0em rgb(200, 255, 203),
-            inset .2em -.2em .5em .3em black,
-            2em 0em 2em -2em white,
-            2em 0em 4em -2em white,
-            -2em 0em 2em -2em white,
-            -2em 0em 4em -2em white;
+            0em 0em 1em .2em #7cefff,
+            inset -.1em .2em .5em 0em #a7ffef,
+            inset .3em -.3em 1em .4em #072147,
+            inset 2em -1em 3em 0em #64bbb4;
 
         filter: brightness(200%) blur(.1em);
 
-        background: #54a0a0;
+        background: #80c2c2;
     }
 
 
     100% {
-        background: rgba(96, 179, 151, 0.664);
+        background: rgb(175 198 233 / 66%);
     }
 
 

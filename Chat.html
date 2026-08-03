@@ -340,7 +340,7 @@
                     }
                     if (key.includes("h")) {
                         spClass += "spoiler spoilerPrimer"
-                        spoiler = 'onclick="this.classList.toggle(\'spoiler\')"';
+                        spoiler = 'onclick="event.stopPropagation();this.classList.toggle(\'spoiler\')"';
 
                     }
 
@@ -430,3 +430,13 @@
         white-space: pre-wrap;
     }
 </style>
+<script>
+    var bgOptions = 20.2;
+
+    var url = "https://warmest-soup.github.io/Assets/Images/ChatroomBGs/";
+
+    var randBG = url + Math.round(Math.random() * bgOptions);
+
+    document.getElementById("messageBox").style.backgroundImage = "url('" + randBG + ".gif')";
+
+</script>
