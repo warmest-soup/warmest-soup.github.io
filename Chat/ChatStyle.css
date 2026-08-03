@@ -39,8 +39,10 @@ img{
 }
 blockquote{
     margin:.5em;
-    padding-left:1em;
-    box-shadow:-.2em 0em 0em 0em gray;
+    padding:.3em 1em .3em 1em;
+    box-shadow:
+        -.5em 0em 0em 0em #406d9a,
+        inset .2em 0em 3em 0em #2f4356;
 }
 /*FLEX COLUMNS!!!*/
 #messageBox,
@@ -65,7 +67,8 @@ blockquote{
 /*Dark Text*/
 .BlockQuote,
 .Timestamp,
-.QuoteBlock > a
+.QuoteBlock > a,
+blockquote
 {
     color:#92c8ff;
 }
