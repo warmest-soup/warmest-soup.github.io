@@ -41,8 +41,8 @@ blockquote{
     margin:.5em;
     padding:.3em 1em .3em 1em;
     box-shadow:
-        -.5em 0em 0em 0em #406d9a,
-        inset .2em 0em 3em 0em #2f4356;
+        -.5em 0em 0em 0em #083a6d,
+        inset .2em 0em 2em 0em #040f18;
 }
 /*FLEX COLUMNS!!!*/
 #messageBox,
