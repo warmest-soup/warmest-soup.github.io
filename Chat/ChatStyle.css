@@ -1,228 +1,169 @@
-:root{
-    color-scheme:dark;
+:root {
+    color-scheme: dark;
+    font-family:"Zen Old Mincho";
+    line-height:min(1.55rem, 3.5vw);
+    font-weight:400;
+    font-size:min(.7rem, 2.5vw);
+
+    --AuthorColor: white;
 }
-
-input {
-    border: none;
-}
-
-a {
-    color: rgb(154, 245, 248);
-}
-
-button {
-    border: none;
-}
-
-::selection {
-
-    background: rgba(174, 134, 238, 0.486);
-
-}
-
-* {
-    margin: 0em;
-    font-family: "Zen Old Mincho", serif;
-    font-size: min(3vw, 1em);
-}
-
-#Page {
-    background: rgb(56, 51, 77);
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
-
-    background-image: url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomForeground.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    background-size: 100% 100%;
-
-    overflow: clip;
-}
-
-#messages {
-    box-shadow:
-        0em 0em 0em .1em black,
-        -.5em -.5em 1em .1em rgb(0, 0, 0),
-        .5em .5em 1em .1em rgba(209, 180, 255, 0.5);
-    border-radius: 1em;
-
+*, input{
+    margin:0em;
+    padding:0em;
     box-sizing:border-box;
-    padding: 2em 2em .7em 2em;
-    width: 90%;
-    height: 75%;
 
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    background-size: 100% 100%;
-
-    overflow-y: auto;
-    overflow-x: clip;
-
-    display: flex;
-    flex-direction: column;
-    gap: .7em;
+    border:none;
+    resize:none;
 }
-
-@media (max-aspect-ratio: 13/16) {
-    #messages {
-        height: 70%;
-    }
+input, textarea{
+    font-family:"Zen Old Mincho";
+    line-height:1.2rem;
+    font-weight:400;
+    font-size:min(1rem, 2.5vw);
+    background:none;
 }
-
-#UserInput {
-    height: 16%;
-    width: 90%;
+input{
+    width:6em;
+    text-align:center;
+    padding:.1em;
 }
-
-input {
-    margin: .5em;
-    border-radius: 1em;
-    height: 1.5em;
-    font-weight: bold;
-    text-align: center;
-
-    background: rgba(17, 31, 26, 0.664);
-    border-radius: 1em;
-
-    width: fit-content;
-    color: white;
-
+img{
+    border-radius:1.5em;
     box-shadow:
-        0em 0em 0em .15em black,
-        inset -.1em .1em .1em 0em rgb(200, 255, 203);
+    .2em .2em .5em 0em black,
+    -.2em -.2em .5em 0em white;
+    margin:1em;
+}
+blockquote{
+    margin:.5em;
+    padding-left:1em;
+    color:gray;
+    box-shadow:-.2em 0em 0em 0em gray;
+}
+/*FLEX COLUMNS!!!*/
+#messageBox,
+#UserInput,
+#Dashboard
+{
+    display:flex;
+    flex-direction:column;
 }
 
-input::placeholder {
-    color: #b1c8f37c;
-}
+/*Round Edges*/
+#messageBox,
+.message, 
+#Author,
+#DraftBox,
+#Color,
+.spoilerPrimer,
+.spoiler
+{border-radius:.5em;}
 
-#MessageBody {
-    height: 70%;
-    margin: .5em;
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    gap: .7em;
-}
-
-#Message {
-    color: white;
-    width: 85%;
-    height: 100%;
-    background: rgba(143, 197, 207, 0.13);
-    white-space: pre-wrap;
-    border: none;
+#messageBox{
+    gap:1em;
     box-shadow:
-        0em 0em 0em .15em black,
-        inset .1em -.1em .5em 0em rgb(200, 253, 255),
-        inset -.1em .1em .5em 0em rgb(17, 4, 73);
-}
-
-#Message::placeholder {
-    color: rgb(137, 145, 185);
-
-
-}
-
-.TextButtons {
-    background-color: rgb(154, 191, 221);
-    border-radius: 1em;
-    height: 40%;
-    width: 90%;
-    line-height: 1em;
-    color:black;
-    text-shadow:
-        0em 0em .1em black,
-        0em 0em .1em black,
-        0em 0em .1em black,
-        0em 0em .1em black,
-        0em 0em .1em black;
-
-    box-shadow:
-        0em 0em .5em .2em black,
-        inset 0em -.4em .5em 0em rgb(11, 24, 51),
-        inset 0em .2em .3em .1em white,
-        inset 0em .2em .3em .2em rgb(142, 71, 209);
-}
-#ToBottom{
-    position:absolute;
-    left:45%;
-    bottom:25%;
-    backdrop-filter:blur(2px);
-
-    font-size:1.3em;
+    0em 0em 0em .1em white;
     
-    background-color: rgb(42 157 193 / 50%);
-    color:white;
-    border-radius: 2em;
-    padding:.5em;
-    line-height: 1em;
-    text-shadow:
-        0em 0em .1em #ffffff,
-        0em 0em .1em #ffffff,
-        0em 0em .1em #ffffff,
-        0em 0em .1em #ffffff,
-        0em 0em .1em #ffffff;
-
+    margin:1em;
+    padding:1em 1.5em 4em 1.5em;
+    height:75%;
+    width:95%;
+    overflow:auto;
+}
+/*Message Block*/
+.message, 
+#Author, 
+.Entrance, 
+.QuoteBlock{
+    padding:.4em;
+    width:fit-content;   
     box-shadow:
-        0em .2em .5em .2em #050d5ba3,
-        inset 0em -.4em .5em 0em rgb(0 13 18),
-        inset 0em .1em .1em .2em white,
-        inset 0em .1em .1em .2em rgb(71 209 169);
+    0em 0em 0em .1em white;
 }
-
-#buttonControls {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 20%;
-    align-items: center;
-    justify-content: center;
-    gap: 1em;
-    font-weight: bold;
+.message{
+    word-wrap:break-word;
+    max-width:100%;
+    margin-left:3em;
+    animation:Enter .2s ease-out;
 }
+.QuoteBlock{
+    font-size:.9em;
+    padding:.3em 1em 2em 2em;
+    border-radius:2em 2em 1em 5em;
+    transform:translatey(1.6em);
+    margin-top:-1.6em;
 
-textarea {
-    resize: none;
-    border-radius: 1em;
-    background: rgb(255 255 255 /20%);
-    padding: .7em;
-    Line-height: 1em;
+    animation:quoteEnter .2s ease-out;
 }
-
-textarea::placeholder {
-    color: rgba(0, 0, 0, 0.486);
+.QuoteBlock > a{
+    text-decoration:none;
+    color:gray;
 }
+#Author{
+    width:8em;
+    color:var(--AuthorColor);
+    font-weight:900;
+}
+#UserInput{
+    gap:6%;
+    align-items:center;
+    height:18%;
+}
+#Dashboard{
+    align-self:start;
+    padding-left:5%;
+    gap:7%;
+}
+#DraftBox{
+    width:90%;
+    height:100%;
+    padding:.3em;
 
-.SentMessages {
-    background: rgba(17, 31, 26, 0.664);
-    border-radius: 1em;
-    padding: .7em;
-    width: fit-content;
-    max-width: 100%;
-    box-sizing: border-box;
-    color: white;
-    z-index: +1;
-    transform: translatex(1em);
-    line-height: 1.4em;
-    overflow-wrap: break-word;
+    box-shadow:0em 0em 0em .1em white;
+}
+#Clock{
+    font-size:.8em;
+}
+#page{
+    align-items:center;
+    width:100vw;
+    height:100vh;
+    overflow:clip;
 
-    backdrop-filter:blur(5px);
-    
-    box-shadow:
-        0em 0em 0em .15em black,
-        inset -.1em .1em .1em 0em rgb(200, 255, 203),
-        inset .2em -.2em .5em .3em black;
-
-    animation: Enter .2s;
+    background: url(https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/ChatroomForeground.jpg) center 15% / cover no-repeat;
+}
+#UserDisplay{
+    text-align:center;
+    font-size:1.1em;
+    transform:translatey(.6em);
+}
+.spoilerPrimer{
+    background:gray;
+    padding:0em .3em 0em .3em;
+}
+.spoiler{
+    background:white;
+}
+.pastAuthors{font-style:bold;}
+.reply2This{
+    animation:replyGlow 2s infinite;
+}
+.Timestamp{
+    color:gray;
+    font-size:.7em;
+}
+.Entrance{
+    align-self:center;
+    font-size:.8em;
+    line-height:1em;
+    padding:.5em 3em .5em 3em;
+    border-radius:3em;
+}
+.Entrance>:nth-child(2){
+    font-size:.8em;
+}
+.Highlight{
+    background:#4b594c;
 }
 
 @keyframes Enter {
@@ -235,39 +176,16 @@ textarea::placeholder {
 
     60% {
         transform:
-            scale(1.2) translatex(2em);
+            scale(1.2);
     }
 
     100% {
         transform:
-            scale(1) translatex(1em);
+            scale(1);
 
         background: rgba(17, 31, 26, 0.664);
 
     }
-}
-
-.quotedMessages {
-    background: rgba(81, 138, 95, 0.664);
-    border-radius: 2em 2em 1em 4em;
-    padding: 1em 1em 1.2em 1em;
-    margin-top:-.8em;
-    width: fit-content;
-    color: white;
-
-    transform: translatey(.7em) translatex(-1em);
-    backdrop-filter:blur(5px);
-
-    box-shadow:
-        0em 0em 0em .15em black,
-        inset -.1em .1em .1em 0em rgb(255, 255, 255),
-        inset .2em -.2em .5em .3em rgb(22, 26, 53);
-
-    display: flex;
-    flex-direction: column;
-    gap: .5em;
-
-    animation: quoteEnter .2s ease-out;
 }
 
 @keyframes quoteEnter {
@@ -285,30 +203,6 @@ textarea::placeholder {
         background: rgba(81, 138, 95, 0.664);
 
     }
-}
-
-.quote {
-    color: rgb(231, 222, 223);
-    padding: .5em;
-    border-radius: 1em 1em 1em 3em;
-    font-size: .7em;
-    box-shadow:
-        0em 0em 1em 0em rgba(255, 255, 255, 0.493),
-        inset 0em 0em 1em 0em rgba(255, 255, 255, 0.301),
-        inset 0em 0em 1em 0em rgb(10, 60, 80);
-}
-
-.quotedMessages>* .PrevAuthors {
-    display: inline;
-}
-
-.PrevAuthors {
-    color: #409dc9;
-    text-shadow: -.1em .1em .2em black;
-}
-
-.reply2This {
-    animation: replyGlow 1s infinite;
 }
 
 @keyframes replyGlow {
@@ -337,53 +231,6 @@ textarea::placeholder {
     }
 
 
-}
-
-
-.timestamp {
-    color: rgb(105, 145, 190);
-    padding-top: 1em;
-    font-size: .7em;
-}
-
-P {
-    max-height: fit-content;
-    min-height: 1em;
-    line-height: 1em;
-
-}
-
-#Author,
-#Color {
-    width: 8em;
-}
-
-.inputLabel {
-    color: white;
-    font-weight: bold;
-    font-size: .8em;
-}
-
-#clock {
-    margin-left: auto;
-    margin-right: 3em;
-    text-align: right;
-}
-
-#AuthorLine {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.genericAt {
-    color: yellow;
-    font-weight: bold;
-    animation: Glow 2s infinite;
-}
-
-.namedAt {
-    font-weight: bold;
-    animation: Glow 2s infinite;
 }
 
 @keyframes Glow {
@@ -422,36 +269,6 @@ P {
             0em .2em .2em transparent,
             .7em -.7em .2em transparent;
     }
-}
-
-.entranceMessage{
-    background: rgb(72 101 92 / 99%);
-    border-radius: 1em;
-    width: fit-content;
-    max-width: 100%;
-    box-sizing: border-box;
-    color: #82b19f;
-    transform: translatex(1em);
-    padding:.2em 1em .2em 1em;
-    font-size:.7em;
-    align-self:center;
-    
-    box-shadow:
-        0em 0em 0em .15em black,
-        inset -.1em .1em .1em 0em rgb(200 246 255 / 68%),
-        inset .2em -.2em .5em .3em #000000b3;
-
-    animation: Enter .2s;
-}
-.entranceMessage>:nth-child(2){
-    padding:0em;
-    text-align:center;
-    font-size:1em;
-}
-
-#userDisplay{
-    line-height:0em;
-    transform:translatey(-.5em);
 }
 
 /*Scroll bar adjustments*/

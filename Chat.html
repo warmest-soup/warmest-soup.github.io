@@ -1,1 +1,432 @@
-Your three days are up 👁️👁️
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<meta name="theme-color" content="black" />
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<link href="./Chat/ChatStyle.css" rel="stylesheet">
+</link>
+
+<!--Chatroom Begins here!-->
+<div id="page">
+
+    <div id="UserDisplay"><span id="UserCount">0</span> user<span id="userPluralization">s</span> online.</div>
+
+    <div id="messageBox"></div>
+
+    <div id="UserInput">
+        <div id="Dashboard">
+            <div id="AuthorInfo">
+                Author: <input id="Author" placeholder="Anonymous" onchange="setUser(this, Color, CaptureBg)"></input>
+
+                <input id="Color" placeholder="Color" onInput="setColor(this)"
+                    onchange="setUser(Author, this, CaptureBg)"></input>
+
+                <input type="checkbox" id="CaptureBg" onchange="setUser(Author, Color, this)" />
+
+            </div>
+
+            <div id="Clock"></div>
+            <script>
+                setInterval(() => document.getElementById("Clock").textContent = new Date().toUTCString(), 1000)
+            </script>
+        </div>
+        <TextArea id="DraftBox" placeHolder="Enter Message..." prewrap="wrap"
+            onKeyDown="if(!event.shiftKey && event.key=='Enter'){send(this,Author,Color)}"></TextArea>
+    </div>
+</div>
+
+<!--Page Functions-->
+<script>
+    var messageBox = document.getElementById("messageBox");
+    //Meow, scroll position listener
+    var caughtUp = true;
+    messageBox.addEventListener("scroll", (x) => {
+        var scrollPosition = x.target.scrollTop;
+        var total = messageBox.scrollHeight
+        var scale = messageBox.clientHeight
+
+        if (scrollPosition >= total - scale * 1.2) {
+            caughtUp = true;
+        } else caughtUp = false;
+
+
+    })
+
+    //Set color demo.
+    var userColor;
+    function setColor(color) {
+        var root = document.documentElement;
+        root.style.setProperty("--AuthorColor", color.value);
+        userColor = getComputedStyle(root).getPropertyValue("--AuthorColor")
+    }
+
+    //Load user
+    function loadUser() {
+        var author = document.getElementById("Author")
+        var color = document.getElementById("Color")
+        var bg = document.getElementById("CaptureBg")
+
+        if (document.cookie) {
+            var settings = document.cookie.split(", ");
+            author.value = settings[0];
+            color.value = settings[1];
+            bg.checked = settings[2];
+        } else {
+            author.value = "Anonymous";
+            color.value = "skyblue";
+            bg.checked = false;
+        }
+
+        setColor(color);
+    }
+    //Collect reply targets
+    function reply2This(target) {
+        target.classList.toggle("reply2this")
+        document.getElementById("DraftBox").focus()
+    }
+    //compile Replies for later
+    var replyTargets = document.getElementsByClassName("reply2this");
+
+    //Collect Users.
+    var rawUserNames = document.getElementsByClassName("pastAuthor");
+
+    //Initialize
+    loadUser()
+
+    //Give berth
+    function giveBerth() {
+        var hilights = Array.from(document.getElementsByClassName("Highlight"));
+        hilights.forEach((x) => x.classList.remove("Highlight"));
+
+        
+        
+        messageBox.scrollBy({
+            top: -messageBox.clientHeight * .2,
+            behavior: "smooth"
+        });
+        
+        console.log(window.location.hash.substring(1))
+        document.getElementById(window.location.hash.substring(1)).classList.add("Highlight");
+    };
+
+
+    
+    window.addEventListener('hashchange', function () {
+        giveBerth();
+    })
+
+
+</script>
+<!--Server Functions-->
+<script type="module">
+    //Load Firebase DB.
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+    //Firebase Functions
+    import {
+        getDatabase,
+        query,
+        limitToLast,
+        onChildAdded,
+        onDisconnect,
+        ref,
+        get,
+        set,
+        onValue,
+        increment,
+        push
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    //Get RATTRAPS Log
+    const fbAddress = {
+        databaseURL: "https://rattraps-3rd-edition-default-rtdb.firebaseio.com"
+    };
+    const db = getDatabase(initializeApp(fbAddress));
+
+    //Key Declarations
+    var logLimit = 100;
+    var messageLogAddress = ref(db, "Chatroom/MessageLog");
+    var messageHistory = query(messageLogAddress, limitToLast(logLimit))
+    var newId;
+
+    var users = "Chatroom/Users";
+    var playAlerts = false;
+    var alertSound = new Audio("https://warmest-soup.github.io/Assets/Audio/ButtonClick.mp3");
+
+    //Users Online---------------------------------------!!!
+    onValue(ref(db, ".info/connected"), (x) => {
+        if (x.val()) {
+            set(ref(db, users + "/Count"), increment(1));
+        }
+        playAlerts = true;
+    })
+    onDisconnect(ref(db, users + "/Count")).set(increment(-1))
+    onDisconnect(push(messageLogAddress)).set({
+        Author: document.getElementById("Author").value,
+        Color: userColor,
+        Message: "has wandered off. :c",
+        Entrance: "Exit",
+        Timestamp: new Date().toUTCString()
+    })
+    //Entrance Message
+    setTimeout(() => {
+        push(messageLogAddress, {
+            Author: document.getElementById("Author").value,
+            Color: userColor,
+            Message: "has appeared! :D",
+            Entrance: "Arrival",
+            Timestamp: new Date().toUTCString()
+        })
+    }, 500)
+
+    //Send Message.--------------------------------------!!!
+    window.send = function (draft, author, color) {
+        //Prevent raw enter key from line breaking
+        event.preventDefault();
+
+        //format replies
+        var replyCodes = "";
+        if (replyTargets.length > 0) {
+            var replyCodes = Array.from(replyTargets).map((x) => {
+                x.classList.toggle("reply2this");
+                return x.id;
+            })
+            replyCodes = replyCodes.join(", ")
+        }
+
+
+        //Send Message to server.
+        newId = push(messageLogAddress, {
+            Author: author.value,
+            Color: userColor,
+            Message: draft.value,
+            Replies: replyCodes,
+            Timestamp: new Date().toUTCString()
+
+        })
+        //Reset Draft Box.
+        draft.value = "";
+
+        //Jump to bottom!
+        messageBox.scrollTo({
+            top: messageBox.scrollHeight,
+            behavior: "smooth"
+        });
+
+    }
+
+    //Update chat history.-------------------------------!!!
+    onChildAdded(messageHistory, (x) => {
+
+        var chatHistory = messageBox.children;
+
+        //create new message
+        var newMessage = document.createElement("div");
+
+        //Build entry messages--------------------------!!!
+        if (x.val().Entrance) {
+            if (x.val().Entrance == "Arrival") {
+                newMessage.classList.add("Entrance");
+                newMessage.innerHTML = "<span style=color:" + x.val().Color + ";>" + x.val().Author + "</span> has Apeared! :D";
+
+                messageBox.appendChild(newMessage)
+            } else if (x.val().Entrance == "Exit") {
+                newMessage.classList.add("Entrance");
+                newMessage.innerHTML = "<span style=color:" + x.val().Color + ";>" + x.val().Author + "</span> has wandered off. :c";
+
+                messageBox.appendChild(newMessage)
+            }
+        } else {
+            //Build chat messages-----------------------!!!
+            newMessage.classList.add("message");
+            newMessage.id = x.key
+            newMessage.setAttribute("onclick", "reply2This(this)")
+
+            newMessage.innerHTML = "<div class='pastAuthor' style='color:" + x.val().Color + ";'>" + x.val().Author + ":</div>";
+
+            //Formatting for replies---_!!!
+            var spacer;
+            var replyBlock = false;
+            if (x.val().Replies) {
+                var replyIDs = new String(x.val().Replies).split(", ")
+                replyBlock = document.createElement("div");
+                replyBlock.classList.add("quoteBlock");
+
+                var targetMessage;
+                var targetText;
+                var quoteIndex = 0;
+                replyIDs.forEach((y) => {
+                    replyBlock.insertAdjacentHTML("beforeEnd",
+                        "<a href='#" + y + "'></a>"
+                    )
+                })
+
+                spacer = "⤷ ";
+            } else spacer = "      ";
+
+            var newText = document.createElement("div")
+            newText.appendChild(document.createTextNode(spacer + x.val().Message));
+
+            newMessage.appendChild(newText)
+            newMessage.insertAdjacentHTML("beforeend", "<div class='TimeStamp'>" + x.val().Timestamp + "</div>")
+
+            //Add message to history.
+            if (replyBlock) {
+                var bigBlock = document.createElement("div")
+                bigBlock.appendChild(replyBlock);
+                bigBlock.appendChild(newMessage);
+
+                messageBox.appendChild(bigBlock);
+
+                //Load replies
+                Array.from(bigBlock.children[0].children).forEach((x) => {
+                    var targetId = x.getAttribute("href").slice(1)
+
+                    get(ref(db, "Chatroom/MessageLog/" + targetId)).then((y) => {
+                        var quote = y.val();
+                        x.innerText = quote.Message
+                        x.insertAdjacentHTML("beforeEnd",
+                            "<div style='color:"+quote.Color+";'>- "+quote.Author+"</div>"
+                        )
+                    })
+                })
+            } else messageBox.appendChild(newMessage);
+
+
+            //formatting-----------------------------!!!
+            //Markdown
+            if (newMessage.innerText.match(/([^\|\s]+)\|([^\|]*)\|/g)) {
+
+                newMessage.innerHTML = newMessage.innerHTML.replace(/([^\|\s]+)\|([^\|]*)\|/g, (match, key, content) => {
+                    var markDown = ""
+                    var tagType = "span"
+                    var textDeco = "";
+                    var spClass = ""
+                    var spoiler = ""
+
+                    if (key.includes("img")) {
+
+                        return "<img src='" + content + "' width=70%>"
+
+                    }
+
+                    if (key.includes("b")) {
+                        markDown += "text-shadow:0em 0em .1em white,0em 0em .1em white,0em 0em .1em white,0em 0em .1em white,0em 0em .1em white;"
+                    }
+                    if (key.includes("i")) {
+                        markDown += "font-style:italic;"
+                    }
+                    if (key.includes("s")) {
+                        markDown += "font-size:.7em;"
+                    }
+                    if (key.includes("l")) {
+                        markDown += "font-size:1.4em;"
+                    }
+                    if (key.includes("_")) {
+                        textDeco += "underline "
+                    }
+                    if (key.includes("-")) {
+                        textDeco += "line-through "
+                    }
+                    if (key.includes("m")) {
+                        tagType = "marquee"
+                    }
+                    if (key.includes("q")) {
+                        tagType = "blockquote"
+                    }
+                    if (key.includes("h")) {
+                        spClass += "spoiler spoilerPrimer"
+                        spoiler = 'onclick="this.classList.toggle(\'spoiler\')"';
+
+                    }
+
+                    return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='" + spClass + "'>" + content + "</" + tagType + ">"
+
+                })
+            }
+
+            //@ Users-------------------------------!!!
+            var messageContent = newMessage.children[1].innerHTML;
+            if (messageContent.match("@")) {
+                Array.from(rawUserNames).forEach((name) => {
+                    if (messageContent.toLowerCase().includes("@" + name.innerText.slice(0, -1).toLowerCase())) {
+                        messageContent = messageContent.replace(new RegExp(`@(${name.innerText.slice(0, -1)})`, "gi"), "<span style='animation: Glow 2s infinite; " + name.getAttribute("style") + ";'>$1</span>")
+
+                        //update message with formatted @s
+                        newMessage.children[1].innerHTML = messageContent
+                    }
+                })
+            }
+
+            //Enable notifications.------------------!!!
+            if (playAlerts) {
+                alertSound.play();
+            }
+
+        }
+        //Remove oldest message.
+        if (caughtUp) {
+            messageBox.scrollTo({
+                top: messageBox.scrollHeight,
+                behavior: "smooth"
+            })
+            if (chatHistory.length > logLimit) {
+                while (messageBox.children.length > logLimit) {
+                    messageBox.children[0].remove()
+                }
+            }
+        }
+    })
+
+    messageBox.addEventListener("scroll", (x) => {
+        var scrollPosition = x.target.scrollTop;
+        var total = messageBox.scrollHeight
+        var scale = messageBox.clientHeight
+
+        if (scrollPosition >= total - scale * 1.2) {
+            caughtUp = true;
+        } else caughtUp = false;
+
+
+    })
+
+    //Remember User
+    window.setUser = function (name, color, bg) {
+        if (name.value.includes(",")) {
+            return
+        }
+        var expires = new Date(Date.now() + 72 * 60 * 60 * 1000);
+
+        document.cookie = name.value + ", " + color.value + ", " + bg.checked + "; expires=" + expires;
+
+        onDisconnect(messageLogAddress).cancel()
+        onDisconnect(push(messageLogAddress)).set({
+            Author: document.getElementById("Author").value,
+            Color: userColor,
+            Message: "has wandered off. :c",
+            Entrance: "Exit",
+            Timestamp: new Date().toUTCString()
+        })
+    }
+
+    //Count online users
+    onValue(ref(db, users + "/Count"), (x) => {
+        var userCount = document.getElementById("UserCount");
+        var pluralize = document.getElementById("userPluralization");
+
+        userCount.innerText = x.val()
+        if (x.val() == "1") {
+            pluralize.innerText = ""
+        } else pluralize.innerText = "s"
+    })
+</script>
+
+<style>
+    .message {
+        white-space: pre-wrap;
+    }
+</style>
