@@ -68,22 +68,35 @@ blockquote{
     padding:1em 1.5em 4em 1.5em;
     height:75%;
     width:95%;
-    overflow:auto;
+    overflow-y:auto;
+    overflow-x:clip;
 }
 /*Message Block*/
 .message, 
 #Author, 
 .Entrance, 
 .QuoteBlock{
-    padding:.4em;
-    width:fit-content;   
+    padding:.4em 1em .3em 1.5em;
+    width:fit-content;
+    background:#124152a1;
     box-shadow:
-    0em 0em 0em .1em white;
+    0em 0em 0em .2em black,
+    inset -.1em .2em .5em 0em #a7ffef,
+    inset .3em -.3em 1em .4em #072147,
+    inset 2em -1em 3em 0em #64bbb4;
+    
+
+    backdrop-filter:
+        contrast(300%)
+        blur(5px);
+
+    text-shadow:-.05em .05em .3em black;
 }
 .message{
     word-wrap:break-word;
     max-width:100%;
     margin-left:3em;
+
     animation:Enter .2s ease-out;
 }
 .QuoteBlock{
