@@ -1,9 +1,8 @@
 :root {
     color-scheme: dark;
     font-family:"Zen Old Mincho";
-    line-height:min(1.55rem, 3.5vw);
     font-weight:400;
-    font-size:min(.7rem, 2.5vw);
+    font-size:min(.8rem, 2.5vw);
 
     --AuthorColor: white;
 }
@@ -197,8 +196,12 @@ box-shadow:
     transform:translatey(.6em);
 }
 .spoilerPrimer{
-    background:#000000a3;
+    background:#00000047;
     padding:0em .3em 0em .3em;
+
+    transition:
+        background .5s ease-out,
+        color .5s ease-out;
 }
 .spoiler{
     background:#111111;

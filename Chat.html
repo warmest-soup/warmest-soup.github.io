@@ -157,32 +157,6 @@
     var playAlerts = false;
     var alertSound = new Audio("https://warmest-soup.github.io/Assets/Audio/ButtonClick.mp3");
 
-    //Users Online---------------------------------------!!!
-    onValue(ref(db, ".info/connected"), (x) => {
-        if (x.val()) {
-            set(ref(db, users + "/Count"), increment(1));
-        }
-        playAlerts = true;
-    })
-    onDisconnect(ref(db, users + "/Count")).set(increment(-1))
-    onDisconnect(push(messageLogAddress)).set({
-        Author: document.getElementById("Author").value,
-        Color: userColor,
-        Message: "has wandered off. :c",
-        Entrance: "Exit",
-        Timestamp: new Date().toUTCString()
-    })
-    //Entrance Message
-    setTimeout(() => {
-        push(messageLogAddress, {
-            Author: document.getElementById("Author").value,
-            Color: userColor,
-            Message: "has appeared! :D",
-            Entrance: "Arrival",
-            Timestamp: new Date().toUTCString()
-        })
-    }, 500)
-
     //Send Message.--------------------------------------!!!
     window.send = function (draft, author, color) {
         //Prevent raw enter key from line breaking
@@ -423,6 +397,33 @@
             pluralize.innerText = ""
         } else pluralize.innerText = "s"
     })
+    
+    //Users Online---------------------------------------!!!
+    onValue(ref(db, ".info/connected"), (x) => {
+        if (x.val()) {
+            set(ref(db, users + "/Count"), increment(1));
+        } else set(ref(db, users + "/Count"), increment(-1));
+        playAlerts = true;
+    })
+    /*onDisconnect(ref(db, users + "/Count")).set(increment(-1))
+    onDisconnect(push(messageLogAddress)).set({
+        Author: document.getElementById("Author").value,
+        Color: userColor,
+        Message: "has wandered off. :c",
+        Entrance: "Exit",
+        Timestamp: new Date().toUTCString()
+    })
+    //Entrance Message
+    setTimeout(() => {
+        push(messageLogAddress, {
+            Author: document.getElementById("Author").value,
+            Color: userColor,
+            Message: "has appeared! :D",
+            Entrance: "Arrival",
+            Timestamp: new Date().toUTCString()
+        })
+    }, 500)
+    */
 </script>
 
 <style>
