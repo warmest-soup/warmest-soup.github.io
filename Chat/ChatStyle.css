@@ -153,6 +153,17 @@ blockquote {
     margin-left: 3em;
 
     animation: Enter .2s ease-out;
+    animation-delay:-.5s;
+
+    box-shadow:
+        0em 0em 0em .2em black,
+        inset .3em -.3em 1em .4em #190021,
+        inset -.1em .2em .5em 0em #d3ffef,
+        inset 2em -1em 3em 0em #4da3c5;
+    transition:
+        background 2s cubic-bezier(0, 0, 0.2, 1),
+        box-shadow 2s cubic-bezier(0, 0, 0.2, 1),
+        filter 2s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .QuoteBlock {
@@ -294,6 +305,7 @@ blockquote {
         inset 2em -1em 3em 0em #64bbb4;
 
     animation: hilit 3s infinite;
+    
 
 }
 
