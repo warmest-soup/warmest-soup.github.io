@@ -312,6 +312,7 @@ blockquote {
     background: #1e5b7f82;
     width: 5.5em;
     height: 4.5em;
+    border-radius: 3em;
 
 
     text-shadow:
@@ -327,7 +328,8 @@ blockquote {
 
 }
 
-#LineBreak, #SendButton {
+#LineBreak,
+#SendButton {
     box-shadow:
         0em 0em 0em .1em black,
         inset .1em -.1em .7em .2em #081a3c,
@@ -338,7 +340,8 @@ blockquote {
     transition: box-shadow 1s ease-out;
 }
 
-#LineBreak:active, #SendButton:active {
+#LineBreak:active,
+#SendButton:active {
     box-shadow:
         0em 0em 0em .1em black,
         inset -.1em .1em .7em .2em #081a3c,
