@@ -29,6 +29,31 @@ input{
     text-align:center;
     padding:.1em;
 }
+input[type="checkbox"] {
+  background-color: #ffffff00;
+  -moz-appeareance: none;
+  -webkit-appearance:none;
+  width: 1em;
+  height: 1em;
+    
+  box-Shadow: 
+      0em 0em 0em .1em #00c9ff,
+      0em 0em 1em 0em #00c9ff,
+      inset 0em 0em .5em 0em #0056c9;
+  border-radius: 0.4em;
+
+    transition:
+        box-shadow .5s ease-out,
+        transform .2s ease-out;
+}
+input[type="checkbox"]:checked {
+  box-Shadow: 
+      0em 0em 1em .1em #ffffff,
+      0em 0em 2em 1em #0093ff,
+      inset 0em 0em 0em 1em #ffffff;
+
+    transform:scale(.5);
+}
 img{
     border-radius:1.5em;
     box-shadow:

@@ -41,21 +41,16 @@
 
 <!--Page Functions-->
 <script>
+    //Prime Declarations
     var messageBox = document.getElementById("messageBox");
-    //Meow, scroll position listener
     var caughtUp = true;
-    messageBox.addEventListener("scroll", (x) => {
-        var scrollPosition = x.target.scrollTop;
-        var total = messageBox.scrollHeight
-        var scale = messageBox.clientHeight
+    var capturedBG = false;
+    //Collect Users.
+    var rawUserNames = document.getElementsByClassName("pastAuthor");
+    //compile Replies for later
+    var replyTargets = document.getElementsByClassName("reply2this");
 
-        if (scrollPosition >= total - scale * 1.2) {
-            caughtUp = true;
-        } else caughtUp = false;
-
-
-    })
-
+    //Functions
     //Set color demo.
     var userColor;
     function setColor(color) {
@@ -68,17 +63,25 @@
     function loadUser() {
         var author = document.getElementById("Author")
         var color = document.getElementById("Color")
-        var bg = document.getElementById("CaptureBg")
+        var bgLock = document.getElementById("CaptureBg")
 
         if (document.cookie) {
             var settings = document.cookie.split(", ");
             author.value = settings[0];
             color.value = settings[1];
-            bg.checked = settings[2];
+
+            if (settings[2] == "true") {
+                bgLock.checked = true;
+            } else bgLock.checked = false;
+
+
+            capturedBG = parseInt(settings[3]);
+
+
         } else {
             author.value = "Anonymous";
             color.value = "skyblue";
-            bg.checked = false;
+            bgLock.checked === false;
         }
 
         setColor(color);
@@ -88,37 +91,91 @@
         target.classList.toggle("reply2this")
         document.getElementById("DraftBox").focus()
     }
-    //compile Replies for later
-    var replyTargets = document.getElementsByClassName("reply2this");
 
-    //Collect Users.
-    var rawUserNames = document.getElementsByClassName("pastAuthor");
-
-    //Initialize
-    loadUser()
-
-    //Give berth
+    //Give Space when jumping
     function giveBerth() {
-        var hilights = Array.from(document.getElementsByClassName("Highlight"));
-        hilights.forEach((x) => x.classList.remove("Highlight"));
+        var hilights = document.getElementsByClassName("Highlight");
+        Array.from(hilights).forEach((x) => x.classList.remove("Highlight"));
 
-        
-        
         messageBox.scrollBy({
             top: -messageBox.clientHeight * .2,
-            behavior: "smooth"
         });
-        
-        console.log(window.location.hash.substring(1))
+
         document.getElementById(window.location.hash.substring(1)).classList.add("Highlight");
+
+        setTimeout(() => {
+            Array.from(hilights).forEach((x) => x.classList.remove("Highlight"));
+        }, 1000)
+
     };
 
+    //Jump to bottom
+    function toBottom() {
+        messageBox.scrollTo({
+            top: messageBox.scrollHeight,
+        })
+    }
 
-    
+    //MarkDown
+    function markDown(textContainer, imgScale) {
+        if (textContainer.innerText.match(/([^\|\s>]+)\|([^\|]*)\|/g)) {
+
+            textContainer.innerHTML = textContainer.innerHTML.replace(/([^\|\s]+)\|([^\|]*)\|/g, (match, key, content) => {
+                var markDown = ""
+                var tagType = "span"
+                var textDeco = "";
+                var spClass = ""
+                var spoiler = ""
+
+                if (key.toLowerCase().includes("img")) {
+
+                    return "<br><img src='" + content + "' width=" + imgScale + "%><br>"
+
+                }
+
+                if (key.toLowerCase().includes("b")) {
+                    markDown += "text-shadow:0em 0em .1em white,0em 0em .1em white,0em 0em .1em white,0em 0em .1em white,0em 0em .1em white;"
+                }
+                if (key.toLowerCase().includes("i")) {
+                    markDown += "font-style:italic;"
+                }
+                if (key.toLowerCase().includes("s")) {
+                    markDown += "font-size:.7em;"
+                }
+                if (key.toLowerCase().includes("l")) {
+                    markDown += "font-size:1.4em;"
+                }
+                if (key.toLowerCase().includes("_")) {
+                    textDeco += "underline "
+                }
+                if (key.toLowerCase().includes("-")) {
+                    textDeco += "line-through "
+                }
+                if (key.toLowerCase().includes("m")) {
+                    tagType = "marquee"
+                }
+                if (key.toLowerCase().includes("q")) {
+                    tagType = "blockquote"
+                }
+                if (key.toLowerCase().includes("h")) {
+                    spClass += "spoiler spoilerPrimer"
+                    spoiler = 'onclick="event.stopPropagation();this.classList.toggle(\'spoiler\')"';
+
+                }
+
+                return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='" + spClass + "'>" + content + "</" + tagType + ">"
+
+            })
+        }
+    }
+
+    //Event Listeners
     window.addEventListener('hashchange', function () {
         giveBerth();
     })
 
+    //Initialize
+    loadUser()
 
 </script>
 <!--Server Functions-->
@@ -186,10 +243,7 @@
         draft.value = "";
 
         //Jump to bottom!
-        messageBox.scrollTo({
-            top: messageBox.scrollHeight,
-            behavior: "smooth"
-        });
+        toBottom();
 
     }
 
@@ -244,8 +298,9 @@
 
             var newText = document.createElement("div")
             newText.appendChild(document.createTextNode(spacer + x.val().Message));
-
             newMessage.appendChild(newText)
+
+
             newMessage.insertAdjacentHTML("beforeend", "<div class='TimeStamp'>" + x.val().Timestamp + "</div>")
 
             //Add message to history.
@@ -262,10 +317,17 @@
 
                     get(ref(db, "Chatroom/MessageLog/" + targetId)).then((y) => {
                         var quote = y.val();
+                        //Cite message
                         x.innerText = quote.Message
+                        markDown(x, 20)
+
+
+                        //Cite Auther
                         x.insertAdjacentHTML("beforeEnd",
-                            "<div style='color:"+quote.Color+";'>- "+quote.Author+"</div>"
+                            "<div style='color:" + quote.Color + ";'>- " + quote.Author + "</div>"
                         )
+
+                        toBottom();
                     })
                 })
             } else messageBox.appendChild(newMessage);
@@ -273,55 +335,8 @@
 
             //formatting-----------------------------!!!
             //Markdown
-            if (newMessage.innerText.match(/([^\|\s]+)\|([^\|]*)\|/g)) {
+            markDown(newMessage, 70);
 
-                newMessage.innerHTML = newMessage.innerHTML.replace(/([^\|\s]+)\|([^\|]*)\|/g, (match, key, content) => {
-                    var markDown = ""
-                    var tagType = "span"
-                    var textDeco = "";
-                    var spClass = ""
-                    var spoiler = ""
-
-                    if (key.includes("img")) {
-
-                        return "<img src='" + content + "' width=70%>"
-
-                    }
-
-                    if (key.includes("b")) {
-                        markDown += "text-shadow:0em 0em .1em white,0em 0em .1em white,0em 0em .1em white,0em 0em .1em white,0em 0em .1em white;"
-                    }
-                    if (key.includes("i")) {
-                        markDown += "font-style:italic;"
-                    }
-                    if (key.includes("s")) {
-                        markDown += "font-size:.7em;"
-                    }
-                    if (key.includes("l")) {
-                        markDown += "font-size:1.4em;"
-                    }
-                    if (key.includes("_")) {
-                        textDeco += "underline "
-                    }
-                    if (key.includes("-")) {
-                        textDeco += "line-through "
-                    }
-                    if (key.includes("m")) {
-                        tagType = "marquee"
-                    }
-                    if (key.includes("q")) {
-                        tagType = "blockquote"
-                    }
-                    if (key.includes("h")) {
-                        spClass += "spoiler spoilerPrimer"
-                        spoiler = 'onclick="event.stopPropagation();this.classList.toggle(\'spoiler\')"';
-
-                    }
-
-                    return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='" + spClass + "'>" + content + "</" + tagType + ">"
-
-                })
-            }
 
             //@ Users-------------------------------!!!
             var messageContent = newMessage.children[1].innerHTML;
@@ -344,10 +359,7 @@
         }
         //Remove oldest message.
         if (caughtUp) {
-            messageBox.scrollTo({
-                top: messageBox.scrollHeight,
-                behavior: "smooth"
-            })
+            toBottom();
             if (chatHistory.length > logLimit) {
                 while (messageBox.children.length > logLimit) {
                     messageBox.children[0].remove()
@@ -361,7 +373,7 @@
         var total = messageBox.scrollHeight
         var scale = messageBox.clientHeight
 
-        if (scrollPosition >= total - scale * 1.2) {
+        if (scrollPosition >= total - scale * 1.5) {
             caughtUp = true;
         } else caughtUp = false;
 
@@ -369,13 +381,23 @@
     })
 
     //Remember User
-    window.setUser = function (name, color, bg) {
+    window.setUser = function (name, color, bgLock) {
         if (name.value.includes(",")) {
             return
         }
         var expires = new Date(Date.now() + 72 * 60 * 60 * 1000);
 
-        document.cookie = name.value + ", " + color.value + ", " + bg.checked + "; expires=" + expires;
+        var background = window.getComputedStyle(messageBox).
+            getPropertyValue("background-image");
+        var currentBG = parseInt(background.slice(62, -6))
+
+        if (bgLock.checked) {
+            capturedBG = currentBG
+        } else if (!bgLock.checked) {
+            capturedBG = false;
+        }
+        document.cookie = name.value + ", " + color.value + ", " + bgLock.checked + ", " + capturedBG + "; expires=" + expires;
+
 
         onDisconnect(messageLogAddress).cancel()
         onDisconnect(push(messageLogAddress)).set({
@@ -397,23 +419,23 @@
             pluralize.innerText = ""
         } else pluralize.innerText = "s"
     })
-    
+
     //Users Online---------------------------------------!!!
     onValue(ref(db, ".info/connected"), (x) => {
         if (x.val()) {
             set(ref(db, users + "/Count"), increment(1));
-        } else set(ref(db, users + "/Count"), increment(-1));
+        } //else set(ref(db, users + "/Count"), increment(-1));
         playAlerts = true;
     })
-    /*onDisconnect(ref(db, users + "/Count")).set(increment(-1))
-    onDisconnect(push(messageLogAddress)).set({
+    onDisconnect(ref(db, users + "/Count")).set(increment(-1))
+    /*onDisconnect(push(messageLogAddress)).set({
         Author: document.getElementById("Author").value,
         Color: userColor,
         Message: "has wandered off. :c",
         Entrance: "Exit",
         Timestamp: new Date().toUTCString()
     })
-    //Entrance Message
+    /*Entrance Message
     setTimeout(() => {
         push(messageLogAddress, {
             Author: document.getElementById("Author").value,
@@ -433,11 +455,17 @@
 </style>
 <script>
     var bgOptions = 20.2;
-
     var url = "https://warmest-soup.github.io/Assets/Images/ChatroomBGs/";
 
-    var randBG = url + Math.round(Math.random() * bgOptions);
+    bgNumber = Math.round(Math.random() * bgOptions);
 
+    if (capturedBG) {
+        bgNumber = capturedBG;
+    }
+
+    var randBG = url + bgNumber;
     document.getElementById("messageBox").style.backgroundImage = "url('" + randBG + ".gif')";
+
+
 
 </script>
