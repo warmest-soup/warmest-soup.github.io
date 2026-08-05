@@ -34,8 +34,14 @@
                 setInterval(() => document.getElementById("Clock").textContent = new Date().toUTCString(), 1000)
             </script>
         </div>
-        <TextArea id="DraftBox" placeHolder="Enter Message..." prewrap="wrap"
-            onKeyDown="if(!event.shiftKey && event.key=='Enter'){send(this,Author,Color)}"></TextArea>
+        <div id="editor">
+            <TextArea id="DraftBox" placeHolder="Enter Message..." prewrap="wrap"
+                onKeyDown="if(!event.shiftKey && event.key=='Enter'){send(this,Author,Color)}"></TextArea>
+            <div id="mobileButtons">
+                <button id="SendButton" onclick="send(DraftBox,Author,Color)">Send!</button>
+                <button id="LineBreak" onClick="newLine()">Line<br>Break</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -169,6 +175,22 @@
         }
     }
 
+    //LineBreak Button
+    function newLine() {
+        var text = document.getElementById("DraftBox");
+        text.focus();
+
+        var cursor = text.selectionStart;
+        var endString = text.value.slice(cursor)
+        
+        text.value = text.value.substring(0, cursor) + "\n" + endString;
+        text.selectionStart=cursor+1;
+        text.selectionEnd=cursor+1;
+        
+        console.log(text.value)
+
+    }
+
     //Event Listeners
     window.addEventListener('hashchange', function () {
         giveBerth();
@@ -189,6 +211,7 @@
         query,
         limitToLast,
         onChildAdded,
+        onChildRemoved,
         onDisconnect,
         ref,
         get,
@@ -218,7 +241,19 @@
     window.send = function (draft, author, color) {
         //Prevent raw enter key from line breaking
         event.preventDefault();
+        draft.focus()
 
+        if (!draft.value) {
+            return
+        }
+        if (!author.value) {
+            author.value = "Anonymous"
+            return
+        }
+        if (!color.value) {
+            color.value = "skyblue"
+            return
+        }
         //format replies
         var replyCodes = "";
         if (replyTargets.length > 0) {
