@@ -27,6 +27,9 @@
 
                 <input type="checkbox" id="CaptureBg" onchange="setUser(Author, Color, this)" />
 
+                <input id="StylePreset" placeHolder="Style" />
+                <button id="StyleButton" onclick="addBar()">Bar</button>
+
             </div>
 
             <div id="Clock"></div>
@@ -175,6 +178,7 @@
         }
     }
 
+
     //LineBreak Button
     function newLine() {
         var text = document.getElementById("DraftBox");
@@ -182,12 +186,35 @@
 
         var cursor = text.selectionStart;
         var endString = text.value.slice(cursor)
-        
+
         text.value = text.value.substring(0, cursor) + "\n" + endString;
-        text.selectionStart=cursor+1;
-        text.selectionEnd=cursor+1;
-        
-        console.log(text.value)
+        text.selectionStart = cursor + 1;
+        text.selectionEnd = cursor + 1;
+
+    }
+
+    //add bar button
+    function addBar() {
+        var editor = document.getElementById("DraftBox")
+        var preset = document.getElementById("StylePreset")
+        var text = editor.value
+
+        editor.focus();
+
+        var start = editor.selectionStart;
+        var end = editor.selectionEnd;
+        var selection = editor.value.substring(start, end);
+        var endString = text.slice(end)
+
+        if (selection) {
+            editor.value = text.substring(0, start) + preset.value + "|" + selection + "|" + endString;
+        } else {
+            editor.value = text.substring(0, start) + "|" + endString;
+
+            text.selectionStart = cursor + 1;
+            text.selectionEnd = cursor + 1;
+        }
+
 
     }
 
@@ -195,6 +222,7 @@
     window.addEventListener('hashchange', function () {
         giveBerth();
     })
+
 
     //Initialize
     loadUser()
@@ -211,7 +239,6 @@
         query,
         limitToLast,
         onChildAdded,
-        onChildRemoved,
         onDisconnect,
         ref,
         get,
@@ -234,6 +261,7 @@
     var newId;
 
     var users = "Chatroom/Users";
+    var showNotifs = false;
     var playAlerts = false;
     var alertSound = new Audio("https://warmest-soup.github.io/Assets/Audio/ButtonClick.mp3");
 
@@ -403,18 +431,6 @@
         }
     })
 
-    messageBox.addEventListener("scroll", (x) => {
-        var scrollPosition = x.target.scrollTop;
-        var total = messageBox.scrollHeight
-        var scale = messageBox.clientHeight
-
-        if (scrollPosition >= total - scale * 1.5) {
-            caughtUp = true;
-        } else caughtUp = false;
-
-
-    })
-
     //Remember User
     window.setUser = function (name, color, bgLock) {
         if (name.value.includes(",")) {
@@ -444,6 +460,67 @@
         })
     }
 
+    //Module event listeners
+    messageBox.addEventListener("scroll", (x) => {
+        var scrollPosition = x.target.scrollTop;
+        var total = messageBox.scrollHeight
+        var scale = messageBox.clientHeight
+
+        if (scrollPosition >= total - scale * 1.5) {
+            caughtUp = true;
+        } else caughtUp = false;
+
+
+    })
+
+    // Turn off entry messages.
+    document.addEventListener("visibilitychange", () => {
+        //When page is hidden.
+        if (document.hidden) {
+            set(ref(db, users + "/Count"), increment(-1))
+
+            push(messageLogAddress, {
+                Author: document.getElementById("Author").value,
+                Color: userColor,
+                Message: "has wandered off. :c",
+                Entrance: "Exit",
+                Timestamp: new Date().toUTCString()
+            })
+
+            //Desktop Notifications
+            showNotifs = true;
+
+            //When page is Visible.
+        } else if (!document.hidden) {
+            set(ref(db, users + "/Count"), increment(1))
+
+            push(messageLogAddress, {
+                Author: document.getElementById("Author").value,
+                Color: userColor,
+                Message: "has appeared! :D",
+                Entrance: "Arrival",
+                Timestamp: new Date().toUTCString()
+            })
+
+
+            //Desktop Notifications
+            showNotifs = false;
+        }
+
+    });
+    //Prime Arival Message.
+    setTimeout(() => {
+        set(ref(db, users + "/Count"), increment(1))
+        push(messageLogAddress, {
+            Author: document.getElementById("Author").value,
+            Color: userColor,
+            Message: "Penis penis penis",
+            Entrance: "Arrival",
+            Timestamp: new Date().toUTCString()
+        })
+    }, 1000)
+
+
     //Count online users
     onValue(ref(db, users + "/Count"), (x) => {
         var userCount = document.getElementById("UserCount");
@@ -455,32 +532,6 @@
         } else pluralize.innerText = "s"
     })
 
-    //Users Online---------------------------------------!!!
-    onValue(ref(db, ".info/connected"), (x) => {
-        if (x.val()) {
-            set(ref(db, users + "/Count"), increment(1));
-        } //else set(ref(db, users + "/Count"), increment(-1));
-        playAlerts = true;
-    })
-    onDisconnect(ref(db, users + "/Count")).set(increment(-1))
-    /*onDisconnect(push(messageLogAddress)).set({
-        Author: document.getElementById("Author").value,
-        Color: userColor,
-        Message: "has wandered off. :c",
-        Entrance: "Exit",
-        Timestamp: new Date().toUTCString()
-    })
-    /*Entrance Message
-    setTimeout(() => {
-        push(messageLogAddress, {
-            Author: document.getElementById("Author").value,
-            Color: userColor,
-            Message: "has appeared! :D",
-            Entrance: "Arrival",
-            Timestamp: new Date().toUTCString()
-        })
-    }, 500)
-    */
 </script>
 
 <style>

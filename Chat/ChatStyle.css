@@ -320,7 +320,7 @@ blockquote {
     justify-content: space-around;
 }
 
-#MobileButtons>* {
+#MobileButtons>* , #StyleButton{
     background: #1e5b7f82;
     width: 5.5em;
     height: 4.5em;
@@ -341,7 +341,8 @@ blockquote {
 }
 
 #LineBreak,
-#SendButton {
+#SendButton,
+#StyleButton{
     box-shadow:
         0em 0em 0em .1em black,
         inset .1em -.1em .7em .2em #081a3c,
@@ -349,11 +350,14 @@ blockquote {
         inset 3em -3em 1em -2em #ffbbf569,
         inset -3em 3em 1em -2em #ffffff47;
 
-    transition: box-shadow 1s ease-out;
+    transition: 
+        box-shadow .5s ease-out,
+        transform .05s ease-out;
 }
 
 #LineBreak:active,
-#SendButton:active {
+#SendButton:active,
+#StyleButton:active {
     box-shadow:
         0em 0em 0em .1em black,
         inset -.1em .1em .7em .2em #081a3c,
@@ -361,7 +365,13 @@ blockquote {
         inset -3em 3em 1em -2em #ffbbf569,
         inset 3em -3em 1em -2em #ffffff47;
 
+    transform:scale(1.2);
 
+
+}
+#StyleButton{
+    font-size:;
+    height:3em;
 }
 
 @keyframes hilit {
