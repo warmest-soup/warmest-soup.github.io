@@ -5,7 +5,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Linefont:wdth,wght@83.6,127&family=Marck+Script&family=Nanum+Pen+Script&family=Rock+Salt&family=Trade+Winds&family=Zen+Old+Mincho:wght@400;500;700;900&display=swap" rel="stylesheet">
 
 <link href="./Chat/ChatStyle.css" rel="stylesheet">
 </link>
@@ -20,15 +20,20 @@
     <div id="UserInput">
         <div id="Dashboard">
             <div id="AuthorInfo">
-                Author: <input id="Author" placeholder="Anonymous" onchange="setUser(this, Color, CaptureBg)"></input>
+                <div id="Nametag">
+                    Author: <input id="Author" placeholder="Anonymous" onchange="setUser()"
+                        onclick="this.select()"></input>
 
-                <input id="Color" placeholder="Color" onInput="setColor(this)"
-                    onchange="setUser(Author, this, CaptureBg)"></input>
+                    <input id="Color" placeholder="Color" onInput="setColor(this)" onchange="setUser()"
+                        onclick="this.select()"></input>
 
-                <input type="checkbox" id="CaptureBg" onchange="setUser(Author, Color, this)" />
+                    <input type="checkbox" id="CaptureBg" onchange="setUser()" />
+                </div>
 
-                <input id="StylePreset" placeHolder="Style" />
-                <button id="StyleButton" onclick="addBar()">Bar</button>
+                <div id="styleButtons">
+                    <input id="StylePreset" placeHolder="Style" onclick="this.select()" />
+                    <button id="StyleButton" onclick="addBar()">Bar</button>
+                </div>
 
             </div>
 
@@ -39,7 +44,7 @@
         </div>
         <div id="editor">
             <TextArea id="DraftBox" placeHolder="Enter Message..." prewrap="wrap"
-                onKeyDown="if(!event.shiftKey && event.key=='Enter'){send(this,Author,Color)}"></TextArea>
+                onKeyDown="if(!event.shiftKey && event.key=='Enter'){send(this,Author,Color)}; if(event.key=='|'){event.preventDefault(); addBar()}"></TextArea>
             <div id="mobileButtons">
                 <button id="SendButton" onclick="send(DraftBox,Author,Color)">Send!</button>
                 <button id="LineBreak" onClick="newLine()">Line<br>Break</button>
@@ -58,6 +63,8 @@
     var rawUserNames = document.getElementsByClassName("pastAuthor");
     //compile Replies for later
     var replyTargets = document.getElementsByClassName("reply2this");
+    var onlineStatus;
+
 
     //Functions
     //Set color demo.
@@ -76,6 +83,10 @@
 
         if (document.cookie) {
             var settings = document.cookie.split(", ");
+
+            onlineStatus = document.cookie.split(";")[1]
+
+
             author.value = settings[0];
             color.value = settings[1];
 
@@ -143,7 +154,7 @@
                 }
 
                 if (key.toLowerCase().includes("b")) {
-                    markDown += "text-shadow:0em 0em .1em white,0em 0em .1em white,0em 0em .1em white,0em 0em .1em white,0em 0em .1em white;"
+                    markDown += "text-shadow:0em 0em .1em white,0em 0em .1em white,0em 0em .1em white;"
                 }
                 if (key.toLowerCase().includes("i")) {
                     markDown += "font-style:italic;"
@@ -169,16 +180,44 @@
                 if (key.toLowerCase().includes("h")) {
                     spClass += "spoiler spoilerPrimer"
                     spoiler = 'onclick="event.stopPropagation();this.classList.toggle(\'spoiler\')"';
-
                 }
+                //Fonts
+                if (key.toLowerCase().includes("~")) {
+                    markDown += "font-family: Marck Script;"
+                }
+                //Rock Salt is awesome
+                if (key.toLowerCase().includes("!")) {
+                    markDown += "font-family: Trade Winds;"
+                }
+                if (key.toLowerCase().includes("/")) {
+                    markDown += "font-family: Nanum Pen Script;"
+                }
+                if (key.toLowerCase().includes("\\")) {
+                    markDown += "font-family: rock salt;"
+                }
+                if (key.toLowerCase().includes("w")) {
+                    markDown += "font-family: linefont;"
+                }
+                if (key.toLowerCase().includes("j")) {
+                    markDown += "font-family: Dela Gothic One;"
+                }
+                
 
                 return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='" + spClass + "'>" + content + "</" + tagType + ">"
 
             })
         }
     }
-
-
+    
+    //Stickers
+    function addSticker(textContainer){
+        if (textContainer.innerText.match(/:(\w+):/g)) {
+            textContainer.innerHTML = textContainer.innerHTML.replace(/:(\w+):/g, (match, sticker) =>{
+                return "<img class='sticker' src=''>"
+            })
+        }
+    }
+    
     //LineBreak Button
     function newLine() {
         var text = document.getElementById("DraftBox");
@@ -322,7 +361,7 @@
         if (x.val().Entrance) {
             if (x.val().Entrance == "Arrival") {
                 newMessage.classList.add("Entrance");
-                newMessage.innerHTML = "<span style=color:" + x.val().Color + ";>" + x.val().Author + "</span> has Apeared! :D";
+                newMessage.innerHTML = "<span style=color:" + x.val().Color + ";>" + x.val().Author + "</span> has apeared! :D";
 
                 messageBox.appendChild(newMessage)
             } else if (x.val().Entrance == "Exit") {
@@ -383,7 +422,7 @@
                         //Cite message
                         x.innerText = quote.Message
                         markDown(x, 20)
-
+                        addSticker(x)
 
                         //Cite Auther
                         x.insertAdjacentHTML("beforeEnd",
@@ -399,6 +438,7 @@
             //formatting-----------------------------!!!
             //Markdown
             markDown(newMessage, 70);
+            addSticker(newMessage)
 
 
             //@ Users-------------------------------!!!
@@ -432,7 +472,11 @@
     })
 
     //Remember User
-    window.setUser = function (name, color, bgLock) {
+    window.setUser = function () {
+        var name = document.getElementById("Author");
+        var color = document.getElementById("Color");
+        var bgLock = document.getElementById("CaptureBg");
+
         if (name.value.includes(",")) {
             return
         }
@@ -447,17 +491,11 @@
         } else if (!bgLock.checked) {
             capturedBG = false;
         }
-        document.cookie = name.value + ", " + color.value + ", " + bgLock.checked + ", " + capturedBG + "; expires=" + expires;
 
 
-        onDisconnect(messageLogAddress).cancel()
-        onDisconnect(push(messageLogAddress)).set({
-            Author: document.getElementById("Author").value,
-            Color: userColor,
-            Message: "has wandered off. :c",
-            Entrance: "Exit",
-            Timestamp: new Date().toUTCString()
-        })
+        document.cookie = name.value + ", " + color.value + ", " + bgLock.checked + ", " + capturedBG + ";" + onlineStatus + ";" + "expires=" + expires;
+
+
     }
 
     //Module event listeners
@@ -473,16 +511,19 @@
 
     })
 
+
     // Turn off entry messages.
     document.addEventListener("visibilitychange", () => {
         //When page is hidden.
-        if (document.hidden) {
+
+        if (document.hidden && onlineStatus) {
             set(ref(db, users + "/Count"), increment(-1))
 
+            onlineStatus = false
+            setUser();
             push(messageLogAddress, {
                 Author: document.getElementById("Author").value,
                 Color: userColor,
-                Message: "has wandered off. :c",
                 Entrance: "Exit",
                 Timestamp: new Date().toUTCString()
             })
@@ -491,13 +532,16 @@
             showNotifs = true;
 
             //When page is Visible.
-        } else if (!document.hidden) {
+
+        } else if (!document.hidden && !onlineStatus) {
             set(ref(db, users + "/Count"), increment(1))
+
+            onlineStatus = true
+            setUser();
 
             push(messageLogAddress, {
                 Author: document.getElementById("Author").value,
                 Color: userColor,
-                Message: "has appeared! :D",
                 Entrance: "Arrival",
                 Timestamp: new Date().toUTCString()
             })
@@ -508,8 +552,11 @@
         }
 
     });
+
     //Prime Arival Message.
     setTimeout(() => {
+        onlineStatus = true;
+        setUser();
         set(ref(db, users + "/Count"), increment(1))
         push(messageLogAddress, {
             Author: document.getElementById("Author").value,

@@ -36,6 +36,10 @@ input {
     text-align: center;
     padding: .1em;
 }
+input::placeholder,
+textarea::placeholder{
+    color:#698bed;
+}
 
 input[type="checkbox"] {
     background-color: #ffffff00;
@@ -152,8 +156,7 @@ blockquote {
     max-width: 100%;
     margin-left: 3em;
 
-    animation: Enter .2s ease-out;
-    animation-delay:-.5s;
+    animation: Enter .3s cubic-bezier(0, 0, 0.2, 1);
 
     box-shadow:
         0em 0em 0em .2em black,
@@ -181,7 +184,7 @@ blockquote {
         inset -.1em .2em .5em 0em #e5feff,
         inset 2em -1em 3em 0em #74d698;
 
-    animation: quoteEnter .2s ease-out;
+    animation: quoteEnter .2s cubic-bezier(0.05, 0.54, 0.28, 0.96);
 }
 
 .quoteblock>a {
@@ -214,9 +217,21 @@ blockquote {
 }
 
 #Dashboard {
+    width:100%;
     align-self: start;
     padding-left: 5%;
     gap: 7%;
+}
+#AuthorInfo{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    width:90%;
+}
+#NameTag{
+    display:flex;
+    gap:1em;
+    align-items:center;
 }
 
 #DraftBox {
@@ -351,8 +366,8 @@ blockquote {
         inset -3em 3em 1em -2em #ffffff47;
 
     transition: 
-        box-shadow .5s ease-out,
-        transform .05s ease-out;
+        box-shadow .1s ease-out,
+        transform .1s ease-out;
 }
 
 #LineBreak:active,
@@ -370,7 +385,6 @@ blockquote {
 
 }
 #StyleButton{
-    font-size:;
     height:3em;
 }
 
@@ -414,9 +428,10 @@ blockquote {
 
     }
 
+    50%{transform: scale(1.1) translatey(1em) translatex(.5em);}
+    
     100% {
-        transform:
-            scale(1) translatey(.7em) translatex(-1em);
+       transform: scale(1) translatey(1.6em) translatex(0em);
 
         background: rgba(81, 138, 95, 0.664);
 
@@ -510,4 +525,15 @@ blockquote {
     box-Shadow: inset 0em 0em 0em .1em darkgray;
     display: none;
     /*Display might be important for when background images appear*/
+}:root {
+    color-scheme: dark;
+    font-family: "Zen Old Mincho";
+    font-weight: 400;
+    font-size: min(.8rem, 2.5vw);
+
+    --AuthorColor: white;
+}
+
+::selection {
+    background: #aa7cb3ad;
 }
