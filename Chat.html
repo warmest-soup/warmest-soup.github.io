@@ -212,8 +212,11 @@
     //Stickers
     function addSticker(textContainer){
         if (textContainer.innerText.match(/:(\w+):/g)) {
-            textContainer.innerHTML = textContainer.innerHTML.replace(/:(\w+):/g, (match, sticker) =>{
-                return "<img class='sticker' src=''>"
+            textContainer.innerHTML = textContainer.innerHTML.replace(/\s:(\w+):/g, (match, sticker) =>{
+                var url= "./Chat/Stickers/" + sticker.toLowerCase()
+                console.log(sticker)
+                console.log(url)
+                return "<img class='sticker' src='"+url+".gif'>"
             })
         }
     }

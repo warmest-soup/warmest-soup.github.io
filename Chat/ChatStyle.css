@@ -324,6 +324,12 @@ blockquote {
 
 }
 
+.sticker{
+    box-shadow:none;
+    height:5em;
+    margin:-2em -.5em -1em -.5em;
+}
+
 #editor {
     display: flex;
     height: 100%;
