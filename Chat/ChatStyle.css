@@ -11,6 +11,38 @@
     background: #aa7cb3ad;
 }
 
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15%;
+    height: 1%;
+    background: white;
+    border-radius: 50%;
+    outline: none;
+    box-Shadow:
+        0em 0em .2em .0em rgb(255 255 255),
+        0em 0em .5em .0em rgb(255 255 255),
+        0em 0em .7em .0em rgb(255 255 255),
+        0em 0em 1em .2em rgb(0 140 255);
+    touch-action: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1em;
+    height: 1em;
+    background: #ffffff;
+    border-radius: 1em;
+    cursor: pointer;
+
+    box-Shadow:
+        0em 0em .2em .0em rgb(255 255 255),
+        0em 0em .5em .0em rgb(255 255 255),
+        0em 0em .7em .0em rgb(255 255 255),
+        0em 0em 1em .2em rgb(0 140 255);
+}
+
 *,
 input {
     margin: 0em;
@@ -36,9 +68,10 @@ input {
     text-align: center;
     padding: .1em;
 }
+
 input::placeholder,
-textarea::placeholder{
-    color:#698bed;
+textarea::placeholder {
+    color: #698bed;
 }
 
 input[type="checkbox"] {
@@ -217,21 +250,23 @@ blockquote {
 }
 
 #Dashboard {
-    width:100%;
+    width: 100%;
     align-self: start;
     padding-left: 5%;
     gap: 7%;
 }
-#AuthorInfo{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    width:90%;
+
+#AuthorInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
 }
-#NameTag{
-    display:flex;
-    gap:1em;
-    align-items:center;
+
+#NameTag {
+    display: flex;
+    gap: 1em;
+    align-items: center;
 }
 
 #DraftBox {
@@ -320,14 +355,14 @@ blockquote {
         inset 2em -1em 3em 0em #64bbb4;
 
     animation: hilit 3s infinite;
-    
+
 
 }
 
-.sticker{
-    box-shadow:none;
-    height:5em;
-    margin:-2em -.5em -1em -.5em;
+.sticker {
+    box-shadow: none;
+    height: 5em;
+    margin: -2em -.5em -1em -.5em;
 }
 
 #editor {
@@ -341,7 +376,8 @@ blockquote {
     justify-content: space-around;
 }
 
-#MobileButtons>* , #StyleButton{
+#MobileButtons>*,
+#StyleButton {
     background: #1e5b7f82;
     width: 5.5em;
     height: 4.5em;
@@ -363,7 +399,7 @@ blockquote {
 
 #LineBreak,
 #SendButton,
-#StyleButton{
+#StyleButton {
     box-shadow:
         0em 0em 0em .1em black,
         inset .1em -.1em .7em .2em #081a3c,
@@ -371,7 +407,7 @@ blockquote {
         inset 3em -3em 1em -2em #ffbbf569,
         inset -3em 3em 1em -2em #ffffff47;
 
-    transition: 
+    transition:
         box-shadow .1s ease-out,
         transform .1s ease-out;
 }
@@ -386,28 +422,28 @@ blockquote {
         inset -3em 3em 1em -2em #ffbbf569,
         inset 3em -3em 1em -2em #ffffff47;
 
-    transform:scale(1.2);
+    transform: scale(1.2);
 
 
 }
-#StyleButton{
-    height:3em;
+
+#StyleButton {
+    height: 3em;
 }
 
-#ToBottom{
-    position:absolute;
+#ToBottom {
+    position: absolute;
     transform:
-        translatex(44vw)
-        translatey(-8vh);
-    
-    background:#2b595300;
-    padding:1vw 3vw 1.5vw 3vw;
-    line-height:1.1em;
-    
-    border-radius:50%;
-    font-size:2vh;
+        translatex(44vw) translatey(-8vh);
 
-    backdrop-filter:blur(1px);
+    background: #2b595300;
+    padding: 1vw 3vw 1.5vw 3vw;
+    line-height: 1.1em;
+
+    border-radius: 50%;
+    font-size: 2vh;
+
+    backdrop-filter: blur(1px);
 
     text-shadow:
         0em 0em .2em white,
@@ -416,7 +452,7 @@ blockquote {
         0em 0em .2em white,
         0em 0em .2em white,
         0em 0em .2em white;
-    
+
     box-shadow:
         0em 0em 0em .1em black,
         inset 0em 0em .4em .1em #000c10,
@@ -463,10 +499,12 @@ blockquote {
 
     }
 
-    50%{transform: scale(1.1) translatey(1em) translatex(.5em);}
-    
+    50% {
+        transform: scale(1.1) translatey(1em) translatex(.5em);
+    }
+
     100% {
-       transform: scale(1) translatey(1.6em) translatex(0em);
+        transform: scale(1) translatey(1.6em) translatex(0em);
 
         background: rgba(81, 138, 95, 0.664);
 
@@ -560,7 +598,9 @@ blockquote {
     box-Shadow: inset 0em 0em 0em .1em darkgray;
     display: none;
     /*Display might be important for when background images appear*/
-}:root {
+}
+
+:root {
     color-scheme: dark;
     font-family: "Zen Old Mincho";
     font-weight: 400;

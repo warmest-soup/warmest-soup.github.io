@@ -35,6 +35,8 @@
                     <input type="checkbox" id="CaptureBg" onchange="setUser()" />
                 </div>
 
+                <input type="range" id="Volume" min="0" max="100" value="50" step="1" oninput="setVolume(this.value)" />
+
                 <div id="styleButtons">
                     <input id="StylePreset" placeHolder="Style" onclick="this.select()" />
                     <button id="StyleButton" onclick="addBar();">Bar</button>
@@ -279,6 +281,13 @@
 
     }
 
+    //Volume
+    function setVolume(volume) {
+        messageNotif.volume = volume / 100;
+        entryNotif.volume = volume / 100;
+        exitNotif.volume = volume / 100;
+    }
+
     //Event Listeners
     window.addEventListener('hashchange', function () {
         giveBerth();
@@ -485,7 +494,6 @@
 
         }
         //Remove oldest message.
-        console.log(caughtUp)
         if (caughtUp) {
             toBottom();
             if (chatHistory.length > logLimit) {
@@ -537,7 +545,7 @@
         var total = messageBox.scrollHeight
         var scale = messageBox.clientHeight
         var jumpButton = document.getElementById("ToBottom");
-        
+
         if (scrollPosition >= total - scale * 1.2) {
             caughtUp = true;
             jumpButton.setAttribute("hidden", true);
