@@ -5,7 +5,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Linefont:wdth,wght@83.6,127&family=Marck+Script&family=Nanum+Pen+Script&family=Rock+Salt&family=Trade+Winds&family=Zen+Old+Mincho:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Linefont:wdth,wght@83.6,127&family=Marck+Script&family=Nanum+Pen+Script&family=Rock+Salt&family=Trade+Winds&family=Zen+Old+Mincho:wght@400;500;700;900&display=swap"
+    rel="stylesheet">
 
 <link href="./Chat/ChatStyle.css" rel="stylesheet">
 </link>
@@ -201,26 +203,24 @@
                 if (key.toLowerCase().includes("j")) {
                     markDown += "font-family: Dela Gothic One;"
                 }
-                
+
 
                 return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='" + spClass + "'>" + content + "</" + tagType + ">"
 
             })
         }
     }
-    
+
     //Stickers
-    function addSticker(textContainer){
+    function addSticker(textContainer) {
         if (textContainer.innerText.match(/:(\w+):/g)) {
-            textContainer.innerHTML = textContainer.innerHTML.replace(/\s:(\w+):/g, (match, sticker) =>{
-                var url= "./Chat/Stickers/" + sticker.toLowerCase()
-                console.log(sticker)
-                console.log(url)
-                return "<img class='sticker' src='"+url+".gif'>"
+            textContainer.innerHTML = textContainer.innerHTML.replace(/\s:(\w+):/g, (match, sticker) => {
+                var url = "./Chat/Stickers/" + sticker.toLowerCase()
+                return "<img class='sticker' src='" + url + ".gif'>"
             })
         }
     }
-    
+
     //LineBreak Button
     function newLine() {
         var text = document.getElementById("DraftBox");
@@ -230,6 +230,7 @@
         var endString = text.value.slice(cursor)
 
         text.value = text.value.substring(0, cursor) + "\n" + endString;
+        
         text.selectionStart = cursor + 1;
         text.selectionEnd = cursor + 1;
 
@@ -247,15 +248,21 @@
         var end = editor.selectionEnd;
         var selection = editor.value.substring(start, end);
         var endString = text.slice(end)
-
+        var cursor = start;
+        
+        
+        
         if (selection) {
+            cursor = end+1+preset.value.length;
+
             editor.value = text.substring(0, start) + preset.value + "|" + selection + "|" + endString;
         } else {
             editor.value = text.substring(0, start) + "|" + endString;
 
-            text.selectionStart = cursor + 1;
-            text.selectionEnd = cursor + 1;
         }
+
+        editor.selectionStart = cursor + 1;
+        editor.selectionEnd = cursor + 1;
 
 
     }
@@ -515,7 +522,7 @@
     })
 
 
-    // Turn off entry messages.
+    /* Turn off entry messages.
     document.addEventListener("visibilitychange", () => {
         //When page is hidden.
 
@@ -569,7 +576,7 @@
             Timestamp: new Date().toUTCString()
         })
     }, 1000)
-
+    */
 
     //Count online users
     onValue(ref(db, users + "/Count"), (x) => {
