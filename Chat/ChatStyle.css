@@ -14,7 +14,7 @@
 input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
-    width: 15%;
+    width: 90%;
     height: 1%;
     background: white;
     border-radius: 50%;
@@ -48,7 +48,6 @@ input {
     margin: 0em;
     padding: 0em;
     box-sizing: border-box;
-
     border: none;
     resize: none;
 }
@@ -262,11 +261,16 @@ blockquote {
     justify-content: space-between;
     width: 90%;
 }
+#AuthorInfo >:nth-child(2){
+    width:15%;
+    text-align:center;
+}
 
 #NameTag {
     display: flex;
-    gap: 1em;
+    gap: .5em;
     align-items: center;
+    justify-content:start;
 }
 
 #DraftBox {
@@ -395,6 +399,10 @@ blockquote {
         brightness(100%) contrast(800%);
 
 
+}
+#styleButtons{
+     width: 5.5em;
+    height: 4.5em;
 }
 
 #LineBreak,

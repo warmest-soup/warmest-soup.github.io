@@ -35,7 +35,10 @@
                     <input type="checkbox" id="CaptureBg" onchange="setUser()" />
                 </div>
 
-                <input type="range" id="Volume" min="0" max="100" value="50" step="1" oninput="setVolume(this.value)" />
+                <div>
+                    <input type="range" id="Volume" min="0" max="100" value="50" step="1"
+                        oninput="setVolume(this.value); setUser()" />
+                </div>
 
                 <div id="styleButtons">
                     <input id="StylePreset" placeHolder="Style" onclick="this.select()" />
@@ -95,7 +98,8 @@
         var author = document.getElementById("Author")
         var color = document.getElementById("Color")
         var bgLock = document.getElementById("CaptureBg")
-
+        var vol = document.getElementById("Volume")
+        console.log(document.cookie)
         if (document.cookie) {
             var settings = document.cookie.split(", ");
 
@@ -111,6 +115,8 @@
 
 
             capturedBG = parseInt(settings[3]);
+
+            vol.value = parseInt(settings[4])
 
 
         } else {
@@ -517,6 +523,7 @@
         var name = document.getElementById("Author");
         var color = document.getElementById("Color");
         var bgLock = document.getElementById("CaptureBg");
+        var vol = document.getElementById("Volume");
 
         if (name.value.includes(",")) {
             return
@@ -534,7 +541,7 @@
         }
 
 
-        document.cookie = name.value + ", " + color.value + ", " + bgLock.checked + ", " + capturedBG + ";" + onlineStatus + ";" + "expires=" + expires;
+        document.cookie = name.value + ", " + color.value + ", " + bgLock.checked + ", " + capturedBG + ", " + vol.value + ";" + onlineStatus + ";" + "expires=" + expires;
 
 
     }
