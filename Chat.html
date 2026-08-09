@@ -17,7 +17,10 @@
 
     <div id="UserDisplay"><span id="UserCount">0</span> user<span id="userPluralization">s</span> online.</div>
 
-    <div id="messageBox"></div>
+    <div id="messageWindow">
+        <div id="messageBox"></div>
+        <button id="ToBottom" onClick="toBottom()">...<br>▽</button>
+    </div>
 
     <div id="UserInput">
         <div id="Dashboard">
@@ -482,6 +485,7 @@
 
         }
         //Remove oldest message.
+        console.log(caughtUp)
         if (caughtUp) {
             toBottom();
             if (chatHistory.length > logLimit) {
@@ -532,16 +536,21 @@
         var scrollPosition = x.target.scrollTop;
         var total = messageBox.scrollHeight
         var scale = messageBox.clientHeight
-
-        if (scrollPosition >= total - scale * 1.5) {
+        var jumpButton = document.getElementById("ToBottom");
+        
+        if (scrollPosition >= total - scale * 1.2) {
             caughtUp = true;
-        } else caughtUp = false;
+            jumpButton.setAttribute("hidden", true);
+        } else {
+            caughtUp = false;
+            jumpButton.removeAttribute("hidden");
+        }
 
 
     })
 
 
-    // Turn off entry messages.
+    /* Turn off entry messages.
     document.addEventListener("visibilitychange", () => {
         //When page is hidden.
 

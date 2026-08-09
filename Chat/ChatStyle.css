@@ -394,6 +394,35 @@ blockquote {
     height:3em;
 }
 
+#ToBottom{
+    position:absolute;
+    transform:
+        translatex(44vw)
+        translatey(-8vh);
+    
+    background:#2b595300;
+    padding:1vw 3vw 1.5vw 3vw;
+    line-height:1.1em;
+    
+    border-radius:50%;
+    font-size:2vh;
+
+    backdrop-filter:blur(1px);
+
+    text-shadow:
+        0em 0em .2em white,
+        0em 0em .2em white,
+        0em 0em .2em white,
+        0em 0em .2em white,
+        0em 0em .2em white,
+        0em 0em .2em white;
+    
+    box-shadow:
+        0em 0em 0em .1em black,
+        inset 0em 0em .4em .1em #000c10,
+        inset 0em 0em .6em .5em #00deff47;
+}
+
 @keyframes hilit {
     50% {
         box-shadow:
