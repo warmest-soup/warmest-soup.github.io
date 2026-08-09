@@ -34,7 +34,7 @@
 
                 <div id="styleButtons">
                     <input id="StylePreset" placeHolder="Style" onclick="this.select()" />
-                    <button id="StyleButton" onclick="addBar()">Bar</button>
+                    <button id="StyleButton" onclick="addBar();">Bar</button>
                 </div>
 
             </div>
@@ -46,10 +46,11 @@
         </div>
         <div id="editor">
             <TextArea id="DraftBox" placeHolder="Enter Message..." prewrap="wrap"
-                onKeyDown="if(!event.shiftKey && event.key=='Enter'){send(this,Author,Color)}; if(event.key=='|'){event.preventDefault(); addBar()}"></TextArea>
+                onKeyDown="if(!event.shiftKey && event.key=='Enter' ){send(this,Author,Color)}; if(event.key=='|'){event.preventDefault(); addBar()}"
+                onclick="playNotifs=true;"></TextArea>
             <div id="mobileButtons">
-                <button id="SendButton" onclick="send(DraftBox,Author,Color)">Send!</button>
-                <button id="LineBreak" onClick="newLine()">Line<br>Break</button>
+                <button id="SendButton" onclick="send(DraftBox,Author,Color); buttonPress.play();">Send!</button>
+                <button id="LineBreak" onClick="newLine(); buttonPress.play();">Line<br>Break</button>
             </div>
         </div>
     </div>
@@ -66,6 +67,13 @@
     //compile Replies for later
     var replyTargets = document.getElementsByClassName("reply2this");
     var onlineStatus;
+
+    //audio Definitions.
+    var playNotifs = false;
+    var messageNotif = new Audio("./Assets/Audio/Chatroom/MessageAlert_.mp3");
+    var entryNotif = new Audio("./Assets/Audio/Chatroom/EntryAlert_.mp3");
+    var exitNotif = new Audio("./Assets/Audio/Chatroom/ExitAlert.mp3");
+    var buttonPress = new Audio("./Assets/Audio/Chatroom/ButtonPress_.mp3");
 
 
     //Functions
@@ -230,7 +238,7 @@
         var endString = text.value.slice(cursor)
 
         text.value = text.value.substring(0, cursor) + "\n" + endString;
-        
+
         text.selectionStart = cursor + 1;
         text.selectionEnd = cursor + 1;
 
@@ -238,6 +246,7 @@
 
     //add bar button
     function addBar() {
+        buttonPress.play();
         var editor = document.getElementById("DraftBox")
         var preset = document.getElementById("StylePreset")
         var text = editor.value
@@ -249,11 +258,11 @@
         var selection = editor.value.substring(start, end);
         var endString = text.slice(end)
         var cursor = start;
-        
-        
-        
+
+
+
         if (selection) {
-            cursor = end+1+preset.value.length;
+            cursor = end + 1 + preset.value.length;
 
             editor.value = text.substring(0, start) + preset.value + "|" + selection + "|" + endString;
         } else {
@@ -311,8 +320,8 @@
 
     var users = "Chatroom/Users";
     var showNotifs = false;
-    var playAlerts = false;
-    var alertSound = new Audio("https://warmest-soup.github.io/Assets/Audio/ButtonClick.mp3");
+
+
 
     //Send Message.--------------------------------------!!!
     window.send = function (draft, author, color) {
@@ -367,6 +376,9 @@
         //create new message
         var newMessage = document.createElement("div");
 
+        //To determine notif type to play.
+        var messageType;
+
         //Build entry messages--------------------------!!!
         if (x.val().Entrance) {
             if (x.val().Entrance == "Arrival") {
@@ -374,11 +386,13 @@
                 newMessage.innerHTML = "<span style=color:" + x.val().Color + ";>" + x.val().Author + "</span> has apeared! :D";
 
                 messageBox.appendChild(newMessage)
+                messageType = "Entry";
             } else if (x.val().Entrance == "Exit") {
                 newMessage.classList.add("Entrance");
                 newMessage.innerHTML = "<span style=color:" + x.val().Color + ";>" + x.val().Author + "</span> has wandered off. :c";
 
                 messageBox.appendChild(newMessage)
+                messageType = "Exit";
             }
         } else {
             //Build chat messages-----------------------!!!
@@ -464,10 +478,7 @@
                 })
             }
 
-            //Enable notifications.------------------!!!
-            if (playAlerts) {
-                alertSound.play();
-            }
+
 
         }
         //Remove oldest message.
@@ -478,6 +489,15 @@
                     messageBox.children[0].remove()
                 }
             }
+        }
+        //Play notifications.------------------!!!
+        if (playNotifs) {
+            console.log("Playing")
+            if(messageType == "Entry"){
+                entryNotif.play();
+            } else if (messageType == "Exit"){
+                exitNotif.play();
+            } else messageNotif.play();
         }
     })
 
@@ -522,7 +542,7 @@
     })
 
 
-    // Turn off entry messages.
+    /* Turn off entry messages.
     document.addEventListener("visibilitychange", () => {
         //When page is hidden.
 
@@ -576,7 +596,7 @@
             Timestamp: new Date().toUTCString()
         })
     }, 1000)
-    // Turn off enrty messages */
+     Turn off enrty messages */
 
     //Count online users
     onValue(ref(db, users + "/Count"), (x) => {
