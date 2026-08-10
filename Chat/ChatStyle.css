@@ -366,7 +366,7 @@ blockquote {
 .sticker {
     box-shadow: none;
     height: 5em;
-    margin: -2em -.5em -1em -.5em;
+    margin: -0em .5em -1em .5em;
 }
 
 #editor {
