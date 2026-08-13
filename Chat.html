@@ -57,8 +57,9 @@
                 onKeyDown="if(!event.shiftKey && event.key=='Enter' ){send(this,Author,Color)}; if(event.key=='|'){event.preventDefault(); addBar()}"
                 onclick="playNotifs=true;"></TextArea>
             <div id="mobileButtons">
-                <button id="SendButton" onclick="send(DraftBox,Author,Color); buttonPress.play();">Send!</button>
-                <button id="LineBreak" onClick="newLine(); buttonPress.play();">Line<br>Break</button>
+                <button id="LineBreak" onClick="newLine(); buttonPress.currentTime=0; buttonPress.play();">Line<br>Break</button>
+                <button id="SendButton" onclick="send(DraftBox,Author,Color); buttonPress.currentTime=0; buttonPress.play();">Send!</button>
+                
             </div>
         </div>
     </div>
@@ -259,6 +260,7 @@
 
     //add bar button
     function addBar() {
+        buttonPress.currentTime=0;
         buttonPress.play();
         var editor = document.getElementById("DraftBox")
         var preset = document.getElementById("StylePreset")
