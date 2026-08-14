@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
-    href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Linefont:wdth,wght@83.6,127&family=Marck+Script&family=Nanum+Pen+Script&family=Rock+Salt&family=Trade+Winds&family=Zen+Old+Mincho:wght@400;500;700;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Linefont:wdth,wght@83.6,409&family=Marck+Script&family=Nanum+Pen+Script&family=Rock+Salt&family=Trade+Winds&family=Zen+Old+Mincho:wght@400;500;700;900&display=swap"
     rel="stylesheet">
 
 <link href="./Chat/ChatStyle.css" rel="stylesheet">
@@ -57,9 +57,11 @@
                 onKeyDown="if(!event.shiftKey && event.key=='Enter' ){send(this,Author,Color)}; if(event.key=='|'){event.preventDefault(); addBar()}"
                 onclick="playNotifs=true;"></TextArea>
             <div id="mobileButtons">
-                <button id="LineBreak" onClick="newLine(); buttonPress.currentTime=0; buttonPress.play();">Line<br>Break</button>
-                <button id="SendButton" onclick="send(DraftBox,Author,Color); buttonPress.currentTime=0; buttonPress.play();">Send!</button>
-                
+                <button id="LineBreak"
+                    onClick="newLine(); buttonPress.currentTime=0; buttonPress.play();">Line<br>Break</button>
+                <button id="SendButton"
+                    onclick="send(DraftBox,Author,Color); buttonPress.currentTime=0; buttonPress.play();">Send!</button>
+
             </div>
         </div>
     </div>
@@ -100,6 +102,7 @@
         var color = document.getElementById("Color")
         var bgLock = document.getElementById("CaptureBg")
         var vol = document.getElementById("Volume")
+        var style = document.getElementById("StylePreset")
         console.log(document.cookie)
         if (document.cookie) {
             var settings = document.cookie.split(", ");
@@ -118,7 +121,11 @@
             capturedBG = parseInt(settings[3]);
 
             vol.value = parseInt(settings[4]);
-            
+
+            if (settings[5]) {
+                style.value = settings[5];
+            }
+
             setVolume(vol.value);
 
 
@@ -165,20 +172,53 @@
         if (textContainer.innerText.match(/([^\|\s>]+)\|([^\|]*)\|/g)) {
 
             textContainer.innerHTML = textContainer.innerHTML.replace(/([^\|\s]+)\|([^\|]*)\|/g, (match, key, content) => {
-                var markDown = ""
+                var markDown = "";
                 var tagType = "span"
                 var textDeco = "";
-                var spClass = ""
-                var spoiler = ""
+                var spClass = "";
+                var spoiler = "";
+                var link = "";
+
+                var filteredColor;
 
                 if (key.toLowerCase().includes("img")) {
 
                     return "<br><img src='" + content + "' width=" + imgScale + "%><br>"
 
                 }
+                if (key.toLowerCase().includes("c.")) {
+                    var color = key.match(/c\.([^]+)/)[1]
+                    var root = document.documentElement;
+
+                    root.style.setProperty('--markColor', color);
+
+                    filteredColor = window.getComputedStyle(root).getPropertyValue('--markColor');
+
+                    markDown += "color:" + filteredColor + ";"
+                    key = key.replace(/c\.([^]+)/, "")
+
+                } else if (key.toLowerCase().includes("a.")) {
+                    tagType = "a"
+                    link = "href='" + key.match(/a\.([^]+)/)[1] + "'";
+
+                    key = key.replace(/a\.([^]+)/, "")
+                }
+
+                if (key.toLowerCase().includes("f(")) {
+                    var animation = key.match(/f\(([^;]+)\)/)[1]
+
+                    markDown += "animation:" + animation + " 2s infinite linear;"
+                    key = key.replace(/f\(([^]+)\)/, "")
+
+                }
 
                 if (key.toLowerCase().includes("b")) {
-                    markDown += "text-shadow:0em 0em .1em white,0em 0em .1em white,0em 0em .1em white;"
+                    var textColor = "white";
+                    if (filteredColor) {
+                        textColor = filteredColor;
+                    }
+
+                    markDown += "text-shadow:0em 0em .1em " + textColor + ",0em 0em .1em " + textColor + ",0em 0em .1em " + textColor + ";"
                 }
                 if (key.toLowerCase().includes("i")) {
                     markDown += "font-style:italic;"
@@ -225,9 +265,25 @@
                 if (key.toLowerCase().includes("j")) {
                     markDown += "font-family: Dela Gothic One;"
                 }
+                if (key.includes("V")) {
+                    markDown += "writing-mode:vertical-lr; text-orientation:upright;"
+                }
+                if (key.includes("v")) {
+                    markDown += "writing-mode:vertical-lr; text-orientation:mixed;"
+                }
+                if (key.toLowerCase().includes("d")) {
+                    markDown += "display:inline-block; transform:rotate(90deg); transform-origin:left;"
+                }
+                if (key.toLowerCase().includes("x")) {
+                    markDown += "display:inline-block; transform:scalex(-1);"
+                }
+                if (key.toLowerCase().includes("y")) {
+                    markDown += "display:inline-block; transform:scaley(-1);"
+                }
 
 
-                return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='" + spClass + "'>" + content + "</" + tagType + ">"
+
+                return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='" + spClass + " mark' " + link + ">" + content + "</" + tagType + ">"
 
             })
         }
@@ -260,7 +316,7 @@
 
     //add bar button
     function addBar() {
-        buttonPress.currentTime=0;
+        buttonPress.currentTime = 0;
         buttonPress.play();
         var editor = document.getElementById("DraftBox")
         var preset = document.getElementById("StylePreset")
@@ -528,6 +584,7 @@
         var color = document.getElementById("Color");
         var bgLock = document.getElementById("CaptureBg");
         var vol = document.getElementById("Volume");
+        var style = document.getElementById("StylePreset");
 
         if (name.value.includes(",")) {
             return
@@ -545,7 +602,7 @@
         }
 
 
-        document.cookie = name.value + ", " + color.value + ", " + bgLock.checked + ", " + capturedBG + ", " + vol.value + ";" + onlineStatus + ";" + "expires=" + expires;
+        document.cookie = name.value + ", " + color.value + ", " + bgLock.checked + ", " + capturedBG + ", " + vol.value + ", " + style.value + ";" + onlineStatus + ";" + "expires=" + expires;
 
 
     }
