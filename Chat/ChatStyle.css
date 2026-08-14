@@ -260,6 +260,8 @@ blockquote {
     align-items: center;
     justify-content: space-between;
     width: 90%;
+    margin-bottom: -1em;
+    margin-top: -.7em;
 }
 
 #AuthorInfo>:nth-child(2) {
@@ -280,6 +282,7 @@ blockquote {
     padding: .5em;
 
     transition: box-shadow 1s ease;
+
 }
 
 #DraftBox:focus {
@@ -384,26 +387,19 @@ blockquote {
 #StyleButton {
     background: #1e5b7f82;
     width: 5.5em;
-    height: 4.5em;
+    height: 50%;
     border-radius: 3em;
-
-
     text-shadow:
         0em 0em .1em white,
         0em 0em .1em white,
         0em 0em .1em white,
         0em 0em .1em white;
-
-
     filter:
         brightness(100%) contrast(800%);
-
-
 }
 
 #styleButtons {
     width: 5.5em;
-    height: 4.5em;
 }
 
 #LineBreak,
@@ -415,7 +411,6 @@ blockquote {
         inset 3em -4.5em .1em -3em #3523c926,
         inset 3em -3em 1em -2em #ffbbf569,
         inset -3em 3em 1em -2em #ffffff47;
-
     transition:
         box-shadow .1s ease-out,
         transform .1s ease-out;
