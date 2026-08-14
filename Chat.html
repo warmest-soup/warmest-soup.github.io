@@ -187,7 +187,7 @@
 
                 }
                 if (key.toLowerCase().includes("c.")) {
-                    var color = key.match(/c\.([^]+)/)[1]
+                    var color = key.match(/c\.([^]+)/i)[1]
                     var root = document.documentElement;
 
                     root.style.setProperty('--markColor', color);
@@ -195,20 +195,20 @@
                     filteredColor = window.getComputedStyle(root).getPropertyValue('--markColor');
 
                     markDown += "color:" + filteredColor + ";"
-                    key = key.replace(/c\.([^]+)/, "")
+                    key = key.replace(/c\.([^]+)/i, "")
 
                 } else if (key.toLowerCase().includes("a.")) {
                     tagType = "a"
-                    link = "href='" + key.match(/a\.([^]+)/)[1] + "'";
+                    link = "href='" + key.match(/a\.([^]+)/i)[1] + "'";
 
-                    key = key.replace(/a\.([^]+)/, "")
+                    key = key.replace(/a\.([^]+)/i, "")
                 }
 
                 if (key.toLowerCase().includes("f(")) {
-                    var animation = key.match(/f\(([^;]+)\)/)[1]
+                    var animation = key.match(/f\(([^;]+)\)/i)[1]
 
                     markDown += "animation:" + animation + " 2s infinite linear;"
-                    key = key.replace(/f\(([^]+)\)/, "")
+                    key = key.replace(/f\(([^]+)\)/i, "")
 
                 }
 
