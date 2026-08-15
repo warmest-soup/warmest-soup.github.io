@@ -564,7 +564,7 @@
             toBottom();
             if (chatHistory.length > logLimit) {
                 while (messageBox.children.length > logLimit) {
-                    messageBox.children[0].remove()
+                    messageBox.children[messageBox.children.length].remove()
                 }
             }
         }
