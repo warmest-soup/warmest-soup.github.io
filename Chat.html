@@ -463,13 +463,13 @@
                 newMessage.classList.add("Entrance");
                 newMessage.innerHTML = "<span style=color:" + x.val().Color + ";>" + x.val().Author + "</span> has apeared! :D";
 
-                messageBox.appendChild(newMessage)
+                messageBox.prepend(newMessage)
                 messageType = "Entry";
             } else if (x.val().Entrance == "Exit") {
                 newMessage.classList.add("Entrance");
                 newMessage.innerHTML = "<span style=color:" + x.val().Color + ";>" + x.val().Author + "</span> has wandered off. :c";
 
-                messageBox.appendChild(newMessage)
+                messageBox.prepend(newMessage)
                 messageType = "Exit";
             }
         } else {
@@ -513,7 +513,7 @@
                 bigBlock.appendChild(replyBlock);
                 bigBlock.appendChild(newMessage);
 
-                messageBox.appendChild(bigBlock);
+                messageBox.prepend(bigBlock);
 
                 //Load replies
                 Array.from(bigBlock.children[0].children).forEach((x) => {
@@ -534,7 +534,7 @@
                         toBottom();
                     })
                 })
-            } else messageBox.appendChild(newMessage);
+            } else messageBox.prepend(newMessage);
 
 
             //formatting-----------------------------!!!
@@ -614,19 +614,21 @@
         var scale = messageBox.clientHeight
         var jumpButton = document.getElementById("ToBottom");
 
-        if (scrollPosition >= total - scale * 1.2) {
+        if (scrollPosition >= -100) {
             caughtUp = true;
             jumpButton.setAttribute("hidden", true);
         } else {
             caughtUp = false;
             jumpButton.removeAttribute("hidden");
         }
-
+        
+        
+        console.log(caughtUp)
 
     })
 
 
-    // Turn off entry messages.
+    /* Turn off entry messages.
     document.addEventListener("visibilitychange", () => {
         //When page is hidden.
 

@@ -158,6 +158,8 @@ blockquote {
     width: 95%;
     overflow-y: auto;
     overflow-x: clip;
+    flex-direction:column-reverse;
+    justify-content:end;
 
     background: url(https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/8.gif) center 15% / cover no-repeat;
 }
