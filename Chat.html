@@ -564,12 +564,13 @@
             toBottom();
             if (chatHistory.length > logLimit) {
                 while (messageBox.children.length > logLimit) {
-                    messageBox.children[messageBox.children.length].remove()
+                    messageBox.children[messageBox.children.length-1].remove()
                 }
             }
         }
         //Play notifications.------------------!!!
         if (playNotifs) {
+            console.log(playNotifs)
             if (messageType == "Entry") {
                 entryNotif.play();
             } else if (messageType == "Exit") {
