@@ -9,15 +9,103 @@
     href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Linefont:wdth,wght@83.6,409&family=Marck+Script&family=Nanum+Pen+Script&family=Rock+Salt&family=Trade+Winds&family=Zen+Old+Mincho:wght@400;500;700;900&display=swap"
     rel="stylesheet">
 
-<div id="textDisplay" oninput="markDown(this, 20)" onkeydown="if(event.key=='Backspace') {clearMarks()}" prewrap="wrap"
-    contenteditable="true">
+<link href="./Chat/ChatStyle.css" rel="stylesheet">
+</link>
+
+<textarea id="textDisplay" oninput="markDown(this, 20); addSticker(this); openStickers(this);"
+    onkeydown="if(event.key=='Backspace') {clearMarks()}" prewrap="wrap">
     Enter message....
+</textarea>
+
+<div id="StickerList" hidden>
 </div>
-
-
+<style>
+    #StickerList {
+        position: fixed;
+        z-index: +2;
+        top: 0;
+        left: 0;
+        background: black;
+    }
+</style>
 
 
 <script>
+
+    //Stickers
+    var stickerList = [
+        "svencry, gif",
+        "svenlaugh, gif",
+        "svennuzzle, gif",
+        "vcat, gif",
+        "honestjo, jpg",
+        "sunpuppy, png"
+    ]
+    //Open sticker menu
+    function openStickers(textContainer) {
+        var cursor = textContainer.selectionStart
+        var matching = textContainer.value.substring(0, cursor).match(/:([a-z]+)$/);
+        var stickerMenu = document.getElementById("StickerList");
+
+        if (matching) {
+            stickerMenu.removeAttribute("Hidden");
+
+            stickerMenu.innerHTML = "";
+            stickerList.forEach((x) => {
+                var stickerType = x.split(", ")[1]
+                var stickerName = x.split(", ")[0]
+
+
+                if (stickerName.match(matching[0].substring(1))) {
+                    stickerMenu.innerHTML += "<div onclick='insertSticker(textDisplay, this.innerText)'>:" + stickerName + ":<br>" + stickerName + "</div>";
+
+                    addSticker(stickerMenu)
+                }
+            })
+
+            console.log(matching)
+        } else stickerMenu.setAttribute("Hidden", "true");
+    }
+    //Add sticker from menu
+    function insertSticker(textContainer, sticker) {
+        var cursor = textContainer.selectionStart
+        var text = textContainer.value.substring(0, cursor)
+        var textEnd = textContainer.value.substring(cursor)
+        var stickerMenu = document.getElementById("StickerList");
+        
+        console.log(sticker)
+        text = text.replace(/:([a-z]+)$/, ":" + sticker.substring(1) + ":");
+        
+        textContainer.value=text+textEnd;
+        
+        stickerMenu.setAttribute("Hidden", "true");
+        textContainer.focus()
+        textContainer.selectionStart = text.length
+        textContainer.selectionEnd = text.length
+    }
+    //Embed sticker images
+    function addSticker(textContainer) {
+        if (textContainer.innerText.match(/:(\w+):/g)) {
+            textContainer.innerHTML = textContainer.innerHTML.replace(/:(\w+):/g, (match, sticker) => {
+
+                var result;
+
+                stickerList.forEach((x) => {
+                    var stickerType = x.split(", ")[1]
+                    var stickerName = x.split(", ")[0]
+
+                    if (sticker.toLowerCase() == stickerName) {
+                        var url = "<img class='sticker' src='./Chat/Stickers/" + stickerName + "." + stickerType + "'>"
+
+                        console.log(url)
+                        result = url;
+                    }
+                })
+
+                if (result) return result;
+            })
+        }
+    }
 
     //remove MarkDown
     function kill(yourself) {
@@ -144,7 +232,7 @@
                 if (key.toLowerCase().includes("\\")) {
                     markDown += "font-family: rock salt;"
                 }
-                
+
                 if (key.toLowerCase().includes("j")) {
                     markDown += "font-family: Dela Gothic One;"
                 }

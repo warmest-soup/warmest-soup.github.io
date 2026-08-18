@@ -3,10 +3,12 @@
     font-family: "Zen Old Mincho";
     font-weight: 400;
     font-size: min(.8rem, 2.5vw);
-
+    
     --AuthorColor: white;
 }
-
+html{
+    height:100%;
+}
 ::selection {
     background: #aa7cb3ad;
 }
@@ -134,7 +136,8 @@ blockquote {
 #Color,
 .spoilerPrimer,
 .spoiler,
-#MobileButtons>* {
+#MobileButtons>*,
+#StickerList{
     border-radius: 1em;
 }
 
@@ -146,7 +149,8 @@ blockquote {
     color: #92c8ff;
 }
 
-#messageBox {
+#messageBox,
+#documentation{
     gap: 1em;
     box-shadow:
         0em 4em 4em -2em #1c349bdb,
@@ -463,6 +467,45 @@ blockquote {
         0em 0em 0em .1em black,
         inset 0em 0em .4em .1em #000c10,
         inset 0em 0em .6em .5em #00deff47;
+}
+#documentation{
+    position:fixed;
+    overflow:auto;
+    z-index:+2;
+    background: url(https://images.wondershare.com/filmora/article-images/how-to-add-tv-static-sound-effect-2.gif) center 15% / cover no-repeat;
+    border-radius:2em;
+    padding:0em;
+    
+}
+#documentation > *{
+    backdrop-filter:brightness(10%) hue-rotate(200deg);
+    color:#aaf7ff9c;
+    padding:2em;
+    box-shadow:inset 0em 0em 5em 5em black;
+}
+#StickerList{
+    background:none;
+    position:fixed;
+    left:5%;
+    bottom:22%;
+    padding:.5em;
+    gap:1em;
+    background:#002b2b52;
+    box-shadow:
+        0em 0em 0em .2em black,
+        inset 0em 0em 3em 1em #02001a;
+
+    text-shadow:
+        0em 0em .2em black,
+        0em 0em .2em black,
+        0em 0em .2em black,
+        0em 0em .2em black,
+        0em 0em .2em black,
+        0em 0em .2em black,
+        0em 0em .2em black,
+        0em 0em .2em black,
+        0em 0em .2em black,
+        0em 0em .2em black;
 }
 
 @keyframes hilit {

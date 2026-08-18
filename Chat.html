@@ -18,7 +18,223 @@
     <div id="UserDisplay"><span id="UserCount">0</span> user<span id="userPluralization">s</span> online.</div>
 
     <div id="messageWindow">
+        <div id="documentation" hidden>
+            <div>
+                Help: <br>
+                <span style="font-size:1.5em;">Stickers:</span>
+                <br> Stickers can be attatched to messages by enclosing their names in colons, for example :svennuzzle:
+                will
+                convert to the sticker of that name.
+                <br>A list of available stickers is provided here:
+                <br> - svennuzzle
+                <br> - svenlaugh
+                <br> - svencry
+                <br> - vcat
+                <br> - sunpuppy
+                <br><br><br>
+
+                <br><span style="font-size:1.5em;">F() Animations:</span>
+                <br> Intended for markdown:
+                <br> - spin
+                <br> - fade
+                <br> - grow
+                <br> - shrink
+                <br> - shake
+                <br> - blur
+                <br>
+                <br> Utility animations that may also work:
+                <br> - hilit
+                <br> - Enter
+                <br> - quoteEnter
+                <br> - replyGlow
+                <br>
+                <br>
+                <br>
+
+                <br><span style="font-size:1.5em;">MarkDown:</span>
+                <br><span style="font-size:1.5em;">Markdown:</span>
+                <br> Key:
+                <br> b Bold
+                <br> i Italic
+                <br> - Strikethrough
+                <br> _ Underline
+                <br>
+                <br> c. Color
+                <br> f() Animate
+                <br>
+                <br> a. Link
+                <br> img. Image embed
+                <br>
+                <br> s Small
+                <br> l Large
+                <br> m Marquee
+                <br> q Block Quote
+                <br> h Hidden Spoiler
+                <br>
+                <br> ~ Cursive
+                <br> ! Loud
+                <br> / Handwritten 1
+                <br> \ Handwritten 2
+                <br> j Japanese Block
+                <br> w Linefont
+                <br>
+                <br> vV Orient Vertical
+                <br> d Turn Down
+                <br> x Flip X
+                <br> y Flip y
+                <br> cw() Clockwise Rotation
+                <br>
+                <br>
+                <br>
+                Markdown is performed by enclosing text in "bars"
+                <br> like this: ib|<span
+                    style="text-shadow: 0em 0em .1em white, 0em 0em .1em white, 0em 0em .1em white;"><i>This text will
+                        be
+                        bold AND italicized</i></span>|
+                <br>
+                The following markdown options are available;
+                <br>
+                <br> <span style="font-size:1.5em;">B</span> Bold: b|<span
+                    style="text-shadow: 0em 0em .1em white, 0em 0em .1em white, 0em 0em .1em white;">This text will be
+                    bold</span>|
+                <br>
+                <br> <span style="font-size:1.5em;">I</span> Italic: i|<i>This text will be italicized</i>|
+                <br>
+                <br> <span style="font-size:1.5em;">-</span> Strikethrough: -|<span
+                    style="text-decoration:line-through;">This text will be crossed out</span>|
+                <br>
+                <br><span style="font-size:1.5em;">_</span> Underline: _|<span style="text-decoration:underline;">This
+                    text
+                    will be underlined</span>|
+                <br>
+                <br>
+                <br>
+                <br> <span style="font-size:1.5em;">C</span>. Color: Color must be the final tag used, for example
+                bc.red|text| will result in bold red text, while
+                c.redb|Text| will result in failure.
+                <br>C. takes any valid CSS color, including named colors, hexcodes, transparency, and rgb() & hsl()
+                formats.
+
+                <br> c.cyan|<span style="color:cyan;">This text will be colored</span>|
+                <br>
+                <br> <span style="font-size:1.5em;">F</span>() Animated: f() requires a named CSS animation to play, a
+                list
+                of available animations is provided below.
+                Animation names are <b>case-sensitive</b> but all animations intended for markDown will be named in all
+                lowercase
+                letters. To layer multiple animations seperate animation names with periods.
+                example f(spin.grow.fade)
+                <br>f(Glow)|<span style="animation:Glow 2s infinite linear;">This text will be animated</span>|
+                <br>
+                <br> <span style="font-size:1.5em;">a</span>. Link: a.url|<a href="www.google.com">This text will become
+                    a
+                    clickable link</a>|
+
+                <br> <span style="font-size:1.5em;">I</span>mg Image embed: Placing a source level image URL in this tag
+                will embed the image in your message, inline.
+                allowing you to add text above and below it to your taste.
+                <br> img|Image source URL|
+                <br>
+                <br> <span style="font-size:1.5em;">S</span> Small text: s|<span style="font-size:.5em;">This text will
+                    be
+                    small</span>|
+
+                <br> <span style="font-size:1.5em;">L</span> Large Text: l|<span style="font-size:1.5em;">T</span>his
+                text
+                will be large</span>|
+                <br>
+                <br> <span style="font-size:1.5em;">M</span> Marquee: m|<marquee>This text will be marqueed</marquee>|
+                <br>
+                <br> <span style="font-size:1.5em;">Q</span> Block Quote: q|<blockquote>This text will be quoted
+                </blockquote>|
+                <br>
+                <br> <span style="font-size:1.5em;">H</span> Hidden Spoiler: h|<span class="spoiler spoilerPrimer"
+                    onclick="this.classList.toggle('spoiler')">This text will be hidden until clicked on.</span>
+                <br>
+                <br>
+                <br> <span style="font-size:1.5em;">~</span> Cursive : b|<span style="font-family:marck script;">This
+                    text
+                    will be cursive</span>|
+                <br>
+                <br> <span style="font-size:1.5em;">!</span> Loud: !|<span style="font-family:trade winds;">This text
+                    will
+                    be in a loud font</span>|
+                <br>
+                <br> <span style="font-size:1.5em;">/</span> Handwritten 1: /|<span
+                    style="font-family:nanum pen script;">This text will be handwritten</span>|
+                <br>
+                <br> <span style="font-size:1.5em;">\</span> Handwritten 2: \|<span style="font-family:rock salt;">This
+                    text
+                    will be handwritten</span>|
+                <br>
+                <br> <span style="font-size:1.5em;">J</span> Japanese Block: j|<span
+                    style="font-family:dela gothic one;">This text will be in block letters, and will also affect 日本語
+                    characters</span>|
+                <br>
+                <br> <span style="font-size:1.5em;">W</span> Linefont: Linefont generates a linegraph based on the
+                Unicode
+                values of the given characters. 0-9 or a-z can be used however, for manual control.
+                <br> w|<span
+                    style="font-family:linefont;">11111111111133333333349933333333959155555555055555555395555555555555555599555555555939595555555555553333333333</span>|
+                <br>
+
+                <br> <span style="font-size:1.5em;">vV</span> Vertical orientation: the V tag has two functions, one for
+                the
+                lowercase "v" and one for the uppercase "V". The lowercase value will keep character orientation inline
+                with
+                the not vertical line orientation, while the uppercase variant will allow for the use of vertical fonts,
+                such as 日本語. The v tag supports new lines, and only one set of bars is necessary for multiple lines of
+                text.
+                <br> <span style="font-size:1.5em;">v</span>|<span
+                    style="writing-mode:vertical-lr; text-orientation:mixed">This text will be vertical</span>| whereas
+                V|<span style="writing-mode:vertical-lr; text-orientation:upright">This text<br>will be
+                    <br>vertical</span>|
+                <br>
+                <br> <span style="font-size:1.5em;">D</span> Downward text: The d tag actively rotates the given text
+                around
+                an anchor point set at the left hand side. this transformation disregards standard document flow, and
+                can be
+                used to strange effects.
+                <br>d|<span style="display:inline-block; transform:rotate(90deg); transform-origin:left;">This text will
+                    be
+                    rotated downward.</span>|
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>As shown here, the rotated text
+                <br>covers text below it.
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br> <span style="font-size:1.5em;">XY</span> Horizontal and Vertical mirroring: The x tag will flip
+                it's
+                contents horizontally, while the y tag will flip it's content vertically, by putting "xy" both axises
+                may be
+                mirrored at once.
+                <br> x|<span style="display:inline-block; transform:scalex(-1)">This text will be backwards</span>|
+                <br>
+                <br> <span style="font-size:1.5em;">CW()</span> Clockwise rotation: This tag will rotate it's context
+                clockwise a number of degrees equal to the number within it's parentheses. For counter-clockwise
+                rotation, a
+                negative number can be used.
+                <br>
+                <br>
+                <br> cw(-45)|<span style="display:inline-block; transform:rotate(-45deg);">Rotated text.</span>|
+                <br>
+                <br>
+                <br>
+                <br>
+
+
+
+            </div>
+        </div>
         <div id="messageBox"></div>
+
+        <div id="StickerList" hidden="true"></div>
         <button id="ToBottom" onClick="toBottom()" hidden="true">...<br>▽</button>
     </div>
 
@@ -55,7 +271,8 @@
         <div id="editor">
             <TextArea id="DraftBox" placeHolder="Enter Message..." prewrap="wrap"
                 onKeyDown="if(!event.shiftKey && event.key=='Enter' ){send(this,Author,Color)}; if(event.key=='|'){event.preventDefault(); addBar()}"
-                onclick="playNotifs=true;"></TextArea>
+                onclick="playNotifs=true;"
+                oninput="showHelp(this.value.substring(0,5)); openStickers(this);"></TextArea>
             <div id="mobileButtons">
                 <button id="LineBreak"
                     onClick="newLine(); buttonPress.currentTime=0; buttonPress.play();">Line<br>Break</button>
@@ -103,7 +320,7 @@
         var bgLock = document.getElementById("CaptureBg")
         var vol = document.getElementById("Volume")
         var style = document.getElementById("StylePreset")
-        console.log(document.cookie)
+
         if (document.cookie) {
             var settings = document.cookie.split(", ");
 
@@ -203,7 +420,6 @@
 
                     key = key.replace(/a\.([^]+)/, "")
                 }
-
                 if (key.toLowerCase().includes("f(")) {
                     var animation = key.match(/f\(([^;]+)\)/)[1]
 
@@ -216,7 +432,6 @@
                     })
                     markDown = markDown.slice(0, -2) + ";"
 
-                    console.log(markDown)
                     key = key.replace(/f\(([^]+)\)/, "")
 
                 }
@@ -275,7 +490,7 @@
                 if (key.toLowerCase().includes("\\")) {
                     markDown += "font-family: rock salt;"
                 }
-                
+
                 if (key.toLowerCase().includes("j")) {
                     markDown += "font-family: Dela Gothic One;"
                 }
@@ -290,9 +505,8 @@
                 }
                 if (key.toLowerCase().includes("xy")) {
                     markDown += "display:inline-block; transform:scalex(-1) scaley(-1);"
-                    console.log(key)
+
                     key = key.replace(/xy/i, "")
-                    console.log(key)
                 }
                 if (key.toLowerCase().includes("x")) {
                     markDown += "display:inline-block; transform:scalex(-1);"
@@ -313,14 +527,78 @@
     }
 
     //Stickers
+    var stickerList = [
+        "svencry, gif",
+        "svenlaugh, gif",
+        "svennuzzle, gif",
+        "vcat, gif",
+        "honestjo, jpg",
+        "sunpuppy, png"
+    ];
+    //Open sticker Context menu
+    function openStickers(textContainer) {
+        var cursor = textContainer.selectionStart
+        var matching = textContainer.value.substring(0, cursor).match(/:([a-z]+)$/);
+        var stickerMenu = document.getElementById("StickerList");
+
+        if (matching) {
+            stickerMenu.removeAttribute("Hidden");
+
+            stickerMenu.innerHTML = "";
+            stickerList.forEach((x) => {
+                var stickerType = x.split(", ")[1]
+                var stickerName = x.split(", ")[0]
+
+
+                if (stickerName.match(matching[0].substring(1))) {
+                    stickerMenu.innerHTML += "<div onclick='insertSticker(DraftBox, this.innerText)'>:" + stickerName + ":<br>" + stickerName + "</div>";
+
+                    addSticker(stickerMenu)
+                }
+            })
+
+        } else stickerMenu.setAttribute("Hidden", "true");
+    }
+    //Add sticker from menu
+    function insertSticker(textContainer, sticker) {
+        var cursor = textContainer.selectionStart
+        var text = textContainer.value.substring(0, cursor)
+        var textEnd = textContainer.value.substring(cursor)
+        var stickerMenu = document.getElementById("StickerList");
+
+
+        text = text.replace(/:([a-z]+)$/, ":" + sticker.substring(1) + ":");
+
+        textContainer.value = text + textEnd;
+
+        stickerMenu.setAttribute("Hidden", "true");
+        textContainer.focus()
+        textContainer.selectionStart = text.length
+        textContainer.selectionEnd = text.length
+    }
+    //Embed sticker images
     function addSticker(textContainer) {
         if (textContainer.innerText.match(/:(\w+):/g)) {
-            textContainer.innerHTML = textContainer.innerHTML.replace(/\s:(\w+):/g, (match, sticker) => {
-                var url = "./Chat/Stickers/" + sticker.toLowerCase()
-                return "<img class='sticker' src='" + url + ".gif'>"
+            textContainer.innerHTML = textContainer.innerHTML.replace(/:(\w+):/g, (match, sticker) => {
+
+                var result;
+
+                stickerList.forEach((x) => {
+                    var stickerType = x.split(", ")[1]
+                    var stickerName = x.split(", ")[0]
+
+                    if (sticker.toLowerCase() == stickerName) {
+                        var url = "<img class='sticker' src='./Chat/Stickers/" + stickerName + "." + stickerType + "'>"
+
+                        result = url;
+                    }
+                })
+
+                if (result) return result;
             })
         }
     }
+
 
     //LineBreak Button
     function newLine() {
@@ -375,6 +653,13 @@
         messageNotif.volume = volume / 100;
         entryNotif.volume = volume / 100;
         exitNotif.volume = volume / 100;
+    }
+
+    //Show help message
+    function showHelp(keyword) {
+        if (keyword.toLowerCase() == "help!") {
+            document.getElementById("documentation").removeAttribute("hidden");
+        } else document.getElementById("documentation").setAttribute("hidden", "true");
     }
 
     //Event Listeners
@@ -587,13 +872,13 @@
             toBottom();
             if (chatHistory.length > logLimit) {
                 while (messageBox.children.length > logLimit) {
-                    messageBox.children[messageBox.children.length-1].remove()
+                    messageBox.children[messageBox.children.length - 1].remove()
                 }
             }
         }
         //Play notifications.------------------!!!
         if (playNotifs) {
-            console.log(playNotifs)
+
             if (messageType == "Entry") {
                 entryNotif.play();
             } else if (messageType == "Exit") {
@@ -645,9 +930,6 @@
             caughtUp = false;
             jumpButton.removeAttribute("hidden");
         }
-        
-        
-        console.log(caughtUp)
 
     })
 
