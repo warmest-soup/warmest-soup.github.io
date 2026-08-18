@@ -9,7 +9,8 @@
     href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Linefont:wdth,wght@83.6,409&family=Marck+Script&family=Nanum+Pen+Script&family=Rock+Salt&family=Trade+Winds&family=Zen+Old+Mincho:wght@400;500;700;900&display=swap"
     rel="stylesheet">
 
-<div id="textDisplay" oninput="markDown(this, 20); clearMarks()" prewrap="wrap" contenteditable="true">
+<div id="textDisplay" oninput="markDown(this, 20)" onkeydown="if(event.key=='Backspace') {clearMarks()}" prewrap="wrap"
+    contenteditable="true">
     Enter message....
 </div>
 
@@ -24,11 +25,11 @@
             yourself.remove();
         }
     }
-    
-    function clearMarks(){
+
+    function clearMarks() {
         var editor = Array.from(document.getElementById("textDisplay").children);
-        editor.forEach((x)=> {
-            if(x.classList.contains("mark")){
+        editor.forEach((x) => {
+            if (x.classList.contains("mark")) {
                 console.log(x.innerText)
                 //kill(x)
             }
@@ -75,9 +76,25 @@
                 if (key.toLowerCase().includes("f(")) {
                     var animation = key.match(/f\(([^;]+)\)/)[1]
 
-                    markDown += "animation:" + animation + " 2s infinite linear;"
+                    animations = animation.split(".");
+
+                    markDown += "animation:"
+
+                    animations.forEach((x) => {
+                        markDown += x + " 2s infinite linear, "
+                    })
+                    markDown = markDown.slice(0, -2) + ";"
+
+                    console.log(markDown)
                     key = key.replace(/f\(([^]+)\)/, "")
 
+                }
+                if (key.toLowerCase().includes("cw(")) {
+                    var degrees = key.match(/cw\((-*\d+)\)/i)[1]
+
+                    markDown += "display:inline-block; transform:rotate(" + degrees + "deg);"
+
+                    key = key.replace(/cw\((-*\d+)\)/i, "")
                 }
 
                 if (key.toLowerCase().includes("b")) {
@@ -127,20 +144,24 @@
                 if (key.toLowerCase().includes("\\")) {
                     markDown += "font-family: rock salt;"
                 }
-                if (key.toLowerCase().includes("w")) {
-                    markDown += "font-family: linefont;"
-                }
+                
                 if (key.toLowerCase().includes("j")) {
                     markDown += "font-family: Dela Gothic One;"
                 }
                 if (key.includes("V")) {
                     markDown += "writing-mode:vertical-lr; text-orientation:upright;"
-                } 
+                }
                 if (key.includes("v")) {
                     markDown += "writing-mode:vertical-lr; text-orientation:mixed;"
                 }
                 if (key.toLowerCase().includes("d")) {
                     markDown += "display:inline-block; transform:rotate(90deg); transform-origin:left;"
+                }
+                if (key.toLowerCase().includes("xy")) {
+                    markDown += "display:inline-block; transform:scalex(-1) scaley(-1);"
+                    console.log(key)
+                    key = key.replace(/xy/i, "")
+                    console.log(key)
                 }
                 if (key.toLowerCase().includes("x")) {
                     markDown += "display:inline-block; transform:scalex(-1);"
@@ -148,10 +169,13 @@
                 if (key.toLowerCase().includes("y")) {
                     markDown += "display:inline-block; transform:scaley(-1);"
                 }
-                
+                if (key.toLowerCase().includes("w")) {
+                    markDown += "font-family: linefont;"
+                }
 
 
-                return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='" + spClass + " mark' " + link + ">" + content + "</" + tagType + ">"
+
+                return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='mark " + spClass + "' " + link + ">" + content + "</" + tagType + ">"
 
             })
         }
@@ -175,7 +199,7 @@
         font-family: Zen Old Mincho;
         border-radius: 1em;
         width: 100%;
-        background:gray;
+        background: rgb(65, 65, 65);
         height: 100%;
         padding: 1em;
         resize: none;
@@ -185,18 +209,16 @@
 
     #textbox {
         background: black;
-        color: rgba(255, 255, 255, 0.185);
+        color: #ffffff;
         caret-color: white;
         margin-right: -50vw;
         margin-bottom: -50vw;
     }
 
     #textDisplay {
-         color: rgba(255, 255, 255, 0.185);
+        color: rgb(255, 255, 255);
         white-space: pre-wrap;
-        color: rgb(0, 0, 0);
     }
-
 
 
 
@@ -316,79 +338,174 @@
     }
 
     @keyframes fade {
+        0% {}
+
+        50% {
+            color: rgba(253, 253, 253, 0);
+        }
+
+        100% {}
+    }
+
+    @keyframes blur {
         0% {
-            filter: opacity(0%);
+            filter: blur(0px);
         }
 
         50% {
-            filter: opacity(100%);
+            filter: blur(10px);
         }
 
         100% {
-            filter: opacity(0%);
+            filter: blur(0px);
         }
     }
-    
+
     @keyframes grow {
         0% {
-            font-size:1em;
+            font-size: 1em;
         }
 
         50% {
-            font-size:2em;
+            font-size: 2em;
         }
 
         100% {
-            font-size:1em;
+            font-size: 1em;
         }
     }
-    
+
     @keyframes shrink {
         0% {
-            font-size:1em;
+            font-size: 1em;
         }
 
         50% {
-            font-size:.5em;
+            font-size: .5em;
         }
 
         100% {
-            font-size:1em;
+            font-size: 1em;
         }
     }
+
     @keyframes shake {
-        0%{display:inline-block; transform:translatex(0em) translatey(0em);}
-        
-        5%{display:inline-block; transform:translatex(-.1em);}
-        10%{display:inline-block; transform:translatex(0.1em);}
-        15%{display:inline-block; transform:translatex(-.1em);}
-        20%{display:inline-block; transform:translatex(0.1em);}
-        25%{display:inline-block; transform:translatex(-.1em);}
-        30%{display:inline-block; transform:translatex(0.1em);}
-        35%{display:inline-block; transform:translatex(-.1em);}
-        40%{display:inline-block; transform:translatex(0.1em);}
-        45%{display:inline-block; transform:translatex(-.1em);}
-        50%{display:inline-block; transform:translatex(0.1em);}
-        55%{display:inline-block; transform:translatex(-.1em);}
-        60%{display:inline-block; transform:translatex(0.1em);}
-        65%{display:inline-block; transform:translatex(-.1em);}
-        70%{display:inline-block; transform:translatex(0.1em);}
-        75%{display:inline-block; transform:translatex(-.1em);}
-        80%{display:inline-block; transform:translatex(0.1em);}
-        85%{display:inline-block; transform:translatex(-.1em);}
-        90%{display:inline-block; transform:translatex(0.1em);}
-        95%{display:inline-block; transform:translatex(-.1em);}
-        
-        100%{display:inline-block; transform:translatex(0em) translatey(0em);}
-        
-    }
-    @keyframes spin {
-        0% {display:inline-block;
-            transform:rotate(0deg);
+        0% {
+            display: inline-block;
+            transform: translatex(0em) translatey(0em);
         }
 
-        100% {display:inline-block;
-            transform:rotate(360deg);
+        5% {
+            display: inline-block;
+            transform: translatex(-.1em);
+        }
+
+        10% {
+            display: inline-block;
+            transform: translatex(0.1em);
+        }
+
+        15% {
+            display: inline-block;
+            transform: translatex(-.1em);
+        }
+
+        20% {
+            display: inline-block;
+            transform: translatex(0.1em);
+        }
+
+        25% {
+            display: inline-block;
+            transform: translatex(-.1em);
+        }
+
+        30% {
+            display: inline-block;
+            transform: translatex(0.1em);
+        }
+
+        35% {
+            display: inline-block;
+            transform: translatex(-.1em);
+        }
+
+        40% {
+            display: inline-block;
+            transform: translatex(0.1em);
+        }
+
+        45% {
+            display: inline-block;
+            transform: translatex(-.1em);
+        }
+
+        50% {
+            display: inline-block;
+            transform: translatex(0.1em);
+        }
+
+        55% {
+            display: inline-block;
+            transform: translatex(-.1em);
+        }
+
+        60% {
+            display: inline-block;
+            transform: translatex(0.1em);
+        }
+
+        65% {
+            display: inline-block;
+            transform: translatex(-.1em);
+        }
+
+        70% {
+            display: inline-block;
+            transform: translatex(0.1em);
+        }
+
+        75% {
+            display: inline-block;
+            transform: translatex(-.1em);
+        }
+
+        80% {
+            display: inline-block;
+            transform: translatex(0.1em);
+        }
+
+        85% {
+            display: inline-block;
+            transform: translatex(-.1em);
+        }
+
+        90% {
+            display: inline-block;
+            transform: translatex(0.1em);
+        }
+
+        95% {
+            display: inline-block;
+            transform: translatex(-.1em);
+        }
+
+        100% {
+            display: inline-block;
+            transform: translatex(0em) translatey(0em);
+        }
+
+    }
+
+    @keyframes spin {
+        0% {
+            display: inline-block;
+            transform: rotate(0deg);
+        }
+
+        100% {
+            display: inline-block;
+            transform: rotate(360deg);
         }
     }
 </style>

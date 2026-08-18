@@ -187,7 +187,7 @@
 
                 }
                 if (key.toLowerCase().includes("c.")) {
-                    var color = key.match(/c\.([^]+)/i)[1]
+                    var color = key.match(/c\.([^]+)/)[1]
                     var root = document.documentElement;
 
                     root.style.setProperty('--markColor', color);
@@ -195,21 +195,37 @@
                     filteredColor = window.getComputedStyle(root).getPropertyValue('--markColor');
 
                     markDown += "color:" + filteredColor + ";"
-                    key = key.replace(/c\.([^]+)/i, "")
+                    key = key.replace(/c\.([^]+)/, "")
 
                 } else if (key.toLowerCase().includes("a.")) {
                     tagType = "a"
-                    link = "href='" + key.match(/a\.([^]+)/i)[1] + "'";
+                    link = "href='" + key.match(/a\.([^]+)/)[1] + "'";
 
-                    key = key.replace(/a\.([^]+)/i, "")
+                    key = key.replace(/a\.([^]+)/, "")
                 }
 
                 if (key.toLowerCase().includes("f(")) {
-                    var animation = key.match(/f\(([^;]+)\)/i)[1]
+                    var animation = key.match(/f\(([^;]+)\)/)[1]
 
-                    markDown += "animation:" + animation + " 2s infinite linear;"
-                    key = key.replace(/f\(([^]+)\)/i, "")
+                    animations = animation.split(".");
 
+                    markDown += "animation:"
+
+                    animations.forEach((x) => {
+                        markDown += x + " 2s infinite linear, "
+                    })
+                    markDown = markDown.slice(0, -2) + ";"
+
+                    console.log(markDown)
+                    key = key.replace(/f\(([^]+)\)/, "")
+
+                }
+                if (key.toLowerCase().includes("cw(")) {
+                    var degrees = key.match(/cw\((-*\d+)\)/i)[1]
+
+                    markDown += "display:inline-block; transform:rotate(" + degrees + "deg);"
+
+                    key = key.replace(/cw\((-*\d+)\)/i, "")
                 }
 
                 if (key.toLowerCase().includes("b")) {
@@ -259,9 +275,7 @@
                 if (key.toLowerCase().includes("\\")) {
                     markDown += "font-family: rock salt;"
                 }
-                if (key.toLowerCase().includes("w")) {
-                    markDown += "font-family: linefont;"
-                }
+                
                 if (key.toLowerCase().includes("j")) {
                     markDown += "font-family: Dela Gothic One;"
                 }
@@ -274,16 +288,25 @@
                 if (key.toLowerCase().includes("d")) {
                     markDown += "display:inline-block; transform:rotate(90deg); transform-origin:left;"
                 }
+                if (key.toLowerCase().includes("xy")) {
+                    markDown += "display:inline-block; transform:scalex(-1) scaley(-1);"
+                    console.log(key)
+                    key = key.replace(/xy/i, "")
+                    console.log(key)
+                }
                 if (key.toLowerCase().includes("x")) {
                     markDown += "display:inline-block; transform:scalex(-1);"
                 }
                 if (key.toLowerCase().includes("y")) {
                     markDown += "display:inline-block; transform:scaley(-1);"
                 }
+                if (key.toLowerCase().includes("w")) {
+                    markDown += "font-family: linefont;"
+                }
 
 
 
-                return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='" + spClass + " mark' " + link + ">" + content + "</" + tagType + ">"
+                return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='mark " + spClass + "' " + link + ">" + content + "</" + tagType + ">"
 
             })
         }
@@ -492,7 +515,7 @@
                 var targetText;
                 var quoteIndex = 0;
                 replyIDs.forEach((y) => {
-                    replyBlock.insertAdjacentHTML("beforeEnd",
+                    replyBlock.insertAdjacentHTML("afterBegin",
                         "<a href='#" + y + "'></a>"
                     )
                 })
