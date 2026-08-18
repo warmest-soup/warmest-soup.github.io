@@ -386,7 +386,7 @@
 
     //MarkDown
     function markDown(textContainer, imgScale) {
-        if (textContainer.innerText.match(/([^\|\s>]+)\|([^\|]*)\|/g)) {
+        if (textContainer.innerText.match(/([^\|\s>]+)\|([^\|]*)\|/ig)) {
 
             textContainer.innerHTML = textContainer.innerHTML.replace(/([^\|\s]+)\|([^\|]*)\|/g, (match, key, content) => {
                 var markDown = "";
@@ -420,8 +420,9 @@
 
                     key = key.replace(/a\.([^]+)/, "")
                 }
+                console.log(key.toLowerCase())
                 if (key.toLowerCase().includes("f(")) {
-                    var animation = key.match(/f\(([^;]+)\)/)[1]
+                    var animation = key.match(/f\(([^;]+)\)/i)[1]
 
                     animations = animation.split(".");
 
@@ -432,7 +433,8 @@
                     })
                     markDown = markDown.slice(0, -2) + ";"
 
-                    key = key.replace(/f\(([^]+)\)/, "")
+                    key = key.replace(/f\(([^]+)\)/i, "")
+                    console.log(markDown)
 
                 }
                 if (key.toLowerCase().includes("cw(")) {
