@@ -487,6 +487,8 @@ blockquote {
     background:none;
     position:fixed;
     left:5%;
+    overflow:scroll;
+    max-height:70vh;
     bottom:22%;
     padding:.5em;
     gap:1em;
@@ -802,12 +804,10 @@ blockquote {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #ffe573;
+    background: #005fff2b;
     border-radius: 1em;
     box-shadow:
-        inset -.05em .05em .2em .1em white,
-        inset -.2em .2em .3em 0em #8f3846,
-        inset .25em -.25em .1em 0em #151842;
+        inset 0em 0em 0em .05em #ffffff;
 }
 
 ::-webkit-scrollbar-corner {
