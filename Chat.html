@@ -874,8 +874,12 @@
 
             //formatting-----------------------------!!!
             //Markdown
-            markDown(newMessage, 70);
-            addSticker(newMessage)
+            //Markdown for author
+            markDown(newMessage.children[0], 70);
+            //Markdown for message.
+            markDown(newMessage.children[1], 70);
+            addSticker(newMessage.children[0])
+            addSticker(newMessage.children[1])
 
 
             //@ Users-------------------------------!!!

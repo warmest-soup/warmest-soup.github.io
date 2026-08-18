@@ -7,7 +7,11 @@
     --AuthorColor: white;
 }
 html{
-    height:100%;
+    height:-webkit-fill-available;
+}
+body{
+    min-height:100vh;
+    min-height:-webkit-fill-available;
 }
 ::selection {
     background: #aa7cb3ad;
