@@ -593,41 +593,41 @@ blockquote {
 
 @keyframes Glow {
     0% {
-        text-shadow:
-            0em 0em 0em black;
-    }
+            text-shadow:
+                0em 0em 0em black;
+        }
 
-    10% {
-        color: white;
-        text-shadow:
-            0em 0em .4em hsl(0, 0%, 100%),
-            0em 0em .1em hsl(0, 0%, 100%),
-            0em .1em .2em hsl(0, 0%, 100%),
-            0em -.1em .2em hsl(0, 0%, 100%);
-    }
+        10% {
+            filter:brightness(500%);
+            color: white;
+            text-shadow:
+                0em 0em .4em hsl(0, 0%, 100%),
+                0em 0em .1em hsl(0, 0%, 100%),
+                0em .1em .2em hsl(0, 0%, 100%),
+                0em -.1em .2em hsl(0, 0%, 100%);
+        }
 
-    30% {
-        filter: none;
-        color: inherit;
-    }
+        30% {
+            color: inherit;
+        }
 
-    50% {
+        50% {
 
-        text-shadow:
-            1em 0em .2em hsl(200deg 50% 50%),
-            -.7em -.2em .2em hsl(200deg 50% 50%),
-            .3em .4em .2em hsl(200deg 50% 50%),
-            .7em -.7em .2em hsl(200deg 50% 50%);
-    }
+            text-shadow:
+                1em 0em .2em hsl(200deg 50% 50%),
+                -.7em -.2em .2em hsl(200deg 50% 50%),
+                .3em .4em .2em hsl(200deg 50% 50%),
+                .7em -.7em .2em hsl(200deg 50% 50%);
+        }
 
-    100% {
-        text-shadow:
-            1em 0em .2em transparent,
-            -.7em -.2em .2em transparent,
-            0em .2em .2em transparent,
-            .7em -.7em .2em transparent;
+        100% {
+            text-shadow:
+                1em 0em .2em transparent,
+                -.7em -.2em .2em transparent,
+                0em .2em .2em transparent,
+                .7em -.7em .2em transparent;
+        }
     }
-}
 
 @keyframes fade {
     0% {}

@@ -12,9 +12,15 @@
 <link href="./Chat/ChatStyle.css" rel="stylesheet">
 </link>
 
-<textarea id="textDisplay" oninput="markDown(this, 20); addSticker(this); openStickers(this);"
-    onkeydown="if(event.key=='Backspace') {clearMarks()}" prewrap="wrap">
-    Enter message....
+
+
+<div id="textDisplay" onchange="markDown(this, 20); addSticker(this); openStickers(this);"
+    onkeydown="if(event.key=='Backspace') {clearMarks()}" prewrap="wrap">Enter message...
+</div>
+
+<textarea id="textbox"
+    oninput="textDisplay.innerText = this.value; console.log(textDisplay.value); markDown(textDisplay, 20); addSticker(textDisplay); openStickers(textDisplay); document.cookie=this.value"
+    onkeydown="if(event.key=='Backspace') {clearMarks()}" prewrap="wrap" placeholder="Enter message...">
 </textarea>
 
 <div id="StickerList" hidden>
@@ -28,23 +34,56 @@
         background: black;
     }
 </style>
-
-
+ 
+ 
 <script>
+    
+    /* Toggle this code off when updating because it breaks cookie support on the Chat potentially.
+    var textbox = document.getElementById("textbox")
+    var textDisplay = document.getElementById("textDisplay"); 
+    textbox.value = document.cookie
+    textDisplay.innerText = textbox.value
+    
+    markDown(textDisplay, 20); 
+    addSticker(textDisplay); 
+    openStickers(textDisplay);
+    // End toggle here! */
 
+    //Stickers
     //Stickers
     var stickerList = [
         "svencry, gif",
         "svenlaugh, gif",
         "svennuzzle, gif",
+        "svenshit, png",
         "vcat, gif",
-        "honestjo, jpg",
-        "sunpuppy, png"
-    ]
+        "vhonestjo, jpg",
+        "vsunpuppy, png",
+        "vwtf, jpg",
+        "souphuhu, png",
+        "soupracoon, png",
+        "meowwalk, gif",
+        "mangosilence, png",
+        "mangoangy, png",
+        "mangoeep, png",
+        "mangoface, png",
+        "mangofat, png",
+        "mangogo, png",
+        "mangolaugh, png",
+        "mangono, png",
+        "mangook, png",
+        "mangosurprise, png",
+        "mangosweat, png",
+        "mangochew, png",
+        "tribow, gif",
+        "trifaint, gif",
+        "tripunch, gif",
+        "triwave, gif"
+    ];
     //Open sticker menu
     function openStickers(textContainer) {
         var cursor = textContainer.selectionStart
-        var matching = textContainer.value.substring(0, cursor).match(/:([a-z]+)$/);
+        var matching = textContainer.innerText.substring(0, cursor).match(/:([a-z]+)$/);
         var stickerMenu = document.getElementById("StickerList");
 
         if (matching) {
@@ -57,7 +96,7 @@
 
 
                 if (stickerName.match(matching[0].substring(1))) {
-                    stickerMenu.innerHTML += "<div onclick='insertSticker(textDisplay, this.innerText)'>:" + stickerName + ":<br>" + stickerName + "</div>";
+                    stickerMenu.innerHTML += "<div onclick='insertSticker(textbox, this.innerText)'>:" + stickerName + ":<br>" + stickerName + "</div>";
 
                     addSticker(stickerMenu)
                 }
@@ -72,12 +111,12 @@
         var text = textContainer.value.substring(0, cursor)
         var textEnd = textContainer.value.substring(cursor)
         var stickerMenu = document.getElementById("StickerList");
-        
+
         console.log(sticker)
         text = text.replace(/:([a-z]+)$/, ":" + sticker.substring(1) + ":");
-        
-        textContainer.value=text+textEnd;
-        
+
+        textContainer.value = text + textEnd;
+
         stickerMenu.setAttribute("Hidden", "true");
         textContainer.focus()
         textContainer.selectionStart = text.length
@@ -126,7 +165,7 @@
 
     //MarkDown
     function markDown(textContainer, imgScale) {
-        if (textContainer.innerText.match(/([^\|\s>]+)\|([^\|]*)\|/g)) {
+        if (textContainer.innerText.match(/([^\|\s>]+)\|([^\|]*)\|/ig)) {
 
             textContainer.innerHTML = textContainer.innerHTML.replace(/([^\|\s]+)\|([^\|]*)\|/g, (match, key, content) => {
                 var markDown = "";
@@ -160,9 +199,9 @@
 
                     key = key.replace(/a\.([^]+)/, "")
                 }
-
+                console.log(key.toLowerCase())
                 if (key.toLowerCase().includes("f(")) {
-                    var animation = key.match(/f\(([^;]+)\)/)[1]
+                    var animation = key.match(/f\(([^;]+)\)/i)[1]
 
                     animations = animation.split(".");
 
@@ -173,8 +212,8 @@
                     })
                     markDown = markDown.slice(0, -2) + ";"
 
+                    key = key.replace(/f\(([^]+)\)/i, "")
                     console.log(markDown)
-                    key = key.replace(/f\(([^]+)\)/, "")
 
                 }
                 if (key.toLowerCase().includes("cw(")) {
@@ -183,6 +222,13 @@
                     markDown += "display:inline-block; transform:rotate(" + degrees + "deg);"
 
                     key = key.replace(/cw\((-*\d+)\)/i, "")
+                }
+                if (key.toLowerCase().includes("hr(")) {
+                    var degrees = key.match(/hr\((-*\d+)\)/i)[1]
+
+                    markDown += "filter: hue-rotate(" + degrees + "deg);"
+
+                    key = key.replace(/hr\((-*\d+)\)/i, "")
                 }
 
                 if (key.toLowerCase().includes("b")) {
@@ -232,10 +278,13 @@
                 if (key.toLowerCase().includes("\\")) {
                     markDown += "font-family: rock salt;"
                 }
-
                 if (key.toLowerCase().includes("j")) {
                     markDown += "font-family: Dela Gothic One;"
                 }
+                if (key.toLowerCase().includes("w")) {
+                    markDown += "font-family: linefont;"
+                }
+                //Transformations
                 if (key.includes("V")) {
                     markDown += "writing-mode:vertical-lr; text-orientation:upright;"
                 }
@@ -247,9 +296,8 @@
                 }
                 if (key.toLowerCase().includes("xy")) {
                     markDown += "display:inline-block; transform:scalex(-1) scaley(-1);"
-                    console.log(key)
+
                     key = key.replace(/xy/i, "")
-                    console.log(key)
                 }
                 if (key.toLowerCase().includes("x")) {
                     markDown += "display:inline-block; transform:scalex(-1);"
@@ -257,10 +305,7 @@
                 if (key.toLowerCase().includes("y")) {
                     markDown += "display:inline-block; transform:scaley(-1);"
                 }
-                if (key.toLowerCase().includes("w")) {
-                    markDown += "font-family: linefont;"
-                }
-
+                
 
 
                 return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='mark " + spClass + "' " + link + ">" + content + "</" + tagType + ">"
@@ -274,10 +319,17 @@
 <style>
     :root {
         --markColor: white;
+        padding: none;
+        margin: none;
     }
 
-    input {
+    input,
+    textarea {
         font-family: Zen Old Mincho;
+        padding: none;
+        margin: none;
+        border: none;
+
     }
 
     #textbox,
@@ -286,9 +338,10 @@
         font-size: 1em;
         font-family: Zen Old Mincho;
         border-radius: 1em;
-        width: 100%;
-        background: rgb(65, 65, 65);
-        height: 100%;
+        width: 100vw;
+        line-height: 2em;
+
+        height: 100vh;
         padding: 1em;
         resize: none;
 
@@ -296,16 +349,20 @@
     }
 
     #textbox {
-        background: black;
-        color: #ffffff;
+        background: rgba(255, 255, 255, 0);
+        color: #ffffff46;
         caret-color: white;
-        margin-right: -50vw;
-        margin-bottom: -50vw;
+
     }
 
     #textDisplay {
+        background: rgb(0, 0, 0);
         color: rgb(255, 255, 255);
         white-space: pre-wrap;
+        pointer-events: none;
+        margin-right: -100vw;
+        margin-bottom: -100vh;
+
     }
 
 
@@ -387,13 +444,14 @@
 
     }
 
-    @keyframes Glow {
+    @keyframes enGlow {
         0% {
             text-shadow:
                 0em 0em 0em black;
         }
 
         10% {
+            filter:brightness(200%);
             color: white;
             text-shadow:
                 0em 0em .4em hsl(0, 0%, 100%),
@@ -403,7 +461,6 @@
         }
 
         30% {
-            filter: none;
             color: inherit;
         }
 

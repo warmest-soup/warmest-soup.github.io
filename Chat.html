@@ -448,6 +448,13 @@
 
                     key = key.replace(/cw\((-*\d+)\)/i, "")
                 }
+                if (key.toLowerCase().includes("hr(")) {
+                    var degrees = key.match(/hr\((-*\d+)\)/i)[1]
+
+                    markDown += "filter: hue-rotate(" + degrees + "deg);"
+
+                    key = key.replace(/hr\((-*\d+)\)/i, "")
+                }
 
                 if (key.toLowerCase().includes("b")) {
                     var textColor = "white";
@@ -496,10 +503,13 @@
                 if (key.toLowerCase().includes("\\")) {
                     markDown += "font-family: rock salt;"
                 }
-
                 if (key.toLowerCase().includes("j")) {
                     markDown += "font-family: Dela Gothic One;"
                 }
+                if (key.toLowerCase().includes("w")) {
+                    markDown += "font-family: linefont;"
+                }
+                //Transformations
                 if (key.includes("V")) {
                     markDown += "writing-mode:vertical-lr; text-orientation:upright;"
                 }
@@ -520,10 +530,7 @@
                 if (key.toLowerCase().includes("y")) {
                     markDown += "display:inline-block; transform:scaley(-1);"
                 }
-                if (key.toLowerCase().includes("w")) {
-                    markDown += "font-family: linefont;"
-                }
-
+                
 
 
                 return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='mark " + spClass + "' " + link + ">" + content + "</" + tagType + ">"
