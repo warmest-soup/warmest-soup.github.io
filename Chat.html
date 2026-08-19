@@ -27,7 +27,7 @@
                 convert to the sticker of that name.
                 <br>A list of available stickers is provided here:
                 <div id="StickerHelp">
-                    
+
                 </div>
                 <br><br><br>
 
@@ -222,10 +222,12 @@
                 <br>
                 <br> cw(-45)|<span style="display:inline-block; transform:rotate(-45deg);">Rotated text.</span>|
                 <br>
-                <br> <span style="font-size:1.5em;">HR()</span> Hue rotation: This tag will shift the color a number of degrees around the color wheel.
+                <br> <span style="font-size:1.5em;">HR()</span> Hue rotation: This tag will shift the color a number of
+                degrees around the color wheel.
                 <br>
                 <br>
-                <br> hr(180)|<span style="filter: hue-rotate(180deg);"><img class="sticker" src="./Chat/Stickers/trifaint.gif"></span>|
+                <br> hr(180)|<span style="filter: hue-rotate(180deg);"><img class="sticker"
+                        src="./Chat/Stickers/trifaint.gif"></span>|
                 <br>
                 <br>
                 <br>
@@ -528,7 +530,7 @@
                 if (key.toLowerCase().includes("y")) {
                     markDown += "display:inline-block; transform:scaley(-1);"
                 }
-                
+
 
 
                 return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='mark " + spClass + "' " + link + ">" + content + "</" + tagType + ">"
@@ -568,8 +570,8 @@
         "tripunch, gif",
         "triwave, gif"
     ];
-    stickerList.forEach((x)=>{
-      document.getElementById("StickerHelp").innerHTML += "<br>- " + x.split(", ")[0]  
+    stickerList.forEach((x) => {
+        document.getElementById("StickerHelp").innerHTML += "<br>- " + x.split(", ")[0]
     })
     //Open sticker Context menu
     function openStickers(textContainer) {
@@ -809,12 +811,17 @@
 
                 messageBox.prepend(newMessage)
                 messageType = "Entry";
+                markDown(newMessage.children[0], 50);
+                addSticker(newMessage.children[0]);
+                
             } else if (x.val().Entrance == "Exit") {
                 newMessage.classList.add("Entrance");
                 newMessage.innerHTML = "<span style=color:" + x.val().Color + ";>" + x.val().Author + "</span> has wandered off. :c";
 
                 messageBox.prepend(newMessage)
                 messageType = "Exit";
+                markDown(newMessage.children[0], 50);
+                addSticker(newMessage.children[0]);
             }
         } else {
             //Build chat messages-----------------------!!!
@@ -823,6 +830,7 @@
             newMessage.setAttribute("onclick", "reply2This(this)")
 
             newMessage.innerHTML = "<div class='pastAuthor' style='color:" + x.val().Color + ";'>" + x.val().Author + ":</div>";
+
 
             //Formatting for replies---_!!!
             var spacer;
@@ -851,6 +859,7 @@
 
             newMessage.insertAdjacentHTML("beforeend", "<div class='TimeStamp'>" + x.val().Timestamp + "</div>")
 
+
             //Add message to history.
             if (replyBlock) {
                 var bigBlock = document.createElement("div")
@@ -867,13 +876,14 @@
                         var quote = y.val();
                         //Cite message
                         x.innerText = quote.Message
-                        markDown(x, 20)
-                        addSticker(x)
 
                         //Cite Auther
                         x.insertAdjacentHTML("beforeEnd",
                             "<div style='color:" + quote.Color + ";'>- " + quote.Author + "</div>"
                         )
+
+                        markDown(x, 20)
+                        addSticker(x)
 
                         toBottom();
                     })
@@ -1059,7 +1069,5 @@
 
     var randBG = url + bgNumber;
     document.getElementById("messageBox").style.backgroundImage = "url('" + randBG + ".gif')";
-
-
 
 </script>
