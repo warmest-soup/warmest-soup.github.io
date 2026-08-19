@@ -26,15 +26,9 @@
                 will
                 convert to the sticker of that name.
                 <br>A list of available stickers is provided here:
-                <br> - svennuzzle
-                <br> - svenlaugh
-                <br> - svencry
-                <br> - vcat
-                <br> - vsunpuppy
-                <br> - vhonestjo
-                <br> - vwtf
-                <br> - soupracoon
-                <br> - souphuhu
+                <div id="StickerHelp">
+                    
+                </div>
                 <br><br><br>
 
                 <br><span style="font-size:1.5em;">F() Animations:</span>
@@ -228,6 +222,10 @@
                 <br>
                 <br> cw(-45)|<span style="display:inline-block; transform:rotate(-45deg);">Rotated text.</span>|
                 <br>
+                <br> <span style="font-size:1.5em;">HR()</span> Hue rotation: This tag will shift the color a number of degrees around the color wheel.
+                <br>
+                <br>
+                <br> hr(180)|<span style="filter: hue-rotate(180deg);"><img class="sticker" src="./Chat/Stickers/trifaint.gif"></span>|
                 <br>
                 <br>
                 <br>
@@ -569,6 +567,9 @@
         "tripunch, gif",
         "triwave, gif"
     ];
+    stickerList.forEach((x)=>{
+      document.getElementById("StickerHelp").innerHTML += "<br>- " + x.split(", ")[0]  
+    })
     //Open sticker Context menu
     function openStickers(textContainer) {
         var cursor = textContainer.selectionStart
