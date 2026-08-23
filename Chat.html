@@ -530,14 +530,6 @@
                 if (key.toLowerCase().includes("y")) {
                     markDown += "display:inline-block; transform:scaley(-1);"
                 }
-                //Time
-                if (key.toLowerCase().includes("t")) {
-                    var input = new Date(Date.parse(content));
-                    if (input) {
-                        content = input.toLocaleString();
-                    }
-
-                }
 
 
 
@@ -624,7 +616,7 @@
     }
     //Embed sticker images
     function addSticker(textContainer) {
-        if (textContainer.innerText.match(/:(\w):/g)) {
+        if (textContainer.innerText.match(/:(\w+):/g)) {
             textContainer.innerHTML = textContainer.innerHTML.replace(/:(\w+):/g, (match, sticker) => {
 
                 var result;
@@ -821,7 +813,7 @@
                 messageType = "Entry";
                 markDown(newMessage.children[0], 50);
                 addSticker(newMessage.children[0]);
-
+                
             } else if (x.val().Entrance == "Exit") {
                 newMessage.classList.add("Entrance");
                 newMessage.innerHTML = "<span style=color:" + x.val().Color + ";>" + x.val().Author + "</span> has wandered off. :c";
