@@ -19,7 +19,7 @@
 </div>
 
 <textarea id="textbox"
-    oninput="textDisplay.innerText = this.value; console.log(textDisplay.value); markDown(textDisplay, 20); addSticker(textDisplay); openStickers(textDisplay); document.cookie=this.value"
+    oninput="textDisplay.innerText = this.value; markDown(textDisplay, 20); addSticker(textDisplay); openStickers(textDisplay); document.cookie=this.value"
     onkeydown="if(event.key=='Backspace') {clearMarks()}" prewrap="wrap" placeholder="Enter message...">
 </textarea>
 
@@ -38,7 +38,7 @@
  
 <script>
     
-    /* Toggle this code off when updating because it breaks cookie support on the Chat potentially.
+    // Toggle this code off when updating because it breaks cookie support on the Chat potentially.
     var textbox = document.getElementById("textbox")
     var textDisplay = document.getElementById("textDisplay"); 
     textbox.value = document.cookie
@@ -101,8 +101,6 @@
                     addSticker(stickerMenu)
                 }
             })
-
-            console.log(matching)
         } else stickerMenu.setAttribute("Hidden", "true");
     }
     //Add sticker from menu
@@ -112,7 +110,6 @@
         var textEnd = textContainer.value.substring(cursor)
         var stickerMenu = document.getElementById("StickerList");
 
-        console.log(sticker)
         text = text.replace(/:([a-z]+)$/, ":" + sticker.substring(1) + ":");
 
         textContainer.value = text + textEnd;
@@ -124,7 +121,7 @@
     }
     //Embed sticker images
     function addSticker(textContainer) {
-        if (textContainer.innerText.match(/:(\w+):/g)) {
+        if (textContainer.innerText.match(/:([^\w+]):/g)) {
             textContainer.innerHTML = textContainer.innerHTML.replace(/:(\w+):/g, (match, sticker) => {
 
                 var result;
@@ -136,7 +133,6 @@
                     if (sticker.toLowerCase() == stickerName) {
                         var url = "<img class='sticker' src='./Chat/Stickers/" + stickerName + "." + stickerType + "'>"
 
-                        console.log(url)
                         result = url;
                     }
                 })
@@ -157,7 +153,6 @@
         var editor = Array.from(document.getElementById("textDisplay").children);
         editor.forEach((x) => {
             if (x.classList.contains("mark")) {
-                console.log(x.innerText)
                 //kill(x)
             }
         })
@@ -199,7 +194,6 @@
 
                     key = key.replace(/a\.([^]+)/, "")
                 }
-                console.log(key.toLowerCase())
                 if (key.toLowerCase().includes("f(")) {
                     var animation = key.match(/f\(([^;]+)\)/i)[1]
 
@@ -213,7 +207,6 @@
                     markDown = markDown.slice(0, -2) + ";"
 
                     key = key.replace(/f\(([^]+)\)/i, "")
-                    console.log(markDown)
 
                 }
                 if (key.toLowerCase().includes("cw(")) {
@@ -304,6 +297,14 @@
                 }
                 if (key.toLowerCase().includes("y")) {
                     markDown += "display:inline-block; transform:scaley(-1);"
+                }
+                //Time
+                if (key.toLowerCase().includes("t")) {
+                    var input = new Date(Date.parse(content));
+                    if(input){
+                        content = input.toLocaleString();
+                    }
+                
                 }
                 
 
