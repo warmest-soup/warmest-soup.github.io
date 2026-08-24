@@ -1,3 +1,259 @@
+<div id="message">
+    !Scheduler
+</div>
+
+<style>
+    .Scheduler {
+        width: 20em;
+        text-align: center;
+    }
+
+    .schedulerInput {
+        background: lightgray;
+        color: rgb(73, 73, 73);
+        width: 2.5em;
+        border-radius: 2em;
+        border: none;
+        box-shadow:
+            0em 0em 0em .1em black,
+            inset -.1em .1em .3em .2em white,
+            inset .5em -.5em .5em -.4em black;
+
+        text-align: center;
+
+        transition:
+            background .5s ease-out,
+            color .5s ease-out,
+            box-shadow .5s ease-out;
+    }
+
+    .schedulerinput:focus {
+        background: white;
+        color: black;
+
+        box-shadow:
+            0em 0em 0em .1em black,
+            inset -.1em .1em .0em .2em white,
+            inset .5em -.5em .2em -.6em black;
+
+    }
+
+    .Year {
+        width: 3.5em;
+    }
+
+    .SchedulerButtons {
+        display: flex;
+        justify-content: space-around;
+        margin-top:1em;
+        margin-bottom:1em;
+    }
+</style>
+
+<script>
+    function Clock(clock) {
+        setInterval(() => clock.textContent = new Date().toUTCString(), 1000)
+    }
+    function ClockLocal(clock) {
+        var weekday = [
+            "Sun",
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat"
+        ]
+        var months = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+        ]
+
+        setInterval(() => clock.textContent =
+            weekday[new Date().getDay()] + ", " +
+            new Date().getDate() + " " +
+            months[new Date().getMonth()] + " " +
+            new Date().getFullYear() + " " +
+            String(new Date().getHours()).padStart(2, "0") + ":" +
+            String(new Date().getMinutes()).padStart(2, "0") + ":" +
+            String(new Date().getSeconds()).padStart(2, "0") +
+            " LOCAL", 1000);
+    }
+    function setValue(container, value) {
+        text.value = value
+    }
+    function copyTmark(start) {
+        var setTime = start.parentNode.parentNode.children[3];
+        var day = setTime.children[0].value;
+        var month = setTime.children[1].value;
+        var year = setTime.children[2].value;
+        var hour = setTime.children[3].value;
+        var min = setTime.children[4].value;
+
+        var localTime = month + "/" + day + "/" + year + " " + hour + ":" + min;
+
+        var conversion = new Date(localTime).toUTCString();
+
+        console.log(min)
+        navigator.clipboard.writeText("t|" + conversion + "|")
+    }
+    function updateSchedPreview(start) {
+        var setTime = start.parentNode
+        var day = setTime.children[0].value;
+        var month = setTime.children[1].value;
+        var year = setTime.children[2].value;
+        var hour = setTime.children[3].value;
+        var min = setTime.children[4].value;
+
+        var localTime = month + "/" + day + "/" + year + " " + hour + ":" + min;
+
+
+        var weekday = [
+            "Sun",
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat"
+        ]
+        var months = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+        ]
+
+        var userDate = new Date(localTime)
+
+        var newDate =
+            weekday[userDate.getDay()] + ", " +
+            userDate.getDate() + " " +
+            months[userDate.getMonth()] + " " +
+            userDate.getFullYear() + " " +
+            String(userDate.getHours()).padStart(2, "0") + ":" +
+            String(userDate.getMinutes()).padStart(2, "0") +
+            " LOCAL"
+
+            
+        var preview = start.parentNode.parentNode.children[4]
+        if(!isNaN(userDate)){
+            preview.innerText=newDate;
+        }
+        
+        console.log(preview)
+    }
+    function addGadget(container) {
+        if(container.innerText.match("!Scheduler")){
+            container.innerHTML=container.innerHTML.replace("!Scheduler", "<div class='Scheduler'><div class='SchedStandard'></div><div class='SchedLocal'></div><br><div class='SchedAdjust'><input class='schedulerInput day' value='"+ new Date(Date.now()).getDate() +"' onclick='select(this)' oninput='updateSchedPreview(this)'> /<input class='schedulerInput Month' value='"+new Date(Date.now()).getMonth()+"' onclick='select(this)' oninput='updateSchedPreview(this)'> /<input class='schedulerInput year' value='"+new Date(Date.now()).getFullYear()+"' onclick='select(this)' oninput='updateSchedPreview(this)'>  at  <input class='schedulerInput hour' value='"+new Date(Date.now()).getHours()+"' onclick='select(this)' oninput='updateSchedPreview(this)'> :<input class='schedulerInput min' value='"+new Date(Date.now()).getMinutes()+"' onclick='select(this)' oninput='updateSchedPreview(this)'></div><div id='SchedPreview'></div><div class='SchedulerButtons'><button>Send Time</button><button onclick='copyTmark(this)'>Copy</button></div></div>")
+        
+        var standard = container.getElementsByClassName("SchedStandard")[0]
+        Clock(standard)
+        var local = container.getElementsByClassName("SchedLocal")[0]
+        ClockLocal(local)
+        var preview = container.getElementsByClassName("SchedAdjust")[0].children[0]
+        updateSchedPreview(preview)
+        }
+    }
+    addGadget(message)
+    
+</script>
+
+So I need a command to deploy or embed a scheduler.
+The scheduler is embedded inside a message, and displays the current time, and then lets you set a time.
+<br><br>
+Beneath this is a button, that when pressed copies your adjusted time to your clipboard in GMT
+<br><br>
+No, it makes more sense to send a message, because then you can say "When are y'all free?"
+<br>
+<br><br>
+Okay.
+So I want a t| markdown that translates GMT to Local time for the reader.
+<br><br>
+and a scheduler widget that lets people send and copy preformatted t|GMT| times.
+<br><br><br>
+So what does the scheduler NEED?
+<br>
+It needs...<br>
+Your local time.
+An interface to modify it
+and the adjusted time.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <meta name="theme-color" content="black" />
@@ -34,18 +290,18 @@
         background: black;
     }
 </style>
- 
- 
+
+
 <script>
-    
+
     // Toggle this code off when updating because it breaks cookie support on the Chat potentially.
     var textbox = document.getElementById("textbox")
-    var textDisplay = document.getElementById("textDisplay"); 
+    var textDisplay = document.getElementById("textDisplay");
     textbox.value = document.cookie
     textDisplay.innerText = textbox.value
-    
-    markDown(textDisplay, 20); 
-    addSticker(textDisplay); 
+
+    markDown(textDisplay, 20);
+    addSticker(textDisplay);
     openStickers(textDisplay);
     // End toggle here! */
 
@@ -157,6 +413,18 @@
             }
         })
     }
+
+    //Day names
+    var temporalWeekday = [
+        "",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Satday",
+        "Sunday"
+    ]
 
     //MarkDown
     function markDown(textContainer, imgScale) {
@@ -300,13 +568,44 @@
                 }
                 //Time
                 if (key.toLowerCase().includes("t")) {
-                    var input = new Date(Date.parse(content));
-                    if(input){
-                        content = input.toLocaleString();
-                    }
-                
+                    var weekday = [
+                        "Sun",
+                        "Mon",
+                        "Tue",
+                        "Wed",
+                        "Thu",
+                        "Fri",
+                        "Sat"
+                    ]
+                    var months = [
+                        "Jan",
+                        "Feb",
+                        "Mar",
+                        "Apr",
+                        "May",
+                        "Jun",
+                        "Jul",
+                        "Aug",
+                        "Sep",
+                        "Oct",
+                        "Nov",
+                        "Dec"
+                    ]
+
+                    var userDate = new Date(content)
+
+                    var newDate =
+                        weekday[userDate.getDay()] + ", " +
+                        userDate.getDate() + " " +
+                        months[userDate.getMonth()] + " " +
+                        userDate.getFullYear() + " " +
+                        String(userDate.getHours()).padStart(2, "0") + ":" +
+                        String(userDate.getMinutes()).padStart(2, "0") +
+                        " LOCAL"
+
+                    content = newDate
                 }
-                
+
 
 
                 return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='mark " + spClass + "' " + link + ">" + content + "</" + tagType + ">"
@@ -334,8 +633,7 @@
     }
 
     #textbox,
-    #textDisplay,
-    input {
+    #textDisplay {
         font-size: 1em;
         font-family: Zen Old Mincho;
         border-radius: 1em;
@@ -452,7 +750,7 @@
         }
 
         10% {
-            filter:brightness(200%);
+            filter: brightness(200%);
             color: white;
             text-shadow:
                 0em 0em .4em hsl(0, 0%, 100%),

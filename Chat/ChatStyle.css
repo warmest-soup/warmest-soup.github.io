@@ -801,6 +801,52 @@ blockquote {
     }
 }
 
+.Scheduler {
+        width: 20em;
+        text-align: center;
+    }
+
+    .schedulerInput {
+        background: lightgray;
+        color: rgb(73, 73, 73);
+        width: 2.5em;
+        border-radius: 2em;
+        border: none;
+        box-shadow:
+            0em 0em 0em .1em black,
+            inset -.1em .1em .3em .2em white,
+            inset .5em -.5em .5em -.4em black;
+
+        text-align: center;
+
+        transition:
+            background .5s ease-out,
+            color .5s ease-out,
+            box-shadow .5s ease-out;
+    }
+
+    .schedulerinput:focus {
+        background: white;
+        color: black;
+
+        box-shadow:
+            0em 0em 0em .1em black,
+            inset -.1em .1em .0em .2em white,
+            inset .5em -.5em .2em -.6em black;
+
+    }
+
+    .Year {
+        width: 3.5em;
+    }
+
+    .SchedulerButtons {
+        display: flex;
+        justify-content: space-around;
+        margin-top:1em;
+        margin-bottom:1em;
+    }
+
 /*Scroll bar adjustments*/
 ::-webkit-scrollbar {
     width: .7em;

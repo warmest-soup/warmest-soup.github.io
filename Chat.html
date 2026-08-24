@@ -30,6 +30,14 @@
 
                 </div>
                 <br><br><br>
+                <span style="font-size:1.5em;">Stickers:</span>
+                <br> Gadgets are tools embedded into one's message that provide helpful functions to chat users. They are used appending a "!" to the begining of their name.
+                <br>
+                <br><span style="font-size:1.5em;">Scheduler:</span> A GMT to Local time converter. LOCAL time is relative to the person viewing it, and is automatically adjusted for each chat member. 
+                The Scheduler's input is in d/m/y and 24-hour format. 
+                <br> Pressing the "Copy" button, will copy the GMT equivalent of the entered time, preformatted with the t| markdown. this can be pasted into a message to coordinate events.
+                <br><br> * The "Send Time" button is currently non-functional, as I became very tired 🥲
+                <br><br><br>
 
                 <br><span style="font-size:1.5em;">F() Animations:</span>
                 <br> Intended for markdown:
@@ -60,6 +68,7 @@
                 <br> c. Color
                 <br> f() Animate
                 <br>
+                <br> t Local Time adjustment
                 <br> a. Link
                 <br> img. Image embed
                 <br>
@@ -124,7 +133,11 @@
                 example f(spin.grow.fade)
                 <br>f(Glow)|<span style="animation:Glow 2s infinite linear;">This text will be animated</span>|
                 <br>
-                <br> <span style="font-size:1.5em;">a.</span> Link: a.url|<a href="www.google.com">This text will become
+                <br> <span style="font-size:1.5em;">T</span> Local Time adjust: This markdown will convert GMT dates and times to the Local Timezones of those who view the message. It's possible for it to read many date formats, but the surest way to get the correct time & date is to copy a preformatted t| from the !Scheduler gadget. 
+                <br>t|Sat, 21 sep 1978 21:13 LOCAL|
+                <br>
+                <br> <span style="font-size:1.5em;">a.</span> Link: Formatted, clickable links that display clean text.
+                <br> a.www.yourUrl.com|<a href="www.google.com">This text will become
                     a
                     clickable link</a>|
 
@@ -530,6 +543,45 @@
                 if (key.toLowerCase().includes("y")) {
                     markDown += "display:inline-block; transform:scaley(-1);"
                 }
+                //Time
+                if (key.toLowerCase().includes("t")) {
+                    var weekday = [
+                        "Sun",
+                        "Mon",
+                        "Tue",
+                        "Wed",
+                        "Thu",
+                        "Fri",
+                        "Sat"
+                    ]
+                    var months = [
+                        "Jan",
+                        "Feb",
+                        "Mar",
+                        "Apr",
+                        "May",
+                        "Jun",
+                        "Jul",
+                        "Aug",
+                        "Sep",
+                        "Oct",
+                        "Nov",
+                        "Dec"
+                    ]
+
+                    var userDate = new Date(content)
+
+                    var newDate =
+                        weekday[userDate.getDay()] + ", " +
+                        userDate.getDate() + " " +
+                        months[userDate.getMonth()] + " " +
+                        userDate.getFullYear() + " " +
+                        String(userDate.getHours()).padStart(2, "0") + ":" +
+                        String(userDate.getMinutes()).padStart(2, "0") +
+                        " LOCAL"
+
+                    content = newDate
+                }
 
 
 
@@ -549,10 +601,23 @@
         "vhonestjo, jpg",
         "vsunpuppy, png",
         "vwtf, jpg",
+        "vfro, png",
+        "vhairflip, png",
+        "vexplode, png",
+        "vblow, png",
+        "vsass, png",
+        "vdizzy, png",
+        "vbow, png",
+        "vfaint, png",
+        "vumbrella, png",
         "souphuhu, png",
         "soupracoon, png",
         "soupbaby, png",
         "meowwalk, gif",
+        "meowwalk2, png",
+        "meowzombie, png",
+        "meowhug, png",
+        "meowchinscratch, png",
         "mangosilence, png",
         "mangoangy, png",
         "mangoeep, png",
@@ -568,7 +633,11 @@
         "tribow, gif",
         "trifaint, gif",
         "tripunch, gif",
-        "triwave, gif"
+        "triwave, gif",
+        "triceracopter, png",
+        "tridevilhorns, png",
+        "triguns, png",
+        "triskip, png"
     ];
     stickerList.forEach((x) => {
         document.getElementById("StickerHelp").innerHTML += "<br>- " + x.split(", ")[0]
@@ -637,6 +706,130 @@
         }
     }
 
+    //Gadgets
+    function Clock(clock) {
+        setInterval(() => clock.textContent = new Date().toUTCString(), 1000)
+    }
+    function ClockLocal(clock) {
+        var weekday = [
+            "Sun",
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat"
+        ]
+        var months = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+        ]
+
+        setInterval(() => clock.textContent =
+            weekday[new Date().getDay()] + ", " +
+            new Date().getDate() + " " +
+            months[new Date().getMonth()] + " " +
+            new Date().getFullYear() + " " +
+            String(new Date().getHours()).padStart(2, "0") + ":" +
+            String(new Date().getMinutes()).padStart(2, "0") + ":" +
+            String(new Date().getSeconds()).padStart(2, "0") +
+            " LOCAL", 1000);
+    }
+    function setValue(container, value) {
+        text.value = value
+    }
+    function copyTmark(start) {
+        var setTime = start.parentNode.parentNode.children[3];
+        var day = setTime.children[0].value;
+        var month = setTime.children[1].value;
+        var year = setTime.children[2].value;
+        var hour = setTime.children[3].value;
+        var min = setTime.children[4].value;
+
+        var localTime = month + "/" + day + "/" + year + " " + hour + ":" + min;
+
+        var conversion = new Date(localTime).toUTCString();
+
+        console.log(min)
+        navigator.clipboard.writeText("t|" + conversion + "|")
+    }
+    function updateSchedPreview(start) {
+        var setTime = start.parentNode
+        var day = setTime.children[0].value;
+        var month = setTime.children[1].value;
+        var year = setTime.children[2].value;
+        var hour = setTime.children[3].value;
+        var min = setTime.children[4].value;
+
+        var localTime = month + "/" + day + "/" + year + " " + hour + ":" + min;
+
+
+        var weekday = [
+            "Sun",
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat"
+        ]
+        var months = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+        ]
+
+        var userDate = new Date(localTime)
+
+        var newDate =
+            weekday[userDate.getDay()] + ", " +
+            userDate.getDate() + " " +
+            months[userDate.getMonth()] + " " +
+            userDate.getFullYear() + " " +
+            String(userDate.getHours()).padStart(2, "0") + ":" +
+            String(userDate.getMinutes()).padStart(2, "0") +
+            " LOCAL"
+
+
+        var preview = start.parentNode.parentNode.children[4]
+        if (!isNaN(userDate)) {
+            preview.innerText = newDate;
+        }
+
+        console.log(preview)
+    }
+    //Add The Gadgets themselves
+    function addGadget(container) {
+        if (container.innerText.match("!Scheduler")) {
+            container.innerHTML = container.innerHTML.replace("!Scheduler", "<div class='Scheduler'><div class='SchedStandard'></div><div class='SchedLocal'></div><br><div class='SchedAdjust'><input class='schedulerInput day' value='" + new Date(Date.now()).getDate() + "' onclick='select(this); event.stopPropagation()' oninput='updateSchedPreview(this)'> /<input class='schedulerInput Month' value='" + (new Date(Date.now()).getMonth() + 1) + "' onclick='select(this); event.stopPropagation()' oninput='updateSchedPreview(this)'> /<input class='schedulerInput year' value='" + new Date(Date.now()).getFullYear() + "' onclick='select(this); event.stopPropagation()' oninput='updateSchedPreview(this)'>  at  <input class='schedulerInput hour' value='" + new Date(Date.now()).getHours() + "' onclick='select(this); event.stopPropagation()' oninput='updateSchedPreview(this)'> :<input class='schedulerInput min' value='" + new Date(Date.now()).getMinutes() + "' onclick='select(this); event.stopPropagation()' oninput='updateSchedPreview(this)'></div><div id='SchedPreview'></div><div class='SchedulerButtons'><button>Send Time</button><button onclick='copyTmark(this); event.stopPropagation()'>Copy</button></div></div>")
+
+            var standard = container.getElementsByClassName("SchedStandard")[0]
+            Clock(standard)
+            var local = container.getElementsByClassName("SchedLocal")[0]
+            ClockLocal(local)
+            var preview = container.getElementsByClassName("SchedAdjust")[0].children[0]
+            updateSchedPreview(preview)
+        }
+    }
 
     //LineBreak Button
     function newLine() {
@@ -813,7 +1006,7 @@
                 messageType = "Entry";
                 markDown(newMessage.children[0], 50);
                 addSticker(newMessage.children[0]);
-                
+
             } else if (x.val().Entrance == "Exit") {
                 newMessage.classList.add("Entrance");
                 newMessage.innerHTML = "<span style=color:" + x.val().Color + ";>" + x.val().Author + "</span> has wandered off. :c";
@@ -899,6 +1092,7 @@
             markDown(newMessage.children[1], 70);
             addSticker(newMessage.children[0])
             addSticker(newMessage.children[1])
+            addGadget(newMessage.children[1]);
 
 
             //@ Users-------------------------------!!!
@@ -984,7 +1178,7 @@
     })
 
 
-    // Turn off entry messages.
+    /* Turn off entry messages.
     document.addEventListener("visibilitychange", () => {
         //When page is hidden.
 
