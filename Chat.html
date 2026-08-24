@@ -819,7 +819,7 @@
     }
     //Add The Gadgets themselves
     function addGadget(container) {
-        if (container.innerText.match("!Scheduler")) {
+        if (container.innerText.match(/!Scheduler/i)) {
             container.innerHTML = container.innerHTML.replace("!Scheduler", "<div class='Scheduler'><div class='SchedStandard'></div><div class='SchedLocal'></div><br><div class='SchedAdjust'><input class='schedulerInput day' value='" + new Date(Date.now()).getDate() + "' onclick='select(this); event.stopPropagation()' oninput='updateSchedPreview(this)'> /<input class='schedulerInput Month' value='" + (new Date(Date.now()).getMonth() + 1) + "' onclick='select(this); event.stopPropagation()' oninput='updateSchedPreview(this)'> /<input class='schedulerInput year' value='" + new Date(Date.now()).getFullYear() + "' onclick='select(this); event.stopPropagation()' oninput='updateSchedPreview(this)'>  at  <input class='schedulerInput hour' value='" + new Date(Date.now()).getHours() + "' onclick='select(this); event.stopPropagation()' oninput='updateSchedPreview(this)'> :<input class='schedulerInput min' value='" + new Date(Date.now()).getMinutes() + "' onclick='select(this); event.stopPropagation()' oninput='updateSchedPreview(this)'></div><div id='SchedPreview'></div><div class='SchedulerButtons'><button>Send Time</button><button onclick='copyTmark(this); event.stopPropagation()'>Copy</button></div></div>")
 
             var standard = container.getElementsByClassName("SchedStandard")[0]
@@ -1178,7 +1178,7 @@
     })
 
 
-    /* Turn off entry messages.
+    // Turn off entry messages.
     document.addEventListener("visibilitychange", () => {
         //When page is hidden.
 
