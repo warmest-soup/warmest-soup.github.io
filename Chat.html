@@ -433,7 +433,7 @@
 
                 } else if (key.toLowerCase().includes("a.")) {
                     tagType = "a"
-                    link = "href='" + key.match(/a\.([^]+)/)[1] + "'";
+                    link = "href='" + key.toLowerCase().match(/a\.([^]+)/)[1] + "'";
 
                     key = key.replace(/a\.([^]+)/, "")
                 }
