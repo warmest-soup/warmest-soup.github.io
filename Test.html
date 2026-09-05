@@ -602,16 +602,16 @@ and the adjusted time.
 
                         var newDate = new Date(Date.now())
 
-                        var weeks = parseInt(content.match(/(?<=(\d+)\s)week/i)?.[1] || 0);
+                        var weeks = parseInt(content.match(/(?<=([-]\d+)\s)week/i)?.[1] || 0);
                         newDate.setDate(newDate.getDate() + (7 * weeks))
 
-                        var days = parseInt(content.match(/(?<=(\d+)\s)day/i)?.[1] || 0);
+                        var days = parseInt(content.match(/(?<=([-]\d+)\s)day/i)?.[1] || 0);
                         newDate.setDate(newDate.getDate() + days)
 
-                        var hours = parseInt(content.match(/(?<=(\d+)\s)hour/i)?.[1] || 0);
+                        var hours = parseInt(content.match(/(?<=([-]\d+)\s)hour/i)?.[1] || 0);
                         newDate.setHours(newDate.getHours() + hours)
 
-                        var minutes = parseInt(content.match(/(?<=(\d+)\s)minute/i)?.[1] || 0);
+                        var minutes = parseInt(content.match(/(?<=([-]\d+)\s)minute/i)?.[1] || 0);
                         newDate.setMinutes(newDate.getMinutes() + minutes)
 
                         userDate = newDate;
