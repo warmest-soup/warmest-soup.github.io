@@ -45,8 +45,8 @@
     .SchedulerButtons {
         display: flex;
         justify-content: space-around;
-        margin-top:1em;
-        margin-bottom:1em;
+        margin-top: 1em;
+        margin-bottom: 1em;
     }
 </style>
 
@@ -103,8 +103,6 @@
         var localTime = month + "/" + day + "/" + year + " " + hour + ":" + min;
 
         var conversion = new Date(localTime).toUTCString();
-
-        console.log(min)
         navigator.clipboard.writeText("t|" + conversion + "|")
     }
     function updateSchedPreview(start) {
@@ -153,28 +151,26 @@
             String(userDate.getMinutes()).padStart(2, "0") +
             " LOCAL"
 
-            
+
         var preview = start.parentNode.parentNode.children[4]
-        if(!isNaN(userDate)){
-            preview.innerText=newDate;
+        if (!isNaN(userDate)) {
+            preview.innerText = newDate;
         }
-        
-        console.log(preview)
     }
     function addGadget(container) {
-        if(container.innerText.match("!Scheduler")){
-            container.innerHTML=container.innerHTML.replace("!Scheduler", "<div class='Scheduler'><div class='SchedStandard'></div><div class='SchedLocal'></div><br><div class='SchedAdjust'><input class='schedulerInput day' value='"+ new Date(Date.now()).getDate() +"' onclick='select(this)' oninput='updateSchedPreview(this)'> /<input class='schedulerInput Month' value='"+new Date(Date.now()).getMonth()+"' onclick='select(this)' oninput='updateSchedPreview(this)'> /<input class='schedulerInput year' value='"+new Date(Date.now()).getFullYear()+"' onclick='select(this)' oninput='updateSchedPreview(this)'>  at  <input class='schedulerInput hour' value='"+new Date(Date.now()).getHours()+"' onclick='select(this)' oninput='updateSchedPreview(this)'> :<input class='schedulerInput min' value='"+new Date(Date.now()).getMinutes()+"' onclick='select(this)' oninput='updateSchedPreview(this)'></div><div id='SchedPreview'></div><div class='SchedulerButtons'><button>Send Time</button><button onclick='copyTmark(this)'>Copy</button></div></div>")
-        
-        var standard = container.getElementsByClassName("SchedStandard")[0]
-        Clock(standard)
-        var local = container.getElementsByClassName("SchedLocal")[0]
-        ClockLocal(local)
-        var preview = container.getElementsByClassName("SchedAdjust")[0].children[0]
-        updateSchedPreview(preview)
+        if (container.innerText.match("!Scheduler")) {
+            container.innerHTML = container.innerHTML.replace("!Scheduler", "<div class='Scheduler'><div class='SchedStandard'></div><div class='SchedLocal'></div><br><div class='SchedAdjust'><input class='schedulerInput day' value='" + new Date(Date.now()).getDate() + "' onclick='select(this)' oninput='updateSchedPreview(this)'> /<input class='schedulerInput Month' value='" + new Date(Date.now()).getMonth() + "' onclick='select(this)' oninput='updateSchedPreview(this)'> /<input class='schedulerInput year' value='" + new Date(Date.now()).getFullYear() + "' onclick='select(this)' oninput='updateSchedPreview(this)'>  at  <input class='schedulerInput hour' value='" + new Date(Date.now()).getHours() + "' onclick='select(this)' oninput='updateSchedPreview(this)'> :<input class='schedulerInput min' value='" + new Date(Date.now()).getMinutes() + "' onclick='select(this)' oninput='updateSchedPreview(this)'></div><div id='SchedPreview'></div><div class='SchedulerButtons'><button>Send Time</button><button onclick='copyTmark(this)'>Copy</button></div></div>")
+
+            var standard = container.getElementsByClassName("SchedStandard")[0]
+            Clock(standard)
+            var local = container.getElementsByClassName("SchedLocal")[0]
+            ClockLocal(local)
+            var preview = container.getElementsByClassName("SchedAdjust")[0].children[0]
+            updateSchedPreview(preview)
         }
     }
     addGadget(message)
-    
+
 </script>
 
 So I need a command to deploy or embed a scheduler.
@@ -592,7 +588,34 @@ and the adjusted time.
                         "Dec"
                     ]
 
+
+                    content += " GMT"
                     var userDate = new Date(content)
+                    if (!userDate) {
+                        content = "sometime?"
+                    } else if (
+                        content.toLowerCase().includes("week") ||
+                        content.toLowerCase().includes("day") ||
+                        content.toLowerCase().includes("hour") ||
+                        content.toLowerCase().includes("minute")
+                    ) {
+
+                        var newDate = new Date(Date.now())
+
+                        var weeks = parseInt(content.match(/(?<=(\d+)\s)week/i)?.[1] || 0);
+                        newDate.setDate(newDate.getDate() + (7 * weeks))
+
+                        var days = parseInt(content.match(/(?<=(\d+)\s)day/i)?.[1] || 0);
+                        newDate.setDate(newDate.getDate() + days)
+
+                        var hours = parseInt(content.match(/(?<=(\d+)\s)hour/i)?.[1] || 0);
+                        newDate.setHours(newDate.getHours() + hours)
+
+                        var minutes = parseInt(content.match(/(?<=(\d+)\s)minute/i)?.[1] || 0);
+                        newDate.setMinutes(newDate.getMinutes() + minutes)
+
+                        userDate = newDate;
+                    }
 
                     var newDate =
                         weekday[userDate.getDay()] + ", " +
@@ -604,6 +627,7 @@ and the adjusted time.
                         " LOCAL"
 
                     content = newDate
+
                 }
 
 
