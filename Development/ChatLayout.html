@@ -12,3 +12,13 @@
         <input>
     </div>
 </div>
+<script>
+    function updateViewportHeight() {
+        const height = window.visualViewport?.height ?? window.innerHeight;
+        document.documentElement.style.setProperty('--viewport-height', `${height}px`);
+    }
+
+    updateViewportHeight();
+
+    window.visualViewport?.addEventListener('resize', updateViewportHeight);
+</script>
