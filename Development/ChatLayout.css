@@ -2,7 +2,7 @@
     color-scheme: dark;
     font-family: "Zen Old Mincho";
     font-weight: 400;
-    font-size: min(.8rem, 2.5vw);
+    font-size: 1rem;
     
     --AuthorColor: white;
 }
@@ -20,28 +20,28 @@
 #page{
     background: url(https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/ChatroomForeground.jpg) center 15% / cover no-repeat;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     overflow: clip;
 
     display:flex;
     padding-top:2vh;
     flex-direction:column;
-    gap:1%;
+    gap:1vh;
 }
 
 #messageWindow{
     background: url(https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/8.gif) center 15% / cover no-repeat;
     overflow:clip;
-    width:90%;
-    height:70%;
+    width:90vw;
+    height:70vh;
 }
 
 #UserInput {
     background: skyblue;
     overflow:clip;
-    width:90%;
-    height:20%;
+    width:90vw;
+    height:20vh;
 }
 
 #page>:nth-child(1) {
