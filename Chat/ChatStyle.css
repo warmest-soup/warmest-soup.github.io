@@ -2,25 +2,52 @@
     color-scheme: dark;
     font-family: "Zen Old Mincho";
     font-weight: 400;
-    font-size: min(.8rem, 2.5vw);
+    font-size: min(.9rem, 2.5vw);
     
     --AuthorColor: white;
+
+    
+    background: url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/ChatroomForeground.jpg") center 15% / cover no-repeat;
 }
-html{
-    height:-webkit-fill-available;
-}
-body{
-    min-height:100vh;
-    min-height:-webkit-fill-available;
-}
-::selection {
-    background: #aa7cb3ad;
+/*Force compliance with default.*/
+input,
+textarea,
+button {
+    font-family: "Zen Old Mincho";
+    line-height: 1.2rem;
+    font-weight: 400;
+    font-size: min(1rem, 2.5vw);
+    background: none;
 }
 
+/*Set default style*/
+*,
+input {
+    margin: 0em;
+    padding: 0em;
+    box-sizing: border-box;
+    border: none;
+    resize: none;
+}
+
+/*Text input default size*/
+input {
+    width: 6em;
+    text-align: center;
+    padding: .1em;
+}
+/*Placeholder text.*/
+input::placeholder,
+textarea::placeholder {
+    color: #698bed;
+}
+
+/*Special Default Stylings*/
+/*Range style*/
 input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
-    width: 90%;
+    width: min(90%, 8em);
     height: 1%;
     background: white;
     border-radius: 50%;
@@ -32,7 +59,6 @@ input[type="range"] {
         0em 0em 1em .2em rgb(0 140 255);
     touch-action: none;
 }
-
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -48,37 +74,7 @@ input[type="range"]::-webkit-slider-thumb {
         0em 0em .7em .0em rgb(255 255 255),
         0em 0em 1em .2em rgb(0 140 255);
 }
-
-*,
-input {
-    margin: 0em;
-    padding: 0em;
-    box-sizing: border-box;
-    border: none;
-    resize: none;
-}
-
-input,
-textarea,
-button {
-    font-family: "Zen Old Mincho";
-    line-height: 1.2rem;
-    font-weight: 400;
-    font-size: min(1rem, 2.5vw);
-    background: none;
-}
-
-input {
-    width: 6em;
-    text-align: center;
-    padding: .1em;
-}
-
-input::placeholder,
-textarea::placeholder {
-    color: #698bed;
-}
-
+/*Checkbox defualt styling*/
 input[type="checkbox"] {
     background-color: #ffffff00;
     -moz-appeareance: none;
@@ -96,7 +92,6 @@ input[type="checkbox"] {
         box-shadow .5s ease-out,
         transform .2s ease-out;
 }
-
 input[type="checkbox"]:checked {
     box-Shadow:
         0em 0em 1em .1em #ffffff,
@@ -106,22 +101,7 @@ input[type="checkbox"]:checked {
     transform: scale(.5);
 }
 
-img {
-    border-radius: 1.5em;
-    box-shadow:
-        .2em .2em .5em 0em black,
-        -.2em -.2em .5em 0em white;
-    margin: 1em;
-}
-
-blockquote {
-    margin: .5em;
-    padding: .3em 1em .3em 1em;
-    box-shadow:
-        -.5em 0em 0em 0em #083a6d,
-        inset .2em 0em 2em 0em #040f18;
-}
-
+/*Preset styles*/
 /*FLEX COLUMNS!!!*/
 #messageBox,
 #UserInput,
@@ -153,11 +133,65 @@ blockquote {
     color: #92c8ff;
 }
 
+
+/*Styling begins here!------------------------*/
+
+/*Markdown Assets*/
+img {
+    border-radius: 10%;
+    box-shadow:
+        .2em .2em .5em 0em #000000,
+        -.2em -.2em .5em 0em #cffeff;
+    margin:.6em 0em .6em 0em;
+}
+blockquote {
+    margin: .5em;
+    padding: .3em 1em .8em 1em;
+    box-shadow:
+        -.3em 0em 0em .1em #083a6d,
+        -.6em 0em 0em 0em #75b4f4,
+        inset .2em 0em 2em 0em #040f18;
+    border-radius:5% 10% 10% 10%;
+}
+
+.spoilerPrimer {
+    background: #00000047;
+    padding: 0em .3em 0em .3em;
+
+    transition:
+        background .5s ease-out,
+        color .5s ease-out;
+}
+.spoiler {
+    background: #111111;
+    color: #111111;
+    text-shadow: none;
+}
+.spoiler::selection {
+    background: white;
+    color: white;
+}
+
+.sticker {
+    box-shadow: none;
+    height: 5em;
+    margin: -0em .5em -1em .5em;
+}
+
+/*Assets!!!!!!!!!!!!*/
+#page {
+    align-items: center;
+    width: 100dvw;
+    max-width:80em;
+    height: 100dvh;
+    overflow: clip;
+}
+
 #messageBox,
 #documentation{
-    gap: 1em;
+    gap: 2%;
     box-shadow:
-        0em 4em 4em -2em #1c349bdb,
+        0em 4em 4em -2em #3550c8db,
         0em -1em 1em .2em #000000db;
 
     margin: 1em;
@@ -171,7 +205,24 @@ blockquote {
 
     background: url(https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/8.gif) center 15% / cover no-repeat;
 }
+/*Help! Section*/
+#documentation{
+    position:fixed;
+    overflow:auto;
+    z-index:+2;
+    background: url(https://images.wondershare.com/filmora/article-images/how-to-add-tv-static-sound-effect-2.gif) center 15% / cover no-repeat;
+    border-radius:2em;
+    padding:0em;
+    
+}
+#documentation > *{
+    backdrop-filter:brightness(10%) hue-rotate(200deg);
+    color:#aaf7ff9c;
+    padding:2em;
+    box-shadow:inset 0em 0em 5em 5em black;
+}
 
+/*Chat messages*/
 /*Message Block*/
 .message,
 #Author,
@@ -190,9 +241,8 @@ blockquote {
     backdrop-filter:
         contrast(5000%) blur(10px) brightness(200%);
 
-    text-shadow: -.05em .05em .3em black;
+    text-shadow: -.1em .09em 0em black;
 }
-
 .message {
     word-wrap: break-word;
     max-width: 100%;
@@ -210,7 +260,6 @@ blockquote {
         box-shadow 2s cubic-bezier(0, 0, 0.2, 1),
         filter 2s cubic-bezier(0, 0, 0.2, 1);
 }
-
 .QuoteBlock {
     font-size: .9em;
     padding: .7em 1.2em 2em 2.2em;
@@ -228,7 +277,6 @@ blockquote {
 
     animation: quoteEnter .2s cubic-bezier(0.05, 0.54, 0.28, 0.96);
 }
-
 .quoteblock>a {
     text-decoration: none;
 
@@ -241,126 +289,13 @@ blockquote {
     width: 100%;
     display: block;
 }
-
-#Author {
-    width: 8em;
-    color: var(--AuthorColor);
-    font-weight: 900;
-}
-
-#Color:active {
-    outline: none;
-}
-
-#UserInput {
-    gap: 6%;
-    align-items: center;
-    height: 18%;
-}
-
-#Dashboard {
-    width: 100%;
-    align-self: start;
-    padding-left: 5%;
-    gap: 7%;
-}
-
-#AuthorInfo {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 90%;
-    margin-bottom: -1em;
-    margin-top: -.7em;
-}
-
-#AuthorInfo>:nth-child(2) {
-    width: 15%;
-    text-align: center;
-}
-
-#NameTag {
-    display: flex;
-    gap: .5em;
-    align-items: center;
-    justify-content: start;
-}
-
-#DraftBox {
-    width: 90%;
-    height: 100%;
-    padding: .5em;
-
-    transition: box-shadow 1s ease;
-
-}
-
-#DraftBox:focus {
-    outline: none;
-    box-shadow:
-        0em -.3em 1em 0em #000000,
-        0em 1em 1em 0em #5555e0,
-        inset 0em 4em 8em -6em #5555e0;
-
-}
-
-#Clock {
-    font-size: .8em;
-}
-
-#page {
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
-    overflow: clip;
-
-    background: url(https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/ChatroomForeground.jpg) center 15% / cover no-repeat;
-}
-
-#UserDisplay {
-    text-align: center;
-    font-size: 1.1em;
-    transform: translatey(.6em);
-}
-
-.spoilerPrimer {
-    background: #00000047;
-    padding: 0em .3em 0em .3em;
-
-    transition:
-        background .5s ease-out,
-        color .5s ease-out;
-}
-
-.spoiler {
-    background: #111111;
-    color: #111111;
-    text-shadow: none;
-}
-
-.spoiler::selection {
-    background: white;
-    color: white;
+.Timestamp {
+    font-size: .7em;
 }
 
 .reply2This {
     animation: replyGlow 2s infinite;
 }
-
-.Timestamp {
-    font-size: .7em;
-}
-
-.Entrance {
-    align-self: center;
-    font-size: .8em;
-    line-height: 1em;
-    padding: .5em 3em .5em 3em;
-    border-radius: 3em;
-    box-shadow: none;
-    background: #232848a6;
-}
-
 .Highlight {
     background: #92c8c1;
     filter: contrast(90%) brightness(115%);
@@ -376,10 +311,112 @@ blockquote {
 
 }
 
-.sticker {
+.Entrance {
+    align-self: center;
+    font-size: .8em;
+    line-height: 1em;
+    padding: .5em 3em .5em 3em;
+    border-radius: 3em;
     box-shadow: none;
-    height: 5em;
-    margin: -0em .5em -1em .5em;
+    background: #232848a6;
+}
+
+#ToBottom {
+    position: absolute;
+    transform:
+        translatex(min(45dvw, 25em)) translatey(-10vh);
+
+    background: #2b595300;
+    padding: .5em 1em .5em 1em;
+    line-height: 1.1em;
+
+    border-radius: 50%;
+    font-size: 2vh;
+
+    backdrop-filter: blur(3px);
+
+    text-shadow:
+        0em 0em .1em white,
+        0em 0em .1em white,
+        0em 0em .1em white,
+        0em 0em .1em white,
+        0em 0em .1em white,
+        0em 0em .1em white;
+
+    box-shadow:
+        0em 0em 1em 0em white,
+        0em 0em .5em 0em white,
+        0em 0em .2em 0em white,
+
+        inset -.1em .1em .3em .1em #ffffff,
+        inset -.2em .2em .5em .2em #00ffe99e,
+        inset .05em -.05em .4em 0em #0800d4,
+        inset .2em -.2em .5em .2em #690337,
+        inset .5em -.5em .5em .7em #6283ff6e;
+    filter:
+        contrast(150%)
+        blur(1px)
+        brightness(100%);
+
+    transition:filter .2s ease-out;
+}
+#ToBottom:hover{
+    filter:
+        contrast(120%)
+        blur(0px)
+        brightness(300%);
+}
+
+#UserInput {
+    gap: 6%;
+    align-items: center;
+    height: 18%;
+}
+/*User Input Text color*/
+#UserInput,
+#draftBox{
+    color:#ffffff;
+    text-shadow: 
+        -.1em .09em 0em black,
+        -.1em .09em .5em black,
+        -.1em .09em .5em black;
+}
+
+#Dashboard {
+    width: 100%;
+    align-self: start;
+    padding-left: 5%;
+    gap: 7%;
+}
+#AuthorInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin-bottom: -1em;
+    margin-top: -.7em;
+}
+#AuthorInfo>:nth-child(2) {
+    width: 15%;
+    text-align: center;
+}
+#NameTag {
+    display: flex;
+    gap: .5em;
+    align-items: center;
+    justify-content: start;
+}
+#Author {
+    width: 8em;
+    color: var(--AuthorColor);
+    font-weight: 900;
+}
+#Color:active {
+    outline: none;
+}
+
+#Clock {
+    font-size: .8em;
 }
 
 #editor {
@@ -388,11 +425,26 @@ blockquote {
     width: 90%;
     gap: 1em;
 }
+#DraftBox {
+    width: 90%;
+    height: 100%;
+    padding: .5em;
+
+    transition: box-shadow 1s ease;
+
+}
+#DraftBox:focus {
+    outline:none;
+    box-shadow:
+        0em -.3em 1em 0em #000000,
+        0em 1em 1em 0em #5555e0,
+        inset 0em 2em 5em -1em #211a68;
+
+}
 
 #MobileButtons {
     justify-content: space-around;
 }
-
 #MobileButtons>*,
 #StyleButton {
     background: #1e5b7f82;
@@ -407,11 +459,9 @@ blockquote {
     filter:
         brightness(100%) contrast(800%);
 }
-
 #styleButtons {
     width: 5.5em;
 }
-
 #LineBreak,
 #SendButton,
 #StyleButton {
@@ -425,7 +475,9 @@ blockquote {
         box-shadow .1s ease-out,
         transform .1s ease-out;
 }
-
+#StyleButton {
+    height: 3em;
+}
 #LineBreak:active,
 #SendButton:active,
 #StyleButton:active {
@@ -441,52 +493,6 @@ blockquote {
 
 }
 
-#StyleButton {
-    height: 3em;
-}
-
-#ToBottom {
-    position: absolute;
-    transform:
-        translatex(44vw) translatey(-8vh);
-
-    background: #2b595300;
-    padding: 1vw 3vw 1.5vw 3vw;
-    line-height: 1.1em;
-
-    border-radius: 50%;
-    font-size: 2vh;
-
-    backdrop-filter: blur(1px);
-
-    text-shadow:
-        0em 0em .2em white,
-        0em 0em .2em white,
-        0em 0em .2em white,
-        0em 0em .2em white,
-        0em 0em .2em white,
-        0em 0em .2em white;
-
-    box-shadow:
-        0em 0em 0em .1em black,
-        inset 0em 0em .4em .1em #000c10,
-        inset 0em 0em .6em .5em #00deff47;
-}
-#documentation{
-    position:fixed;
-    overflow:auto;
-    z-index:+2;
-    background: url(https://images.wondershare.com/filmora/article-images/how-to-add-tv-static-sound-effect-2.gif) center 15% / cover no-repeat;
-    border-radius:2em;
-    padding:0em;
-    
-}
-#documentation > *{
-    backdrop-filter:brightness(10%) hue-rotate(200deg);
-    color:#aaf7ff9c;
-    padding:2em;
-    box-shadow:inset 0em 0em 5em 5em black;
-}
 #StickerList{
     background:none;
     position:fixed;
@@ -513,6 +519,12 @@ blockquote {
         0em 0em .2em black,
         0em 0em .2em black;
 }
+
+/*END OF STYLE!!!*/
+
+
+/*Animations---------------------------------------*/
+
 
 @keyframes hilit {
     50% {
@@ -638,7 +650,6 @@ blockquote {
 
     100% {}
 }
-
 @keyframes blur {
     0% {
         filter: blur(0px);
@@ -652,7 +663,6 @@ blockquote {
         filter: blur(0px);
     }
 }
-
 @keyframes grow {
     0% {
         font-size: 1em;
@@ -666,7 +676,6 @@ blockquote {
         font-size: 1em;
     }
 }
-
 @keyframes shrink {
     0% {
         font-size: 1em;
@@ -680,7 +689,6 @@ blockquote {
         font-size: 1em;
     }
 }
-
 @keyframes shake {
     0% {
         display: inline-block;
@@ -788,7 +796,6 @@ blockquote {
     }
 
 }
-
 @keyframes spin {
     0% {
         display: inline-block;
@@ -800,86 +807,140 @@ blockquote {
         transform: rotate(360deg);
     }
 }
+@keyframes bounce{
+    0%{display:inline-block;
+        transform:scalex(1.1) scaley(.5) translatey(50%);}
+    10%{transform:scalex(.9) scaley(1.5) translatey(-50%);}
+    
+    20%{transform:scalex(1) scaley(1) translatey(-90%);}
+    25%{transform:scalex(1) scaley(1) translatey(-100%);}
+    30%{transform:scalex(1) scaley(1) translatey(-90%);}
+    
+    40%{transform:scalex(1) scaley(1) translatey(0%);}
+    50%{transform:scalex(1.1) scaley(.5) translatey(50%);}
 
+    60%{transform:scalex(.9) scaley(1.5) translatey(-50%);}
+    
+    70%{transform:scalex(1) scaley(1) translatey(-90%);}
+    75%{transform:scalex(1) scaley(1) translatey(-100%);}
+    80%{transform:scalex(1) scaley(1) translatey(-90%);}
+    
+    90%{transform:scalex(1) scaley(1) translatey(0%);}
+    100%{display:inline-block;
+        transform:scalex(1.1) scaley(.5) translatey(50%);}
+}
+
+/*Gadgets*/
 .Scheduler {
-        width: 20em;
-        text-align: center;
+    width: 20em;
+    text-align: center;
+    background:url("https://media.giphy.com/media/jXss1uWA4rJwA/giphy.gif") center/cover no-repeat;
+    padding:1em;
+    margin:1em;
+    border-radius:1em;
+    box-shadow:
+        inset 0em 0em .5em .1em white,
+        inset 0em 0em 6em 1em #000c21;
+
+    text-shadow: 
+        -.1em .09em 0em black,
+        -.1em .09em .5em black,
+        -.1em .09em .5em black,
+        -.1em .09em .5em black,
+        -.1em .09em .5em black,
+        -.1em .09em .5em black,
+        -.1em .09em .5em black;
+}
+.schedulerInput {
+    background: #d3d3d3;
+    color: rgb(73, 73, 73);
+    width: 2.5em;
+    border-radius: 2em;
+    border: none;
+    box-shadow:
+         0em 0em 0em .1em black,
+         inset -.1em .1em .3em .2em white,
+        inset .5em -.5em .5em -.4em black;
+
+    text-align: center;
+
+    transition:
+         background .5s ease-out,
+         color .5s ease-out,
+        box-shadow .5s ease-out;
     }
+.schedulerinput:focus {
+    background: white;
+    color: black;
 
-    .schedulerInput {
-        background: lightgray;
-        color: rgb(73, 73, 73);
-        width: 2.5em;
-        border-radius: 2em;
-        border: none;
-        box-shadow:
-            0em 0em 0em .1em black,
-            inset -.1em .1em .3em .2em white,
-            inset .5em -.5em .5em -.4em black;
+    box-shadow:
+        0em 0em 0em .1em black,
+        inset -.1em .1em .0em .2em white,
+        inset .5em -.5em .2em -.6em black;
 
-        text-align: center;
+}
+.schedulerinput::selection{
+    color:white;
+    background:black;
+}
+.Year {
+    width: 3.5em;
+}
+.SchedulerButtons {
+    display: flex;
+    justify-content: space-around;
+    margin-top:1em;
+    margin-bottom:1em;
+}
+.scheduler>*>button{
+    outline:none;
+    background: #d3d3d3;
+    color: rgb(73, 73, 73);
+    border-radius: 2em;
+    border: none;
+    box-shadow:
+         0em 0em 0em .1em black,
+         inset -.1em .1em .3em .2em white,
+        inset .5em -.5em .5em -.4em black;
 
-        transition:
-            background .5s ease-out,
-            color .5s ease-out,
-            box-shadow .5s ease-out;
-    }
+    text-align: center;
+    padding:.2em 1em;
+    transform:scale(100%);
 
-    .schedulerinput:focus {
-        background: white;
-        color: black;
+    
+}
+.scheduler>*>button:active{
+    outline:none;
+    background:#717171;
+    color: black;
+    box-shadow:
+         0em 0em 0em .1em white,
+         inset -.1em .1em .3em .2em black,
+        inset .5em -.5em .5em -.4em white;
+    transform:scale(110%);
+}
 
-        box-shadow:
-            0em 0em 0em .1em black,
-            inset -.1em .1em .0em .2em white,
-            inset .5em -.5em .2em -.6em black;
-
-    }
-
-    .Year {
-        width: 3.5em;
-    }
-
-    .SchedulerButtons {
-        display: flex;
-        justify-content: space-around;
-        margin-top:1em;
-        margin-bottom:1em;
-    }
-
+/*Scroll Bar Style----------------------------*/
 /*Scroll bar adjustments*/
 ::-webkit-scrollbar {
     width: .7em;
     display: overlay;
 }
-
 ::-webkit-scrollbar-thumb {
-    background: #005fff2b;
+    background: #00c8ff47;
     border-radius: 1em;
-    box-shadow:
-        inset 0em 0em 0em .05em #ffffff;
+    box-shadow:inset 0em 0em 0em .05em #ffffff;
 }
-
 ::-webkit-scrollbar-corner {
     display: none;
 }
-
 ::-webkit-scrollbar-track {
-    background: lightGray;
-    box-Shadow: inset 0em 0em 0em .1em darkgray;
     display: none;
-    /*Display might be important for when background images appear*/
 }
 
-:root {
-    color-scheme: dark;
-    font-family: "Zen Old Mincho";
-    font-weight: 400;
-    font-size: min(.8rem, 2.5vw);
-
-    --AuthorColor: white;
-}
-
+/*System Styling*/
 ::selection {
-    background: #aa7cb3ad;
+    background: #b0527b8f;
+    border-radius:1em;
+    color:cyan;
 }

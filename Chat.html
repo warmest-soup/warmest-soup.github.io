@@ -25,244 +25,256 @@
                 <br> Stickers can be attatched to messages by enclosing their names in colons, for example :svennuzzle:
                 will
                 convert to the sticker of that name.
-                <br>A list of available stickers is provided here:
-                <div id="StickerHelp">
-
-                </div>
-                <br><br><br>
-                <span style="font-size:1.5em;">Stickers:</span>
-                <br> Gadgets are tools embedded into one's message that provide helpful functions to chat users. They are used appending a "!" to the begining of their name.
-                <br>
-                <br><span style="font-size:1.5em;">Scheduler:</span> A GMT to Local time converter. LOCAL time is relative to the person viewing it, and is automatically adjusted for each chat member. 
-                The Scheduler's input is in d/m/y and 24-hour format. 
-                <br> Pressing the "Copy" button, will copy the GMT equivalent of the entered time, preformatted with the t| markdown. this can be pasted into a message to coordinate events.
-                <br><br> * The "Send Time" button is currently non-functional, as I became very tired 🥲
-                <br><br><br>
-
-                <br><span style="font-size:1.5em;">F() Animations:</span>
-                <br> Intended for markdown:
-                <br> - spin
-                <br> - fade
-                <br> - grow
-                <br> - shrink
-                <br> - shake
-                <br> - blur
-                <br>
-                <br> Utility animations that may also work:
-                <br> - hilit
-                <br> - Enter
-                <br> - quoteEnter
-                <br> - replyGlow
-                <br> - Glow
-                <br>
-                <br>
-                <br>
-
-                <br><span style="font-size:1.5em;">MarkDown:</span>
-                <br> Key:
-                <br> b Bold
-                <br> i Italic
-                <br> - Strikethrough
-                <br> _ Underline
-                <br>
-                <br> c. Color
-                <br> f() Animate
-                <br>
-                <br> t Local Time adjustment
-                <br> a. Link
-                <br> img. Image embed
-                <br>
-                <br> s Small
-                <br> l Large
-                <br> m Marquee
-                <br> q Block Quote
-                <br> h Hidden Spoiler
-                <br>
-                <br> ~ Cursive
-                <br> ! Loud
-                <br> / Handwritten 1
-                <br> \ Handwritten 2
-                <br> j Japanese Block
-                <br> w Linefont
-                <br>
-                <br> vV Orient Vertical
-                <br> d Turn Down
-                <br> x Flip X
-                <br> y Flip y
-                <br> cw() Clockwise Rotation
-                <br>
-                <br>
-                <br>
-                Markdown is performed by enclosing text in "bars"
-                <br> like this: ib|<span
-                    style="text-shadow: 0em 0em .1em white, 0em 0em .1em white, 0em 0em .1em white;"><i>This text will
-                        be
-                        bold AND italicized</i></span>|
-                <br>
-                The following markdown options are available;
-                <br>
-                <br> <span style="font-size:1.5em;">B</span> Bold: b|<span
-                    style="text-shadow: 0em 0em .1em white, 0em 0em .1em white, 0em 0em .1em white;">This text will be
-                    bold</span>|
-                <br>
-                <br> <span style="font-size:1.5em;">I</span> Italic: i|<i>This text will be italicized</i>|
-                <br>
-                <br> <span style="font-size:1.5em;">-</span> Strikethrough: -|<span
-                    style="text-decoration:line-through;">This text will be crossed out</span>|
-                <br>
-                <br><span style="font-size:1.5em;">_</span> Underline: _|<span style="text-decoration:underline;">This
-                    text
-                    will be underlined</span>|
-                <br>
-                <br>
-                <br>
-                <br> <span style="font-size:1.5em;">C.</span> Color: Color must be the final tag used, for example
-                bc.red|text| will result in bold red text, while
-                c.redb|Text| will result in failure.
-                <br>C. takes any valid CSS color, including named colors, hexcodes, transparency, and rgb() & hsl()
-                formats.
-
-                <br> c.cyan|<span style="color:cyan;">This text will be colored</span>|
-                <br>
-                <br> <span style="font-size:1.5em;">F()</span> Animated: f() requires a named CSS animation to play, a
-                list
-                of available animations is provided below.
-                Animation names are <b>case-sensitive</b> but all animations intended for markDown will be named in all
-                lowercase
-                letters. To layer multiple animations seperate animation names with periods.
-                example f(spin.grow.fade)
-                <br>f(Glow)|<span style="animation:Glow 2s infinite linear;">This text will be animated</span>|
-                <br>
-                <br> <span style="font-size:1.5em;">T</span> Local Time adjust: This markdown will convert GMT dates and times to the Local Timezones of those who view the message. It's possible for it to read many date formats, but the surest way to get the correct time & date is to copy a preformatted t| from the !Scheduler gadget. 
-                <br>
-                <br>t|Sat, 21 sep 1978 21:13 LOCAL|
-                <br>
-                <br>T| has a secondary function, in that it can also take and convert <i>relative times</i>. 
-                <br>For example, 
-                <br>t|1 week, 1 day, 1 hour, 1 minute|
-                <br>
-                <br>Will produce a LOCAL time that it 1 week, 1 day, 1 hour, and 1 minute ahead of the current time. 
-                <br>t| Can also take negative values, for example t|-1 day|, will result in a time that is 24 hours (1 day) prior to now.
-                <br>
-                <br>
-                <br> <span style="font-size:1.5em;">a.</span> Link: Formatted, clickable links that display clean text.
-                <br> a.www.yourUrl.com|<a href="www.google.com">This text will become
-                    a
-                    clickable link</a>|
-
-                <br> <span style="font-size:1.5em;">Img</span> Image embed: Placing a source level image URL in this tag
-                will embed the image in your message, inline.
-                allowing you to add text above and below it to your taste.
-                <br> img|Image source URL|
-                <br>
-                <br> <span style="font-size:1.5em;">S</span> Small text: s|<span style="font-size:.5em;">This text will
-                    be
-                    small</span>|
-
-                <br> <span style="font-size:1.5em;">L</span> Large Text: l|<span style="font-size:1.5em;">T</span>his
-                text
-                will be large</span>|
-                <br>
-                <br> <span style="font-size:1.5em;">M</span> Marquee: m|<marquee>This text will be marqueed</marquee>|
-                <br>
-                <br> <span style="font-size:1.5em;">Q</span> Block Quote: q|<blockquote>This text will be quoted
-                </blockquote>|
-                <br>
-                <br> <span style="font-size:1.5em;">H</span> Hidden Spoiler: h|<span class="spoiler spoilerPrimer"
-                    onclick="this.classList.toggle('spoiler')">This text will be hidden until clicked on.</span>
-                <br>
-                <br>
-                <br> <span style="font-size:1.5em;">~</span> Cursive : b|<span style="font-family:marck script;">This
-                    text
-                    will be cursive</span>|
-                <br>
-                <br> <span style="font-size:1.5em;">!</span> Loud: !|<span style="font-family:trade winds;">This text
-                    will
-                    be in a loud font</span>|
-                <br>
-                <br> <span style="font-size:1.5em;">/</span> Handwritten 1: /|<span
-                    style="font-family:nanum pen script;">This text will be handwritten</span>|
-                <br>
-                <br> <span style="font-size:1.5em;">\</span> Handwritten 2: \|<span style="font-family:rock salt;">This
-                    text
-                    will be handwritten</span>|
-                <br>
-                <br> <span style="font-size:1.5em;">J</span> Japanese Block: j|<span
-                    style="font-family:dela gothic one;">This text will be in block letters, and will also affect 日本語
-                    characters</span>|
-                <br>
-                <br> <span style="font-size:1.5em;">W</span> Linefont: Linefont generates a linegraph based on the
-                Unicode
-                values of the given characters. 0-9 or a-z can be used however, for manual control.
-                <br> w|<span
-                    style="font-family:linefont;">11111111111133333333349933333333959155555555055555555395555555555555555599555555555939595555555555553333333333</span>|
-                <br>
-
-                <br> <span style="font-size:1.5em;">vV</span> Vertical orientation: the V tag has two functions, one for
-                the
-                lowercase "v" and one for the uppercase "V". The lowercase value will keep character orientation inline
-                with
-                the not vertical line orientation, while the uppercase variant will allow for the use of vertical fonts,
-                such as 日本語. The v tag supports new lines, and only one set of bars is necessary for multiple lines of
-                text.
-                <br> <span style="font-size:1.5em;">v</span>|<span
-                    style="writing-mode:vertical-lr; text-orientation:mixed">This text will be vertical</span>| whereas
-                V|<span style="writing-mode:vertical-lr; text-orientation:upright">This text<br>will be
-                    <br>vertical</span>|
-                <br>
-                <br> <span style="font-size:1.5em;">D</span> Downward text: The d tag actively rotates the given text
-                around
-                an anchor point set at the left hand side. this transformation disregards standard document flow, and
-                can be
-                used to strange effects.
-                <br>d|<span style="display:inline-block; transform:rotate(90deg); transform-origin:left;">This text will
-                    be
-                    rotated downward.</span>|
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>As shown here, the rotated text
-                <br>covers text below it.
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br> <span style="font-size:1.5em;">XY</span> Horizontal and Vertical mirroring: The x tag will flip
-                it's
-                contents horizontally, while the y tag will flip it's content vertically, by putting "xy" both axises
-                may be
-                mirrored at once.
-                <br> x|<span style="display:inline-block; transform:scalex(-1)">This text will be backwards</span>|
-                <br>
-                <br> <span style="font-size:1.5em;">CW()</span> Clockwise rotation: This tag will rotate it's context
-                clockwise a number of degrees equal to the number within it's parentheses. For counter-clockwise
-                rotation, a
-                negative number can be used.
-                <br>
-                <br>
-                <br> cw(-45)|<span style="display:inline-block; transform:rotate(-45deg);">Rotated text.</span>|
-                <br>
-                <br> <span style="font-size:1.5em;">HR()</span> Hue rotation: This tag will shift the color a number of
-                degrees around the color wheel.
-                <br>
-                <br>
-                <br> hr(180)|<span style="filter: hue-rotate(180deg);"><img class="sticker"
-                        src="./Chat/Stickers/trifaint.gif"></span>|
-                <br>
-                <br>
-                <br>
-
-
+                <br>A list of available stickers will appear when typing sticker names. All stickers begin with a
+                prefix, usually related to their set name, or the chat user that requested their inclusion. The current
+                steacker prefixes, by which all stickers can be seen, are as follows;
+                <br> - v: From the user most commonly referred to as "V".
+                <br> - tri: From the user most commonly referred to as "anonymous".
+                <br> - meow: From the user most commonly referred to as "meow".
+                <br> - soup: From the chat developer, and user "W.S.".
+                <br> - mango: A sticker set consisting of a cat named Mango. "V".
 
             </div>
-        </div>
-        <div id="messageBox"></div>
+            <br><br><br>
+            <span style="font-size:1.5em;">Stickers:</span>
+            <br> Gadgets are tools embedded into one's message that provide helpful functions to chat users. They are
+            used appending a "!" to the begining of their name.
+            <br>
+            <br><span style="font-size:1.5em;">Scheduler:</span> A GMT to Local time converter. LOCAL time is relative
+            to the person viewing it, and is automatically adjusted for each chat member.
+            The Scheduler's input is in d/m/y and 24-hour format.
+            <br> Pressing the "Copy" button, will copy the GMT equivalent of the entered time, preformatted with the t|
+            markdown. this can be pasted into a message to coordinate events.
+            <br><br> * The "Send Time" button is currently non-functional, as I became very tired 🥲
+            <br><br><br>
 
-        <div id="StickerList" hidden="true"></div>
-        <button id="ToBottom" onClick="toBottom()" hidden="true">...<br>▽</button>
+            <br><span style="font-size:1.5em;">F() Animations:</span>
+            <br> Intended for markdown:
+            <br> - spin
+            <br> - fade
+            <br> - grow
+            <br> - shrink
+            <br> - shake
+            <br> - blur
+            <br>
+            <br> Utility animations that may also work:
+            <br> - hilit
+            <br> - Enter
+            <br> - quoteEnter
+            <br> - replyGlow
+            <br> - Glow
+            <br>
+            <br>
+            <br>
+
+            <br><span style="font-size:1.5em;">MarkDown:</span>
+            <br> Key:
+            <br> b Bold
+            <br> i Italic
+            <br> - Strikethrough
+            <br> _ Underline
+            <br>
+            <br> c. Color
+            <br> f() Animate
+            <br>
+            <br> t Local Time adjustment
+            <br> a. Link
+            <br> img. Image embed
+            <br>
+            <br> s Small
+            <br> l Large
+            <br> m Marquee
+            <br> q Block Quote
+            <br> h Hidden Spoiler
+            <br>
+            <br> ~ Cursive
+            <br> ! Loud
+            <br> / Handwritten 1
+            <br> \ Handwritten 2
+            <br> j Japanese Block
+            <br> w Linefont
+            <br>
+            <br> vV Orient Vertical
+            <br> d Turn Down
+            <br> x Flip X
+            <br> y Flip y
+            <br> cw() Clockwise Rotation
+            <br>
+            <br>
+            <br>
+            Markdown is performed by enclosing text in "bars"
+            <br> like this: ib|<span
+                style="text-shadow: 0em 0em .1em white, 0em 0em .1em white, 0em 0em .1em white;"><i>This text will
+                    be
+                    bold AND italicized</i></span>|
+            <br>
+            The following markdown options are available;
+            <br>
+            <br> <span style="font-size:1.5em;">B</span> Bold: b|<span
+                style="text-shadow: 0em 0em .1em white, 0em 0em .1em white, 0em 0em .1em white;">This text will be
+                bold</span>|
+            <br>
+            <br> <span style="font-size:1.5em;">I</span> Italic: i|<i>This text will be italicized</i>|
+            <br>
+            <br> <span style="font-size:1.5em;">-</span> Strikethrough: -|<span
+                style="text-decoration:line-through;">This text will be crossed out</span>|
+            <br>
+            <br><span style="font-size:1.5em;">_</span> Underline: _|<span style="text-decoration:underline;">This
+                text
+                will be underlined</span>|
+            <br>
+            <br>
+            <br>
+            <br> <span style="font-size:1.5em;">C.</span> Color: Color must be the final tag used, for example
+            bc.red|text| will result in bold red text, while
+            c.redb|Text| will result in failure.
+            <br>C. takes any valid CSS color, including named colors, hexcodes, transparency, and rgb() & hsl()
+            formats.
+
+            <br> c.cyan|<span style="color:cyan;">This text will be colored</span>|
+            <br>
+            <br> <span style="font-size:1.5em;">F()</span> Animated: f() requires a named CSS animation to play, a
+            list
+            of available animations is provided below.
+            Animation names are <b>case-sensitive</b> but all animations intended for markDown will be named in all
+            lowercase
+            letters. To layer multiple animations seperate animation names with periods.
+            example f(spin.grow.fade)
+            <br>f(Glow)|<span style="animation:Glow 2s infinite linear;">This text will be animated</span>|
+            <br>
+            <br> <span style="font-size:1.5em;">T</span> Local Time adjust: This markdown will convert GMT dates and
+            times to the Local Timezones of those who view the message. It's possible for it to read many date formats,
+            but the surest way to get the correct time & date is to copy a preformatted t| from the !Scheduler gadget.
+            <br>
+            <br>t|Sat, 21 sep 1978 21:13 LOCAL|
+            <br>
+            <br>T| has a secondary function, in that it can also take and convert <i>relative times</i>.
+            <br>For example,
+            <br>t|1 week, 1 day, 1 hour, 1 minute|
+            <br>
+            <br>Will produce a LOCAL time that it 1 week, 1 day, 1 hour, and 1 minute ahead of the current time.
+            <br>t| Can also take negative values, for example t|-1 day|, will result in a time that is 24 hours (1 day)
+            prior to now.
+            <br>
+            <br>
+            <br> <span style="font-size:1.5em;">a.</span> Link: Formatted, clickable links that display clean text.
+            <br> a.www.yourUrl.com|<a href="www.google.com">This text will become
+                a
+                clickable link</a>|
+
+            <br> <span style="font-size:1.5em;">Img</span> Image embed: Placing a source level image URL in this tag
+            will embed the image in your message, inline.
+            allowing you to add text above and below it to your taste.
+            <br> img|Image source URL|
+            <br>
+            <br> <span style="font-size:1.5em;">S</span> Small text: s|<span style="font-size:.5em;">This text will
+                be
+                small</span>|
+
+            <br> <span style="font-size:1.5em;">L</span> Large Text: l|<span style="font-size:1.5em;">T</span>his
+            text
+            will be large</span>|
+            <br>
+            <br> <span style="font-size:1.5em;">M</span> Marquee: m|<marquee>This text will be marqueed</marquee>|
+            <br>
+            <br> <span style="font-size:1.5em;">Q</span> Block Quote: q|<blockquote>This text will be quoted
+            </blockquote>|
+            <br>
+            <br> <span style="font-size:1.5em;">H</span> Hidden Spoiler: h|<span class="spoiler spoilerPrimer"
+                onclick="this.classList.toggle('spoiler')">This text will be hidden until clicked on.</span>
+            <br>
+            <br>
+            <br> <span style="font-size:1.5em;">~</span> Cursive : b|<span style="font-family:marck script;">This
+                text
+                will be cursive</span>|
+            <br>
+            <br> <span style="font-size:1.5em;">!</span> Loud: !|<span style="font-family:trade winds;">This text
+                will
+                be in a loud font</span>|
+            <br>
+            <br> <span style="font-size:1.5em;">/</span> Handwritten 1: /|<span
+                style="font-family:nanum pen script;">This text will be handwritten</span>|
+            <br>
+            <br> <span style="font-size:1.5em;">\</span> Handwritten 2: \|<span style="font-family:rock salt;">This
+                text
+                will be handwritten</span>|
+            <br>
+            <br> <span style="font-size:1.5em;">J</span> Japanese Block: j|<span
+                style="font-family:dela gothic one;">This text will be in block letters, and will also affect 日本語
+                characters</span>|
+            <br>
+            <br> <span style="font-size:1.5em;">W</span> Linefont: Linefont generates a linegraph based on the
+            Unicode
+            values of the given characters. 0-9 or a-z can be used however, for manual control.
+            <br> w|<span
+                style="font-family:linefont;">11111111111133333333349933333333959155555555055555555395555555555555555599555555555939595555555555553333333333</span>|
+            <br>
+
+            <br> <span style="font-size:1.5em;">vV</span> Vertical orientation: the V tag has two functions, one for
+            the
+            lowercase "v" and one for the uppercase "V". The lowercase value will keep character orientation inline
+            with
+            the not vertical line orientation, while the uppercase variant will allow for the use of vertical fonts,
+            such as 日本語. The v tag supports new lines, and only one set of bars is necessary for multiple lines of
+            text.
+            <br> <span style="font-size:1.5em;">v</span>|<span
+                style="writing-mode:vertical-lr; text-orientation:mixed">This text will be vertical</span>| whereas
+            V|<span style="writing-mode:vertical-lr; text-orientation:upright">This text<br>will be
+                <br>vertical</span>|
+            <br>
+            <br> <span style="font-size:1.5em;">D</span> Downward text: The d tag actively rotates the given text
+            around
+            an anchor point set at the left hand side. this transformation disregards standard document flow, and
+            can be
+            used to strange effects.
+            <br>d|<span style="display:inline-block; transform:rotate(90deg); transform-origin:left;">This text will
+                be
+                rotated downward.</span>|
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>As shown here, the rotated text
+            <br>covers text below it.
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br> <span style="font-size:1.5em;">XY</span> Horizontal and Vertical mirroring: The x tag will flip
+            it's
+            contents horizontally, while the y tag will flip it's content vertically, by putting "xy" both axises
+            may be
+            mirrored at once.
+            <br> x|<span style="display:inline-block; transform:scalex(-1)">This text will be backwards</span>|
+            <br>
+            <br> <span style="font-size:1.5em;">CW()</span> Clockwise rotation: This tag will rotate it's context
+            clockwise a number of degrees equal to the number within it's parentheses. For counter-clockwise
+            rotation, a
+            negative number can be used.
+            <br>
+            <br>
+            <br> cw(-45)|<span style="display:inline-block; transform:rotate(-45deg);">Rotated text.</span>|
+            <br>
+            <br> <span style="font-size:1.5em;">HR()</span> Hue rotation: This tag will shift the color a number of
+            degrees around the color wheel.
+            <br>
+            <br>
+            <br> hr(180)|<span style="filter: hue-rotate(180deg);"><img class="sticker"
+                    src="./Chat/Stickers/trifaint.gif"></span>|
+            <br>
+            <br>
+            <br>
+
+
+
+        </div>
     </div>
+    <div id="messageBox"></div>
+
+    <div id="StickerList" hidden="true"></div>
+    <button id="ToBottom" onClick="toBottom()" hidden="true">...<br>▽</button>
+
 
     <div id="UserInput">
         <div id="Dashboard">
@@ -648,14 +660,21 @@
         "vfaint, png",
         "vumbrella, png",
         "votter, png",
+        "vbteam, png",
+        "vateam, png",
+        "vrabbithops, png",
         "souphuhu, png",
         "soupracoon, png",
         "soupbaby, png",
+        "soupmains, png",
+        "soup2nds, png",
+        "soup3rds, png",
         "meowwalk, gif",
         "meowwalk2, png",
         "meowzombie, png",
         "meowhug, png",
         "meowchinscratch, png",
+        "meowmains, png",
         "mangosilence, png",
         "mangoangy, png",
         "mangoeep, png",
@@ -675,11 +694,9 @@
         "triceracopter, png",
         "tridevilhorns, png",
         "triguns, png",
-        "triskip, png"
+        "triskip, png",
+        "trimain, png"
     ];
-    stickerList.forEach((x) => {
-        document.getElementById("StickerHelp").innerHTML += "<br>- " + x.split(", ")[0]
-    })
     //Open sticker Context menu
     function openStickers(textContainer) {
         var cursor = textContainer.selectionStart
