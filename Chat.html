@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
-    href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Linefont:wdth,wght@83.6,409&family=Marck+Script&family=Nanum+Pen+Script&family=Rock+Salt&family=Trade+Winds&family=Zen+Old+Mincho:wght@400;500;700;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Linefont:wdth,wght@83.6,409&family=Marck+Script&family=Nanum+Pen+Script&family=Rock+Salt&family=Trade+Winds&family=Xanh+Mono:ital@0;1&family=Zen+Old+Mincho:wght@400;500;700;900&display=swap"
     rel="stylesheet">
 
 <link href="./Chat/ChatStyle.css" rel="stylesheet">
@@ -15,7 +15,7 @@
 <!--Chatroom Begins here!-->
 <div id="page">
 
-    <div id="UserDisplay"><span id="UserCount">0</span> user<span id="userPluralization">s</span> online.</div>
+    <marquee id="Bulletin">★★★     </marquee>
 
     <div id="messageWindow">
         <div id="documentation" hidden>
@@ -273,6 +273,7 @@
     <div id="messageBox"></div>
 
     <div id="StickerList" hidden="true"></div>
+
     <button id="ToBottom" onClick="toBottom()" hidden="true">...<br>▽</button>
 
 
@@ -1186,6 +1187,23 @@
         }
     })
 
+    //Bulletin
+    var bulletin = document.getElementById("Bulletin");
+    var newsPoints = [];
+    onChildAdded(ref(db, "Chatroom/Bulletin"), (x) => {
+        bulletin.innerHTML = "★★★      ";
+        newsPoints.push(x.val() + "      ★★★      ")
+
+        var shuffled = [...newsPoints].sort(() => Math.random() - 0.5);
+
+        shuffled.forEach((y) => {
+            console.log(y)
+            bulletin.innerHTML += y;
+        })
+
+        markDown(bulletin, 70)
+    })
+
     //Remember User
     window.setUser = function () {
         var name = document.getElementById("Author");
@@ -1238,8 +1256,6 @@
         //When page is hidden.
 
         if (document.hidden && onlineStatus) {
-            set(ref(db, users + "/Count"), increment(-1))
-
             onlineStatus = false
             setUser();
             push(messageLogAddress, {
@@ -1288,16 +1304,7 @@
     }, 1000)
     //Turn off enrty messages */
 
-    //Count online users
-    onValue(ref(db, users + "/Count"), (x) => {
-        var userCount = document.getElementById("UserCount");
-        var pluralize = document.getElementById("userPluralization");
 
-        userCount.innerText = x.val()
-        if (x.val() == "1") {
-            pluralize.innerText = ""
-        } else pluralize.innerText = "s"
-    })
 
 </script>
 
@@ -1307,7 +1314,7 @@
     }
 </style>
 <script>
-    var bgOptions = 24.1;
+    var bgOptions = 35;
     var url = "https://warmest-soup.github.io/Assets/Images/ChatroomBGs/";
 
     bgNumber = Math.round(Math.random() * bgOptions);

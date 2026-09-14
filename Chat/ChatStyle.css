@@ -3,6 +3,7 @@
     font-family: "Zen Old Mincho";
     font-weight: 400;
     font-size: min(.9rem, 2.5vw);
+    overflow:clip;
     
     --AuthorColor: white;
 
@@ -184,7 +185,29 @@ blockquote {
     width: 100dvw;
     max-width:80em;
     height: 100dvh;
-    overflow: clip;
+    overflow: hide;
+}
+
+#Bulletin{
+    display:flex;
+    align-items:center;
+    height:5%;
+    font-size:3dvh;
+    font-family:"Xanh Mono";
+    margin-top:2%;
+    background:url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/MGSWires.png");
+
+    color:white;
+    text-shadow:
+        0em 0em .1em white,
+        0em 0em .2em #eb00ff,
+        0em 0em .4em #ff6464;
+    box-shadow:
+        inset 0em 0em .6em .4em black,
+        0em 0em .4em 0em #ce8eff;
+
+    filter:contrast(170%);
+    overflow:clip;
 }
 
 #messageBox,
@@ -196,7 +219,7 @@ blockquote {
 
     margin: 1em;
     padding: 1em 1.5em 4em 1.5em;
-    height: 75%;
+    height: 70%;
     width: 95%;
     overflow-y: auto;
     overflow-x: clip;
