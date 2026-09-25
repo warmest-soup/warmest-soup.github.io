@@ -1,14 +1,285 @@
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!doctype html>
+<html>
+<body>
 
-<meta name="theme-color" content="black" />
+<h2>WebRTC Call</h2>
 
-<link href="./ChatLayout.css" rel="stylesheet">
-</link>
+<button id="create">Create Call</button>
+<input id="id" placeholder="Call ID">
+<button id="join">Join Call</button>
 
-<div id="page">
-    <div id="marquee"></div>
-    <div id="messageWindow"></div>
-    <div id="UserInput">
-        <input>
-    </div>
-</div>
+<p>Call ID: <b id="callId"></b></p>
+
+<video id="local" autoplay muted playsinline width="400"></video>
+<video id="remote" autoplay playsinline width="400"></video>
+
+<script type="module">
+
+import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  push,
+  set,
+  get,
+  update,
+  onValue,
+  onChildAdded
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDQQ3o3BDkO1tlbuTxtNwBPGXA9WU0-0hQ",
+  authDomain: "rattraps-3rd-edition.firebaseapp.com",
+  databaseURL: "https://rattraps-3rd-edition-default-rtdb.firebaseio.com",
+  projectId: "rattraps-3rd-edition",
+  storageBucket: "rattraps-3rd-edition.firebasestorage.app",
+  messagingSenderId: "462515270404",
+  appId: "1:462515270404:web:bc1222161ed1691e2e9651"
+};
+
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+
+const rtc = {
+  iceServers: [
+    { urls: "stun:stun.l.google.com:19302" }
+  ]
+};
+
+
+let pc;
+let localStream;
+let remoteStream;
+
+
+async function setup() {
+
+  localStream = await navigator.mediaDevices.getUserMedia({
+    video: true,
+    audio: true
+  });
+
+  local.srcObject = localStream;
+
+  remoteStream = new MediaStream();
+  remote.srcObject = remoteStream;
+
+  pc = new RTCPeerConnection(rtc);
+
+  localStream.getTracks().forEach(track => {
+    pc.addTrack(track, localStream);
+  });
+
+  pc.ontrack = event => {
+    event.streams[0].getTracks().forEach(track => {
+      remoteStream.addTrack(track);
+    });
+  };
+}
+
+
+/* =========================
+   CREATE CALL
+========================= */
+
+create.onclick = async () => {
+
+  await setup();
+
+  // Generate a unique call ID
+  const callRef = push(ref(db, "calls"));
+
+  const callIdValue = callRef.key;
+
+  callId.textContent = callIdValue;
+
+
+  // References for ICE candidates
+  const callerCandidatesRef =
+    ref(db, `calls/${callIdValue}/callerCandidates`);
+
+  const calleeCandidatesRef =
+    ref(db, `calls/${callIdValue}/calleeCandidates`);
+
+
+  // Send caller ICE candidates
+  pc.onicecandidate = async event => {
+
+    if (event.candidate) {
+
+      const candidateRef = push(callerCandidatesRef);
+
+      await set(
+        candidateRef,
+        event.candidate.toJSON()
+      );
+
+    }
+  };
+
+
+  // Create offer
+  const offer = await pc.createOffer();
+
+  await pc.setLocalDescription(offer);
+
+
+  // Store offer
+  await set(ref(db, `calls/${callIdValue}/offer`), {
+    type: offer.type,
+    sdp: offer.sdp
+  });
+
+
+  // Wait for answer
+  onValue(
+    ref(db, `calls/${callIdValue}/answer`),
+    async snapshot => {
+
+      const answer = snapshot.val();
+
+      if (
+        answer &&
+        !pc.currentRemoteDescription
+      ) {
+
+        await pc.setRemoteDescription(answer);
+
+      }
+
+    }
+  );
+
+
+  // Listen for callee ICE candidates
+  onChildAdded(
+    calleeCandidatesRef,
+    async snapshot => {
+
+      const candidate = snapshot.val();
+
+      if (candidate) {
+
+        await pc.addIceCandidate(
+          new RTCIceCandidate(candidate)
+        );
+
+      }
+
+    }
+  );
+
+};
+
+
+/* =========================
+   JOIN CALL
+========================= */
+
+join.onclick = async () => {
+
+  await setup();
+
+  const callIdValue = id.value.trim();
+
+  if (!callIdValue) {
+    alert("Enter a Call ID");
+    return;
+  }
+
+
+  const callRef =
+    ref(db, `calls/${callIdValue}`);
+
+
+  const snapshot = await get(callRef);
+
+
+  if (!snapshot.exists()) {
+
+    alert("Call not found");
+    return;
+
+  }
+
+
+  const callData = snapshot.val();
+
+
+  const callerCandidatesRef =
+    ref(db, `calls/${callIdValue}/callerCandidates`);
+
+  const calleeCandidatesRef =
+    ref(db, `calls/${callIdValue}/calleeCandidates`);
+
+
+  // Send callee ICE candidates
+  pc.onicecandidate = async event => {
+
+    if (event.candidate) {
+
+      const candidateRef =
+        push(calleeCandidatesRef);
+
+      await set(
+        candidateRef,
+        event.candidate.toJSON()
+      );
+
+    }
+
+  };
+
+
+  // Apply caller's offer
+  await pc.setRemoteDescription(
+    callData.offer
+  );
+
+
+  // Create answer
+  const answer =
+    await pc.createAnswer();
+
+  await pc.setLocalDescription(answer);
+
+
+  // Store answer
+  await set(
+    ref(db, `calls/${callIdValue}/answer`),
+    {
+      type: answer.type,
+      sdp: answer.sdp
+    }
+  );
+
+
+  // Listen for caller ICE candidates
+  onChildAdded(
+    callerCandidatesRef,
+    async snapshot => {
+
+      const candidate = snapshot.val();
+
+      if (candidate) {
+
+        await pc.addIceCandidate(
+          new RTCIceCandidate(candidate)
+        );
+
+      }
+
+    }
+  );
+
+};
+
+</script>
+
+</body>
+</html>
