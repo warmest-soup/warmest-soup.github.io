@@ -1,0 +1,28 @@
+<button id="notify">Send notification</button>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+    import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-messaging.js";
+    import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-functions.js";
+
+    const app = initializeApp({
+        apiKey: "AIzaSyBunyChVwR7Wq0CeQ1J2vaCUW1onWBXpEU",
+        authDomain: "ex-patriot.firebaseapp.com",
+        projectId: "ex-patriot",
+        messagingSenderId: "407951799946",
+        appId: "1:407951799946:web:2b7b91807ef6ed3841df73"
+    });
+
+    const messaging = getMessaging(app);
+    const functions = getFunctions(app);
+
+    document.querySelector("#notify").onclick = async () => {
+
+        const registration = await navigator.serviceWorker.register(
+            "/sw.js"
+        );
+
+        const token = await getToken(messaging, { vapidKey: "BFfxPRd6B-zsg1d5YrBm7kqavg1nZXHa0bhEhXZ2OCTC00Io_QDhbqo6Q8-9bGluntomfmsbU0-HTdAnL8nQq4Q" });
+        await httpsCallable(functions, "notify")({ token });
+    };
+</script>

@@ -264,7 +264,7 @@ blockquote {
     backdrop-filter:
         contrast(5000%) blur(10px) brightness(200%);
 
-    text-shadow: -.1em .09em 0em black;
+    text-shadow: -.1em .09em .1em #000000;
 }
 .message {
     word-wrap: break-word;
@@ -668,7 +668,7 @@ blockquote {
     0% {}
 
     50% {
-        color: rgba(253, 253, 253, 0);
+        filter: opacity(0%);
     }
 
     100% {}
