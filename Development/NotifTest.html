@@ -1,5 +1,11 @@
 <button id="notify">Send notification</button>
 
+<style>
+    #notify{
+        font-size:2rem;
+    }
+</style>
+
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
     import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-messaging.js";
@@ -22,7 +28,9 @@
             "https://warmest-soup.github.io/firebase-messaging-sw.js"
         );
 
-        const token = await getToken(messaging, { vapidKey: "BFfxPRd6B-zsg1d5YrBm7kqavg1nZXHa0bhEhXZ2OCTC00Io_QDhbqo6Q8-9bGluntomfmsbU0-HTdAnL8nQq4Q" });
+        const token = await getToken(messaging, { vapidKey: "BFfxPRd6B-zsg1d5YrBm7kqavg1nZXHa0bhEhXZ2OCTC00Io_QDhbqo6Q8-9bGluntomfmsbU0-HTdAnL8nQq4Q",
+            serviceWorkerRegistration: registration
+         });
         await httpsCallable(functions, "notify")({ token });
     };
 </script>
