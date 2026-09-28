@@ -8,8 +8,14 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-    import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-messaging.js";
-    import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-functions.js";
+    import {
+        getMessaging,
+        getToken
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-messaging.js";
+    import {
+        getFunctions,
+        httpsCallable
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-functions.js";
 
     const app = initializeApp({
         apiKey: "AIzaSyBunyChVwR7Wq0CeQ1J2vaCUW1onWBXpEU",
@@ -20,28 +26,31 @@
     });
 
     const messaging = getMessaging(app);
-
-    onMessage(messaging, (payload) => {
-        console.log("Foreground message received:", payload);
-
-        alert(
-            `${payload.notification?.title || "Notification"}\n\n` +
-            `${payload.notification?.body || ""}`
-        );
-    });
-
     const functions = getFunctions(app);
 
+    const registration = await navigator.serviceWorker.register(
+        "/firebase-messaging-sw.js"
+    );
+
+    const token = await getToken(messaging, {
+        vapidKey: "BFfxPRd6B-zsg1d5YrBm7kqavg1nZXHa0bhEhXZ2OCTC00Io_QDhbqo6Q8-9bGluntomfmsbU0-HTdAnL8nQq4Q",
+        serviceWorkerRegistration: registration
+    });
+
+    // Register this browser with the server.
+    await httpsCallable(functions, "registerToken")({
+        token
+    });
+
     document.querySelector("#notify").onclick = async () => {
+        try {
+            await httpsCallable(functions, "notify")({
+                senderToken: token
+            });
 
-        const registration = await navigator.serviceWorker.register(
-            "https://warmest-soup.github.io/firebase-messaging-sw.js"
-        );
-
-        const token = await getToken(messaging, {
-            vapidKey: "BFfxPRd6B-zsg1d5YrBm7kqavg1nZXHa0bhEhXZ2OCTC00Io_QDhbqo6Q8-9bGluntomfmsbU0-HTdAnL8nQq4Q",
-            serviceWorkerRegistration: registration
-        });
-        await httpsCallable(functions, "notify")({ token });
+            console.log("Notification sent.");
+        } catch (error) {
+            console.error("Notification failed:", error);
+        }
     };
 </script>
