@@ -25,7 +25,7 @@
     document.querySelector("#notify").onclick = async () => {
 
         const registration = await navigator.serviceWorker.register(
-            "https://warmest-soup.github.io/firebase-messaging-sw.js"
+            "https://warmest-soup.github.io/Development/firebase-messaging-sw.js"
         );
 
         const token = await getToken(messaging, { vapidKey: "BFfxPRd6B-zsg1d5YrBm7kqavg1nZXHa0bhEhXZ2OCTC00Io_QDhbqo6Q8-9bGluntomfmsbU0-HTdAnL8nQq4Q",
