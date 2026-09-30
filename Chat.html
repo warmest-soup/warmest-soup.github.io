@@ -977,27 +977,31 @@
         onValue,
         increment,
         push
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
+    
+    //ExPat Initialize.
     import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-messaging.js";
     import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-functions.js";
+    
 
     //Get RATTRAPS Log
     const fbAddress = {
         databaseURL: "https://rattraps-3rd-edition-default-rtdb.firebaseio.com"
     };
-    const db = getDatabase(initializeApp(fbAddress));
+    const db = getDatabase(initializeApp(fbAddress,"rattraps"));
 
+    //Initilize ExPat Specifiv
     const exPatApp = initializeApp({
         apiKey: "AIzaSyBunyChVwR7Wq0CeQ1J2vaCUW1onWBXpEU",
         authDomain: "ex-patriot.firebaseapp.com",
         projectId: "ex-patriot",
         messagingSenderId: "407951799946",
         appId: "1:407951799946:web:2b7b91807ef6ed3841df73",
-        databaseURL: "https://ex-patriot-default-rtdb.firebaseio.com/"
-    });
+        databaseURL: "https://ex-patriot-default-rtdb.firebaseio.com/" 
+    }, "exPat");
 
-    const messaging = getMessaging(exPatApp);
-    const functions = getFunctions(exPatApp);
+    const exPatMessaging = getMessaging(exPatApp);
+    const exPatFunctions = getFunctions(exPatApp);
 
     //Key Declarations
     var logLimit = 100;
@@ -1054,17 +1058,18 @@
             "https://warmest-soup.github.io/firebase-messaging-sw.js"
         );
 
-        const token = await getToken(messaging, {
+        const token = await getToken(exPatMessaging, {
             vapidKey: "BFfxPRd6B-zsg1d5YrBm7kqavg1nZXHa0bhEhXZ2OCTC00Io_QDhbqo6Q8-9bGluntomfmsbU0-HTdAnL8nQq4Q",
             serviceWorkerRegistration: registration
         });
 
-        await httpsCallable(functions, "notify")({
+        await httpsCallable(exPatFunctions, "notify")({
             token: token,
-            author: author.value,
-            body: draft.value
+            author: authorName.value,
+            body: messageBody.value
         });
-
+        
+        
         //Reset Draft Box.
         draft.value = "";
 
