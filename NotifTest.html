@@ -29,19 +29,6 @@
     const messaging = getMessaging(app);
     const functions = getFunctions(app);
 
-    const db=getDatabase(app)
-
-    //Collect tokens from db
-    var userTokens = await get(ref(db, "userTokens"))
-    console.log(userTokens.val())
-    
-    var tokens = []
-    //send notification to each.
-    userTokens.forEach((x) => {
-        tokens.push(x.val())
-    })
-    console.log(tokens)
-
     document.querySelector("#notify").onclick = async function () {
         const registration = await navigator.serviceWorker.register(
             "https://warmest-soup.github.io/firebase-messaging-sw.js"
@@ -54,8 +41,8 @@
             
         await httpsCallable(functions, "notify")({
             token: token,
-            author: authorName.innerText,
-            body: messageBody.innerText
+            author: authorName.value,
+            body: messageBody.value
         });
     };
 
