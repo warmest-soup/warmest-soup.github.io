@@ -12,3 +12,8 @@ firebase.initializeApp({
 });
 
 firebase.messaging();
+// Clickable Notif Link.
+self.addEventListener('notificationclick', function (event) {
+  event.notification.close();
+  event.waitUntil(clients.openWindow('https://warmest-soup.github.io/Chat'));
+});

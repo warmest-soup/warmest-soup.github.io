@@ -1019,18 +1019,25 @@
         //Prevent raw enter key from line breaking
         event.preventDefault();
         draft.focus()
+        author=author.value;
+        draft=draft.value;
 
-        if (!draft.value) {
+        if (!draft) {
             return
         }
-        if (!author.value) {
-            author.value = "Anonymous"
+        if (!author) {
+            author = "Anonymous"
             return
         }
         if (!color.value) {
             color.value = "skyblue"
             return
         }
+        
+        //Reset Draft Box.
+        draft.value = "";
+        
+        
         //format replies
         var replyCodes = "";
         if (replyTargets.length > 0) {
@@ -1044,9 +1051,9 @@
 
         //Send Message to server.
         newId = push(messageLogAddress, {
-            Author: author.value,
+            Author: author,
             Color: userColor,
-            Message: draft.value,
+            Message: draft,
             Replies: replyCodes,
             Timestamp: new Date().toUTCString()
 
@@ -1065,13 +1072,9 @@
 
         await httpsCallable(exPatFunctions, "notify")({
             token: token,
-            author: author.value,
-            body: draft.value
+            author: author,
+            body: draft
         });
-        
-        
-        //Reset Draft Box.
-        draft.value = "";
 
         //Jump to bottom!
         toBottom();
