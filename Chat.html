@@ -962,7 +962,7 @@
 <!--Server Functions-->
 <script type="module">
     //Load Firebase DB.
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
     //Firebase Functions
     import {
@@ -978,12 +978,26 @@
         increment,
         push
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-messaging.js";
+    import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-functions.js";
 
     //Get RATTRAPS Log
     const fbAddress = {
         databaseURL: "https://rattraps-3rd-edition-default-rtdb.firebaseio.com"
     };
     const db = getDatabase(initializeApp(fbAddress));
+
+    const exPatApp = initializeApp({
+        apiKey: "AIzaSyBunyChVwR7Wq0CeQ1J2vaCUW1onWBXpEU",
+        authDomain: "ex-patriot.firebaseapp.com",
+        projectId: "ex-patriot",
+        messagingSenderId: "407951799946",
+        appId: "1:407951799946:web:2b7b91807ef6ed3841df73",
+        databaseURL: "https://ex-patriot-default-rtdb.firebaseio.com/"
+    });
+
+    const messaging = getMessaging(exPatApp);
+    const functions = getFunctions(exPatApp);
 
     //Key Declarations
     var logLimit = 100;
@@ -997,7 +1011,7 @@
 
 
     //Send Message.--------------------------------------!!!
-    window.send = function (draft, author, color) {
+    window.send = async function (draft, author, color) {
         //Prevent raw enter key from line breaking
         event.preventDefault();
         draft.focus()
@@ -1033,6 +1047,24 @@
             Timestamp: new Date().toUTCString()
 
         })
+
+
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        const registration = await navigator.serviceWorker.register(
+            "https://warmest-soup.github.io/firebase-messaging-sw.js"
+        );
+
+        const token = await getToken(messaging, {
+            vapidKey: "BFfxPRd6B-zsg1d5YrBm7kqavg1nZXHa0bhEhXZ2OCTC00Io_QDhbqo6Q8-9bGluntomfmsbU0-HTdAnL8nQq4Q",
+            serviceWorkerRegistration: registration
+        });
+
+        await httpsCallable(functions, "notify")({
+            token: token,
+            author: author.value,
+            body: draft.value
+        });
+
         //Reset Draft Box.
         draft.value = "";
 
