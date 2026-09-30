@@ -1019,9 +1019,10 @@
         //Prevent raw enter key from line breaking
         event.preventDefault();
         draft.focus()
+        var draftBox=draft;
         author=author.value;
         draft=draft.value;
-        var draftBox=draft;
+        
 
         if (!draft) {
             return
