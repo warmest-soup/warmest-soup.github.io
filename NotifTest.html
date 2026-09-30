@@ -1,5 +1,8 @@
+<div style="display:flex; flex-direction:column; gap:1em;">
+<input placeholder="Author" style="resize:none;" id="authorName"></input>
+<textarea id="messageBody" placeholder="Enter message..." style="resize:none;"></textarea>
 <button id="notify">Send notification</button>
-
+<div>
 <style>
     #notify {
         font-size: 10vw;
@@ -7,20 +10,37 @@
 </style>
 
 <script type="module">
+    
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
     import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-messaging.js";
     import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-functions.js";
+    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
+
 
     const app = initializeApp({
         apiKey: "AIzaSyBunyChVwR7Wq0CeQ1J2vaCUW1onWBXpEU",
         authDomain: "ex-patriot.firebaseapp.com",
         projectId: "ex-patriot",
         messagingSenderId: "407951799946",
-        appId: "1:407951799946:web:2b7b91807ef6ed3841df73"
+        appId: "1:407951799946:web:2b7b91807ef6ed3841df73",
+        databaseURL: "https://ex-patriot-default-rtdb.firebaseio.com/"
     });
 
     const messaging = getMessaging(app);
     const functions = getFunctions(app);
+
+    const db=getDatabase(app)
+
+    //Collect tokens from db
+    var userTokens = await get(ref(db, "userTokens"))
+    console.log(userTokens.val())
+    
+    var tokens = []
+    //send notification to each.
+    userTokens.forEach((x) => {
+        tokens.push(x.val())
+    })
+    console.log(tokens)
 
     document.querySelector("#notify").onclick = async function () {
         const registration = await navigator.serviceWorker.register(
@@ -31,9 +51,11 @@
             vapidKey: "BFfxPRd6B-zsg1d5YrBm7kqavg1nZXHa0bhEhXZ2OCTC00Io_QDhbqo6Q8-9bGluntomfmsbU0-HTdAnL8nQq4Q",
             serviceWorkerRegistration: registration
         });
-
+            
         await httpsCallable(functions, "notify")({
-            token: token
+            token: token,
+            author: authorName.innerText,
+            body: messageBody.innerText
         });
     };
 
