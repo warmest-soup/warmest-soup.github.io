@@ -1021,6 +1021,7 @@
         draft.focus()
         author=author.value;
         draft=draft.value;
+        var draftBox=draft;
 
         if (!draft) {
             return
@@ -1035,7 +1036,7 @@
         }
         
         //Reset Draft Box.
-        draft.value = "";
+        draftBox.value = "";
         
         
         //format replies
