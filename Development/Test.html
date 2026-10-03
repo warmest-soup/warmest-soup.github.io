@@ -433,9 +433,9 @@ and the adjusted time.
 
     //MarkDown
     function markDown(textContainer, imgScale) {
-        if (textContainer.innerText.match(/([^\|\s>]+)\|([^\|]*)\|/ig)) {
+        if (textContainer.innerText.match(/([^\|\s]+)\|([^\|]*)\|/ig)) {
 
-            textContainer.innerHTML = textContainer.innerHTML.replace(/([^\|\s]+)\|([^\|]*)\|/g, (match, key, content) => {
+            textContainer.innerHTML = textContainer.innerText.replace(/([^\|\s]+)\|([^\|]*)\|/g, (match, key, content) => {
                 var markDown = "";
                 var tagType = "span"
                 var textDeco = "";
@@ -638,10 +638,19 @@ and the adjusted time.
                     content = newDate
 
                 }
+                if (key.toLowerCase().includes("=")) {
+                    markDown += "text-align:center;"
+                    tagType="div";
+                }
+                if (key.toLowerCase().includes(">")) {
+                    markDown += "text-align:right;"
+                    tagType="div";
+                }
 
-
-
-                return "<" + tagType + " style='" + markDown + "text-decoration:" + textDeco + ";' " + spoiler + " class='mark " + spClass + "' " + link + ">" + content + "</" + tagType + ">"
+                if(textDeco!=""){
+                    textDeco="text-decoration:" + textDeco + ";";
+                }
+                return "<" + tagType + " style='" + markDown + textDeco + "' " + spoiler + " class='mark " + spClass + "' " + link + ">" + content + "</" + tagType + ">"
 
             })
         }
@@ -670,7 +679,7 @@ and the adjusted time.
         font-size: 1em;
         font-family: Zen Old Mincho;
         border-radius: 1em;
-        width: 100vw;
+        width: 97vw;
         line-height: 2em;
 
         height: 100vh;
