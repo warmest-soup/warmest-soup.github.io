@@ -470,7 +470,7 @@ blockquote {
     width: 90%;
     height: 100%;
     padding: .5em;
-
+    white-space: pre-wrap;
     transition: box-shadow 1s ease;
 }
 #DraftBox{
@@ -478,10 +478,9 @@ blockquote {
 }
 #draftPreview {
     color: rgb(255, 255, 255);
+    position:absolute;
     white-space: pre-wrap;
     pointer-events: none;
-    margin-right: -89%;
-    margin-top:-.5%;
     z-index:+1;
 }
 
