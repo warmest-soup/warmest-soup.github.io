@@ -318,13 +318,18 @@
             </script>
         </div>
         <div id="editor">
-            <div id="draftPreview" prewrap="wrap">
-            </div>
+            <div id="textEditor">
+                <div id="draftPreview" prewrap="wrap"></div>
 
-            <TextArea id="DraftBox" placeHolder="Enter Message..." prewrap="wrap"
-                onKeyDown="if(!event.shiftKey && event.key=='Enter' ){send(this,Author,Color)}; if(event.key=='|'){event.preventDefault(); addBar()}"
-                onclick="playNotifs=true;"
-                oninput="showHelp(this.value.substring(0,5)); draftPreview.innerText = this.value; markDown(draftPreview, 20); addSticker(draftPreview); openStickers(this);"></TextArea>
+                <div contentEditable="true" id="DraftBox" placeHolder="Enter Message..." prewrap="wrap"
+                    onKeyDown="if(!event.shiftKey && event.key=='Enter' ){send(this,Author,Color)}; if(event.key=='|'){event.preventDefault(); addBar()}"
+                    onclick="playNotifs=true;"
+                    oninput="showHelp(this.innerText.substring(0,5)); draftPreview.innerText = this.innerText; markDown(draftPreview, 20); openStickers(this); addSticker(draftPreview);">
+                </div>
+                <script>
+                    DraftBox.innerText = "";
+                </script>
+            </div>
             <div id="mobileButtons">
                 <button id="LineBreak"
                     onClick="newLine(); buttonPress.currentTime=0; buttonPress.play();">Line<br>Break</button>
@@ -741,8 +746,9 @@
     ];
     //Open sticker Context menu
     function openStickers(textContainer) {
-        var cursor = textContainer.selectionStart
-        var matching = textContainer.value.substring(0, cursor).match(/:([a-z]+)$/);
+        console.log("Got in!")
+        var matching = textContainer.innerText.match(/:([a-z]+)$/);
+
         var stickerMenu = document.getElementById("StickerList");
 
         if (matching) {
@@ -762,25 +768,23 @@
             })
 
         } else stickerMenu.setAttribute("Hidden", "true");
+
     }
+
     //Add sticker from menu
     function insertSticker(textContainer, sticker) {
-        var cursor = textContainer.selectionStart
-        var text = textContainer.value.substring(0, cursor)
-        var textEnd = textContainer.value.substring(cursor)
         var stickerMenu = document.getElementById("StickerList");
 
+        console.log(textContainer.innerText)
+        console.log(sticker)
 
-        text = text.replace(/:([a-z]+)$/, ":" + sticker.substring(1) + ":");
-
-        textContainer.value = text + textEnd;
+        textContainer.innerText = textContainer.innerText.replace(/:([a-z]+)$/, ":" + sticker.slice(1) + ":");
 
         stickerMenu.setAttribute("Hidden", "true");
         textContainer.focus()
-        textContainer.selectionStart = text.length
-        textContainer.selectionEnd = text.length
 
-        draftPreview.innerText = DraftBox.value;
+        draftPreview.innerText = DraftBox.innerText;
+        addSticker(draftPreview)
     }
     //Embed sticker images
     function addSticker(textContainer) {
@@ -932,50 +936,46 @@
 
     //LineBreak Button
     function newLine() {
-        var text = document.getElementById("DraftBox");
-        text.focus();
+        buttonPress.currentTime = 0;
+        buttonPress.play();
 
-        var cursor = text.selectionStart;
-        var endString = text.value.slice(cursor)
-
-        text.value = text.value.substring(0, cursor) + "\n" + endString;
-
-        text.selectionStart = cursor + 1;
-        text.selectionEnd = cursor + 1;
+        DraftBox.focus();
+        var select = window.getSelection();
+        select.getRangeAt(0).insertNode(document.createTextNode("\n"))
+        select.collapseToEnd()
+        draftPreview.innerText = DraftBox.innerText
+        markDown(draftPreview)
 
     }
 
     //add bar button
     function addBar() {
+        //console.log(window.getSelection())
         buttonPress.currentTime = 0;
         buttonPress.play();
         var editor = document.getElementById("DraftBox")
-        var preset = document.getElementById("StylePreset")
-        var text = editor.value
+        var preset = document.getElementById("StylePreset").value
 
         editor.focus();
 
-        var start = editor.selectionStart;
-        var end = editor.selectionEnd;
-        var selection = editor.value.substring(start, end);
-        var endString = text.slice(end)
-        var cursor = start;
+        var select = window.getSelection();
+        var text = select.toString()
 
+        var start = select.anchorOffset;
+        var end = start + String(select).length;
+        var endString = String(text).slice(end);
 
-
-        if (selection) {
-            cursor = end + 1 + preset.value.length;
-
-            editor.value = text.substring(0, start) + preset.value + "|" + selection + "|" + endString;
+        if (select.isCollapsed) {
+            select.getRangeAt(0).insertNode(document.createTextNode("|"))
+            select.collapseToEnd()
         } else {
-            editor.value = text.substring(0, start) + "|" + endString;
-
+            select.getRangeAt(0).insertNode(document.createTextNode(preset + "|"))
+            select.collapseToEnd()
+            select.getRangeAt(0).insertNode(document.createTextNode("|"))
+            select.collapseToEnd()
         }
 
-        editor.selectionStart = cursor + 1;
-        editor.selectionEnd = cursor + 1;
-
-        draftPreview.innerText = DraftBox.value
+        draftPreview.innerText = DraftBox.innerText
         markDown(draftPreview)
     }
 
@@ -997,7 +997,17 @@
     window.addEventListener('hashchange', function () {
         giveBerth();
     })
+    var s1 = document.getElementById("DraftBox");
+    var s2 = document.getElementById("draftPreview");
+    s1.addEventListener("scroll", twoScroll, false);
+    s2.addEventListener("scroll", oneScroll, false);
 
+    function oneScroll(e) {
+        s1.scrollTop = s2.scrollTop;
+    }
+    function twoScroll(e) {
+        s2.scrollTop = s1.scrollTop;
+    }
 
     //Initialize
     loadUser()
@@ -1065,7 +1075,7 @@
         draft.focus()
         var draftBox = draft;
         author = author.value;
-        draft = draft.value;
+        draft = draft.innerText;
 
 
         if (!draft) {
@@ -1081,7 +1091,7 @@
         }
 
         //Reset Draft Box.
-        draftBox.value = "";
+        draftBox.innerText = "";
         draftPreview.innerHTML = "";
 
 
@@ -1338,7 +1348,7 @@
     })
 
 
-    // Turn off entry messages.
+    /* Turn off entry messages.
     document.addEventListener("visibilitychange", () => {
         //When page is hidden.
 

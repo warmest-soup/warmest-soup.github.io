@@ -1,0 +1,117 @@
+root {
+    color-scheme: dark;
+    font-family: "Zen Old Mincho";
+    font-weight: 400;
+    font-size: min(.9rem, 2.5vw);
+    overflow: clip;
+
+    --AuthorColor: white;
+
+
+    background: url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/ChatroomForeground.jpg") center 15% / cover no-repeat;
+}
+
+/*Force compliance with default.*/
+input,
+textarea,
+button {
+    font-family: "Zen Old Mincho";
+    line-height: 1.2rem;
+    font-weight: 400;
+    font-size: min(1rem, 2.5vw);
+    background: none;
+}
+
+/*Set default style*/
+*,
+input {
+    margin: 0em;
+    padding: 0em;
+    box-sizing: border-box;
+    border: none;
+    resize: none;
+}
+
+/*Text input default size*/
+input {
+    width: 6em;
+    text-align: center;
+    padding: .1em;
+}
+
+/*Placeholder text.*/
+input::placeholder,
+textarea::placeholder {
+    color: #698bed;
+}
+
+input:focus{
+    outline:none;
+}
+
+/*Special Default Stylings*/
+/*Range style*/
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: min(90%, 8em);
+    height: 1%;
+    background: white;
+    border-radius: 50%;
+    outline: none;
+    box-Shadow:
+        0em 0em .2em .0em rgb(255 255 255),
+        0em 0em .5em .0em rgb(255 255 255),
+        0em 0em .7em .0em rgb(255 255 255),
+        0em 0em 1em .2em rgb(0 140 255);
+    touch-action: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1em;
+    height: 1em;
+    background: #ffffff;
+    border-radius: 1em;
+    cursor: pointer;
+
+    box-Shadow:
+        0em 0em .2em .0em rgb(255 255 255),
+        0em 0em .5em .0em rgb(255 255 255),
+        0em 0em .7em .0em rgb(255 255 255),
+        0em 0em 1em .2em rgb(0 140 255);
+}
+
+/*Checkbox defualt styling*/
+input[type="checkbox"] {
+    background-color: #ffffff00;
+    -moz-appeareance: none;
+    appearance: none;
+    width: 1em;
+    height: 1em;
+
+    box-Shadow:
+        0em 0em 0em .1em #00c9ff,
+        0em 0em 1em 0em #00c9ff,
+        inset 0em 0em .5em 0em #0056c9;
+    border-radius: 0.4em;
+
+    transition:
+        box-shadow .5s ease-out,
+        transform .2s ease-out;
+}
+
+input[type="checkbox"]:checked {
+    box-Shadow:
+        0em 0em 1em .1em #ffffff,
+        0em 0em 2em 1em #0093ff,
+        inset 0em 0em 0em 1em #ffffff;
+
+    transform: scale(.5);
+}
+
+
+
+
+/*CSS Starts here!------------------>>*/

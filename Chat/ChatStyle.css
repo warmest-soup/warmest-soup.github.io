@@ -3,13 +3,14 @@
     font-family: "Zen Old Mincho";
     font-weight: 400;
     font-size: min(.9rem, 2.5vw);
-    overflow:clip;
-    
+    overflow: clip;
+
     --AuthorColor: white;
 
-    
+
     background: url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/ChatroomForeground.jpg") center 15% / cover no-repeat;
 }
+
 /*Force compliance with default.*/
 input,
 textarea,
@@ -37,6 +38,7 @@ input {
     text-align: center;
     padding: .1em;
 }
+
 /*Placeholder text.*/
 input::placeholder,
 textarea::placeholder {
@@ -60,6 +62,7 @@ input[type="range"] {
         0em 0em 1em .2em rgb(0 140 255);
     touch-action: none;
 }
+
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -75,6 +78,7 @@ input[type="range"]::-webkit-slider-thumb {
         0em 0em .7em .0em rgb(255 255 255),
         0em 0em 1em .2em rgb(0 140 255);
 }
+
 /*Checkbox defualt styling*/
 input[type="checkbox"] {
     background-color: #ffffff00;
@@ -93,6 +97,7 @@ input[type="checkbox"] {
         box-shadow .5s ease-out,
         transform .2s ease-out;
 }
+
 input[type="checkbox"]:checked {
     box-Shadow:
         0em 0em 1em .1em #ffffff,
@@ -123,7 +128,7 @@ input[type="checkbox"]:checked {
 .spoilerPrimer,
 .spoiler,
 #MobileButtons>*,
-#StickerList{
+#StickerList {
     border-radius: 1em;
 }
 
@@ -144,8 +149,9 @@ img {
     box-shadow:
         .2em .2em .5em 0em #000000,
         -.2em -.2em .5em 0em #cffeff;
-    margin:.6em 0em .6em 0em;
+    margin: .6em 0em .6em 0em;
 }
+
 blockquote {
     margin: .5em;
     padding: .3em 1em .8em 1em;
@@ -153,7 +159,7 @@ blockquote {
         -.3em 0em 0em .1em #083a6d,
         -.6em 0em 0em 0em #75b4f4,
         inset .2em 0em 2em 0em #040f18;
-    border-radius:5% 10% 10% 10%;
+    border-radius: 5% 10% 10% 10%;
 }
 
 .spoilerPrimer {
@@ -164,11 +170,13 @@ blockquote {
         background .5s ease-out,
         color .5s ease-out;
 }
+
 .spoiler {
     background: #111111;
     color: #111111;
     text-shadow: none;
 }
+
 .spoiler::selection {
     background: white;
     color: white;
@@ -184,21 +192,21 @@ blockquote {
 #page {
     align-items: center;
     width: 100dvw;
-    max-width:80em;
+    max-width: 80em;
     height: 100dvh;
     overflow: hide;
 }
 
-#Bulletin{
-    display:flex;
-    align-items:center;
-    height:5%;
-    font-size:3dvh;
-    font-family:"Xanh Mono";
-    margin-top:2%;
-    background:url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/MGSWires.png");
+#Bulletin {
+    display: flex;
+    align-items: center;
+    height: 5%;
+    font-size: 3dvh;
+    font-family: "Xanh Mono";
+    margin-top: 2%;
+    background: url("https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/MGSWires.png");
 
-    color:white;
+    color: white;
     text-shadow:
         0em 0em .1em white,
         0em 0em .2em #eb00ff,
@@ -207,12 +215,12 @@ blockquote {
         inset 0em 0em .6em .4em black,
         0em 0em .4em 0em #ce8eff;
 
-    filter:contrast(170%);
-    overflow:clip;
+    filter: contrast(170%);
+    overflow: clip;
 }
 
 #messageBox,
-#documentation{
+#documentation {
     gap: 2%;
     box-shadow:
         0em 4em 4em -2em #3550c8db,
@@ -229,21 +237,23 @@ blockquote {
 
     background: url(https://raw.githubusercontent.com/warmest-soup/warmest-soup.github.io/refs/heads/main/Assets/Images/ChatroomBGs/8.gif) center 15% / cover no-repeat;
 }
+
 /*Help! Section*/
-#documentation{
-    position:fixed;
-    overflow:auto;
-    z-index:+2;
+#documentation {
+    position: fixed;
+    overflow: auto;
+    z-index: +2;
     background: url(https://images.wondershare.com/filmora/article-images/how-to-add-tv-static-sound-effect-2.gif) center 15% / cover no-repeat;
-    border-radius:2em;
-    padding:0em;
-    
+    border-radius: 2em;
+    padding: 0em;
+
 }
-#documentation > *{
-    backdrop-filter:brightness(10%) hue-rotate(200deg);
-    color:#aaf7ff9c;
-    padding:2em;
-    box-shadow:inset 0em 0em 5em 5em black;
+
+#documentation>* {
+    backdrop-filter: brightness(10%) hue-rotate(200deg);
+    color: #aaf7ff9c;
+    padding: 2em;
+    box-shadow: inset 0em 0em 5em 5em black;
 }
 
 /*Chat messages*/
@@ -267,6 +277,7 @@ blockquote {
 
     text-shadow: -.1em .09em .1em #000000;
 }
+
 .message {
     word-wrap: break-word;
     max-width: 100%;
@@ -284,6 +295,7 @@ blockquote {
         box-shadow 2s cubic-bezier(0, 0, 0.2, 1),
         filter 2s cubic-bezier(0, 0, 0.2, 1);
 }
+
 .QuoteBlock {
     font-size: .9em;
     padding: .7em 1.2em 2em 2.2em;
@@ -301,6 +313,7 @@ blockquote {
 
     animation: quoteEnter .2s cubic-bezier(0.05, 0.54, 0.28, 0.96);
 }
+
 .quoteblock>a {
     text-decoration: none;
 
@@ -313,6 +326,7 @@ blockquote {
     width: 100%;
     display: block;
 }
+
 .Timestamp {
     font-size: .7em;
 }
@@ -320,6 +334,7 @@ blockquote {
 .reply2This {
     animation: replyGlow 2s infinite;
 }
+
 .Highlight {
     background: #92c8c1;
     filter: contrast(90%) brightness(115%);
@@ -378,17 +393,14 @@ blockquote {
         inset .2em -.2em .5em .2em #690337,
         inset .5em -.5em .5em .7em #6283ff6e;
     filter:
-        contrast(150%)
-        blur(1px)
-        brightness(100%);
+        contrast(150%) blur(1px) brightness(100%);
 
-    transition:filter .2s ease-out;
+    transition: filter .2s ease-out;
 }
-#ToBottom:hover{
+
+#ToBottom:hover {
     filter:
-        contrast(120%)
-        blur(0px)
-        brightness(300%);
+        contrast(120%) blur(0px) brightness(300%);
 }
 
 #UserInput {
@@ -396,11 +408,12 @@ blockquote {
     align-items: center;
     height: 18%;
 }
+
 /*User Input Text color*/
 #UserInput,
-#draftBox{
-    color:#ffffff;
-    text-shadow: 
+#draftBox {
+    color: #ffffff;
+    text-shadow:
         -.1em .09em 0em black,
         -.1em .09em .5em black,
         -.1em .09em .5em black;
@@ -413,6 +426,7 @@ blockquote {
     padding-left: 5%;
     gap: 7%;
 }
+
 #AuthorInfo {
     display: flex;
     align-items: center;
@@ -421,28 +435,32 @@ blockquote {
     margin-bottom: -1em;
     margin-top: -.7em;
 }
+
 #AuthorInfo>:nth-child(2) {
     width: 15%;
     text-align: center;
 }
+
 #NameTag {
     display: flex;
     gap: .5em;
     align-items: center;
     justify-content: start;
 }
+
 #Author {
     width: 8em;
     color: var(--AuthorColor);
     font-weight: 900;
 }
+
 #Color:active {
     outline: none;
 }
 
-#togglePreview{
-    font-size:1.5em;
-    margin-bottom:.3em;
+#togglePreview {
+    font-size: 1.5em;
+    margin-bottom: .3em;
 
     outline: none;
     Text-shadow:
@@ -451,8 +469,8 @@ blockquote {
         0em 0em .2em rgb(0 236 255),
         0em 0em .2em rgb(0 236 255),
         0em 0em .2em rgb(65 0 255),
-        0em 0em .3em  rgb(65 0 255);
-    
+        0em 0em .3em rgb(65 0 255);
+
 }
 
 #Clock {
@@ -465,27 +483,37 @@ blockquote {
     width: 90%;
     gap: 1em;
 }
-#DraftPreview,
-#DraftBox {
+
+#textEditor {
+    display: grid;
     width: 90%;
     height: 100%;
     padding: .5em;
+}
+
+#DraftPreview,
+#DraftBox {
     white-space: pre-wrap;
+    grid-row: 1;
+    grid-column: 1;
+    overflow:auto;
+    min-height:90%;
+    max-height: 12vh;
     transition: box-shadow 1s ease;
 }
-#DraftBox{
-    color:#5764ffa3;
+
+#DraftBox {
+    color: #5764ffa3;
 }
+
 #draftPreview {
     color: rgb(255, 255, 255);
-    position:absolute;
-    white-space: pre-wrap;
     pointer-events: none;
-    z-index:+1;
+    z-index: +1;
 }
 
 #DraftBox:focus {
-    outline:none;
+    outline: none;
     box-shadow:
         0em -.3em 1em 0em #000000,
         0em 1em 1em 0em #5555e0,
@@ -496,6 +524,7 @@ blockquote {
 #MobileButtons {
     justify-content: space-around;
 }
+
 #MobileButtons>*,
 #StyleButton {
     background: #1e5b7f82;
@@ -510,9 +539,11 @@ blockquote {
     filter:
         brightness(100%) contrast(800%);
 }
+
 #styleButtons {
     width: 5.5em;
 }
+
 #LineBreak,
 #SendButton,
 #StyleButton {
@@ -526,9 +557,11 @@ blockquote {
         box-shadow .1s ease-out,
         transform .1s ease-out;
 }
+
 #StyleButton {
     height: 3em;
 }
+
 #LineBreak:active,
 #SendButton:active,
 #StyleButton:active {
@@ -544,16 +577,16 @@ blockquote {
 
 }
 
-#StickerList{
-    background:none;
-    position:fixed;
-    left:5%;
-    overflow:scroll;
-    max-height:70vh;
-    bottom:22%;
-    padding:.5em;
-    gap:1em;
-    background:#002b2b52;
+#StickerList {
+    background: none;
+    position: fixed;
+    left: 5%;
+    overflow: scroll;
+    max-height: 70vh;
+    bottom: 22%;
+    padding: .5em;
+    gap: 1em;
+    background: #002b2b52;
     box-shadow:
         0em 0em 0em .2em black,
         inset 0em 0em 3em 1em #02001a;
@@ -656,41 +689,41 @@ blockquote {
 
 @keyframes Glow {
     0% {
-            text-shadow:
-                0em 0em 0em black;
-        }
-
-        10% {
-            filter:brightness(500%);
-            color: white;
-            text-shadow:
-                0em 0em .4em hsl(0, 0%, 100%),
-                0em 0em .1em hsl(0, 0%, 100%),
-                0em .1em .2em hsl(0, 0%, 100%),
-                0em -.1em .2em hsl(0, 0%, 100%);
-        }
-
-        30% {
-            color: inherit;
-        }
-
-        50% {
-
-            text-shadow:
-                1em 0em .2em hsl(200deg 50% 50%),
-                -.7em -.2em .2em hsl(200deg 50% 50%),
-                .3em .4em .2em hsl(200deg 50% 50%),
-                .7em -.7em .2em hsl(200deg 50% 50%);
-        }
-
-        100% {
-            text-shadow:
-                1em 0em .2em transparent,
-                -.7em -.2em .2em transparent,
-                0em .2em .2em transparent,
-                .7em -.7em .2em transparent;
-        }
+        text-shadow:
+            0em 0em 0em black;
     }
+
+    10% {
+        filter: brightness(500%);
+        color: white;
+        text-shadow:
+            0em 0em .4em hsl(0, 0%, 100%),
+            0em 0em .1em hsl(0, 0%, 100%),
+            0em .1em .2em hsl(0, 0%, 100%),
+            0em -.1em .2em hsl(0, 0%, 100%);
+    }
+
+    30% {
+        color: inherit;
+    }
+
+    50% {
+
+        text-shadow:
+            1em 0em .2em hsl(200deg 50% 50%),
+            -.7em -.2em .2em hsl(200deg 50% 50%),
+            .3em .4em .2em hsl(200deg 50% 50%),
+            .7em -.7em .2em hsl(200deg 50% 50%);
+    }
+
+    100% {
+        text-shadow:
+            1em 0em .2em transparent,
+            -.7em -.2em .2em transparent,
+            0em .2em .2em transparent,
+            .7em -.7em .2em transparent;
+    }
+}
 
 @keyframes fade {
     0% {}
@@ -701,6 +734,7 @@ blockquote {
 
     100% {}
 }
+
 @keyframes blur {
     0% {
         filter: blur(0px);
@@ -714,6 +748,7 @@ blockquote {
         filter: blur(0px);
     }
 }
+
 @keyframes grow {
     0% {
         font-size: 1em;
@@ -727,6 +762,7 @@ blockquote {
         font-size: 1em;
     }
 }
+
 @keyframes shrink {
     0% {
         font-size: 1em;
@@ -740,6 +776,7 @@ blockquote {
         font-size: 1em;
     }
 }
+
 @keyframes shake {
     0% {
         display: inline-block;
@@ -847,6 +884,7 @@ blockquote {
     }
 
 }
+
 @keyframes spin {
     0% {
         display: inline-block;
@@ -858,42 +896,76 @@ blockquote {
         transform: rotate(360deg);
     }
 }
-@keyframes bounce{
-    0%{display:inline-block;
-        transform:scalex(1.1) scaley(.5) translatey(50%);}
-    10%{transform:scalex(.9) scaley(1.5) translatey(-50%);}
-    
-    20%{transform:scalex(1) scaley(1) translatey(-90%);}
-    25%{transform:scalex(1) scaley(1) translatey(-100%);}
-    30%{transform:scalex(1) scaley(1) translatey(-90%);}
-    
-    40%{transform:scalex(1) scaley(1) translatey(0%);}
-    50%{transform:scalex(1.1) scaley(.5) translatey(50%);}
 
-    60%{transform:scalex(.9) scaley(1.5) translatey(-50%);}
-    
-    70%{transform:scalex(1) scaley(1) translatey(-90%);}
-    75%{transform:scalex(1) scaley(1) translatey(-100%);}
-    80%{transform:scalex(1) scaley(1) translatey(-90%);}
-    
-    90%{transform:scalex(1) scaley(1) translatey(0%);}
-    100%{display:inline-block;
-        transform:scalex(1.1) scaley(.5) translatey(50%);}
+@keyframes bounce {
+    0% {
+        display: inline-block;
+        transform: scalex(1.1) scaley(.5) translatey(50%);
+    }
+
+    10% {
+        transform: scalex(.9) scaley(1.5) translatey(-50%);
+    }
+
+    20% {
+        transform: scalex(1) scaley(1) translatey(-90%);
+    }
+
+    25% {
+        transform: scalex(1) scaley(1) translatey(-100%);
+    }
+
+    30% {
+        transform: scalex(1) scaley(1) translatey(-90%);
+    }
+
+    40% {
+        transform: scalex(1) scaley(1) translatey(0%);
+    }
+
+    50% {
+        transform: scalex(1.1) scaley(.5) translatey(50%);
+    }
+
+    60% {
+        transform: scalex(.9) scaley(1.5) translatey(-50%);
+    }
+
+    70% {
+        transform: scalex(1) scaley(1) translatey(-90%);
+    }
+
+    75% {
+        transform: scalex(1) scaley(1) translatey(-100%);
+    }
+
+    80% {
+        transform: scalex(1) scaley(1) translatey(-90%);
+    }
+
+    90% {
+        transform: scalex(1) scaley(1) translatey(0%);
+    }
+
+    100% {
+        display: inline-block;
+        transform: scalex(1.1) scaley(.5) translatey(50%);
+    }
 }
 
 /*Gadgets*/
 .Scheduler {
     width: 20em;
     text-align: center;
-    background:url("https://media.giphy.com/media/jXss1uWA4rJwA/giphy.gif") center/cover no-repeat;
-    padding:1em;
-    margin:1em;
-    border-radius:1em;
+    background: url("https://media.giphy.com/media/jXss1uWA4rJwA/giphy.gif") center/cover no-repeat;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 1em;
     box-shadow:
         inset 0em 0em .5em .1em white,
         inset 0em 0em 6em 1em #000c21;
 
-    text-shadow: 
+    text-shadow:
         -.1em .09em 0em black,
         -.1em .09em .5em black,
         -.1em .09em .5em black,
@@ -902,6 +974,7 @@ blockquote {
         -.1em .09em .5em black,
         -.1em .09em .5em black;
 }
+
 .schedulerInput {
     background: #d3d3d3;
     color: rgb(73, 73, 73);
@@ -909,17 +982,18 @@ blockquote {
     border-radius: 2em;
     border: none;
     box-shadow:
-         0em 0em 0em .1em black,
-         inset -.1em .1em .3em .2em white,
+        0em 0em 0em .1em black,
+        inset -.1em .1em .3em .2em white,
         inset .5em -.5em .5em -.4em black;
 
     text-align: center;
 
     transition:
-         background .5s ease-out,
-         color .5s ease-out,
+        background .5s ease-out,
+        color .5s ease-out,
         box-shadow .5s ease-out;
-    }
+}
+
 .schedulerinput:focus {
     background: white;
     color: black;
@@ -930,45 +1004,50 @@ blockquote {
         inset .5em -.5em .2em -.6em black;
 
 }
-.schedulerinput::selection{
-    color:white;
-    background:black;
+
+.schedulerinput::selection {
+    color: white;
+    background: black;
 }
+
 .Year {
     width: 3.5em;
 }
+
 .SchedulerButtons {
     display: flex;
     justify-content: space-around;
-    margin-top:1em;
-    margin-bottom:1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
-.scheduler>*>button{
-    outline:none;
+
+.scheduler>*>button {
+    outline: none;
     background: #d3d3d3;
     color: rgb(73, 73, 73);
     border-radius: 2em;
     border: none;
     box-shadow:
-         0em 0em 0em .1em black,
-         inset -.1em .1em .3em .2em white,
+        0em 0em 0em .1em black,
+        inset -.1em .1em .3em .2em white,
         inset .5em -.5em .5em -.4em black;
 
     text-align: center;
-    padding:.2em 1em;
-    transform:scale(100%);
+    padding: .2em 1em;
+    transform: scale(100%);
 
-    
+
 }
-.scheduler>*>button:active{
-    outline:none;
-    background:#717171;
+
+.scheduler>*>button:active {
+    outline: none;
+    background: #717171;
     color: black;
     box-shadow:
-         0em 0em 0em .1em white,
-         inset -.1em .1em .3em .2em black,
+        0em 0em 0em .1em white,
+        inset -.1em .1em .3em .2em black,
         inset .5em -.5em .5em -.4em white;
-    transform:scale(110%);
+    transform: scale(110%);
 }
 
 /*Scroll Bar Style----------------------------*/
@@ -977,14 +1056,17 @@ blockquote {
     width: .7em;
     display: overlay;
 }
+
 ::-webkit-scrollbar-thumb {
     background: #00c8ff47;
     border-radius: 1em;
-    box-shadow:inset 0em 0em 0em .05em #ffffff;
+    box-shadow: inset 0em 0em 0em .05em #ffffff;
 }
+
 ::-webkit-scrollbar-corner {
     display: none;
 }
+
 ::-webkit-scrollbar-track {
     display: none;
 }
@@ -992,6 +1074,6 @@ blockquote {
 /*System Styling*/
 ::selection {
     background: #b0527b8f;
-    border-radius:1em;
-    color:cyan;
+    border-radius: 1em;
+    color: cyan;
 }
