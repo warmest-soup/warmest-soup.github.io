@@ -498,7 +498,9 @@ blockquote {
     grid-column: 1;
     overflow:auto;
     min-height:90%;
-    max-height: 12vh;
+    max-height:90%;
+    padding:.5em;
+    
     transition: box-shadow 1s ease;
 }
 
