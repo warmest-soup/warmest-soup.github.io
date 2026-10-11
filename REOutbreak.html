@@ -1,27 +1,27 @@
 <div>
     <div id="routeFilters">
-        Easy/Normal A <input type="checkbox" onclick="filterSPItems()"/> | 
-        Easy/Normal B <input type="checkbox" onclick="filterSPItems()"/> | 
-        Hard/Very A <input type="checkbox" onclick="filterSPItems()"/> | 
-        Hard/Very B <input type="checkbox" onclick="filterSPItems()"/>
+        Easy/Normal A <input type="checkbox" onclick="filterSPItems()" /> |
+        Easy/Normal B <input type="checkbox" onclick="filterSPItems()" /> |
+        Hard/Very A <input type="checkbox" onclick="filterSPItems()" /> |
+        Hard/Very B <input type="checkbox" onclick="filterSPItems()" />
     </div>
     <div id="sceneFilters">
-        Outbreak <input type="checkbox" onclick="filterSPItems()"/> | 
-        Below Freezing Point <input type="checkbox" onclick="filterSPItems()"/> | 
-        The Hive <input type="checkbox" onclick="filterSPItems()"/> | 
-        Hellfire <input type="checkbox" onclick="filterSPItems()"/> | 
-        Decisions, Decisions <input type="checkbox" onclick="filterSPItems()"/>
+        Outbreak <input type="checkbox" onclick="filterSPItems()" /> |
+        Below Freezing Point <input type="checkbox" onclick="filterSPItems()" /> |
+        The Hive <input type="checkbox" onclick="filterSPItems()" /> |
+        Hellfire <input type="checkbox" onclick="filterSPItems()" /> |
+        Decisions, Decisions <input type="checkbox" onclick="filterSPItems()" />
     </div>
     <div id="characterFilters">
-        Any <input type="checkbox" Checked="true" onclick="filterSPItems()"/> | 
-        Yoko <input type="checkbox" onclick="filterSPItems()"/> | 
-        Cindy <input type="checkbox" onclick="filterSPItems()"/> | 
-        Alyssa <input type="checkbox" onclick="filterSPItems()"/> | 
-        Kevin <input type="checkbox" onclick="filterSPItems()"/> | 
-        Mark <input type="checkbox" onclick="filterSPItems()"/> | 
-        Jim <input type="checkbox" onclick="filterSPItems()"/> | 
-        George <input type="checkbox" onclick="filterSPItems()"/> | 
-        David <input type="checkbox" onclick="filterSPItems()"/>
+        Any <input type="checkbox" Checked="true" onclick="filterSPItems()" /> |
+        Yoko <input type="checkbox" onclick="filterSPItems()" /> |
+        Cindy <input type="checkbox" onclick="filterSPItems()" /> |
+        Alyssa <input type="checkbox" onclick="filterSPItems()" /> |
+        Kevin <input type="checkbox" onclick="filterSPItems()" /> |
+        Mark <input type="checkbox" onclick="filterSPItems()" /> |
+        Jim <input type="checkbox" onclick="filterSPItems()" /> |
+        George <input type="checkbox" onclick="filterSPItems()" /> |
+        David <input type="checkbox" onclick="filterSPItems()" />
     </div>
 </div>
 <div id="RawData">
@@ -9003,7 +9003,7 @@
         var jim = charfilters[6].checked;
         var george = charfilters[7].checked;
         var david = charfilters[8].checked;
-        
+
         var scenefilters = Array.from(sceneFilters.children);
         var outbreak = scenefilters[0].checked;
         var freezing = scenefilters[1].checked;
@@ -9034,7 +9034,7 @@
             ) {
                 x.setAttribute("hidden", "true")
             }
-            
+
             if (
                 (outbreak == false && x.children[3].textContent.match(/\"outbreak\"/gi)) ||
                 (freezing == false && x.children[3].textContent.match(/\"below freezing point\"/gi)) ||
@@ -9055,17 +9055,17 @@
         return data
     }
 
-    function populateList(list){
+    function populateList(list) {
         list.forEach(x => {
-        RawData.appendChild(x)
+            RawData.appendChild(x)
 
-        x.insertAdjacentHTML("beforeend", "<input type='checkbox' onclick='crossOut(this.parentNode, this.checked)'/>")
+            x.insertAdjacentHTML("beforeend", "<input type='checkbox' onclick='crossOut(this.parentNode, this.checked)'/>")
 
-        x.children[1].setAttribute("hidden", "true")
-        //x.children[2].setAttribute("hidden", "true")
-    })
+            x.children[1].setAttribute("hidden", "true")
+            x.children[2].setAttribute("hidden", "true")
+        })
     }
-    
+
     function crossOut(item, checkedOff) {
         if (checkedOff) {
             item.style.textDecoration = "line-through";
@@ -9131,23 +9131,23 @@
         "b4f west area oassage",
         "b4f culture room",
         "b4f low temperature laboratory",
-        
+
         "b5f computer room",
         "b5f emergency passage",
         "b5f area c passage",
         "b5f area b passage",
-        
+
         "b6f south passage",
         "b6f security center",
         "b6f security centre",
         "b6f east area passage",
-        
+
         "b7f east passage",
         "b7f laboratory",
         "b7f chemical disposal room",
         "b7f chemical storage room",
         "b7f south passage",
-        
+
         "main shaft",
         "platform",
         "cargo elevator",
@@ -9159,11 +9159,11 @@
         "3f passage",
         "room 302",
         "nurses' center",
-        
+
         "2f passage",
         "nurse's station",
         "room 202",
-        
+
         "1f passage",
         "night reception",
         "locker room",
@@ -9173,15 +9173,15 @@
         "hall",
         "office",
         "1f doctor's station",
-        
+
         "b1f reposing room",
         "b1f elavator control room",
         "admin room",
         "b1f waste liquid disposal room",
         "waste disposal chamber",
-        
+
         "roof",
-        
+
         "underground passage entrance",
         "underground waterway entrance"
     ]
@@ -9195,7 +9195,7 @@
         "room 102",
         "room 103",
         "room 104",
-        
+
         "northwest passage 2",
         "2f store room",
         "security room",
@@ -9203,12 +9203,12 @@
         "room 201",
         "room 202",
         "room 204",
-        
+
         "linen room",
         "room 301",
         "room 30*",
         "room 306",
-        
+
         "apple inn front lobby"
     ]
     var decisionsOrder = [
@@ -9218,18 +9218,18 @@
         "b1f passage b",
         "student affairs office",
         "general manager's room",
-        
+
         "art gallery",
         "2f art gallery",
         "drawing room",
         "presidents' room",
-        
+
         "study room",
-        
+
         "b2f passage elevator",
         "pier",
         "back square",
-        
+
         "b3f passage b",
         "restroom",
         "walkway a",
@@ -9237,7 +9237,7 @@
         "water works management office",
         "water tank",
         "b3f water quality assurance testing room",
-        
+
         "b4f corridor",
         "old subway tracks",
         "south car",
@@ -9246,44 +9246,50 @@
         "b4f storeroom",
         "tool room",
         "tower lower half",
-        
+
         "3f experiment preparation room",
         "equipment room",
         "laboratory",
         "3f machine storage",
         "second hall",
-        
+
         "1f unloading passage",
-        
+
         "3f second hall",
         "3f machine storage room"
     ]
-    
+
     RawData.innerHTML = "";
-    
+
     orderList(outbreak, characters, 5)
     orderList(outbreak, outbreakOrder, 4)
-    
+
     populateList(outbreak)
-    
+
     orderList(freezing, characters, 5)
     orderList(freezing, freezingOrder, 4)
 
     populateList(freezing)
-    
+
     orderList(hive, characters, 5)
     orderList(hive, hiveOrder, 4)
 
     populateList(hive)
-    
+
     orderList(hellfire, characters, 5)
     orderList(hellfire, hellfireOrder, 4)
 
     populateList(hellfire)
-    
+
     orderList(decisions, characters, 5)
     orderList(decisions, decisionsOrder, 4)
 
     populateList(decisions)
-    
+
+    /*var pics = Array.from(document.querySelectorAll("img"))
+    pics.forEach(x => {
+        x.src = String(x.src).replace(/\/revision\/latest\/scale-to-width-down\/75\?cb=\d+/, "")
+    })
+    */
+
 </script>
