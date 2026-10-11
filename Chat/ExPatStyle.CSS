@@ -15,6 +15,7 @@ root {
 input,
 textarea,
 button {
+    box-sizing:border-box;
     font-family: "Zen Old Mincho";
     line-height: 1.2rem;
     font-weight: 400;
@@ -111,7 +112,37 @@ input[type="checkbox"]:checked {
     transform: scale(.5);
 }
 
-
-
-
 /*CSS Starts here!------------------>>*/
+/*CSS Starts here!------------------>>*/
+/*CSS Starts here!------------------>>*/
+/*CSS Starts here!------------------>>*/
+/*CSS Starts here!------------------>>*/
+/*CSS Starts here!------------------>>*/
+button{
+    border-radius:.2em;
+    padding:.2em;
+    box-shadow:
+        0em 0em 0em .1em black;
+    background:white;
+}
+button:active{
+    box-shadow:
+        0em 0em 0em .1em black;
+    background:gray;
+}
+#Page{
+    display:flex;
+    gap:1em;
+}
+#Explorer{
+    display:flex;
+    gap:1em;
+    margin:.5em;
+}
+.explorerSect{
+    box-shadow: inset 0em 0em 0em .05em;
+}
+.sections{
+    margin:.5em;
+    box-shadow:0em 0em 0em .1em;
+}

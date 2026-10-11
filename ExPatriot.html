@@ -8,20 +8,38 @@
     href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Linefont:wdth,wght@83.6,409&family=Marck+Script&family=Nanum+Pen+Script&family=Rock+Salt&family=Trade+Winds&family=Xanh+Mono:ital@0;1&family=Zen+Old+Mincho:wght@400;500;700;900&display=swap"
     rel="stylesheet">
 
-<div class="Page" id="ClubDirectory">
-    <div class="ClubDeclaration">
-        <div id="LogIn">
-            <input id="userName" placeholder="ID" />
-            <input id="password" placeholder="KEY" />
-            <button id="loginButton" onclick="logIn(userName.value,password.value)">Log In</button>
+<div id="Page">
+    <div class="sections">
+        <div class="ClubDeclaration">
+            <div id="LogIn">
+                <input id="userName" placeholder="ID" />
+                <input id="password" placeholder="KEY" type="password" />
+                <button id="loginButton" onclick="logIn(userName.value,password.value)">Log In</button>
+            </div>
+            <div id="ExPatDeclaration" hidden>
+                <div>
+                    i|"'Keep, ancient lands, your storied pomp!' cries she
+                    With silent lips. 'Give me your tired, your poor,
+                    Your huddled masses yearning to breathe free,
+                    The wretched refuse of your teeming shore.
+                    Send these, the homeless, tempest-tost to me,
+                    I lift my lamp beside the golden door!'"|
+                </div>
+                <button onclick="logout()">Log Out</button>
+            </div>
         </div>
-        <div id="ExpatDeclaration" hidden>
-            meow
+        <div id="Explorer">
+            <div id="ClubDirectory" class="explorerSect">
+            </div>
+            <div id="ClubRooms" class="explorerSect">
+            </div>
         </div>
     </div>
-    <div id="ClubDirectory">
+    <div id="RoomApp" class="sections">
+    </div>
+    <div id="RoomSettings" class="sections">
+    </div>
 
-    </div>
 </div>
 
 
@@ -31,5 +49,22 @@
 <script type="module" src="./Chat/ExPatScript.js"></script>
 
 <script>
-    test()
+    var client;
+    if (document.cookie) {
+        client = JSON.parse(document.cookie)
+    } else client = {
+        ExPat: {
+            User: "",
+            Session: ""
+        }
+    };
+
+    function updateCookie() {
+        document.cookie = JSON.stringify(client);
+    }
+
+    var clubDirect = ClubDirectory;
+    var roomDirect = ClubRooms;
+    var roomApp = RoomApp
+    var activeClub
 </script>
