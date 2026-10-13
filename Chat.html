@@ -1371,6 +1371,7 @@
             registration.getNotifications().then((notifications) => {
                 notifications.forEach((notification) => notification.close());
             });
+            set(ref(db, users + "/Count"), increment(1))
 
             onlineStatus = true
             setUser();
