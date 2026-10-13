@@ -1367,9 +1367,10 @@
             showNotifs = true;
 
             //When page is Visible.
-
         } else if (!document.hidden && !onlineStatus) {
-            set(ref(db, users + "/Count"), increment(1))
+            registration.getNotifications().then((notifications) => {
+                notifications.forEach((notification) => notification.close());
+            });
 
             onlineStatus = true
             setUser();
