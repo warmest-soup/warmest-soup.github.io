@@ -9062,7 +9062,6 @@
             x.insertAdjacentHTML("beforeend", "<input type='checkbox' onclick='crossOut(this.parentNode, this.checked)'/>")
 
             x.children[1].setAttribute("hidden", "true")
-            x.children[2].setAttribute("hidden", "true")
         })
     }
 
@@ -9286,10 +9285,13 @@
 
     populateList(decisions)
 
-    /*var pics = Array.from(document.querySelectorAll("img"))
+    var pics = Array.from(document.querySelectorAll("img"))
     pics.forEach(x => {
-        x.src = String(x.src).replace(/\/revision\/latest\/scale-to-width-down\/75\?cb=\d+/, "")
+        var link = x.parentNode.getAttribute("href").replace(/\/revision\/latest\?cb=\d+/, "");
+        
+        x.parentNode.setAttribute("href",link)
+        x.src= link;
     })
-    */
+    
 
 </script>
