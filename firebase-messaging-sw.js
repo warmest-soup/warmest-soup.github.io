@@ -16,3 +16,12 @@ firebase.messaging();
 self.addEventListener('notificationclick', function (event) {
   event.waitUntil(clients.openWindow('https://warmest-soup.github.io/Chat'));
 });
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    // The tab has become visible, so clear stale notifications
+    registration.getNotifications().then((notifications) => {
+      notifications.forEach((notification) => notification.close());
+    });
+  }
+});
