@@ -1367,10 +1367,8 @@
             showNotifs = true;
 
             //When page is Visible.
+
         } else if (!document.hidden && !onlineStatus) {
-            registration.getNotifications().then((notifications) => {
-                notifications.forEach((notification) => notification.close());
-            });
             set(ref(db, users + "/Count"), increment(1))
 
             onlineStatus = true
@@ -1382,7 +1380,9 @@
                 Entrance: "Arrival",
                 Timestamp: new Date().toUTCString()
             })
-
+            registration.getNotifications().then((notifications) => {
+                notifications.forEach((notification) => notification.close());
+            });
             //Desktop Notifications
             showNotifs = false;
         }
