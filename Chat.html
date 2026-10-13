@@ -1279,6 +1279,9 @@
 
             if (messageType == "Entry") {
                 entryNotif.play();
+                registration.getNotifications().then((notifications) => {
+                    notifications.forEach((notification) => notification.close());
+                });
             } else if (messageType == "Exit") {
                 exitNotif.play();
             } else messageNotif.play();
@@ -1380,9 +1383,7 @@
                 Entrance: "Arrival",
                 Timestamp: new Date().toUTCString()
             })
-            registration.getNotifications().then((notifications) => {
-                notifications.forEach((notification) => notification.close());
-            });
+
             //Desktop Notifications
             showNotifs = false;
         }
